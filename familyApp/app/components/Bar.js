@@ -22,8 +22,10 @@ import Icon6 from 'react-native-vector-icons/Octicons';
 import Icon7 from 'react-native-vector-icons/Foundation';
 
 //import the file screen (page)
-import Login from './app/components/Login';
-import Profile from './app/components/Profile'
+import Login from './Login';
+import Tasks from './Tasks'
+import SignUp from './SignUp';
+import Try from './Try';
 
 const UserTypeGenderText={
   //female (Mother) / male (Father)/ child (Children)
@@ -32,12 +34,65 @@ const UserTypeGenderText={
   child:'Child',
 }
 
+const MyApp=createDrawerNavigator(
+  {
+    Finance:{
+      //path:'/',
+      screen:Try,  
+    },
+    Shortage:{
+     //path:'/sent',
+     screen:Tasks,  
+    },
+    'Family Events':{
+     //path:'/sent',
+     screen:Tasks,  
+    },
+    Study:{
+     //path:'/sent',
+     screen:Tasks,  
+    },
+    Exam:{
+     //path:'/sent',
+     screen:Tasks,  
+    },
+    'User Information':{
+     //path:'/sent',
+     screen:Tasks,  
+    },
+    Outside:{
+     //path:'/sent',
+     screen:Tasks,  
+    },
+    Tasks:{
+     //path:'/sent',
+     screen:Tasks,  
+    },
+    'Login For Try Only':{
+     //path:'/sent',
+     screen:Login,  
+    },
+    'SignUp For Try Only':{
+     //path:'/sent',
+     screen:SignUp,  
+    }
+  },
+  {
+    initialRouteName:'Tasks',
+    drawerPosition:'left',
+    drawarWidth:10,
+    contentOptions:{
+      activeTintColor:'red',
+    }
+  }
+);
+
 //export Home from the react componant
-export default class Home extends React.Component{
+export default class Profile extends React.Component{
   //the constructor
-  constructor(){
+  constructor(props){
     //super for ES6
-    super();
+    super(props);
     //all the data save before to can show in the bar
     this.state={
       //defult thing when change from data base change here 🙂 <3
@@ -66,6 +121,7 @@ goToTasks(){
   //render
   render() {
     //what return
+    //const { navigate } = this.props.navigation.navigate;
     return (
       <View style={styles.allPage}>
         <View style={styles.barView}>
@@ -76,21 +132,21 @@ goToTasks(){
 
             leftComponent={
               <View  style={styles.leftComponent}>
-                <Icon0 onPress={()=>this.props.navigation.navigate('DrawerOpen')} style={{color:'#0bf5fb'}} name="bars" size={35}/>
+                <Icon0 onPress={()=>navigation.navigate('Tasks')} style={{color:'#0bf5fb'}} name="bars" size={35}/>
                 <Text onPress={this.goToDrawer.bind(this)} style={styles.textUnderIcon}>Menu</Text>
               </View>
             }
 
             centerComponent={
               <View style={styles.centerComponentView}>
-                <View style={styles.firstCenterComponent}>
+                <View style={styles.centerComponent}>
                   <Icon0 name={this.state.userType} size={35} color="red"/>
                   <Text style={styles.textUnderIcon}>
                     {UserTypeGenderText[this.state.userType]}
                   </Text>
                 </View>
                 
-                <View style={styles.firstCenterComponent}>
+                <View style={styles.centerComponent}>
                   <Text style={styles.textIconDone}>{this.state.userProgress}%</Text>
                   <Text style={styles.textUnderIcon}>
                     Progress
@@ -114,7 +170,7 @@ goToTasks(){
 
             rightComponent={
               <View style={styles.rightComponent}>
-                <Icon6 onPress={this.goToTasks.bind(this)} style={{color:'#0bf5fb'}} name="checklist" size={35}/>
+                <Icon6 onPress={() => navigate('Tasks') } style={{color:'#0bf5fb'}} name="checklist" size={35}/>
                 <Text onPress={this.goToTasks.bind(this)} style={styles.textUnderIcon}>Tasks</Text>
               </View>
             }
@@ -122,7 +178,7 @@ goToTasks(){
           </Header>
         </View>
         <View style={styles.otherView}>
-        <MyApp open={true}/>
+        <MyApp />
         
         </View>
 
@@ -130,55 +186,6 @@ goToTasks(){
     );
   }
 }
-
-const MyApp=createDrawerNavigator(
-  {
-    Finance:{
-      //path:'/',
-      screen:Login,  
-    },
-    Shortage:{
-     //path:'/sent',
-     screen:Login,  
-    },
-    'Family Events':{
-     //path:'/sent',
-     screen:Profile,  
-    },
-    Study:{
-     //path:'/sent',
-     screen:Profile,  
-    },
-    Exam:{
-     //path:'/sent',
-     screen:Profile,  
-    },
-    'User Information':{
-     //path:'/sent',
-     screen:Profile,  
-    },
-    Outside:{
-     //path:'/sent',
-     screen:Profile,  
-    },
-    Tasks:{
-     //path:'/sent',
-     screen:Profile,  
-    },
-    Logout:{
-     //path:'/sent',
-     screen:Profile,  
-    }
-  },
-  {
-    initialRouteName:'Tasks',
-    drawerPosition:'left',
-    drawarWidth:100,
-    contentOptions:{
-      activeTintColor:'red',
-    }
-  }
-);
 
 const styles = StyleSheet.create({
   allPage: {
@@ -224,7 +231,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   centerComponent: {
-    marginRight:15,
+    marginRight:20,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -233,30 +240,28 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   textUnderIcon: {
-    fontSize: 13,
+    fontSize: 15,
     textAlign:'center',
     fontWeight: 'bold',
     color:'white',
   },
   textIconDone: {
-    fontSize: 25,
+    fontSize: 23,
     textAlign:'center',
     fontWeight: 'bold',
     color:'#3cff00',
-    marginBottom:5,
   },
   textIconRank: {
-    fontSize: 30,
+    fontSize: 23,
     textAlign:'center',
     fontWeight: 'bold',
     color:'red',
   },
   textIconMoney: {
-    fontSize: 25,
+    fontSize: 23,
     textAlign:'center',
     fontWeight: 'bold',
     color:'#3cff00',
-    marginBottom:5,
   },
   otherView: {
     flex:1,

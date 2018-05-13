@@ -1,12 +1,25 @@
 //import react from react
 import React from 'react';
 //import element from reacr-native 
-import { StyleSheet, Text, View,Button,TextInput,TouchableOpacity } from 'react-native';
-//import the icon from lirbary
-import Icon from 'react-native-vector-icons/FontAwesome';
-//import input from elent react native
-import { FormInput } from 'react-native-elements';
-import { DrawerNavigator } from 'react-navigation';
+import { StyleSheet, Text, View, Button, TextInput, TouchableOpacity, ScrollView, Image } from 'react-native';
+//import FormInput & Header from react native elements
+import { FormInput, Header ,Divider, CheckBox,} from 'react-native-elements';
+//import from navidate react drawer
+import Drawer  from 'react-native-drawer'
+//import createDrawerNavigator as DrawerNavigator from react navigation
+import { createDrawerNavigator } from 'react-navigation'
+//import  from native-base
+//import { Container, Content, Icon, Header, Body } from 'native-base'
+
+//import the icon from lirbary  one by one (each one library in react native icon)
+import Icon0 from 'react-native-vector-icons/FontAwesome';
+import Icon1 from 'react-native-vector-icons/Entypo';
+import Icon2 from 'react-native-vector-icons/Feather';
+import Icon3 from 'react-native-vector-icons/Ionicons';
+import Icon4 from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon5 from 'react-native-vector-icons/MaterialIcons';
+import Icon6 from 'react-native-vector-icons/Octicons';
+import Icon7 from 'react-native-vector-icons/Foundation';
 
 //export this app from the react componant
 export default class LoginPrototype extends React.Component {
@@ -27,12 +40,12 @@ export default class LoginPrototype extends React.Component {
     tabBarLabel:'Screen 1',
     drawarIcon:()=>{
       return(
-        <Icon
+        <Icon0
           name='user'
           size={23}
           style={{color:'blue'}}
         >
-        </Icon>
+        </Icon0>
       );
     }
   }
@@ -48,12 +61,32 @@ export default class LoginPrototype extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+       <Header
+            backgroundColor='#123456'
+            innerContainerStyles={styles.innerContainer}
+            outerContainerStyles={styles.outerContainer}
+
+            leftComponent={
+              <View  style={styles.leftComponent}>
+                <Icon0 onPress={()=>navigation.navigate('Tasks')} style={{color:'#0bf5fb'}} name="bars" size={35}/>
+                <Text  style={styles.textUnderIcon}>Menu</Text>
+              </View>
+            }
+
+            rightComponent={
+              <View style={styles.rightComponent}>
+                <Icon6 onPress={() => navigate('Tasks') } style={{color:'#0bf5fb'}} name="checklist" size={35}/>
+                <Text style={styles.textUnderIcon}>Tasks</Text>
+              </View>
+            }
+          >
+          </Header>
         <View style={styles.container2}>
   
           <Text style={styles.mainText}>Login or Sign Up</Text>
         
           <View style={styles.usernamePasswordView}>
-            <Icon style={styles.usernamePasswordIcon} name="user" size={20} color="#000"/>
+            <Icon0 style={styles.usernamePasswordIcon} name="user" size={20} color="#000"/>
             <TextInput style={styles.usernamePasswordTextInput}
               placeholder="Username"
               onChangeText={(username) => {this.setState({username})}}
@@ -61,7 +94,7 @@ export default class LoginPrototype extends React.Component {
           </View>
   
           <View style={styles.usernamePasswordView}>
-            <Icon style={styles.usernamePasswordIcon} name="lock" size={20} color="#000"/>
+            <Icon0 style={styles.usernamePasswordIcon} name="lock" size={20} color="#000"/>
             <TextInput
               type="password" 
               maxlength="4" 

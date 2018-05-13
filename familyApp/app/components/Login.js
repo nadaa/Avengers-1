@@ -25,11 +25,13 @@ export default class Login extends React.Component {
 	_loadInitialState = async () => {
 		var value = await AsyncStorage.getItem('user');
 		if(value !== null){
-			this.props.navigation.navigate('Profile')
+      //jozaa
+			//this.props.navigation.navigate('Profile')
 		}
 	}
   render() {
-  	const { navigate } = this.props.navigation;
+    //jozaa
+  	//const { navigate } = this.props.navigation;
     return (
     <KeyboardAvoidingView behaviour='padding' style ={styles.wrapper}>
     <View style={styles.container}>

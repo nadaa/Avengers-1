@@ -5,9 +5,9 @@ import Login from './app/components/Login';
 import Profile from './app/components/Profile';
 import SignUp from './app/components/SignUp';
 
-
+/*jozaa comment this 
 const Application=  createStackNavigator({
-  Home: { screen: SignUp },
+  Home: { screen: Profile },
   SignUp: { screen: SignUp },
   Login: { screen: Profile },
   Profile: { screen: Profile },
@@ -19,11 +19,13 @@ const Application=  createStackNavigator({
       }
 
 });
-
+*/
 export default class App extends React.Component {
   render() {
     return (
-      <Application/>
+      //jozaa coomment this
+      //<Application/>
+      <Profile/>
       
 
     );
