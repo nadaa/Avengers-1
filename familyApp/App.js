@@ -5,10 +5,6 @@ import Login from './app/components/Login';
 import Profile from './app/components/Profile';
 import SignUp from './app/components/SignUp';
 
-<<<<<<< HEAD
-const Application=  createStackNavigator({
-  Home: { screen: Login },
-=======
 
 const Application=  createStackNavigator({
   Home: { screen: SignUp },
@@ -16,7 +12,6 @@ const Application=  createStackNavigator({
   Login: { screen: Profile },
   Profile: { screen: Profile },
   Login:{screen: Login}
->>>>>>> connection front end component
 },{
 
     navigationOptions: {

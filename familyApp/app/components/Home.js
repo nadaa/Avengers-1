@@ -6,7 +6,7 @@ import { StyleSheet, Text, View,Button,TextInput,TouchableOpacity } from 'react-
 import Icon from 'react-native-vector-icons/FontAwesome';
 //import input from elent react native
 import { FormInput } from 'react-native-elements';
-import {DrawerNavigator } from 'react-navigation'
+import { DrawerNavigator } from 'react-navigation';
 
 //export this app from the react componant
 export default class LoginPrototype extends React.Component {
