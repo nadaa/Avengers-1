@@ -19,6 +19,12 @@ export default class App extends React.Component {
   render() {
     return (
       <Application/>
+      // <View>
+      // <Text>fdsgdsfdsfsfsfdsf      </Text>
+      // <Text>fdsgdsfdsfsfsfdsf      </Text>
+      // <Text>gdsfdsfsfsfdsf      </Text>
+      // </View>
+
     );
   }
 }
