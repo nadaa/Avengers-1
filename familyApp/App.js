@@ -6,7 +6,6 @@ import Profile from './app/components/Profile';
 import SignUp from './app/components/SignUp';
 
 
-
 const Application=  createStackNavigator({
   Home: { screen: SignUp },
   SignUp: { screen: SignUp },
