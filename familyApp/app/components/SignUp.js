@@ -8,7 +8,7 @@ import {
  TouchableOpacity,
  AsyncStorage,
 } from 'react-native';
-import { StackNavigator } from 'react-navigation';
+import {createStackNavigator } from 'react-navigation';
 //we did 11:00 AM
 
 export default class Login extends React.Component {
