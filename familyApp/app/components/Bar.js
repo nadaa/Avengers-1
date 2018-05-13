@@ -21,11 +21,12 @@ import Icon5 from 'react-native-vector-icons/MaterialIcons';
 import Icon6 from 'react-native-vector-icons/Octicons';
 import Icon7 from 'react-native-vector-icons/Foundation';
 
-//import the file
+//import the file screen (page)
 import Login from './app/components/Login';
 import Profile from './app/components/Profile'
 
 const UserTypeGenderText={
+  //female (Mother) / male (Father)/ child (Children)
   female:'Mother',
   male:'Father',
   child:'Child',
@@ -39,7 +40,7 @@ export default class Home extends React.Component{
     super();
     //all the data save before to can show in the bar
     this.state={
-      //defult thing when change from data base change here 🙂
+      //defult thing when change from data base change here 🙂 <3
       //female (Mother) / male (Father)/ child (Children)
       userType:'female',
       //from 100%
@@ -53,17 +54,14 @@ export default class Home extends React.Component{
 
 goToDrawerIcon(){
   alert('goToDrawerIcon');
-  return (<fScreen/>)
 };
 goToDrawer(){
   alert('goToDrawer');
-  return (<fScreen/>)
 };
 goToTasks(){
   alert('goToTasks');
   //this.props.navigation.openDrawer()
 };
-
 
   //render
   render() {
@@ -274,19 +272,6 @@ const styles = StyleSheet.create({
 
 
 /*
-
-
-<CheckBox
-  center
-  title='Click Here to Remove This Item'
-  iconRight
-  iconType='material'
-  checkedIcon='clear'
-  uncheckedIcon='add'
-  checkedColor='red'
-  checked={this.state.checked}
-  />
-
 
 
 
