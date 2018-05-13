@@ -29,6 +29,7 @@ export default class Login extends React.Component {
 		}
 	}
   render() {
+  	const { navigate } = this.props.navigation;
     return (
     <KeyboardAvoidingView behaviour='padding' style ={styles.wrapper}>
     <View style={styles.container}>
@@ -51,7 +52,9 @@ export default class Login extends React.Component {
     /> 
     <TouchableOpacity
     	style={styles.btn}
-    	onPress={this.login}
+    	onPress={() =>
+          navigate('Profile')
+        }
     	>
     	<Text>Log in</Text>
     	</TouchableOpacity>
@@ -59,9 +62,7 @@ export default class Login extends React.Component {
     </KeyboardAvoidingView>
     );
   }
-  login=()=>{
-  	alert('test')
-  }
+  
 }
 
 const styles = StyleSheet.create({
