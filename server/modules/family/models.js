@@ -1,14 +1,15 @@
 const mongoose=require('mongoose');
 
 const userSchema=new mongoose.Schema({
-	email:{
-	 type: String, index: { unique: true }
-	},
+
+	 // type: String, index: { unique: true }
+	email:String,
 	password: String,
-	name:String,
-	bdate: Date,
+	username:String,
+	bdate: String,
 	role: String,
-	rank: {type:Number,default:0}
+	rank: String,
+	familyId:String
 	
 })
 

@@ -10,21 +10,21 @@ import {
 } from 'react-native';
 
 import {createStackNavigator } from 'react-navigation';
-//we did 11:00 AM
-
-  
-
 import Login from './Login';
+import axios from 'axios';    
 
 export default class SignUp extends React.Component {
 
 	constructor(props){
 		super(props);
 		this.state={
-			username:'',
-			email:'',
-			password:'',
-			DateOfBirth:'',
+		email:'',
+		password: '',
+		username:'',
+		bdate: '',
+		role: '',
+		rank: '',
+		familyId:''
 		}
 	}
 	componentDidMount(){
@@ -36,8 +36,54 @@ export default class SignUp extends React.Component {
 			this.props.navigation.navigate('Profile')
 		}
 	}
+
+
+
+
+
+sendSignUp(){
+	// axios.post('http://192.168.1.86:3000/api/signup', {
+ //  user:this.state
+ // })
+ // .then(function (response) {
+ //   console.log(response);
+ // })
+ // .catch(function (error) {
+ //   console.log(error);
+ // });
+	// fetch('http://192.168.1.86:3000/api/signup', {
+	//   method: 'POST',
+	//   headers: {
+	//     Accept: 'application/json',
+	//     'Content-Type': 'application/json',
+	//   },
+	//   body: JSON.stringify({
+	//   //       email:this.state.email,
+	// 		// password: this.state.password,
+	// 		// username:this.state.username,
+	// 		// bdate:this.state.bdate,
+	// 		// role: this.state.role,
+	// 		// rank: this.state.rank,
+	// 		// familyId:this.state.familyId
+	// 		user:this.state,
+
+	//   })
+
+	// })
+
+ //  .then((response) => response.json())
+ //    .then((responseJson) => {
+      
+ //    })
+ //    .catch((error) => {
+ //      console.error(error);
+ //    });
+
+}
+
+
   render() {
-  	const { navigate } = this.props.navigation;
+  	
     return (
     <KeyboardAvoidingView behaviour='padding' style ={styles.wrapper}>
     <View style={styles.container}>
@@ -53,8 +99,6 @@ export default class SignUp extends React.Component {
     	placeholder='Email'
     	onChangeText={(email) => this.setState({email})}
     	
-
-
     /> 
      <TextInput
     	style={styles.textInput} 
@@ -62,20 +106,36 @@ export default class SignUp extends React.Component {
     	onChangeText={(password) => this.setState({password})}
     	secureTextEntry={true}	
 
-
     /> 
      <TextInput
     	style={styles.textInput} 
     	placeholder='DateOfBirth'
-    	onChangeText={(DateOfBirth) => this.setState({DateOfBirth})}
+    	onChangeText={(bdate) => this.setState({bdate})}
+    	
+    /> 
+     <TextInput
+    	style={styles.textInput} 
+    	placeholder='Role'
+    	onChangeText={(role) => this.setState({role})}
+    	
+    /> 
+     <TextInput
+    	style={styles.textInput} 
+    	placeholder='Rank'
+    	onChangeText={(rank) => this.setState({rank})}
     		
+    /> 
+     <TextInput
+    	style={styles.textInput} 
+    	placeholder='FamilyId'
+    	onChangeText={(familyId) => this.setState({familyId})}		
 
     /> 
     
     <TouchableOpacity
     	style={styles.btn}
-    	onPress={() =>
-          navigate('Login')
+    	onPress={
+    		this.sendSignUp()
         }
     	>
     	<Text>SignUp</Text>
@@ -84,21 +144,9 @@ export default class SignUp extends React.Component {
     </KeyboardAvoidingView>
     );
   }
-  login=()=>{
-  	fetch('https://192.168.1.86.3000/api/signup', {
-	  method: 'POST',
-	  headers: {
-	    Accept: 'application/json',
-	    'Content-Type': 'application/json',
-	  },
-	  body: JSON.stringify({
-	    username: this.state.username,
-	    email: this.state.email,
-	    password: this.state.password,
-	    DateOfBirth: this.state.DateOfBirth,
-  }),
-});
-  }
+
+
+ 
 }
 
 const styles = StyleSheet.create({

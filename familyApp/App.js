@@ -12,6 +12,7 @@ const Application=  createStackNavigator({
   Login: { screen: Profile },
   Profile: { screen: Profile },
   Login:{screen: Login}
+
 },{
 
     navigationOptions: {
