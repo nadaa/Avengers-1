@@ -1,283 +1,79 @@
-//import react from react
-import React from 'react';
-//import element from reacr-native 
-import { StyleSheet, Text, View, Button, TextInput, TouchableOpacity, ScrollView, Image } from 'react-native';
-//import FormInput & Header from react native elements
-import { FormInput, Header ,Divider, CheckBox,} from 'react-native-elements';
-//import from navidate react drawer
-import Drawer  from 'react-native-drawer'
-//import createDrawerNavigator as DrawerNavigator from react navigation
-import { createDrawerNavigator } from 'react-navigation'
-//import  from native-base
-//import { Container, Content, Icon, Header, Body } from 'native-base'
+//dont delete this because it is the code for ata base jozaa
 
-//import the icon from lirbary  one by one (each one library in react native icon)
-import Icon0 from 'react-native-vector-icons/FontAwesome';
-import Icon1 from 'react-native-vector-icons/Entypo';
-import Icon2 from 'react-native-vector-icons/Feather';
-import Icon3 from 'react-native-vector-icons/Ionicons';
-import Icon4 from 'react-native-vector-icons/MaterialCommunityIcons';
-import Icon5 from 'react-native-vector-icons/MaterialIcons';
-import Icon6 from 'react-native-vector-icons/Octicons';
-import Icon7 from 'react-native-vector-icons/Foundation';
 
-//import the file screen (page)
-import Login from './Login';
-import Tasks from './Tasks'
-import SignUp from './SignUp';
-import Try from './Try';
 
-const UserTypeGenderText={
-  //female (Mother) / male (Father)/ child (Children)
-  female:'Mother',
-  male:'Father',
-  child:'Child',
+//first the mother
+1- function run automaticlly when user login in
+2- get the type of user from data base (by the email)
+3- put type inside the state
+
+//second the progress
+1- function run automaticlly when user login in
+2- get the all tasks of user from data base (by the email)
+3- calculate how many task state cchecl over all tasks
+4- return this number  in percenteg
+
+//third ranked
+1- function run automaticlly when user login in
+2- get the progress for all family child (by email + fimilly id + child)
+3- compare each progress b other
+4- if the same give the compare for how many task have
+5- if the same give who eamil lenght smallest
+
+//finance
+1- function run automaticlly when user login in
+2- get the how money this family have (by email + fimilly id + money)
+3- subtract the input from output
+
+
+
+
+//proplem
+1- menue button
+2- tasks button
+3- router me and waed
+
+
+
+
+
+
+///note
+
+neeed
+
+
+
+
+
+
+
+myby
+
+//dont know why dont wwork
+ //  axios.get('http://facebook.github.io/react-native/movies.json')
+ // .then(function (response) {
+ //   console.log(response);
+ //   alert('JSON.stringify(response.movies[0])');
+ // })
+ // .catch(function (error) {
+ //   console.log(error);
+ // });
+
+
+
+
+done
+
+/*fetch wrok trying
+fectch1(){
+  return fetch('http://facebook.github.io/react-native/movies.json')
+    .then((response) => response.json())
+    .then((responseJson) => {
+      alert(JSON.stringify(responseJson.movies[0]));
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 }
-
-const MyApp=createDrawerNavigator(
-  {
-    Finance:{
-      //path:'/',
-      screen:Try,  
-    },
-    Shortage:{
-     //path:'/sent',
-     screen:Tasks,  
-    },
-    'Family Events':{
-     //path:'/sent',
-     screen:Tasks,  
-    },
-    Study:{
-     //path:'/sent',
-     screen:Tasks,  
-    },
-    Exam:{
-     //path:'/sent',
-     screen:Tasks,  
-    },
-    'User Information':{
-     //path:'/sent',
-     screen:Tasks,  
-    },
-    Outside:{
-     //path:'/sent',
-     screen:Tasks,  
-    },
-    Tasks:{
-     //path:'/sent',
-     screen:Tasks,  
-    },
-    'Login For Try Only':{
-     //path:'/sent',
-     screen:Login,  
-    },
-    'SignUp For Try Only':{
-     //path:'/sent',
-     screen:SignUp,  
-    }
-  },
-  {
-    initialRouteName:'Tasks',
-    drawerPosition:'left',
-    drawarWidth:10,
-    contentOptions:{
-      activeTintColor:'red',
-    }
-  }
-);
-
-//export Home from the react componant
-export default class Profile extends React.Component{
-  //the constructor
-  constructor(props){
-    //super for ES6
-    super(props);
-    //all the data save before to can show in the bar
-    this.state={
-      //defult thing when change from data base change here 🙂 <3
-      //female (Mother) / male (Father)/ child (Children)
-      userType:'female',
-      //from 100%
-      userProgress:'100',
-      //for how many child in family
-      userRanking:'2',
-      //the money still
-      restMoney:'1500',
-    };
-  }
-
-goToDrawerIcon(){
-  alert('goToDrawerIcon');
-};
-goToDrawer(){
-  alert('goToDrawer');
-};
-goToTasks(){
-  alert('goToTasks');
-  //this.props.navigation.openDrawer()
-};
-
-  //render
-  render() {
-    //what return
-    //const { navigate } = this.props.navigation.navigate;
-    return (
-      <View style={styles.allPage}>
-        <View style={styles.barView}>
-          <Header
-            backgroundColor='#123456'
-            innerContainerStyles={styles.innerContainer}
-            outerContainerStyles={styles.outerContainer}
-
-            leftComponent={
-              <View  style={styles.leftComponent}>
-                <Icon0 onPress={()=>navigation.navigate('Tasks')} style={{color:'#0bf5fb'}} name="bars" size={35}/>
-                <Text onPress={this.goToDrawer.bind(this)} style={styles.textUnderIcon}>Menu</Text>
-              </View>
-            }
-
-            centerComponent={
-              <View style={styles.centerComponentView}>
-                <View style={styles.centerComponent}>
-                  <Icon0 name={this.state.userType} size={35} color="red"/>
-                  <Text style={styles.textUnderIcon}>
-                    {UserTypeGenderText[this.state.userType]}
-                  </Text>
-                </View>
-                
-                <View style={styles.centerComponent}>
-                  <Text style={styles.textIconDone}>{this.state.userProgress}%</Text>
-                  <Text style={styles.textUnderIcon}>
-                    Progress
-                  </Text>
-                </View>
-                <View style={styles.centerComponent}>
-                  <Text style={styles.textIconRank}>{this.state.userRanking}</Text>
-                  <Text style={styles.textUnderIcon}>
-                    Rank
-                  </Text>
-                </View>
-                <View style={styles.lastCenterComponent}>
-                  <Text style={styles.textIconMoney}>{this.state.restMoney}</Text>
-                  <Text style={styles.textUnderIcon}>
-                    Money
-                  </Text>
-                </View>
-                              
-              </View>
-            }
-
-            rightComponent={
-              <View style={styles.rightComponent}>
-                <Icon6 onPress={() => navigate('Tasks') } style={{color:'#0bf5fb'}} name="checklist" size={35}/>
-                <Text onPress={this.goToTasks.bind(this)} style={styles.textUnderIcon}>Tasks</Text>
-              </View>
-            }
-          >
-          </Header>
-        </View>
-        <View style={styles.otherView}>
-        <MyApp />
-        
-        </View>
-
-      </View>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  allPage: {
-    flex: 1,
-    flexDirection: 'column',
-    backgroundColor: 'white',
-  },
-  barView: {
-    flexDirection: 'column',
-    marginTop:35,
-  },
-  innerContainer: {
-    //backgroundColor:'green',
-    flexDirection: 'row',
-    alignItems: 'center',
-    margin:-12,
-  },
-  leftComponent: {
-    flex:1,
-    flexDirection:'column',
-    justifyContent:'center',
-    marginLeft:5,
-    alignItems: 'center',
-  },
-  rightComponent: {
-    flex:1,
-    flexDirection:'column',
-    justifyContent:'center',
-    marginRight:5,
-    alignItems: 'center',
-
-  },
-  centerComponentView: {
-    flexDirection: 'row',
-    //backgroundColor: 'pink',
-    alignItems: 'center',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  firstCenterComponent: {
-    marginRight:15,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  centerComponent: {
-    marginRight:20,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  lastCenterComponent: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  textUnderIcon: {
-    fontSize: 15,
-    textAlign:'center',
-    fontWeight: 'bold',
-    color:'white',
-  },
-  textIconDone: {
-    fontSize: 23,
-    textAlign:'center',
-    fontWeight: 'bold',
-    color:'#3cff00',
-  },
-  textIconRank: {
-    fontSize: 23,
-    textAlign:'center',
-    fontWeight: 'bold',
-    color:'red',
-  },
-  textIconMoney: {
-    fontSize: 23,
-    textAlign:'center',
-    fontWeight: 'bold',
-    color:'#3cff00',
-  },
-  otherView: {
-    flex:1,
-    flexDirection: 'column',
-    backgroundColor: 'green',
-    marginBottom:35,
-  },
-  d: {
-    backgroundColor: 'red',
-    marginTop:150,
-  },
-});
-
-
-/*
-
-
-
 */
