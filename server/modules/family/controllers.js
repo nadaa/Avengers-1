@@ -27,91 +27,102 @@ var bcrypt = require('bcrypt');
 exports.signupUser = function(req, res) {
  
 
-
- var newUser={
-  username : req.body.user.username,  
-   email :req.body.user.email,   
-   password :req.body.user.password,   
-   bdate :req.body.user.bdate,   
-   role :req.body.user.role,   
-   rank :req.body.user.rank,
-  familyId :req.body.user.familyId,
-}
+// res.send('{msg:err}')
+//  var newUser={
+//   username : req.body.user.username,  
+//    email :req.body.user.email,   
+//    password :req.body.user.password,   
+//    bdate :req.body.user.bdate,   
+//    role :req.body.user.role,   
+//    rank :req.body.user.rank,
+//   familyId :req.body.user.familyId,
+// }
   
-  new models.User(newUser).save(function(err){
-    if(err){
-      res.send({msg:err})
-    }
+//   new models.User(newUser).save(function(err){
+//     if(err){
+      
+//       console.log("error occured")
+//     }
 
-    else{
-      res.send({msg:"create a new user"});
-    }
+//     else{
+      
+//       console.log("success")
+//     }
 
-  })
+//   })
     
-    }
 
-
-  // models.User.findOne({ email: email },function(err,found){
-
-   // if (!found ){
-   //   var newUser =new models.User({
-   //    username:username,
-   //    email: email,
-   //    password: password,
-   //    DateOfBirth: DateOfBirth,
-   //    role:role,
-   //    rank:rank,
-   //    familyId:familyId
-   //  });
-   //   bcrypt.hash(password, 10, function(err, hash) {
-   //    newUser.password=hash;
-   //    newUser.save(function(err,obj) {
-   //     if(err){
-   //      res.status(500).send(err);
-   //      res.send("error");
-   //    }
-   //    else{
-   //      res.status(201).send("Thank You");
-   //      res.send("success signup");
-   //    }
-   //  })
-   //  });
-       
-   //   }
-   //   else{
-   //    res.status(201).send("")
-   //  }
-  // })
-
-
-
-
-
-
-
-
-exports.signinUser = function(req, res) {
-  var email = req.body['states[email]'];
-  var passWord = req.body['states[password]'];
-  models.User.findOne({ email: email },function(err,user){
-   if (!user ){
-    console.log("user not exist")
-  } else {
-    var data="kk";
-    models.User.comparepassword(password,user.password, function(err,match) {
-      if (match) {
-        data="coreeeeect";
-        res.status(201).send(data);
-            console.log("coreeeeect");
-          } else {
-            console.log("innnnncoreeeeect");
-            data="";
-            res.status(201).send(data);
-          }
-        });
-      }
+var newUser =new models.User({
+       username : req.body.user.username,  
+       email :req.body.user.email,   
+       password :req.body.user.password,   
+       bdate :req.body.user.bdate,   
+       role :req.body.user.role,   
+       rank :req.body.user.rank,
+       familyId :parseInt(req.body.user.familyId),
     });
-};
+    
+
+console.log(req.body.user.email)
+  models.User.findOne({ email: req.body.user.email },function(err,found){
+
+   if (!found ){
+     
+      bcrypt.hash(newUser.password, 10, function(err, hash) {
+      newUser.password=hash;
+      console.log(' newUser.password', hash)
+
+
+
+      newUser.save(function(err,obj) {
+       
+         if(err){
+          res.status(500).send({msg:"error"});
+         // res.send({msg:"error"});
+        }
+        else{
+          res.status(201).send({msg:"success signup"});
+
+          //res.send({msg:"success signup"});
+        }
+      
+      });
+       
+     })
+     
+  }
+
+  else{
+      res.status(201).send({msg:'choose another email'})
+    }
+    
+})
+
+
+console.log(newUser);
+}
+
+// exports.signinUser = function(req, res) {
+//   var email = req.body['states[email]'];
+//   var passWord = req.body['states[password]'];
+//   models.User.findOne({ email: email },function(err,user){
+//    if (!user ){
+//     console.log("user not exist")
+//   } else {
+//     var data="kk";
+//     models.User.comparepassword(password,user.password, function(err,match) {
+//       if (match) {
+//         data="coreeeeect";
+//         res.status(201).send(data);
+//             console.log("coreeeeect");
+//           } else {
+//             console.log("innnnncoreeeeect");
+//             data="";
+//             res.status(201).send(data);
+//           }
+//         });
+//       }
+//     });
+// };
 
 

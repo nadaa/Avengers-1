@@ -6,10 +6,10 @@ const userSchema=new mongoose.Schema({
 	email:String,
 	password: String,
 	username:String,
-	bdate: String,
+	bdate: Date,
 	role: String,
-	rank: String,
-	familyId:String
+	rank: {type:Number,default:0},
+	familyId:Number
 	
 })
 

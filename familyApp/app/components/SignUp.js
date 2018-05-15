@@ -6,30 +6,46 @@ import {
  TextInput,
  KeyboardAvoidingView,
  TouchableOpacity,
+ Button,
  AsyncStorage,
+ Picker,
 } from 'react-native';
 
 import {createStackNavigator } from 'react-navigation';
 import Login from './Login';
 import axios from 'axios';    
 
+
+import DatePicker from 'react-native-datepicker';
+
+import {Select, Option} from "react-native-chooser";
+
+
+
 export default class SignUp extends React.Component {
 
 	constructor(props){
-		super(props);
-		this.state={
-		email:'',
-		password: '',
-		username:'',
-		bdate: '',
-		role: '',
-		rank: '',
-		familyId:''
-		}
-	}
+        super(props);
+
+        this.state={
+        email:'',
+        password: '',
+        username:'',
+        bdate: '',
+        role: 'Select your role',
+        familyId:''
+        }
+    }
+
+
+
 	componentDidMount(){
 		this._loadInitialState().done();
 	}
+
+
+
+    //store user info in the device
 	_loadInitialState = async () => {
 		var value = await AsyncStorage.getItem('user');
 		if(value !== null){
@@ -39,107 +55,130 @@ export default class SignUp extends React.Component {
 
 
 
-
-
-sendSignUp(){
-	// axios.post('http://192.168.1.86:3000/api/signup', {
- //  user:this.state
- // })
- // .then(function (response) {
- //   console.log(response);
- // })
- // .catch(function (error) {
- //   console.log(error);
- // });
-	// fetch('http://192.168.1.86:3000/api/signup', {
-	//   method: 'POST',
-	//   headers: {
-	//     Accept: 'application/json',
-	//     'Content-Type': 'application/json',
-	//   },
-	//   body: JSON.stringify({
-	//   //       email:this.state.email,
-	// 		// password: this.state.password,
-	// 		// username:this.state.username,
-	// 		// bdate:this.state.bdate,
-	// 		// role: this.state.role,
-	// 		// rank: this.state.rank,
-	// 		// familyId:this.state.familyId
-	// 		user:this.state,
-
-	//   })
-
-	// })
-
- //  .then((response) => response.json())
- //    .then((responseJson) => {
-      
- //    })
- //    .catch((error) => {
- //      console.error(error);
- //    });
-
+validateEmail (text) {
+    var reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ;
+    if(reg.test(text) === false)
+    {return false;
+      }
+    else {
+      return true;
+    }
 }
 
 
+sendSignUp(){
+      const { navigate } = this.props.navigation;
+	axios.post('http://192.168.1.86:3000/api/signup', {
+    user:this.state
+ })
+ .then(function (response) {
+  
+   if(response.data.msg==="success signup"){
+        navigate('Login')
+   }
+   else if(response.data.msg==='choose another email'){
+         alert('choose another email')
+    }
+   }
+//this.textInput.clear()
+   //clear the textinputs
+    // this.setState({ email,
+    //     password,
+    //     username,
+    //     bdate,
+    //     role,
+    //     rank,
+    //     familyId})
+
+ )
+ .catch(function (error) {
+   console.log(error);
+ });
+}
+
+onSelect(value, label) {
+    this.setState({role : value});
+  }
+
+
   render() {
-  	
+  	const { navigate } = this.props.navigation;
     return (
     <KeyboardAvoidingView behaviour='padding' style ={styles.wrapper}>
     <View style={styles.container}>
     <Text style={styles.header}> SIGNUP </Text>
+
     <TextInput
-    	style={styles.textInput} 
+    ref={input =>{this.textInput =input}}
+        value={this.state.username}
+    	style={styles.textInput}  
     	placeholder='Username'
-    	onChangeText={(username) => this.setState({username})}
-    	
+    	onChangeText={(text) => this.setState({username: text})}
     /> 
      <TextInput
+        value={this.state.email}
     	style={styles.textInput} 
     	placeholder='Email'
-    	onChangeText={(email) => this.setState({email})}
-    	
+    	onChangeText={(text) => this.setState({email: text})}
     /> 
      <TextInput
     	style={styles.textInput} 
     	placeholder='Password'
-    	onChangeText={(password) => this.setState({password})}
     	secureTextEntry={true}	
+        value={this.state.password}
+        onChangeText={(text) => this.setState({password: text})}
+    /> 
+   
+      <DatePicker 
+   
+        style={styles.datepicker}
+        date={this.state.bdate}
+        mode="date"
+        placeholder="select your birthdate"
+        format="YYYY-MM-DD"
+        confirmBtnText="Confirm"
+        cancelBtnText="Cancel"
+       
+        onDateChange={(date) => {this.setState({bdate: new Date(date)})}}
+      />
 
-    /> 
-     <TextInput
-    	style={styles.textInput} 
-    	placeholder='DateOfBirth'
-    	onChangeText={(bdate) => this.setState({bdate})}
-    	
-    /> 
-     <TextInput
-    	style={styles.textInput} 
-    	placeholder='Role'
-    	onChangeText={(role) => this.setState({role})}
-    	
-    /> 
-     <TextInput
-    	style={styles.textInput} 
-    	placeholder='Rank'
-    	onChangeText={(rank) => this.setState({rank})}
-    		
-    /> 
+
+
+    <View style={styles.rolepicker}>
+        <Select
+            onSelect = {this.onSelect.bind(this)}
+            defaultText  = {this.state.role}
+            textStyle = {{}}
+            
+          >
+          <Option value = 'father'>Father</Option>
+          <Option value = 'mother'>Mother</Option>
+          <Option value = 'kid'>kid</Option>
+         
+
+        </Select>
+      </View>
+
      <TextInput
     	style={styles.textInput} 
     	placeholder='FamilyId'
-    	onChangeText={(familyId) => this.setState({familyId})}		
-
+    		
+        value={this.state.familyId}
+        onChangeText={(text) => this.setState({familyId: text})}
     /> 
     
     <TouchableOpacity
     	style={styles.btn}
     	onPress={
-    		this.sendSignUp()
+    		this.sendSignUp.bind(this)
         }
     	>
     	<Text>SignUp</Text>
     	</TouchableOpacity>
+         <Text style={{color: 'blue'}}
+        onPress={() =>  navigate('Login')}>
+          I have already account
+             </Text>
     </View>
     </KeyboardAvoidingView>
     );
@@ -173,6 +212,30 @@ textInput: {
 	marginBottom: 20,
 	backgroundColor: '#fff',
 },
+
+datepicker: {
+    width:295,
+    height:60,
+    alignSelf: 'stretch',
+    padding: 16,
+    marginBottom: 20,
+    backgroundColor: '#fff',
+},
+
+
+rolepicker: {
+    alignSelf: 'stretch',
+    padding: 16,
+    marginBottom: 20,
+    backgroundColor: '#fff',
+    
+
+
+    
+
+    // height:100,
+},
+
 btn: {
 	alignSelf:'stretch',
 	backgroundColor:'#01c853',
