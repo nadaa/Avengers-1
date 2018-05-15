@@ -8,7 +8,9 @@ import { FormInput, Header ,Divider, CheckBox } from 'react-native-elements';
 import Drawer from 'react-native-drawer'
 //import createDrawerNavigator as DrawerNavigator from react navigation
 import { createDrawerNavigator } from 'react-navigation'
-
+//import axios to make router works
+import axios from 'axios';    
+ 
 //import the icon from lirbary  one by one (each one library in react native icon)
 import Icon0 from 'react-native-vector-icons/FontAwesome';
 import Icon1 from 'react-native-vector-icons/Entypo';
@@ -108,6 +110,20 @@ export default class Profile extends React.Component{
       restMoney:'1500',
     };
   }
+//Ip Adress Jozaa: 192.168.1.82
+
+fectch1(){
+  //return axios.get('http://192.168.1.82:3000')
+  return fetch('http://192.168.1.82:3000')
+    .then((response) => response.json())
+      .then((responseJson) => {
+        console.log("server done:",JSON.stringify(responseJson) )
+         alert(JSON.stringify(responseJson));
+      })
+    .catch(function (error) {
+     console.log(error);
+    });  
+}
 
 goToDrawer(){
   alert('goToDrawer');
@@ -130,7 +146,7 @@ goToTasks(){
 
             leftComponent={
               <View  style={styles.leftComponent}>
-                <Icon0 onPress={this.goToDrawer.bind(this)} style={{color:'#0bf5fb'}} name="bars" size={35}/>
+                <Icon0 onPress={this.fectch1.bind(this)} style={{color:'#0bf5fb'}} name="bars" size={35}/>
                 <Text onPress={this.goToDrawer.bind(this)} style={styles.textUnderIcon}>Menu</Text>
               </View>
             }
