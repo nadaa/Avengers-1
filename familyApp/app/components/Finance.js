@@ -28,12 +28,9 @@ const UserTypeGenderText={
 //export Home from the react componant
 export default class Finance extends React.Component{
   //the constructor
-  constructor(){
+  constructor(props){
     //super for ES6
-    super();
-    //
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-
+    super(props);
     //all the data save before to can show in the bar
     this.state={
       //defult thing when change from data base change here 🙂 <3
@@ -46,7 +43,13 @@ export default class Finance extends React.Component{
       //the money still
       restMoney:'1500',
       //
-      dataSource: ds.cloneWithRows(['row 1', 'row 2']),
+      tableHead: ['Name', 'Cost'],
+      tableData: [
+        ['water', '12'],
+        ['electriciti', '20'],
+        ['shortige', '40'],
+        ['event', '50']
+      ]
     };
   }
 
@@ -88,20 +91,11 @@ export default class Finance extends React.Component{
     //what return   
     return (
       <View style={styles.allPage}>
-        <ListView
-          dataSource={this.state.dataSource}
-          renderRow={(rowData) => <Text>{rowData}</Text>}
-          renderColumn={(rowData)=><Text>{rowData}</Text>}
-        />
-
+       <Table borderStyle={{borderWidth: 4, borderColor: '#c8e1ff'}}>
+          <Row data={this.state.tableHead} style={styles.head} textStyle={styles.text}/>
+          <Rows data={this.state.tableData} textStyle={styles.text} />
+        </Table>
       </View>
-  //           <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-  //           {
-  //               data.map((datum) => { 
-  //               // This will render a row for each data element.
-  //                 return this.renderRow();
-  //               });
-  //           }
     );
   }    
 }
@@ -129,7 +123,10 @@ const styles = StyleSheet.create({
     textAlign:'center',
     fontWeight: 'bold',
     color:'gray',  
-  }
+  },
+  container: { flex: 1, padding: 16, paddingTop: 30 },
+  head: { height: 40, backgroundColor: 'green' },
+  text: { margin: 6 }
 
 });
 
