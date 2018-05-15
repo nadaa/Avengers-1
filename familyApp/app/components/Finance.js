@@ -1,13 +1,9 @@
 //import react from react
 import React from 'react';
 //import element from reacr-native 
-import { StyleSheet, Text, View, Button } from 'react-native';
-//import FormInput & Header from react native elements
-import { FormInput, Header ,Divider, CheckBox } from 'react-native-elements';
-//import from navidate react drawer
-import Drawer from 'react-native-drawer'
-//import createDrawerNavigator as DrawerNavigator from react navigation
-import { createDrawerNavigator } from 'react-navigation'
+import { StyleSheet, Text, View, Button, ListView } from 'react-native';
+//import table from react native table component
+import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 //import axios to make router works
 import axios from 'axios';    
  
@@ -35,6 +31,9 @@ export default class Finance extends React.Component{
   constructor(){
     //super for ES6
     super();
+    //
+    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+
     //all the data save before to can show in the bar
     this.state={
       //defult thing when change from data base change here 🙂 <3
@@ -46,6 +45,8 @@ export default class Finance extends React.Component{
       userRanking:'2',
       //the money still
       restMoney:'1500',
+      //
+      dataSource: ds.cloneWithRows(['row 1', 'row 2']),
     };
   }
 
@@ -81,11 +82,19 @@ export default class Finance extends React.Component{
   //           </View>
   //       );
   //   }
-  // //render
-  // render() {
-  //   //what return   
-  //       const data = [1, 2, 3, 4, 5];
-  //       return (
+  //render
+  render() {
+    //const data = [1, 2, 3, 4, 5];
+    //what return   
+    return (
+      <View style={styles.allPage}>
+        <ListView
+          dataSource={this.state.dataSource}
+          renderRow={(rowData) => <Text>{rowData}</Text>}
+          renderColumn={(rowData)=><Text>{rowData}</Text>}
+        />
+
+      </View>
   //           <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
   //           {
   //               data.map((datum) => { 
@@ -93,10 +102,8 @@ export default class Finance extends React.Component{
   //                 return this.renderRow();
   //               });
   //           }
-  //           </View>
-  //       );
-  //   }
-    
+    );
+  }    
 }
 
 const styles = StyleSheet.create({
@@ -137,4 +144,24 @@ const styles = StyleSheet.create({
         </View>
 
 
+
+<View style={styles.otherView}>
+          <table style="width:100%">
+            <tr>
+              <th>Firstname</th>
+              <th>Lastname</th> 
+              <th>Age</th>
+            </tr>
+            <tr>
+              <td>Jill</td>
+              <td>Smith</td> 
+              <td>50</td>
+            </tr>
+            <tr>
+              <td>Eve</td>
+              <td>Jackson</td> 
+              <td>94</td>
+            </tr>
+          </table>
+        </View>
 */
