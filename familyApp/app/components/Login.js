@@ -9,7 +9,7 @@ import {
  AsyncStorage,
 } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
-
+import SignUp from './SignUp'
 
 export default class Login extends React.Component {
 	constructor(props){
@@ -31,7 +31,7 @@ export default class Login extends React.Component {
 	}
   render() {
     //jozaa
-  	//const { navigate } = this.props.navigation;
+  	const { navigate } = this.props.navigation;
     return (
     <KeyboardAvoidingView behaviour='padding' style ={styles.wrapper}>
     <View style={styles.container}>
@@ -55,11 +55,16 @@ export default class Login extends React.Component {
     <TouchableOpacity
     	style={styles.btn}
     	onPress={() =>
-          navigate('Profile')
+    		alert('hello')
+        //  navigate('Profile')
         }
     	>
     	<Text>Log in</Text>
     	</TouchableOpacity>
+    	 <Text style={{color: 'blue'}}
+        onPress={() =>  navigate('SignUp')}>
+          create account
+             </Text>
     </View>
     </KeyboardAvoidingView>
     );
