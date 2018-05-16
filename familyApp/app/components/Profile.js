@@ -83,8 +83,8 @@ const MyDrawer=createDrawerNavigator(
     },
   },
   {
-    //initialRouteName:'Tasks',
-    initialRouteName:'Try2',
+    //initialRouteName:'Tasks',Finance Exam
+    initialRouteName:'Finance',
     drawerPosition:'left',
     //contentComponent: CustomDrawerContentComponent,
     //drawarWidth:10,

@@ -75,11 +75,10 @@ export default class Finance extends React.Component{
       });  
   }
   addToFinance(){
-    alert('add To Finance');
+    alert('Add To Finance');
   };
   editFromFinance(){
-   
-    
+    alert('Edit From Finance');  
   };
   removeFromFinance(){
     alert('Remove From Finance');
@@ -118,20 +117,7 @@ export default class Finance extends React.Component{
             <Text style={styles.textBtnRemove}>Remove</Text>
           </TouchableOpacity>
         </View>
- <View>
-
-   <View>
-        <Dialog.Container>
-          <Dialog.Title>Account delete</Dialog.Title>
-          <Dialog.Description>
-            Do you want to delete this account? You cannot undo this action.
-          </Dialog.Description>
-          <Dialog.Button label="Cancel" />
-          <Dialog.Button label="Delete" />
-        </Dialog.Container>
-      </View>
-
- </View>
+ 
 
       </View>
     );
@@ -267,4 +253,20 @@ Alert.alert(
         txt = "Hello " + person + "! How are you today?";
     }
 
+
+
+<View>
+
+   <View>
+        <Dialog.Container>
+          <Dialog.Title>Account delete</Dialog.Title>
+          <Dialog.Description>
+            Do you want to delete this account? You cannot undo this action.
+          </Dialog.Description>
+          <Dialog.Button label="Cancel" />
+          <Dialog.Button label="Delete" />
+        </Dialog.Container>
+      </View>
+
+ </View>
 */
