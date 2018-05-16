@@ -1,22 +1,11 @@
 //import react from react
 import React from 'react';
 //import element from reacr-native 
-import { StyleSheet, Text, View, TouchableOpacity, ListView } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, ListView, Alert } from 'react-native';
 //import table from react native table component
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 //import axios to make router works
 import axios from 'axios';    
- 
-//import the icon from lirbary  one by one (each one library in react native icon)
-import Icon0 from 'react-native-vector-icons/FontAwesome';
-import Icon1 from 'react-native-vector-icons/Entypo';
-import Icon2 from 'react-native-vector-icons/Feather';
-import Icon3 from 'react-native-vector-icons/Ionicons';
-import Icon4 from 'react-native-vector-icons/MaterialCommunityIcons';
-import Icon5 from 'react-native-vector-icons/MaterialIcons';
-import Icon6 from 'react-native-vector-icons/Octicons';
-import Icon7 from 'react-native-vector-icons/Foundation';
-
 
 const UserTypeGenderText={
   //female (Mother) / male (Father) / child (Children)
@@ -28,9 +17,9 @@ const UserTypeGenderText={
 //export Home from the react componant
 export default class Finance extends React.Component{
   //the constructor
-  constructor(props){
+  constructor(){
     //super for ES6
-    super(props);
+    super();
     //all the data save before to can show in the bar
     this.state={
       //defult thing when change from data base change here 🙂 <3
@@ -44,17 +33,22 @@ export default class Finance extends React.Component{
       restMoney:'1500',
       //
       tableHead:  ['Name', 'Cost'],
-      tableName: ['Water', 'Electriciti', 'Shortage', 'Family Event'],
+      tableName: ['Water', 'Electricity', 'Shortage', 'Family Event'],
       tableCost:  [[12],     [20],            [40],         [50]    ],
       tableTotal:['Total',0]
     };
+    //auto call function when render this scren
+    this.calculateTotal();
   }
-  total1(){
-    var total=0
+  calculateTotal(){
+    var total=0;
     for (var i = 0; i < this.state.tableCost.length; i++) {
-      total+=this.state.tableCost[i][0]
+      total+=this.state.tableCost[i][0];
     }
-    this.setState({tableTotal : ['Total',total]});
+    //cant use set state so we use this .state
+    this.state.tableTotal[1]=total;
+    //this.setState({tableTotal : ['Total',total]});
+    //alert('you cal total: '+this.state.tableTotal[1]);
   }
   fectch1(){
     //return axios.get('http://192.168.1.82:3000')
@@ -69,28 +63,29 @@ export default class Finance extends React.Component{
       });  
   }
   addToFinance(){
-    //alert('add To Finance');
-    //alert(typeof this.state.tableCost[0][0]);
-    alert(this.state.tableTotal[1]);
+    alert('add To Finance');
   };
-   removeFromFinance(){
-    this.total1()
-    //this.state.tableCost.splice(0,1)
-    //this.state.tableName.splice(0,1)
-    alert('remove From Finance');
+  editFromFinance(){
+    Alert.alert(
+      'Edit From Finance',
+      'Choose which you want to edit',
+      [
+        {text: 'Cancel', onPress: () => alert('Cancel Pressed'), style: 'cancel'},
+        {text: 'OK', onPress: () => alert('OK Pressed')},
+      ],
+      { cancelable: false }
+    )  
+  };
+  removeFromFinance(){
+    alert('Remove From Finance');
   };
   calculate(){
-    this.total1()
-    //this.state.tableCost.splice(0,1)
-    //this.state.tableName.splice(0,1)
+    this.calculateTotal();
     alert('calculate');
   };
   see(){
-    //alert('add To Finance');
-    //alert(typeof this.state.tableCost[0][0]);
     alert(this.state.tableTotal[1]);
   };
- 
   render() {
     //what return   
     return (
@@ -106,39 +101,16 @@ export default class Finance extends React.Component{
           </Table>
         </View>
         <View style={styles.btnView}>
-          <TouchableOpacity
-            style={styles.btnAdd}
-            onPress={
-            this.addToFinance.bind(this)
-          }
-          >
+          <TouchableOpacity style={styles.btnAdd} onPress={this.addToFinance.bind(this)}>
             <Text style={styles.textBtnAdd}>Add</Text>
           </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.btnRemove}
-            onPress={
-            this.removeFromFinance.bind(this)
-          }
-          >
+
+          <TouchableOpacity style={styles.btnEdit} onPress={this.editFromFinance.bind(this)}>
+            <Text style={styles.textBtnEdit}>Edit</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.btnRemove} onPress={this.removeFromFinance.bind(this)}>
             <Text style={styles.textBtnRemove}>Remove</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.btnView}>
-          <TouchableOpacity
-            style={styles.btnAdd}
-            onPress={
-            this.see.bind(this)
-          }
-          >
-            <Text style={styles.textBtnAdd}>see total</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.btnRemove}
-            onPress={
-            this.calculate.bind(this)
-          }
-          >
-            <Text style={styles.textBtnRemove}>calculate total</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -218,6 +190,18 @@ const styles = StyleSheet.create({
     padding:10,
   },
   textBtnAdd:{
+    fontWeight: 'bold',
+    textAlign: 'center', 
+    fontSize: 30,
+    color:'black', 
+  },
+  btnEdit:{
+    backgroundColor: '#6239BD',
+    marginTop:10,
+    padding:10,
+    marginLeft:10,
+  },
+  textBtnEdit:{
     fontWeight: 'bold',
     textAlign: 'center', 
     fontSize: 30,
