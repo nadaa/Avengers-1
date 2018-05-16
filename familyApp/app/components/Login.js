@@ -11,8 +11,8 @@ import {
 import axios from 'axios';  
 import { createStackNavigator } from 'react-navigation';
 import SignUp from './SignUp';
-//import Profile from './Profile';
-
+// import Profile from './Profile';
+import Tasks from './Tasks'
 export default class Login extends React.Component {
 	constructor(props){
 		super(props);
@@ -40,12 +40,17 @@ export default class Login extends React.Component {
          .then(function (response) {
           
            if(response.data.msg==="success"){
-                navigate('SignUp')
+                // navigate('Profile')
+                 alert(response.data.msg)
+                  navigate('SignUp')
+
+
            }
-           else if(response.data.msg==="error here"){
+           else if(response.data.msg==="the password is not correct"){
                  alert("the password is not correct")
             }
             else if(response.data.msg==="no account"){
+              alert('You Have No Account')
                  navigate('SignUp')
                
             }
@@ -67,17 +72,13 @@ export default class Login extends React.Component {
     	style={styles.textInput} 
     	placeholder='Username'
     	onChangeText={(username) => this.setState({username})}
-    		
-
-
+    	
     /> 
      <TextInput
     	style={styles.textInput} 
     	placeholder='Password'
     	onChangeText={(password) => this.setState({password})}
     	
-
-
     /> 
     <TouchableOpacity
     	style={styles.btn}
@@ -88,9 +89,9 @@ export default class Login extends React.Component {
     	>
     	<Text>Log in</Text>
     	</TouchableOpacity>
-    	 <Text style={{color: 'blue'}}
+    	 <Text style={{color: 'blue', paddingTop:10}}
         onPress={() =>  navigate('SignUp')}>
-          create account
+          create account for free -SignUp-
              </Text>
     </View>
     </KeyboardAvoidingView>

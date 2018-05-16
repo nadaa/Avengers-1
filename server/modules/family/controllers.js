@@ -52,16 +52,19 @@ console.log(newUser);
 exports.signinUser = function(req, res) {
  models.User.findOne({'username':req.body.user.username},function (err, data) {
   console.log('data',data)
-    if(err){
-      res.status(404).send({msg:"no account"})}
-      if(data !== null){
+    if(data===null){
+      res.send({msg:"no account"})
+    }
+
+      else if(data !== null){
         bcrypt.compare(req.body.user.password, data.password, function(err, resCrypt) {
-          if(err){res.status(404).send({msg:"error here"})}
-            if(resCrypt){
+          if(!resCrypt){res.send({msg:"the password is not correct"})}
+            else if(resCrypt){
               req.session._id=data._id;
               req.session.username=data.username;
               req.session.password=data.password;
-              res.status(200).send({msg:"success"})
+              res.send({msg:"success"})
+
             }
           });
 
