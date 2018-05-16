@@ -163,9 +163,9 @@ onSelect(value, label) {
     	>
     	<Text>SignUp</Text>
     	</TouchableOpacity>
-         <Text style={{color: 'blue'}}
+         <Text style={{color: 'blue', paddingTop:10}}
         onPress={() =>  navigate('Login')}>
-          I have already account
+          I have already account -Login-
              </Text>
     </View>
     </KeyboardAvoidingView>
