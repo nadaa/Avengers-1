@@ -26,6 +26,8 @@ import Login from './Login';
 import Tasks from './Tasks'
 import SignUp from './SignUp';
 import Try from './Try';
+import Try2 from './Try2';
+
 import Finance from './Finance';
 
 const UserTypeGenderText={
@@ -63,7 +65,7 @@ const MyDrawer=createDrawerNavigator(
     },
     Exam:{
      //path:'/sent',
-     screen:Tasks,  
+     screen:Try2,  
     },
     
     Outside:{
@@ -82,7 +84,7 @@ const MyDrawer=createDrawerNavigator(
   },
   {
     //initialRouteName:'Tasks',
-    initialRouteName:'Finance',
+    initialRouteName:'Try2',
     drawerPosition:'left',
     //contentComponent: CustomDrawerContentComponent,
     //drawarWidth:10,

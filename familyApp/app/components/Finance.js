@@ -1,11 +1,23 @@
 //import react from react
 import React from 'react';
 //import element from reacr-native 
-import { StyleSheet, Text, View, TouchableOpacity, ListView, Alert } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 //import table from react native table component
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 //import axios to make router works
-import axios from 'axios';    
+import axios from 'axios';   
+
+
+//import Dialog from react native dialog
+import Dialog from "react-native-dialog";
+
+
+
+// import HTML from react native render html to render html elemnt
+import HTML from 'react-native-render-html';
+// Dialog Component from react native dialog component to render pop elemnt
+import { DialogComponent, SlideAnimation } from 'react-native-dialog-component';
+
 
 const UserTypeGenderText={
   //female (Mother) / male (Father) / child (Children)
@@ -66,15 +78,8 @@ export default class Finance extends React.Component{
     alert('add To Finance');
   };
   editFromFinance(){
-    Alert.alert(
-      'Edit From Finance',
-      'Choose which you want to edit',
-      [
-        {text: 'Cancel', onPress: () => alert('Cancel Pressed'), style: 'cancel'},
-        {text: 'OK', onPress: () => alert('OK Pressed')},
-      ],
-      { cancelable: false }
-    )  
+   
+    
   };
   removeFromFinance(){
     alert('Remove From Finance');
@@ -113,6 +118,21 @@ export default class Finance extends React.Component{
             <Text style={styles.textBtnRemove}>Remove</Text>
           </TouchableOpacity>
         </View>
+ <View>
+
+   <View>
+        <Dialog.Container>
+          <Dialog.Title>Account delete</Dialog.Title>
+          <Dialog.Description>
+            Do you want to delete this account? You cannot undo this action.
+          </Dialog.Description>
+          <Dialog.Button label="Cancel" />
+          <Dialog.Button label="Delete" />
+        </Dialog.Container>
+      </View>
+
+ </View>
+
       </View>
     );
   }    
@@ -219,26 +239,32 @@ const styles = StyleSheet.create({
     fontSize: 30,
     color:'black', 
   },
+   container: {
+    flex: 1,
+    paddingBottom: 20,
+  },
 });
 
 
 /*
 
-
-         tableHead: ['Name', 'Cost'],
-      tableTitle: ['water', 'electriciti', 'shortige', 'event'],
-      tableData: [
-        ['12'],
-        ['20'],
-        ['40'],
-        ['50']
+Alert.alert(
+      'Edit From Finance',
+      'Choose which one you want to edit',
+      [
+        {text: 'Ask me later', onPress: () => {}},
+        {text: 'Cancel', onPress: () => alert('Cancel Pressed'), style: 'cancel'},
+        {text: 'OK', onPress: () => alert('OK Pressed')},
       ],
+      { cancelable: false }
+    )  
 
-      container: { flex: 1, padding: 16, paddingTop: 30, backgroundColor: '#fff' },
-  head: {  height: 40,  backgroundColor: '#f1f8ff'  },
-  wrapper: { flexDirection: 'row' },
-  title: { flex: 1, backgroundColor: '#f6f8fa' },
-  row: {  height: 28  },
-  text: { textAlign: 'center' }
+ var txt;
+    var person = HTML.prompt("Please enter your name:", "Harry Potter");
+    if (person == null || person == "") {
+        txt = "User cancelled the prompt.";
+    } else {
+        txt = "Hello " + person + "! How are you today?";
+    }
 
 */
