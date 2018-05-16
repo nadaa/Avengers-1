@@ -1,7 +1,7 @@
 //import react from react
 import React from 'react';
 //import element from reacr-native 
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 //import FormInput & Header from react native elements
 import { FormInput, Header ,Divider, CheckBox } from 'react-native-elements';
 //import from navidate react drawer
@@ -209,7 +209,8 @@ const styles = StyleSheet.create({
   },
   barView: {
     flexDirection: 'column',
-    //marginTop:35,
+    //comment this after finish
+    marginTop:35,
   },
   innerContainer: {
     //backgroundColor:'green',
@@ -281,7 +282,8 @@ const styles = StyleSheet.create({
     flex:1,
     flexDirection: 'column',
     backgroundColor: 'green',
-    //marginBottom:35,
+    //comment this after finish
+    marginBottom:35,
   },
 });
 

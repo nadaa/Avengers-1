@@ -1,7 +1,7 @@
 //import react from react
 import React from 'react';
 //import element from reacr-native 
-import { StyleSheet, Text, View, Button, ListView } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, ListView } from 'react-native';
 //import table from react native table component
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 //import axios to make router works
@@ -43,13 +43,10 @@ export default class Finance extends React.Component{
       //the money still
       restMoney:'1500',
       //
-      tableHead: ['Name', 'Cost'],
-      tableData: [
-        ['water', '12'],
-        ['electriciti', '20'],
-        ['shortige', '40'],
-        ['event', '50']
-      ]
+      tableHead:  ['Name', 'Cost'],
+      tableName: ['Water', 'Electriciti', 'Shortige', 'Event',],
+      tableCost:  [[12],    [20],          [40],       [50],    ],
+      tableTotal:['Total',[150]]
     };
   }
 
@@ -66,35 +63,44 @@ export default class Finance extends React.Component{
       });  
   }
   
-  goToDrawer(){
-    alert('goToDrawer');
+  addToFinance(){
+    alert('addToFinance');
   };
-  goToTasks(){
-    alert('goToTasks');
-    //this.props.navigation.openDrawer()
+  removeFromFinance(){
+    alert('removeFromFinance');
   };
-  
-  //  renderRow() {
-  //       return (
-  //           <View style={{ flex: 1, alignSelf: 'stretch', flexDirection: 'row' }}>
-  //               <View style={{ flex: 1, alignSelf: 'stretch' }} /> { /* Edit these as they are your cells. You may even take parameters to display different data / react elements etc. */}
-  //               <View style={{ flex: 1, alignSelf: 'stretch' }} />
-  //               <View style={{ flex: 1, alignSelf: 'stretch' }} />
-  //               <View style={{ flex: 1, alignSelf: 'stretch' }} />
-  //               <View style={{ flex: 1, alignSelf: 'stretch' }} />
-  //           </View>
-  //       );
-  //   }
-  //render
   render() {
-    //const data = [1, 2, 3, 4, 5];
     //what return   
     return (
       <View style={styles.allPage}>
-       <Table borderStyle={{borderWidth: 4, borderColor: '#c8e1ff'}}>
-          <Row data={this.state.tableHead} style={styles.head} textStyle={styles.text}/>
-          <Rows data={this.state.tableData} textStyle={styles.text} />
-        </Table>
+        <View style={styles.tableView}>
+          <Table>
+            <Row data={this.state.tableHead} style={styles.head} textStyle={styles.textHead}/>
+            <TableWrapper style={styles.wrapper}>
+              <Col data={this.state.tableName} style={styles.name} textStyle={styles.textName}/>
+              <Rows data={this.state.tableCost} style={styles.cost} textStyle={styles.textCost} flexArr={[1]}/>
+            </TableWrapper>
+            <Row data={this.state.tableTotal} style={styles.total} textStyle={styles.textTotal}/>
+          </Table>
+        </View>
+        <View style={styles.btnView}>
+          <TouchableOpacity
+            style={styles.btn}
+            onPress={
+            this.addToFinance.bind(this)
+          }
+          >
+            <Text>Add More</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.btn}
+            onPress={
+            this.removeFromFinance.bind(this)
+          }
+          >
+            <Text>Remove One</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }    
@@ -105,60 +111,81 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     backgroundColor: 'white',
+    marginBottom:35,
   },
-  otherView: {
-    flex:1,
+  tableView: {
+    flex: 1,
     flexDirection: 'column',
     backgroundColor: 'green',
-    //marginBottom:35,
+    marginRight:10,
+    marginLeft:10,
   },
-  name:{
-    fontSize: 23,
-    textAlign:'center',
-    fontWeight: 'bold',
-    color:'white',
+  wrapper: { 
+    flexDirection: 'row' 
   },
-  cost:{
-    fontSize: 23,
-    textAlign:'center',
-    fontWeight: 'bold',
-    color:'gray',  
+  head: {  
+    height: 50,  
+    backgroundColor: 'red',
   },
-  container: { flex: 1, padding: 16, paddingTop: 30 },
-  head: { height: 40, backgroundColor: 'green' },
-  text: { margin: 6 }
+  textHead:{
+    textAlign: 'center', 
+    fontSize: 25,
+  },
+  name: { 
+    backgroundColor: 'blue' 
+  },
+  textName:{
+    textAlign: 'center', 
+    fontSize: 25,
+  },
+  cost: {  
+    height: 35  
+  },
+  textCost:{
+    textAlign: 'center', 
+    fontSize: 25,
+  },
+  total:{
+    height: 40,  
+    backgroundColor: 'pink', 
+  },
+  textTotal:{
+    textAlign: 'center', 
+    fontSize: 25,
+  },
+  btnView: {
+    flex:1,
+    backgroundColor: 'pink',
+    flexDirection:'column',
+    justifyContent:'center',
+    marginLeft:5,
+    alignItems: 'center',
+  },
+  btn:{
+    flex: 1,  
+    backgroundColor: 'gray' 
+  }
 
 });
 
 
 /*
-<View style={styles.allPage}>
-        <View style={styles.otherView}>
-          <Text onPress={this.goToDrawer.bind(this)} style={styles.name}>Menu</Text>
-          <Text onPress={this.goToDrawer.bind(this)} style={styles.cost}>cost</Text>
-
-        
-        </View>
 
 
+         tableHead: ['Name', 'Cost'],
+      tableTitle: ['water', 'electriciti', 'shortige', 'event'],
+      tableData: [
+        ['12'],
+        ['20'],
+        ['40'],
+        ['50']
+      ],
 
-<View style={styles.otherView}>
-          <table style="width:100%">
-            <tr>
-              <th>Firstname</th>
-              <th>Lastname</th> 
-              <th>Age</th>
-            </tr>
-            <tr>
-              <td>Jill</td>
-              <td>Smith</td> 
-              <td>50</td>
-            </tr>
-            <tr>
-              <td>Eve</td>
-              <td>Jackson</td> 
-              <td>94</td>
-            </tr>
-          </table>
-        </View>
+      container: { flex: 1, padding: 16, paddingTop: 30, backgroundColor: '#fff' },
+  head: {  height: 40,  backgroundColor: '#f1f8ff'  },
+  wrapper: { flexDirection: 'row' },
+  title: { flex: 1, backgroundColor: '#f6f8fa' },
+  row: {  height: 28  },
+  text: { textAlign: 'center' }
+
 */
