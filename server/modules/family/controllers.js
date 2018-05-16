@@ -1,57 +1,10 @@
 var models=require('./models');
-// var request = require('request');
 var bcrypt = require('bcrypt');
 
 
-// this function will be invoked from the router /signUp
-
-// exports.signupUser = function (req, res) {
-
-//   	var newUser={
-// 	email:req.body.email,
-// 	name:req.body.username,
-
-// 	//need to encrypt the password first
-// 	password:req.body.password,
-// 	bDate:req.body.DateOfBirth,
-// 	familyId:req.body.familyId
-// 	}
-//     //console.log(newUser)
-// 	new models.User(newUser).save(function(err){
-		
-// 		res.send(newUser);
-// 	})
-// };
-
+// const session = require('express-session');
 
 exports.signupUser = function(req, res) {
- 
-
-// res.send('{msg:err}')
-//  var newUser={
-//   username : req.body.user.username,  
-//    email :req.body.user.email,   
-//    password :req.body.user.password,   
-//    bdate :req.body.user.bdate,   
-//    role :req.body.user.role,   
-//    rank :req.body.user.rank,
-//   familyId :req.body.user.familyId,
-// }
-  
-//   new models.User(newUser).save(function(err){
-//     if(err){
-      
-//       console.log("error occured")
-//     }
-
-//     else{
-      
-//       console.log("success")
-//     }
-
-//   })
-    
-
 var newUser =new models.User({
        username : req.body.user.username,  
        email :req.body.user.email,   
@@ -61,9 +14,7 @@ var newUser =new models.User({
        rank :req.body.user.rank,
        familyId :parseInt(req.body.user.familyId),
     });
-    
-
-console.log(req.body.user.email)
+  console.log(req.body.user.email)
   models.User.findOne({ email: req.body.user.email },function(err,found){
 
    if (!found ){
@@ -72,24 +23,20 @@ console.log(req.body.user.email)
       newUser.password=hash;
       console.log(' newUser.password', hash)
 
-
-
       newUser.save(function(err,obj) {
        
          if(err){
           res.status(500).send({msg:"error"});
-         // res.send({msg:"error"});
+      
         }
         else{
           res.status(201).send({msg:"success signup"});
 
-          //res.send({msg:"success signup"});
         }
       
       });
        
      })
-     
   }
 
   else{
@@ -102,27 +49,24 @@ console.log(req.body.user.email)
 console.log(newUser);
 }
 
-// exports.signinUser = function(req, res) {
-//   var email = req.body['states[email]'];
-//   var passWord = req.body['states[password]'];
-//   models.User.findOne({ email: email },function(err,user){
-//    if (!user ){
-//     console.log("user not exist")
-//   } else {
-//     var data="kk";
-//     models.User.comparepassword(password,user.password, function(err,match) {
-//       if (match) {
-//         data="coreeeeect";
-//         res.status(201).send(data);
-//             console.log("coreeeeect");
-//           } else {
-//             console.log("innnnncoreeeeect");
-//             data="";
-//             res.status(201).send(data);
-//           }
-//         });
-//       }
-//     });
-// };
+exports.signinUser = function(req, res) {
+ models.User.findOne({'username':req.body.user.username},function (err, data) {
+  console.log('data',data)
+    if(err){
+      res.status(404).send({msg:"no account"})}
+      if(data !== null){
+        bcrypt.compare(req.body.user.password, data.password, function(err, resCrypt) {
+          if(err){res.status(404).send({msg:"error here"})}
+            if(resCrypt){
+              req.session._id=data._id;
+              req.session.username=data.username;
+              req.session.password=data.password;
+              res.status(200).send({msg:"success"})
+            }
+          });
+
+      }
+    });
+};
 
 
