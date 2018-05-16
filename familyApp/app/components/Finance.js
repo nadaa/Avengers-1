@@ -45,11 +45,17 @@ export default class Finance extends React.Component{
       //
       tableHead:  ['Name', 'Cost'],
       tableName: ['Water', 'Electriciti', 'Shortage', 'Family Event'],
-      tableCost:  [[12],    [20],          [40],       [50]    ],
-      tableTotal:['Total',[150]]
+      tableCost:  [[12],     [20],            [40],         [50]    ],
+      tableTotal:['Total',0]
     };
   }
-
+  total1(){
+    var total=0
+    for (var i = 0; i < this.state.tableCost.length; i++) {
+      total+=this.state.tableCost[i][0]
+    }
+    this.setState({tableTotal : ['Total',total]});
+  }
   fectch1(){
     //return axios.get('http://192.168.1.82:3000')
     return fetch('http://192.168.1.82:3000')
@@ -62,18 +68,29 @@ export default class Finance extends React.Component{
        console.log(error);
       });  
   }
-  
   addToFinance(){
     //alert('add To Finance');
     //alert(typeof this.state.tableCost[0][0]);
-    alert(this.state.tableCost[0][0]+this.state.tableCost[1][0]);
-
+    alert(this.state.tableTotal[1]);
   };
-  removeFromFinance(){
-    this.state.tableCost.splice(0,1)
-    this.state.tableName.splice(0,1)
+   removeFromFinance(){
+    this.total1()
+    //this.state.tableCost.splice(0,1)
+    //this.state.tableName.splice(0,1)
     alert('remove From Finance');
   };
+  calculate(){
+    this.total1()
+    //this.state.tableCost.splice(0,1)
+    //this.state.tableName.splice(0,1)
+    alert('calculate');
+  };
+  see(){
+    //alert('add To Finance');
+    //alert(typeof this.state.tableCost[0][0]);
+    alert(this.state.tableTotal[1]);
+  };
+ 
   render() {
     //what return   
     return (
@@ -95,7 +112,7 @@ export default class Finance extends React.Component{
             this.addToFinance.bind(this)
           }
           >
-            <Text style={styles.textBtnAdd}>Add More</Text>
+            <Text style={styles.textBtnAdd}>Add</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.btnRemove}
@@ -103,7 +120,25 @@ export default class Finance extends React.Component{
             this.removeFromFinance.bind(this)
           }
           >
-            <Text style={styles.textBtnRemove}>Remove One</Text>
+            <Text style={styles.textBtnRemove}>Remove</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.btnView}>
+          <TouchableOpacity
+            style={styles.btnAdd}
+            onPress={
+            this.see.bind(this)
+          }
+          >
+            <Text style={styles.textBtnAdd}>see total</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.btnRemove}
+            onPress={
+            this.calculate.bind(this)
+          }
+          >
+            <Text style={styles.textBtnRemove}>calculate total</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -120,60 +155,65 @@ const styles = StyleSheet.create({
   },
   tableView: {
     flexDirection: 'column',
-    backgroundColor: 'green',
+    backgroundColor: 'white',
+    // backgroundColor: '#0bf5fb',
   },
   table: {
-    backgroundColor: 'gray',
+    backgroundColor: '#6239BD',
     marginRight:10,
     marginLeft:10,
     marginTop:10,
     marginBottom:10,
   },
   wrapper: { 
-    flexDirection: 'row' 
+    flexDirection: 'row',
   },
   head: {  
     height: 50,  
-    backgroundColor: 'red',
+    backgroundColor: '#123456',
   },
   textHead:{
     fontWeight: 'bold',
     textAlign: 'center', 
     fontSize: 40,
+    color:'#3cff00',
   },
   name: {  
-    backgroundColor: 'blue' 
+     // backgroundColor: '#6239BD' 
   },
   textName:{
     fontWeight: 'bold',
     textAlign: 'center', 
     fontSize: 25,
+    color:'white',
   },
   cost: {  
-    backgroundColor: 'yellow'   
+    // backgroundColor: '#6239BD',
   },
   textCost:{
     fontWeight: 'bold',
     textAlign: 'center', 
     fontSize: 25,
+    color:'white', 
   },
   total:{
     height: 40,  
-    backgroundColor: 'pink', 
+    backgroundColor: '#123456', 
   },
   textTotal:{
     fontWeight: 'bold',
     textAlign: 'center', 
     fontSize: 30,
+    color:'red', 
   },
   btnView: {
-    backgroundColor: 'pink',
-    flexDirection:'column',
+    backgroundColor: 'white',
+    flexDirection:'row',
     justifyContent:'center',
     alignItems: 'center',
   },
   btnAdd:{
-    backgroundColor: 'blue',
+    backgroundColor: '#3cff00',
     marginTop:10,
     padding:10,
   },
@@ -181,16 +221,19 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center', 
     fontSize: 30,
+    color:'black', 
   },
   btnRemove:{
     backgroundColor: 'red',
     marginTop:10,
     padding:10,
+    marginLeft:10,
   },
   textBtnRemove:{
     fontWeight: 'bold',
     textAlign: 'center', 
     fontSize: 30,
+    color:'black', 
   },
 });
 

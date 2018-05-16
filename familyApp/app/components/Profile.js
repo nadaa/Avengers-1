@@ -45,6 +45,14 @@ const MyDrawer=createDrawerNavigator(
      //path:'/sent',
      screen:Tasks,  
     },
+    'User Information':{
+     //path:'/sent',
+     screen:Tasks,  
+    },
+    Tasks:{
+     //path:'/sent',
+     screen:Tasks,  
+    },
     'Family Events':{
      //path:'/sent',
      screen:Tasks,  
@@ -57,18 +65,12 @@ const MyDrawer=createDrawerNavigator(
      //path:'/sent',
      screen:Tasks,  
     },
-    'User Information':{
-     //path:'/sent',
-     screen:Tasks,  
-    },
+    
     Outside:{
      //path:'/sent',
      screen:Try,  
     },
-    Tasks:{
-     //path:'/sent',
-     screen:Tasks,  
-    },
+    
     'Login For Try Only':{
      //path:'/sent',
      screen:Login,  
@@ -281,7 +283,7 @@ const styles = StyleSheet.create({
   otherView: {
     flex:1,
     flexDirection: 'column',
-    backgroundColor: 'green',
+    backgroundColor: 'white',
     //comment this after finish
     marginBottom:35,
   },
