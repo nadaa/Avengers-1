@@ -13,12 +13,10 @@ const userSchema=new mongoose.Schema({
 })
 
 const taskSchema=new mongoose.Schema({
-	taskName:Date,
-	taskCategory:String,
+	taskName:String,
 	taskDate:{type:Date,default:new Date()},
 	completed:{type:Boolean,default:false},
 	userEmail:String,
-	familyId:String 
 })
 
 
