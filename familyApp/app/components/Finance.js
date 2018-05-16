@@ -44,8 +44,8 @@ export default class Finance extends React.Component{
       restMoney:'1500',
       //
       tableHead:  ['Name', 'Cost'],
-      tableName: ['Water', 'Electriciti', 'Shortige', 'Event',],
-      tableCost:  [[12],    [20],          [40],       [50],    ],
+      tableName: ['Water', 'Electriciti', 'Shortage', 'Family Event'],
+      tableCost:  [[12],    [20],          [40],       [50]    ],
       tableTotal:['Total',[150]]
     };
   }
@@ -64,17 +64,22 @@ export default class Finance extends React.Component{
   }
   
   addToFinance(){
-    alert('addToFinance');
+    //alert('add To Finance');
+    //alert(typeof this.state.tableCost[0][0]);
+    alert(this.state.tableCost[0][0]+this.state.tableCost[1][0]);
+
   };
   removeFromFinance(){
-    alert('removeFromFinance');
+    this.state.tableCost.splice(0,1)
+    this.state.tableName.splice(0,1)
+    alert('remove From Finance');
   };
   render() {
     //what return   
     return (
       <View style={styles.allPage}>
         <View style={styles.tableView}>
-          <Table>
+          <Table style={styles.table}>
             <Row data={this.state.tableHead} style={styles.head} textStyle={styles.textHead}/>
             <TableWrapper style={styles.wrapper}>
               <Col data={this.state.tableName} style={styles.name} textStyle={styles.textName}/>
@@ -85,20 +90,20 @@ export default class Finance extends React.Component{
         </View>
         <View style={styles.btnView}>
           <TouchableOpacity
-            style={styles.btn}
+            style={styles.btnAdd}
             onPress={
             this.addToFinance.bind(this)
           }
           >
-            <Text>Add More</Text>
+            <Text style={styles.textBtnAdd}>Add More</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={styles.btn}
+            style={styles.btnRemove}
             onPress={
             this.removeFromFinance.bind(this)
           }
           >
-            <Text>Remove One</Text>
+            <Text style={styles.textBtnRemove}>Remove One</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -114,11 +119,15 @@ const styles = StyleSheet.create({
     marginBottom:35,
   },
   tableView: {
-    flex: 1,
     flexDirection: 'column',
     backgroundColor: 'green',
+  },
+  table: {
+    backgroundColor: 'gray',
     marginRight:10,
     marginLeft:10,
+    marginTop:10,
+    marginBottom:10,
   },
   wrapper: { 
     flexDirection: 'row' 
@@ -128,20 +137,23 @@ const styles = StyleSheet.create({
     backgroundColor: 'red',
   },
   textHead:{
+    fontWeight: 'bold',
     textAlign: 'center', 
-    fontSize: 25,
+    fontSize: 40,
   },
-  name: { 
+  name: {  
     backgroundColor: 'blue' 
   },
   textName:{
+    fontWeight: 'bold',
     textAlign: 'center', 
     fontSize: 25,
   },
   cost: {  
-    height: 35  
+    backgroundColor: 'yellow'   
   },
   textCost:{
+    fontWeight: 'bold',
     textAlign: 'center', 
     fontSize: 25,
   },
@@ -150,22 +162,36 @@ const styles = StyleSheet.create({
     backgroundColor: 'pink', 
   },
   textTotal:{
+    fontWeight: 'bold',
     textAlign: 'center', 
-    fontSize: 25,
+    fontSize: 30,
   },
   btnView: {
-    flex:1,
     backgroundColor: 'pink',
     flexDirection:'column',
     justifyContent:'center',
-    marginLeft:5,
     alignItems: 'center',
   },
-  btn:{
-    flex: 1,  
-    backgroundColor: 'gray' 
-  }
-
+  btnAdd:{
+    backgroundColor: 'blue',
+    marginTop:10,
+    padding:10,
+  },
+  textBtnAdd:{
+    fontWeight: 'bold',
+    textAlign: 'center', 
+    fontSize: 30,
+  },
+  btnRemove:{
+    backgroundColor: 'red',
+    marginTop:10,
+    padding:10,
+  },
+  textBtnRemove:{
+    fontWeight: 'bold',
+    textAlign: 'center', 
+    fontSize: 30,
+  },
 });
 
 

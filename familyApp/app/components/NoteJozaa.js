@@ -26,6 +26,7 @@
 2- get the how money this family have (by email + fimilly id + money)
 3- subtract the input from output
 
+need to save the table in data base and the cost to can render it
 
 
 
