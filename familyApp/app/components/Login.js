@@ -8,8 +8,10 @@ import {
  TouchableOpacity,
  AsyncStorage,
 } from 'react-native';
+import axios from 'axios';  
 import { createStackNavigator } from 'react-navigation';
-import SignUp from './SignUp'
+import SignUp from './SignUp';
+//import Profile from './Profile';
 
 export default class Login extends React.Component {
 	constructor(props){
@@ -19,6 +21,7 @@ export default class Login extends React.Component {
 			password:'',
 		}
 	}
+  
 	componentDidMount(){
 		this._loadInitialState().done();
 	}
@@ -29,6 +32,30 @@ export default class Login extends React.Component {
 			//this.props.navigation.navigate('Profile')
 		}
 	}
+  sendLogin(){
+          const { navigate } = this.props.navigation;
+            axios.post('http://192.168.1.86:3000/api/login', {
+            user:this.state
+         })
+         .then(function (response) {
+          
+           if(response.data.msg==="success"){
+                navigate('SignUp')
+           }
+           else if(response.data.msg==="error here"){
+                 alert("the password is not correct")
+            }
+            else if(response.data.msg==="no account"){
+                 navigate('SignUp')
+               
+            }
+           })
+         .catch(function (error) {
+           console.log(error);
+         });
+};
+
+
   render() {
     //jozaa
   	const { navigate } = this.props.navigation;
@@ -54,8 +81,8 @@ export default class Login extends React.Component {
     /> 
     <TouchableOpacity
     	style={styles.btn}
-    	onPress={() =>
-    		alert('hello')
+    	onPress={
+    		 this.sendLogin.bind(this)
         //  navigate('Profile')
         }
     	>

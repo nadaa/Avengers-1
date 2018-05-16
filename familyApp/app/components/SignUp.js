@@ -14,10 +14,7 @@ import {
 import {createStackNavigator } from 'react-navigation';
 import Login from './Login';
 import axios from 'axios';    
-
-
 import DatePicker from 'react-native-datepicker';
-
 import {Select, Option} from "react-native-chooser";
 
 
@@ -55,46 +52,37 @@ export default class SignUp extends React.Component {
 
 
 
-validateEmail (text) {
-    var reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ;
-    if(reg.test(text) === false)
-    {return false;
-      }
-    else {
-      return true;
-    }
-}
+// validateEmail (text) {
+//     var reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ;
+//     if(reg.test(text) === false)
+//     {return false;
+//       }
+//     else {
+//       return true;
+//     }
+// }
 
 
 sendSignUp(){
-      const { navigate } = this.props.navigation;
-	axios.post('http://192.168.1.86:3000/api/signup', {
+const { navigate } = this.props.navigation;
+axios.post('http://192.168.1.86:3000/api/signup', {
     user:this.state
- })
- .then(function (response) {
-  
-   if(response.data.msg==="success signup"){
-        navigate('Login')
-   }
-   else if(response.data.msg==='choose another email'){
-         alert('choose another email')
-    }
-   }
-//this.textInput.clear()
-   //clear the textinputs
-    // this.setState({ email,
-    //     password,
-    //     username,
-    //     bdate,
-    //     role,
-    //     rank,
-    //     familyId})
+   })
+   .then(function (response) {
+    
+     if(response.data.msg==="success signup"){
+          navigate('Login')
+     }
+     else if(response.data.msg==='choose another email'){
+           alert('choose another email')
+      }
+     }
 
- )
- .catch(function (error) {
-   console.log(error);
- });
-}
+   )
+   .catch(function (error) {
+     console.log(error);
+   });
+  }
 
 onSelect(value, label) {
     this.setState({role : value});
@@ -110,7 +98,7 @@ onSelect(value, label) {
 
     <TextInput
     ref={input =>{this.textInput =input}}
-        value={this.state.username}
+     value={this.state.username}
     	style={styles.textInput}  
     	placeholder='Username'
     	onChangeText={(text) => this.setState({username: text})}
