@@ -26,6 +26,7 @@ import Login from './Login';
 import Tasks from './Tasks'
 import SignUp from './SignUp';
 import Try from './Try';
+import Finance from './Finance';
 
 const UserTypeGenderText={
   //female (Mother) / male (Father) / child (Children)
@@ -38,7 +39,7 @@ const MyDrawer=createDrawerNavigator(
   {
     Finance:{
       //path:'/',
-      screen:Try, 
+      screen:Finance, 
     },
     Shortage:{
      //path:'/sent',
@@ -62,7 +63,7 @@ const MyDrawer=createDrawerNavigator(
     },
     Outside:{
      //path:'/sent',
-     screen:Tasks,  
+     screen:Try,  
     },
     Tasks:{
      //path:'/sent',
@@ -78,7 +79,8 @@ const MyDrawer=createDrawerNavigator(
     },
   },
   {
-    initialRouteName:'Tasks',
+    //initialRouteName:'Tasks',
+    initialRouteName:'Finance',
     drawerPosition:'left',
     //contentComponent: CustomDrawerContentComponent,
     //drawarWidth:10,
@@ -110,28 +112,27 @@ export default class Profile extends React.Component{
       restMoney:'1500',
     };
   }
-//Ip Adress Jozaa: 192.168.1.82
 
-fectch1(){
-  //return axios.get('http://192.168.1.82:3000')
-  return fetch('http://192.168.1.82:3000')
-    .then((response) => response.json())
-      .then((responseJson) => {
-        console.log("server done:",JSON.stringify(responseJson) )
-         alert(JSON.stringify(responseJson));
-      })
-    .catch(function (error) {
-     console.log(error);
-    });  
-}
-
-goToDrawer(){
-  alert('goToDrawer');
-};
-goToTasks(){
-  alert('goToTasks');
-  //this.props.navigation.openDrawer()
-};
+  fectch1(){
+    //return axios.get('http://192.168.1.82:3000')
+    return fetch('http://192.168.1.82:3000')
+      .then((response) => response.json())
+        .then((responseJson) => {
+          console.log("server done:",JSON.stringify(responseJson) )
+           alert(JSON.stringify(responseJson));
+        })
+      .catch(function (error) {
+       console.log(error);
+      });  
+  }
+  
+  goToDrawer(){
+    alert('Drawer From Profile');
+  };
+  goToTasks(){
+    alert('Tasks From Profile');
+    //this.props.navigation.openDrawer()
+  };
 
   //render
   render() {
@@ -184,7 +185,7 @@ goToTasks(){
 
             rightComponent={
               <View style={styles.rightComponent}>
-                <Icon6 onPress={this.goToTasks.bind(this) } style={{color:'#0bf5fb'}} name="checklist" size={35}/>
+                <Icon6 onPress={this.fectch1.bind(this)} style={{color:'#0bf5fb'}} name="checklist" size={35}/>
                 <Text onPress={this.goToTasks.bind(this)} style={styles.textUnderIcon}>Tasks</Text>
               </View>
             }
@@ -208,7 +209,7 @@ const styles = StyleSheet.create({
   },
   barView: {
     flexDirection: 'column',
-    marginTop:35,
+    //marginTop:35,
   },
   innerContainer: {
     //backgroundColor:'green',
@@ -280,11 +281,7 @@ const styles = StyleSheet.create({
     flex:1,
     flexDirection: 'column',
     backgroundColor: 'green',
-    marginBottom:35,
-  },
-  d: {
-    backgroundColor: 'red',
-    marginTop:150,
+    //marginBottom:35,
   },
 });
 

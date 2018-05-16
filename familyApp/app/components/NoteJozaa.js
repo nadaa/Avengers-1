@@ -1,4 +1,5 @@
 //dont delete this because it is the code for ata base jozaa
+//IP Adress Jozaa: 192.168.1.82
 
 
 
@@ -77,3 +78,45 @@ fectch1(){
     });
 }
 */
+
+
+
+
+app.js--------------------------
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import {createStackNavigator} from 'react-navigation';
+import Login from './app/components/Login';
+import Profile from './app/components/Profile';
+import SignUp from './app/components/SignUp';
+
+/*jozaa comment this 
+const Application=  createStackNavigator({
+  Home: { screen: Profile },
+  SignUp: { screen: SignUp },
+  Login: { screen: Profile },
+  Profile: { screen: Profile },
+  Login:{screen: Login}
+
+},{
+
+    navigationOptions: {
+       header: false,
+      }
+
+});
+*/
+export default class App extends React.Component {
+  render() {
+    return (
+      //jozaa coomment this
+      //<Application/>
+      <Profile/>
+      
+
+    );
+  }
+}
+
+
+------------------------------------------
