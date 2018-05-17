@@ -61,7 +61,7 @@ const MyDrawer=createDrawerNavigator(
     },
     Study:{
      //path:'/sent',
-     screen:Tasks,  
+     screen:Try,  
     },
     Exam:{
      //path:'/sent',
@@ -83,7 +83,8 @@ const MyDrawer=createDrawerNavigator(
     },
   },
   {
-    //initialRouteName:'Tasks',Finance Exam
+    //                                 Try2 Try
+    //initialRouteName:'Tasks',Finance Exam Study
     initialRouteName:'Finance',
     drawerPosition:'left',
     //contentComponent: CustomDrawerContentComponent,
