@@ -1,13 +1,9 @@
 //import react from react
 import React from 'react';
 //import element from reacr-native 
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity,Button } from 'react-native';
 //import FormInput & Header from react native elements
 import { FormInput, Header ,Divider, CheckBox } from 'react-native-elements';
-//import from navidate react drawer
-import Drawer from 'react-native-drawer'
-//import createDrawerNavigator as DrawerNavigator from react navigation
-import { createDrawerNavigator } from 'react-navigation'
 //import axios to make router works
 import axios from 'axios';    
 
@@ -21,15 +17,6 @@ import Icon5 from 'react-native-vector-icons/MaterialIcons';
 import Icon6 from 'react-native-vector-icons/Octicons';
 import Icon7 from 'react-native-vector-icons/Foundation';
 
-//import the file screen (page)
-import Login from './Login';
-import Tasks from './Tasks'
-import SignUp from './SignUp';
-import Try from './Try';
-import Try2 from './Try2';
-import Try3 from './Try3';
-import Finance from './Finance';
-
 const UserTypeGenderText={
   //female (Mother) / male (Father) / child (Children)
   female:'Mother',
@@ -37,69 +24,8 @@ const UserTypeGenderText={
   child:'Child',
 }
 
-const MyDrawer=createDrawerNavigator(
-  {
-    Finance:{
-      //path:'/',
-      screen:Finance, 
-    },
-    Shortage:{
-     //path:'/sent',
-     screen:Tasks,  
-    },
-    'User Information':{
-     //path:'/sent',
-     screen:Tasks,  
-    },
-    Tasks:{
-     //path:'/sent',
-     screen:Tasks,  
-    },
-    'Family Events':{
-     //path:'/sent',
-     screen:Tasks,  
-    },
-    Study:{
-     //path:'/sent',
-     screen:Try,  
-    },
-    Exam:{
-     //path:'/sent',
-     screen:Try2,  
-    },
-    
-    Outside:{
-     //path:'/sent',
-     screen:Try3,  
-    },
-    
-    'Login For Try Only':{
-     //path:'/sent',
-     screen:Login,  
-    },
-    'SignUp For Try Only':{
-     //path:'/sent',
-     screen:SignUp,  
-    },
-  },
-  {
-    //                                  Try   Try2 Try3 
-    //initialRouteName:'Tasks',Finance  Study Exam Outside
-    initialRouteName:'Finance',
-    drawerPosition:'left',
-    //contentComponent: CustomDrawerContentComponent,
-    //drawarWidth:10,
-    drawerOpenRoute: 'DrawerOpen',
-    drawerCloseRoute: 'DrawerClose',
-    drawerToggleRoute: 'DrawerToggle',
-    contentOptions:{
-      activeTintColor:'red',
-    }
-  }
-);
-
-//export Home from the react componant
-export default class Profile extends React.Component{
+//export Bar from the react componant
+export default class Bar extends React.Component{
   //the constructor
   constructor(){
     //super for ES6
@@ -117,7 +43,6 @@ export default class Profile extends React.Component{
       restMoney:'1500',
     };
   }
-
   fectch1(){
     //return axios.get('http://192.168.1.82:3000')
     return fetch('http://192.168.1.82:3000')
@@ -130,21 +55,6 @@ export default class Profile extends React.Component{
        console.log(error);
       });  
   }
-  
-  goToDrawer(){
-    alert('Drawer From Profile');
-  };
-  goToTasks(){
-    alert('Tasks From Profile');
-    //this.props.navigation.openDrawer()
-  };
-  closeControlPanel(){
-    this._drawer.close()
-  };
-  openControlPanel(){
-    this._drawer.open()
-  };
-
   //render
   render() {
     //what return
@@ -158,8 +68,8 @@ export default class Profile extends React.Component{
 
             leftComponent={
               <View  style={styles.leftComponent}>
-                <Icon0 onPress={this.fectch1.bind(this)} style={{color:'#0bf5fb'}} name="bars" size={35}/>
-                <Text onPress={this.fectch1.bind(this)} style={styles.textUnderIcon}>Menu</Text>
+                <Icon0 onPress={() =>this.props.navigation.openDrawer()} style={{color:'#0bf5fb'}} name="bars" size={35}/>
+                <Text onPress={() => this.props.navigation.openDrawer()} style={styles.textUnderIcon}>Menu</Text>
               </View>
             }
 
@@ -189,22 +99,18 @@ export default class Profile extends React.Component{
                   <Text style={styles.textUnderIcon}>
                     Money
                   </Text>
-                </View>
-                              
+                </View>             
               </View>
             }
 
             rightComponent={
               <View style={styles.rightComponent}>
-                <Icon6 onPress={this.fectch1.bind(this)} style={{color:'#0bf5fb'}} name="checklist" size={35}/>
-                <Text onPress={this.goToTasks.bind(this)} style={styles.textUnderIcon}>Tasks</Text>
+                <Icon6 onPress={() =>this.props.navigation.navigate('Tasks')} style={{color:'#0bf5fb'}} name="checklist" size={35}/>
+                <Text onPress={() =>this.props.navigation.navigate('Tasks')} style={styles.textUnderIcon}>Tasks</Text>
               </View>
             }
           >
           </Header>
-        </View>
-        <View style={styles.otherView}>
-          <MyDrawer/>
         </View>
       </View>
     );
@@ -213,7 +119,7 @@ export default class Profile extends React.Component{
 
 const styles = StyleSheet.create({
   allPage: {
-    flex: 1,
+    //flex: 1,
     flexDirection: 'column',
     backgroundColor: 'white',
   },
@@ -296,10 +202,3 @@ const styles = StyleSheet.create({
     marginBottom:35,
   },
 });
-
-
-/*
-
-
-
-*/
