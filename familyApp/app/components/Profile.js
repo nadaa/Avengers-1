@@ -1,7 +1,7 @@
 //import react from react
 import React from 'react';
 //import element from reacr-native 
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 //import FormInput & Header from react native elements
 import { FormInput, Header ,Divider, CheckBox } from 'react-native-elements';
 //import from navidate react drawer
@@ -26,6 +26,8 @@ import Login from './Login';
 import Tasks from './Tasks'
 import SignUp from './SignUp';
 import Try from './Try';
+import Try2 from './Try2';
+
 import Finance from './Finance';
 
 const UserTypeGenderText={
@@ -45,6 +47,14 @@ const MyDrawer=createDrawerNavigator(
      //path:'/sent',
      screen:Tasks,  
     },
+    'User Information':{
+     //path:'/sent',
+     screen:Tasks,  
+    },
+    Tasks:{
+     //path:'/sent',
+     screen:Tasks,  
+    },
     'Family Events':{
      //path:'/sent',
      screen:Tasks,  
@@ -55,20 +65,14 @@ const MyDrawer=createDrawerNavigator(
     },
     Exam:{
      //path:'/sent',
-     screen:Tasks,  
+     screen:Try2,  
     },
-    'User Information':{
-     //path:'/sent',
-     screen:Tasks,  
-    },
+    
     Outside:{
      //path:'/sent',
      screen:Try,  
     },
-    Tasks:{
-     //path:'/sent',
-     screen:Tasks,  
-    },
+    
     'Login For Try Only':{
      //path:'/sent',
      screen:Login,  
@@ -79,7 +83,7 @@ const MyDrawer=createDrawerNavigator(
     },
   },
   {
-    //initialRouteName:'Tasks',
+    //initialRouteName:'Tasks',Finance Exam
     initialRouteName:'Finance',
     drawerPosition:'left',
     //contentComponent: CustomDrawerContentComponent,
@@ -209,7 +213,8 @@ const styles = StyleSheet.create({
   },
   barView: {
     flexDirection: 'column',
-    //marginTop:35,
+    //comment this after finish
+    marginTop:35,
   },
   innerContainer: {
     //backgroundColor:'green',
@@ -280,8 +285,9 @@ const styles = StyleSheet.create({
   otherView: {
     flex:1,
     flexDirection: 'column',
-    backgroundColor: 'green',
-    //marginBottom:35,
+    backgroundColor: 'white',
+    //comment this after finish
+    marginBottom:35,
   },
 });
 

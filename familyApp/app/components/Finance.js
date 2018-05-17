@@ -1,21 +1,22 @@
 //import react from react
 import React from 'react';
 //import element from reacr-native 
-import { StyleSheet, Text, View, Button, ListView } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 //import table from react native table component
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 //import axios to make router works
-import axios from 'axios';    
- 
-//import the icon from lirbary  one by one (each one library in react native icon)
-import Icon0 from 'react-native-vector-icons/FontAwesome';
-import Icon1 from 'react-native-vector-icons/Entypo';
-import Icon2 from 'react-native-vector-icons/Feather';
-import Icon3 from 'react-native-vector-icons/Ionicons';
-import Icon4 from 'react-native-vector-icons/MaterialCommunityIcons';
-import Icon5 from 'react-native-vector-icons/MaterialIcons';
-import Icon6 from 'react-native-vector-icons/Octicons';
-import Icon7 from 'react-native-vector-icons/Foundation';
+import axios from 'axios';   
+
+
+//import Dialog from react native dialog
+import Dialog from "react-native-dialog";
+
+
+
+// import HTML from react native render html to render html elemnt
+import HTML from 'react-native-render-html';
+// Dialog Component from react native dialog component to render pop elemnt
+import { DialogComponent, SlideAnimation } from 'react-native-dialog-component';
 
 
 const UserTypeGenderText={
@@ -28,9 +29,9 @@ const UserTypeGenderText={
 //export Home from the react componant
 export default class Finance extends React.Component{
   //the constructor
-  constructor(props){
+  constructor(){
     //super for ES6
-    super(props);
+    super();
     //all the data save before to can show in the bar
     this.state={
       //defult thing when change from data base change here 🙂 <3
@@ -43,16 +44,24 @@ export default class Finance extends React.Component{
       //the money still
       restMoney:'1500',
       //
-      tableHead: ['Name', 'Cost'],
-      tableData: [
-        ['water', '12'],
-        ['electriciti', '20'],
-        ['shortige', '40'],
-        ['event', '50']
-      ]
+      tableHead:  ['Name', 'Cost'],
+      tableName: ['Water', 'Electricity', 'Shortage', 'Family Event'],
+      tableCost:  [[12],     [20],            [40],         [50]    ],
+      tableTotal:['Total',0]
     };
+    //auto call function when render this scren
+    this.calculateTotal();
   }
-
+  calculateTotal(){
+    var total=0;
+    for (var i = 0; i < this.state.tableCost.length; i++) {
+      total+=this.state.tableCost[i][0];
+    }
+    //cant use set state so we use this .state
+    this.state.tableTotal[1]=total;
+    //this.setState({tableTotal : ['Total',total]});
+    //alert('you cal total: '+this.state.tableTotal[1]);
+  }
   fectch1(){
     //return axios.get('http://192.168.1.82:3000')
     return fetch('http://192.168.1.82:3000')
@@ -65,36 +74,51 @@ export default class Finance extends React.Component{
        console.log(error);
       });  
   }
-  
-  goToDrawer(){
-    alert('goToDrawer');
+  addToFinance(){
+    alert('Add To Finance');
   };
-  goToTasks(){
-    alert('goToTasks');
-    //this.props.navigation.openDrawer()
+  editFromFinance(){
+    alert('Edit From Finance');  
   };
-  
-  //  renderRow() {
-  //       return (
-  //           <View style={{ flex: 1, alignSelf: 'stretch', flexDirection: 'row' }}>
-  //               <View style={{ flex: 1, alignSelf: 'stretch' }} /> { /* Edit these as they are your cells. You may even take parameters to display different data / react elements etc. */}
-  //               <View style={{ flex: 1, alignSelf: 'stretch' }} />
-  //               <View style={{ flex: 1, alignSelf: 'stretch' }} />
-  //               <View style={{ flex: 1, alignSelf: 'stretch' }} />
-  //               <View style={{ flex: 1, alignSelf: 'stretch' }} />
-  //           </View>
-  //       );
-  //   }
-  //render
+  removeFromFinance(){
+    alert('Remove From Finance');
+  };
+  calculate(){
+    this.calculateTotal();
+    alert('calculate');
+  };
+  see(){
+    alert(this.state.tableTotal[1]);
+  };
   render() {
-    //const data = [1, 2, 3, 4, 5];
     //what return   
     return (
       <View style={styles.allPage}>
-       <Table borderStyle={{borderWidth: 4, borderColor: '#c8e1ff'}}>
-          <Row data={this.state.tableHead} style={styles.head} textStyle={styles.text}/>
-          <Rows data={this.state.tableData} textStyle={styles.text} />
-        </Table>
+        <View style={styles.tableView}>
+          <Table style={styles.table}>
+            <Row data={this.state.tableHead} style={styles.head} textStyle={styles.textHead}/>
+            <TableWrapper style={styles.wrapper}>
+              <Col data={this.state.tableName} style={styles.name} textStyle={styles.textName}/>
+              <Rows data={this.state.tableCost} style={styles.cost} textStyle={styles.textCost} flexArr={[1]}/>
+            </TableWrapper>
+            <Row data={this.state.tableTotal} style={styles.total} textStyle={styles.textTotal}/>
+          </Table>
+        </View>
+        <View style={styles.btnView}>
+          <TouchableOpacity style={styles.btnAdd} onPress={this.addToFinance.bind(this)}>
+            <Text style={styles.textBtnAdd}>Add</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.btnEdit} onPress={this.editFromFinance.bind(this)}>
+            <Text style={styles.textBtnEdit}>Edit</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.btnRemove} onPress={this.removeFromFinance.bind(this)}>
+            <Text style={styles.textBtnRemove}>Remove</Text>
+          </TouchableOpacity>
+        </View>
+ 
+
       </View>
     );
   }    
@@ -105,60 +129,144 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     backgroundColor: 'white',
+    marginBottom:35,
   },
-  otherView: {
-    flex:1,
+  tableView: {
     flexDirection: 'column',
-    backgroundColor: 'green',
-    //marginBottom:35,
+    backgroundColor: 'white',
+    // backgroundColor: '#0bf5fb',
   },
-  name:{
-    fontSize: 23,
-    textAlign:'center',
+  table: {
+    backgroundColor: '#6239BD',
+    marginRight:10,
+    marginLeft:10,
+    marginTop:10,
+    marginBottom:10,
+  },
+  wrapper: { 
+    flexDirection: 'row',
+  },
+  head: {  
+    height: 50,  
+    backgroundColor: '#123456',
+  },
+  textHead:{
     fontWeight: 'bold',
+    textAlign: 'center', 
+    fontSize: 40,
+    color:'#3cff00',
+  },
+  name: {  
+     // backgroundColor: '#6239BD' 
+  },
+  textName:{
+    fontWeight: 'bold',
+    textAlign: 'center', 
+    fontSize: 25,
     color:'white',
   },
-  cost:{
-    fontSize: 23,
-    textAlign:'center',
-    fontWeight: 'bold',
-    color:'gray',  
+  cost: {  
+    // backgroundColor: '#6239BD',
   },
-  container: { flex: 1, padding: 16, paddingTop: 30 },
-  head: { height: 40, backgroundColor: 'green' },
-  text: { margin: 6 }
-
+  textCost:{
+    fontWeight: 'bold',
+    textAlign: 'center', 
+    fontSize: 25,
+    color:'white', 
+  },
+  total:{
+    height: 40,  
+    backgroundColor: '#123456', 
+  },
+  textTotal:{
+    fontWeight: 'bold',
+    textAlign: 'center', 
+    fontSize: 30,
+    color:'red', 
+  },
+  btnView: {
+    backgroundColor: 'white',
+    flexDirection:'row',
+    justifyContent:'center',
+    alignItems: 'center',
+  },
+  btnAdd:{
+    backgroundColor: '#3cff00',
+    marginTop:10,
+    padding:10,
+  },
+  textBtnAdd:{
+    fontWeight: 'bold',
+    textAlign: 'center', 
+    fontSize: 30,
+    color:'black', 
+  },
+  btnEdit:{
+    backgroundColor: '#6239BD',
+    marginTop:10,
+    padding:10,
+    marginLeft:10,
+  },
+  textBtnEdit:{
+    fontWeight: 'bold',
+    textAlign: 'center', 
+    fontSize: 30,
+    color:'black', 
+  },
+  btnRemove:{
+    backgroundColor: 'red',
+    marginTop:10,
+    padding:10,
+    marginLeft:10,
+  },
+  textBtnRemove:{
+    fontWeight: 'bold',
+    textAlign: 'center', 
+    fontSize: 30,
+    color:'black', 
+  },
+   container: {
+    flex: 1,
+    paddingBottom: 20,
+  },
 });
 
 
 /*
-<View style={styles.allPage}>
-        <View style={styles.otherView}>
-          <Text onPress={this.goToDrawer.bind(this)} style={styles.name}>Menu</Text>
-          <Text onPress={this.goToDrawer.bind(this)} style={styles.cost}>cost</Text>
 
-        
-        </View>
+Alert.alert(
+      'Edit From Finance',
+      'Choose which one you want to edit',
+      [
+        {text: 'Ask me later', onPress: () => {}},
+        {text: 'Cancel', onPress: () => alert('Cancel Pressed'), style: 'cancel'},
+        {text: 'OK', onPress: () => alert('OK Pressed')},
+      ],
+      { cancelable: false }
+    )  
+
+ var txt;
+    var person = HTML.prompt("Please enter your name:", "Harry Potter");
+    if (person == null || person == "") {
+        txt = "User cancelled the prompt.";
+    } else {
+        txt = "Hello " + person + "! How are you today?";
+    }
 
 
 
-<View style={styles.otherView}>
-          <table style="width:100%">
-            <tr>
-              <th>Firstname</th>
-              <th>Lastname</th> 
-              <th>Age</th>
-            </tr>
-            <tr>
-              <td>Jill</td>
-              <td>Smith</td> 
-              <td>50</td>
-            </tr>
-            <tr>
-              <td>Eve</td>
-              <td>Jackson</td> 
-              <td>94</td>
-            </tr>
-          </table>
-        </View>
+<View>
+
+   <View>
+        <Dialog.Container>
+          <Dialog.Title>Account delete</Dialog.Title>
+          <Dialog.Description>
+            Do you want to delete this account? You cannot undo this action.
+          </Dialog.Description>
+          <Dialog.Button label="Cancel" />
+          <Dialog.Button label="Delete" />
+        </Dialog.Container>
+      </View>
+
+ </View>
 */
