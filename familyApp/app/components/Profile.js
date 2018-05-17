@@ -10,7 +10,7 @@ import Drawer from 'react-native-drawer'
 import { createDrawerNavigator } from 'react-navigation'
 //import axios to make router works
 import axios from 'axios';    
- 
+
 //import the icon from lirbary  one by one (each one library in react native icon)
 import Icon0 from 'react-native-vector-icons/FontAwesome';
 import Icon1 from 'react-native-vector-icons/Entypo';
@@ -27,7 +27,7 @@ import Tasks from './Tasks'
 import SignUp from './SignUp';
 import Try from './Try';
 import Try2 from './Try2';
-
+import Try3 from './Try3';
 import Finance from './Finance';
 
 const UserTypeGenderText={
@@ -70,7 +70,7 @@ const MyDrawer=createDrawerNavigator(
     
     Outside:{
      //path:'/sent',
-     screen:Try,  
+     screen:Try3,  
     },
     
     'Login For Try Only':{
@@ -83,8 +83,8 @@ const MyDrawer=createDrawerNavigator(
     },
   },
   {
-    //                                 Try2 Try
-    //initialRouteName:'Tasks',Finance Exam Study
+    //                                  Try   Try2 Try3 
+    //initialRouteName:'Tasks',Finance  Study Exam Outside
     initialRouteName:'Finance',
     drawerPosition:'left',
     //contentComponent: CustomDrawerContentComponent,
@@ -138,6 +138,12 @@ export default class Profile extends React.Component{
     alert('Tasks From Profile');
     //this.props.navigation.openDrawer()
   };
+  closeControlPanel(){
+    this._drawer.close()
+  };
+  openControlPanel(){
+    this._drawer.open()
+  };
 
   //render
   render() {
@@ -153,7 +159,7 @@ export default class Profile extends React.Component{
             leftComponent={
               <View  style={styles.leftComponent}>
                 <Icon0 onPress={this.fectch1.bind(this)} style={{color:'#0bf5fb'}} name="bars" size={35}/>
-                <Text onPress={this.goToDrawer.bind(this)} style={styles.textUnderIcon}>Menu</Text>
+                <Text onPress={this.fectch1.bind(this)} style={styles.textUnderIcon}>Menu</Text>
               </View>
             }
 
@@ -200,7 +206,6 @@ export default class Profile extends React.Component{
         <View style={styles.otherView}>
           <MyDrawer/>
         </View>
-
       </View>
     );
   }
