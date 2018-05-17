@@ -5,7 +5,7 @@ const appControllers=require('./controllers');
 
 appRouter.route('/api/signup').post((req,res)=>{
 	// to retreive all family members
-	console.log("request received",req.body)
+	// console.log("request received",req.body)
 	appControllers.signupUser(req,res);
 
 })

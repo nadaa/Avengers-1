@@ -6,7 +6,6 @@ import {
  TextInput,
  KeyboardAvoidingView,
  TouchableOpacity,
- AsyncStorage,
 } from 'react-native';
 import axios from 'axios';  
 import { createStackNavigator } from 'react-navigation';
@@ -23,15 +22,15 @@ export default class Login extends React.Component {
 	}
   
 	componentDidMount(){
-		this._loadInitialState().done();
+		// this._loadInitialState().done();
 	}
-	_loadInitialState = async () => {
-		var value = await AsyncStorage.getItem('user');
-		if(value !== null){
-      //jozaa
-			//this.props.navigation.navigate('Profile')
-		}
-	}
+	// _loadInitialState = async () => {
+	// 	var value = await AsyncStorage.getItem('user');
+	// 	if(value !== null){
+ //      //jozaa
+	// 		//this.props.navigation.navigate('Profile')
+	// 	}
+	// }
   sendLogin(){
           const { navigate } = this.props.navigation;
             axios.post('http://192.168.1.86:3000/api/login', {
