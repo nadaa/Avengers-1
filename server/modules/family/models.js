@@ -5,10 +5,9 @@ const userSchema=new mongoose.Schema({
 	 type: String, index: { unique: true }
 	},
 	password: String,
-	name:String,
+	username:String,
 	bdate: Date,
 	role: String,
-	rank: {type:Number,default:0},
 	familyId:String
 	
 })
@@ -17,7 +16,7 @@ const taskSchema=new mongoose.Schema({
 	taskName:Date,
 	taskCategory:String,
 	taskDate:{type:Date,default:new Date()},
-	status:{type:String,default:"uncomplete"},
+	completed:{type:Boolean,default:false},
 	userEmail:String,
 	familyId:String 
 })
