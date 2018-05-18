@@ -1,6 +1,8 @@
 import React from 'react';
-import { View, Picker, StyleSheet, TextInput, TouchableOpacity, Text } from 'react-native';
+import { View, Picker, FlatList ,StyleSheet,Platform, TextInput, TouchableOpacity, Text } from 'react-native';
 import axios from 'axios';
+import { List, ListItem,CheckBox } from "react-native-elements";
+
 export default class TaskMonitor extends React.Component {
 
 	constructor(props){
@@ -9,11 +11,12 @@ export default class TaskMonitor extends React.Component {
 		this.state={
 			// it should object of arrays (kidname as key, value array of tasks)
 			kids:[],
-			KidTasks:[],
+			kidTasks:[],
 			kidIndex:0
 		}
 		this.getKids=this.getKids.bind(this);
 		this.showTasks=this.showTasks.bind(this);
+		//this.renderItem=this.renderItem.bind(this);
 	}
 
 
@@ -40,7 +43,7 @@ showTasks(){
 	})
 	.then((response) =>{
 		//console.log(response.data);
-		this.setState({KidTasks:response.data});
+		this.setState({kidTasks:response.data});
     
   })
   .catch(function (error) {
@@ -52,41 +55,61 @@ componentDidMount(){
 	// send a ajax get request to get all kids
 	this.getKids();
 }
+
+	// renderItem(item){
+	// 	return (
+	// 	<View>
+	// 	<Text>{item.taskName}</Text>
+	// 	<Text>{item.completed}</Text>
+	// 	</View>
+
+	// 	)
+	// 	}
+
+
+
 	render() {
 		return (
-			<View style={styles.container}>
-			
-
-
-			<Picker
+			<View style={styles.container} >
+		
+			<View style={{borderWidth:2,marginTop:10,height:150,width:400}}>
+			<Picker style={styles.picker}
 			selectedValue = {this.state.selectedKid}
   			onValueChange={(kidName, kidIndex) => this.setState({selectedKid: kidName,kidIndex:kidIndex})}
-			style={{ width: 160 }}
 			mode="dropdown">
 			
 			{this.state.kids.map((kid,index)=>{
-        	return (<Picker.Item label={kid.username} value={kid.username} key={index}/>) 
+        	return (<Picker.Item   label={kid.username} value={kid.username} key={index}/>) 
 			})}
 			</Picker>
-
+			
 
 			<TouchableOpacity
 			style={styles.btn}
 			onPress={() =>this.showTasks()}>
 			<Text style={styles.textStyle}>Show Tasks</Text>
 			</TouchableOpacity>
-
-
-			{this.state.KidTasks.map((task,index)=>{
-				return(<View style={{flex: 1, flexDirection: 'column'}}>
-				<View key={index}><Text>{task.taskName+" "+task.completed}</Text></View>
-				</View>
-				)
-			})
-			}
-
-
 			</View>
+
+
+
+   	<View style={{borderWidth:2,marginTop:20,height:150,width:400}}>
+
+			<FlatList
+      data={this.state.kidTasks}
+      //numColumns={4}
+      renderItem={({ item }) => (
+          <Text style={styles.text}>{`${item.taskName}  ${item.completed}`}</Text>
+
+         )}
+    />
+
+    </View>
+		    
+
+			
+			
+		</View>
 
 
 
@@ -102,6 +125,8 @@ const styles = StyleSheet.create({
 		backgroundColor: '#2896d3',
 		paddingLeft: 40,
 		paddingRight: 40,
+	
+		//paddingTop: Platform.OS === 'ios' ? 0 : Expo.Constants.statusBarHeight
 	},
 
 	btn: {
@@ -138,4 +163,12 @@ const styles = StyleSheet.create({
 		backgroundColor: '#fff',
 
 	},
+
+	picker: {
+    width: 200,
+    height: 44,
+    borderColor: 'black',
+    borderWidth: 1,
+    
+  },
 })

@@ -24,9 +24,9 @@ const Application=  createStackNavigator({
 export default class App extends React.Component {
   render() {
     return (
-       // <Application/>
-      // if (Jozaa){comment the above + uncomment the down}
-      <Drawer/>
+       <Application/>
+      // if (Jozaa){comment the above + uncomment the down} 
+      //<Drawer/>
     );
   }
 }
