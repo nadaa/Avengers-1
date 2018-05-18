@@ -18,7 +18,6 @@ import DatePicker from 'react-native-datepicker';
 import {Select, Option} from "react-native-chooser";
 
 
-
 export default class SignUp extends React.Component {
 
 	constructor(props){
