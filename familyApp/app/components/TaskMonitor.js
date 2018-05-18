@@ -2,6 +2,8 @@ import React from 'react';
 import { View, Picker, FlatList ,StyleSheet,Platform, TextInput, TouchableOpacity, Text } from 'react-native';
 import axios from 'axios';
 import { List, ListItem,CheckBox } from "react-native-elements";
+import CheckboxGroup from 'react-native-checkbox-group';
+
 
 export default class TaskMonitor extends React.Component {
 
@@ -12,10 +14,12 @@ export default class TaskMonitor extends React.Component {
 			// it should object of arrays (kidname as key, value array of tasks)
 			kids:[],
 			kidTasks:[],
-			kidIndex:0
+			kidIndex:0,
+			checked:true,
 		}
 		this.getKids=this.getKids.bind(this);
 		this.showTasks=this.showTasks.bind(this);
+		this.deleteCompletedTask=this.deleteCompletedTask.bind(this);
 		//this.renderItem=this.renderItem.bind(this);
 	}
 
@@ -27,7 +31,6 @@ getKids(){
 	axios.get(`http://10.0.2.2:3000/api/getkids/${familyId}`)
 	.then((response) =>{
 		this.setState({kids:response.data});
-				//console.log(this.state.kids);
 
   })
   .catch(function (error) {
@@ -35,6 +38,12 @@ getKids(){
   });
 
 }
+
+deleteCompletedTask(selected){
+
+
+}
+
 
 showTasks(){
 	var kidEmail=this.state.kids[this.state.kidIndex].email;
@@ -95,22 +104,33 @@ componentDidMount(){
 
    	<View style={{borderWidth:2,marginTop:20,height:150,width:400}}>
 
-			<FlatList
-      data={this.state.kidTasks}
-      //numColumns={4}
-      renderItem={({ item }) => (
-          <Text style={styles.text}>{`${item.taskName}  ${item.completed}`}</Text>
+		
+		    <CheckboxGroup
+              callback={(selected) => { this.deleteCompletedTask(selected) }}
+              iconColor={"#fff"}
+              iconSize={30}
+              checkedIcon="ios-checkbox-outline"
+              uncheckedIcon="ios-square-outline"
+              checkboxes={this.state.kidTasks.map((task,index)=>{
+              	return {label:task.taskName+'     '+task.completed,value:index}
 
-         )}
-    />
-
-    </View>
-		    
+              })
+                
+              }
+              labelStyle={{
+                color: '#333'
+              }}
+              rowStyle={{
+                flexDirection: 'row'
+              }}
+              rowDirection={"column"}
+            />
 
 			
 			
 		</View>
 
+    </View>
 
 
 			);
