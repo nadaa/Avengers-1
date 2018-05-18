@@ -1,3 +1,36 @@
+
+
+in the secind 
+
+class AuthenticationScreen extends React.Component {
+  //here the solutio
+  static router = AuthenticationNavigator.router;
+  //
+  render() {
+    return (
+      <AuthenticationNavigator navigation={this.props.navigation}/>
+    );
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-------------------------------------------------------------
+
+
+
+
 export default App extends React.Component {
   render() {
     /* In the root component we are rendering the app navigator */
@@ -11,6 +44,7 @@ const AppNavigator = createSwitchNavigator({
 });
 
 class AuthenticationScreen extends React.Component {
+
   render() {
     return (
       <AuthenticationNavigator />
@@ -58,7 +92,7 @@ export default App extends React.Component {
   }
 }
 const AppNavigator = createSwitchNavigator({
-  /* 
+  /*
    * Rather than being rendered by a screen component, the
    * AuthenticationNavigator is a screen component
    */
@@ -70,6 +104,3 @@ const AuthenticationNavigator = createStackNavigator({
   SignIn: SignInScreen,
   ForgotPassword: ForgotPasswordScreen,
 });
-
-
-

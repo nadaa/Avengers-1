@@ -1,11 +1,12 @@
 //import react from react
 import React from 'react';
-//import element from reacr-native 
+//import element from reacr-native
 import { StyleSheet, Text, View, TouchableOpacity,Button } from 'react-native';
 //import FormInput & Header from react native elements
 import { FormInput, Header ,Divider, CheckBox } from 'react-native-elements';
 //import axios to make router works
-import axios from 'axios';    
+import axios from 'axios';
+import Drawer from './Drawer';
 
 //import the icon from lirbary  one by one (each one library in react native icon)
 import Icon0 from 'react-native-vector-icons/FontAwesome';
@@ -53,13 +54,14 @@ export default class Bar extends React.Component{
         })
       .catch(function (error) {
        console.log(error);
-      });  
+      });
   }
   //render
   render() {
     //what return
     return (
       <View style={styles.allPage}>
+
         <View style={styles.barView}>
           <Header
             backgroundColor='#123456'
@@ -81,7 +83,7 @@ export default class Bar extends React.Component{
                     {UserTypeGenderText[this.state.userType]}
                   </Text>
                 </View>
-                
+
                 <View style={styles.centerComponent}>
                   <Text style={styles.textIconDone}>{this.state.userProgress}%</Text>
                   <Text style={styles.textUnderIcon}>
@@ -99,7 +101,7 @@ export default class Bar extends React.Component{
                   <Text style={styles.textUnderIcon}>
                     Money
                   </Text>
-                </View>             
+                </View>
               </View>
             }
 
@@ -125,8 +127,8 @@ const styles = StyleSheet.create({
   },
   barView: {
     flexDirection: 'column',
-    //comment this after finish
-    marginTop:35,
+    //When finish delet this
+    marginTop:25,
   },
   innerContainer: {
     //backgroundColor:'green',

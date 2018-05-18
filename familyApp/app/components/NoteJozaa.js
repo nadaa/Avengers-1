@@ -1,5 +1,10 @@
 //dont delete this because it is the code for ata base jozaa
 //IP Adress Jozaa: 192.168.1.82
+import Bar from './Bar'
+<Bar navigation={this.props.navigation}/>
+
+Drawer     //When finish delet this
+Bar     //When finish delet this
 
 
 
@@ -91,7 +96,7 @@ import Login from './app/components/Login';
 import Profile from './app/components/Profile';
 import SignUp from './app/components/SignUp';
 
-/*jozaa comment this 
+/*jozaa comment this
 const Application=  createStackNavigator({
   Home: { screen: Profile },
   SignUp: { screen: SignUp },
@@ -113,7 +118,7 @@ export default class App extends React.Component {
       //jozaa coomment this
       //<Application/>
       <Profile/>
-      
+
 
     );
   }
@@ -123,12 +128,12 @@ export default class App extends React.Component {
 ------------------------------------------
 
 
-drawer work 
+drawer work
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import Drawer from 'react-native-drawer'
- 
-export default class Application extends React.Component {  
+
+export default class Application extends React.Component {
   closeControlPanel(){
     this._drawer.close()
   };
@@ -144,7 +149,7 @@ export default class Application extends React.Component {
           <Text >Menu2</Text>
 <TouchableOpacity
          onPress={this.closeControlPanel.bind(this)} >
-          <Text >closeControlPanel</Text> 
+          <Text >closeControlPanel</Text>
          </TouchableOpacity>
         </View>
         }
@@ -152,16 +157,13 @@ export default class Application extends React.Component {
          <Text >Menuyyyyy</Text>
          <TouchableOpacity
          onPress={this.openControlPanel.bind(this)} >
-          <Text >openControlPanel</Text> 
+          <Text >openControlPanel</Text>
          </TouchableOpacity>
           <TouchableOpacity
          onPress={this.closeControlPanel.bind(this)} >
-          <Text >closeControlPanel</Text> 
+          <Text >closeControlPanel</Text>
          </TouchableOpacity>
       </Drawer>
     )
   }
 }
-
-
-               

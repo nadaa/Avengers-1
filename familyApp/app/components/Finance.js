@@ -1,23 +1,20 @@
 //import react from react
 import React from 'react';
-//import element from reacr-native 
+//import element from reacr-native
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 //import table from react native table component
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 //import axios to make router works
-import axios from 'axios';   
+import axios from 'axios';
+import Bar from './Bar'
 
-
+// untill now I didint use it
 //import Dialog from react native dialog
 import Dialog from "react-native-dialog";
-
-
-
 // import HTML from react native render html to render html elemnt
 import HTML from 'react-native-render-html';
 // Dialog Component from react native dialog component to render pop elemnt
 import { DialogComponent, SlideAnimation } from 'react-native-dialog-component';
-
 
 const UserTypeGenderText={
   //female (Mother) / male (Father) / child (Children)
@@ -72,13 +69,13 @@ export default class Finance extends React.Component{
         })
       .catch(function (error) {
        console.log(error);
-      });  
+      });
   }
   addToFinance(){
     alert('Add To Finance');
   };
   editFromFinance(){
-    alert('Edit From Finance');  
+    alert('Edit From Finance');
   };
   removeFromFinance(){
     alert('Remove From Finance');
@@ -91,9 +88,10 @@ export default class Finance extends React.Component{
     alert(this.state.tableTotal[1]);
   };
   render() {
-    //what return   
+    //what return
     return (
       <View style={styles.allPage}>
+      <Bar navigation={this.props.navigation}/>
         <View style={styles.tableView}>
           <Table style={styles.table}>
             <Row data={this.state.tableHead} style={styles.head} textStyle={styles.textHead}/>
@@ -117,11 +115,11 @@ export default class Finance extends React.Component{
             <Text style={styles.textBtnRemove}>Remove</Text>
           </TouchableOpacity>
         </View>
- 
+
 
       </View>
     );
-  }    
+  }
 }
 
 const styles = StyleSheet.create({
@@ -143,46 +141,46 @@ const styles = StyleSheet.create({
     marginTop:10,
     marginBottom:10,
   },
-  wrapper: { 
+  wrapper: {
     flexDirection: 'row',
   },
-  head: {  
-    height: 50,  
+  head: {
+    height: 50,
     backgroundColor: '#123456',
   },
   textHead:{
     fontWeight: 'bold',
-    textAlign: 'center', 
+    textAlign: 'center',
     fontSize: 40,
     color:'#3cff00',
   },
-  name: {  
-     // backgroundColor: '#6239BD' 
+  name: {
+     // backgroundColor: '#6239BD'
   },
   textName:{
     fontWeight: 'bold',
-    textAlign: 'center', 
+    textAlign: 'center',
     fontSize: 25,
     color:'white',
   },
-  cost: {  
+  cost: {
     // backgroundColor: '#6239BD',
   },
   textCost:{
     fontWeight: 'bold',
-    textAlign: 'center', 
+    textAlign: 'center',
     fontSize: 25,
-    color:'white', 
+    color:'white',
   },
   total:{
-    height: 40,  
-    backgroundColor: '#123456', 
+    height: 40,
+    backgroundColor: '#123456',
   },
   textTotal:{
     fontWeight: 'bold',
-    textAlign: 'center', 
+    textAlign: 'center',
     fontSize: 30,
-    color:'red', 
+    color:'red',
   },
   btnView: {
     backgroundColor: '#2896d3',
@@ -197,9 +195,9 @@ const styles = StyleSheet.create({
   },
   textBtnAdd:{
     fontWeight: 'bold',
-    textAlign: 'center', 
+    textAlign: 'center',
     fontSize: 30,
-    color:'black', 
+    color:'black',
   },
   btnEdit:{
     backgroundColor: '#6239BD',
@@ -209,9 +207,9 @@ const styles = StyleSheet.create({
   },
   textBtnEdit:{
     fontWeight: 'bold',
-    textAlign: 'center', 
+    textAlign: 'center',
     fontSize: 30,
-    color:'black', 
+    color:'black',
   },
   btnRemove:{
     backgroundColor: 'red',
@@ -221,9 +219,9 @@ const styles = StyleSheet.create({
   },
   textBtnRemove:{
     fontWeight: 'bold',
-    textAlign: 'center', 
+    textAlign: 'center',
     fontSize: 30,
-    color:'black', 
+    color:'black',
   },
    container: {
     flex: 1,
@@ -243,7 +241,7 @@ Alert.alert(
         {text: 'OK', onPress: () => alert('OK Pressed')},
       ],
       { cancelable: false }
-    )  
+    )
 
  var txt;
     var person = HTML.prompt("Please enter your name:", "Harry Potter");
