@@ -3,14 +3,12 @@ import { StyleSheet, Text, View } from 'react-native';
 import {createStackNavigator} from 'react-navigation';
 import Login from './app/components/Login';
 import SignUp from './app/components/SignUp';
-
 import KidsTasks from './app/components/AssignKidsTasks';
 import TaskMonitor from './app/components/TaskMonitor';
-
 import Drawer from './app/components/Drawer';
+import Bar from './app/components/Bar'
 
-
-//jozaa comment this 
+//jozaa comment this
 const Application=  createStackNavigator({
   Home: { screen: SignUp },
   SignUp: { screen: SignUp },
@@ -19,27 +17,17 @@ const Application=  createStackNavigator({
   Login:{screen: Login}
 
 },{
-
-    navigationOptions: {
-       header: false,
-      }
-
+  navigationOptions: {
+    header: false,
+  }
 });
 
 export default class App extends React.Component {
   render() {
     return (
-       <Application/>
-
-      // if (!Jozaa){comment the down + uncomment the above} 
-      // <TaskMonitor/>
-      
-
-      // if (Jozaa){comment the above + uncomment the down} 
-      //<Drawer/>
-
-
+       //<Application/>
+      // if (Jozaa){comment the above + uncomment the down}
+      <Drawer/>
     );
   }
 }
-

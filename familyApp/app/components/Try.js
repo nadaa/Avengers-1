@@ -1,7 +1,8 @@
 import React from 'react';
 import { Text, TouchableOpacity, View } from "react-native";
 import Dialog from "react-native-dialog";
- 
+import Bar from './Bar'
+
 export default class DialogTester extends React.Component {
   constructor(){
     //super for ES6
@@ -22,10 +23,14 @@ export default class DialogTester extends React.Component {
   render() {
     return (
       <View>
+      <Bar navigation={this.props.navigation}/>
+    <Text>asdasd</Text>
+    <Text>asdasd</Text>
+
         <TouchableOpacity onPress={this.showDialog.bind(this)}>
           <Text>Show Dialog</Text>
         </TouchableOpacity>
-        <Dialog.Container visible={true}>
+        <Dialog.Container visible={false}>
           <Dialog.Title>Account delete</Dialog.Title>
           <Dialog.Description>
             Do you want to delete this account? You cannot undo this action.
