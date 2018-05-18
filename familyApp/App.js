@@ -32,7 +32,7 @@ export default class App extends React.Component {
        <Application/>
 
       // if (!Jozaa){comment the down + uncomment the above} 
-      // <TaskMonitor/>
+      //<TaskMonitor/>
       
 
       // if (Jozaa){comment the above + uncomment the down} 
