@@ -91,7 +91,7 @@ axios.post('http://192.168.1.86:3000/api/signup', {
     return (
     <KeyboardAvoidingView behaviour='padding' style ={styles.wrapper}>
     <View style={styles.container}>
-    <Text style={styles.header}> SIGNUP </Text>
+    <Text style={styles.header}>{/* jozaa change this  SIGNUP*/} User Information </Text>
 
     <TextInput
     ref={input =>{this.textInput =input}}
@@ -144,9 +144,12 @@ axios.post('http://192.168.1.86:3000/api/signup', {
 
     <TouchableOpacity
     	style={styles.btn}
+        //Here Please change (Jozaa comment)
+        /*
     	onPress={
     		this.sendInfo.bind(this)
         }
+        */
     	>
     	<Text>SignUp</Text>
     	</TouchableOpacity>

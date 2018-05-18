@@ -11,6 +11,7 @@ import UserInfo from './UserInfo';
 import Bar from './Bar'
 
 import Try from './Try';
+import Try2 from './Try2';
 import Login from './Login';
 import SignUp from './SignUp';
 
@@ -28,6 +29,9 @@ const MyDrawer=createDrawerNavigator(
 
     Try:{
       screen:Try,
+    },
+    Try2:{
+      screen:Try2,
     },
     Shortage:{
      screen:Tasks,
@@ -69,7 +73,8 @@ const MyDrawer=createDrawerNavigator(
 
 //export Drawer from the react componant
 export default class Drawer extends React.Component{
-  //here change
+  //here change make the navigate work and 
+  //in <MyDrawer> put navigation={this.props.navigation}
   static router = MyDrawer.router;
   //render
   render() {
