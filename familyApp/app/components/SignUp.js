@@ -36,19 +36,19 @@ export default class SignUp extends React.Component {
 
 
 
-	componentDidMount(){
-		this._loadInitialState().done();
-	}
+	// componentDidMount(){
+	// 	this._loadInitialState().done();
+	// }
 
 
 
-    //store user info in the device
-	_loadInitialState = async () => {
-		var value = await AsyncStorage.getItem('user');
-		if(value !== null){
-			this.props.navigation.navigate('Profile')
-		}
-	}
+ //    //store user info in the device
+	// _loadInitialState = async () => {
+	// 	var value = await AsyncStorage.getItem('user');
+	// 	if(value !== null){
+	// 		this.props.navigation.navigate('Profile')
+	// 	}
+	// }
 
 
 

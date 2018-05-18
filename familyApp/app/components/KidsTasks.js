@@ -1,34 +1,65 @@
 import React from 'react';
 import { View, Picker, StyleSheet, TextInput, TouchableOpacity, Text } from 'react-native';
-
+import axios from 'axios';
 export default class KidsTasks extends React.Component {
 
 	constructor(props){
 		super(props);
 
 		this.state={
-			kidName: '',
-			taskText : ''
+			// to store all kids of the loggedin parent
+			kids:[],
+			taskText: '',
+			selectedKid:'',
+			familyId:'',
+			kidIndex:0
 		}
+		this.getKids=this.getKids.bind(this);
+		this.setKidTask=this.setKidTask.bind(this);
 	}
 
+
+getKids(){
+	//get familyId from the localstorage of the loggedin user, for testing
+	//I will use familyId=1
+	var familyId="1"
+	axios.get(`http://10.0.2.2:3000/api/getkids/${familyId}`)
+	.then((response) =>{
+    this.setState({kids:response.data});
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+
+}
+
+
+setKidTask(){
+	//console.log(this.state.kids[this.state.kidIndex]);
+	var kidEmail=this.state.kids[this.state.kidIndex].email;
+	axios.post('http://10.0.2.2:3000/api/setkidtask',{kidemail:kidEmail,
+		task:this.state.taskText
+
+	})
+	.then((response) =>{
+	    
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+
+}
+
+
+componentDidMount(){
+	// send a ajax get request to get all kids
+	this.getKids();
+}
 	render() {
 		return (
 			<View style={styles.container}>
 			
-			<Picker
-			selectedValue = {this.state.day}
-			onValueChange={day => this.setState({ day })}
-			style={{ width: 160 }}
-			mode="dropdown"
-			>
-			<Picker.Item label="Monday" value="Monday" />
-			<Picker.Item label="Tuesday" value="Tuesday" />
-			<Picker.Item label="Wednesday" value="Wednesday" />
-
-
-			</Picker>
-
+			
 			<TextInput 
 			underlineColorAndroid="transparent"
 			value={this.state.taskText}
@@ -37,9 +68,22 @@ export default class KidsTasks extends React.Component {
 			onChangeText={(text) => this.setState({taskText: text})}
 			/> 
 
+			<Picker
+			selectedValue = {this.state.selectedKid}
+  			onValueChange={(kidName, kidIndex) => this.setState({selectedKid: kidName,kidIndex:kidIndex})}
+			style={{ width: 160 }}
+			mode="dropdown">
+			
+			{this.state.kids.map((kid,index)=>{
+        	return (<Picker.Item label={kid.username} value={kid.username} key={index}/>) 
+			})}
+			</Picker>
+
+
+
 			<TouchableOpacity
 			style={styles.btn}
-			onPress={() =>  console.log("Hussein")}>
+			onPress={() => this.setKidTask() }>
 			<Text style={styles.textStyle}>Submit</Text>
 			</TouchableOpacity>
 			</View>

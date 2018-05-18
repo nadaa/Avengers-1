@@ -4,6 +4,8 @@ import {createStackNavigator} from 'react-navigation';
 import Login from './app/components/Login';
 import Profile from './app/components/Profile';
 import SignUp from './app/components/SignUp';
+import KidsTasks from './app/components/KidsTasks';
+import TaskMonitor from './app/components/TaskMonitor';
 
 //jozaa comment this 
 // const Application=  createStackNavigator({
@@ -26,7 +28,7 @@ export default class App extends React.Component {
     return (
       // <Application/>
       // if (!Jozaa){comment the down + uncomment the above} 
-      <Profile/>
+      <TaskMonitor/>
       
 
     );
