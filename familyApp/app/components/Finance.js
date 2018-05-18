@@ -128,12 +128,12 @@ const styles = StyleSheet.create({
   allPage: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: 'white',
-    marginBottom:35,
+    backgroundColor: '#2896d3',
+    //marginBottom:35,
   },
   tableView: {
     flexDirection: 'column',
-    backgroundColor: 'white',
+    backgroundColor: '#2896d3',
     // backgroundColor: '#0bf5fb',
   },
   table: {
@@ -185,7 +185,7 @@ const styles = StyleSheet.create({
     color:'red', 
   },
   btnView: {
-    backgroundColor: 'white',
+    backgroundColor: '#2896d3',
     flexDirection:'row',
     justifyContent:'center',
     alignItems: 'center',
