@@ -29,9 +29,7 @@ var newUser =new models.User({
         }
         else{
           res.status(201).send({msg:"success signup"});
-
         }
-      
       });
        
      })
@@ -47,32 +45,78 @@ var newUser =new models.User({
 // console.log(newUser);
 }
 
+
+
 exports.signinUser = function(req, res) {
  models.User.findOne({'username':req.body.user.username},function (err, data) {
   console.log('data',data)
     if(data===null){
       res.send({msg:"no account"})
     }
-
-      else if(data !== null){
-
+    else if(data !== null){
   // console.log('data',data)
     if(err){
       res.status(404).send({msg:"no account"})}
       if(data !== null){
         bcrypt.compare(req.body.user.password, data.password, function(err, resCrypt) {
-          if(!resCrypt){res.send({msg:"the password is not correct"})}
+          if(!resCrypt){
+            res.send({msg:"the password is not correct"})
+          }
             else if(resCrypt){
               req.session._id=data._id;
               req.session.username=data.username;
               req.session.password=data.password;
               res.send({msg:"success"})
-
             }
           });
-
       }
-    });
-};
+    };
+})
+}
+
+exports.getAllKids=function(req,res){
+  var familyId=req.params.familyid;
+  models.User.find({$and:[{familyId:familyId},{role:'kid'}]},function(err,kids){
+    if(err){
+      console.log("error");
+      res.status(500).send();
+    }
+    else{
+    //console.log(kids);
+    res.status(200).send(kids);
+  }
+  })
+}
 
 
+exports.setKidTask=function(req,res){
+  var newTask={
+  taskName:req.body.task,
+  userEmail:req.body.kidemail
+  }
+  new models.Task(newTask).save(function(err,task){
+    if(err){
+      console.log("error adding a new Task");
+      res.status(500).send();
+    }
+    else{
+      console.log('a new task is added',task);
+      res.status(200).send();
+    }
+  })
+
+}
+
+exports.getTasks=function(req,res){
+  var kidEmail=req.body.kidemail;
+  models.Task.find({userEmail:kidEmail},function(err,tasks){
+    if(err){
+      res.status(500).send();
+    }
+    else{
+      //console.log(tasks);
+      res.status(200).send(tasks)
+    }
+
+  })
+}

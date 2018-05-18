@@ -25,4 +25,25 @@ appRouter.route('/api/login').post((req,res)=>{
 
 })
 
+
+appRouter.route('/api/getkids/:familyid').get((req,res)=>{
+  //console.log(req.params.familyid);
+  appControllers.getAllKids(req,res);
+
+})
+
+
+appRouter.route('/api/setkidtask').post((req,res)=>{
+  //console.log("received setkidtask");
+  appControllers.setKidTask(req,res);
+
+})
+
+appRouter.route('/api/gettasks').post((req,res)=>{
+  //console.log("received getkidtasks");
+  appControllers.getTasks(req,res);
+
+})
+
+
 module.exports=appRouter;
