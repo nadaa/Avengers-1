@@ -11,7 +11,7 @@ import UserInfo from './UserInfo';
 import Bar from './Bar'
 
 import Try from './Try';
-import Try2 from './Try2';
+import Try2 from './Try';
 import Login from './Login';
 import SignUp from './SignUp';
 
@@ -48,25 +48,31 @@ const MyDrawer=createDrawerNavigator(
     Outside:{
      screen:Try,
     },
-    'Login For Try Only':{
-     screen:Login,
+    Logout:{
+     screen:Try,
     },
-    'SignUp For Try Only':{
-     screen:SignUp,
-    },
+  
   },
   {
+    // navigationOptions:({navigation}) => ({
+    //   headerStyle: {backgroundColor: 'red'},
+    //   title: 'Welcome!',
+    //   headerTintColor: 'blue',
+    // }),
+    //contentComponent: CustomDrawerContentComponent,
+
+
     //                                  Try   Try2 Try3
     //initialRouteName:'Tasks',Finance  Study Exam Outside
     initialRouteName:'Finance',
     drawerPosition:'left',
-    //contentComponent: CustomDrawerContentComponent,
-    //drawarWidth:10,
+    drawerWidth:200,
     drawerOpenRoute: 'DrawerOpen',
     drawerCloseRoute: 'DrawerClose',
     drawerToggleRoute: 'DrawerToggle',
     contentOptions:{
       activeTintColor:'red',
+      // tintStyle:{backgroundColor: 'red'},
     },
   }
 );

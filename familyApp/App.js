@@ -11,10 +11,9 @@ import Drawer from './app/components/Drawer'
 const Application=  createStackNavigator({
   Home: { screen: SignUp },
   SignUp: { screen: SignUp },
-  Login: { screen: SignUp },
+  //Login: { screen: Drawer },
+  Login:{ screen: Login }
   Drawer: { screen: Drawer },
-  Login:{screen: Login}
-
 },{
   navigationOptions: {
     header: false,
@@ -24,9 +23,9 @@ const Application=  createStackNavigator({
 export default class App extends React.Component {
   render() {
     return (
-       <Application/>
+       // <Application/>
       // if (Jozaa){comment the above + uncomment the down} 
-      //<Drawer/>
+      <Drawer/>
     );
   }
 }
