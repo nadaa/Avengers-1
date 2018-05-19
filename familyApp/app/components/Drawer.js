@@ -11,7 +11,7 @@ import UserInfo from './UserInfo';
 import Bar from './Bar'
 
 import Try from './Try';
-import Try2 from './Try2';
+import Try2 from './Try';
 import Login from './Login';
 import SignUp from './SignUp';
 
