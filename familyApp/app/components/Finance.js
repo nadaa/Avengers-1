@@ -1,7 +1,7 @@
 //import react from react
 import React from 'react';
 //import element from reacr-native
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native';
 //import table from react native table component
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 //import axios to make router works
@@ -44,10 +44,10 @@ export default class Finance extends React.Component{
     this.setState({ AddDialogVisible: true });
   };
   handleCancelAdd(){
-    this.setState({ dialogVisible: false });
+    this.setState({ AddDialogVisible: false });
   };
   handleAdd(){
-    this.setState({ dialogVisible: false });
+    this.setState({ AddDialogVisible: false });
   };
 
 
@@ -76,19 +76,26 @@ export default class Finance extends React.Component{
             <Row data={this.state.tableTotal} style={styles.total} textStyle={styles.textTotal}/>
           </Table>
         </View>
+
         <View style={styles.btnView}>
           <TouchableOpacity style={styles.btnAdd} onPress={this.addToFinance.bind(this)}>
             <Text style={styles.textBtnAdd}>Add</Text>
           </TouchableOpacity>
 
-        <Dialog.Container visible={this.state.AddDialogVisible}>
-          <Dialog.Title>Add To Finance</Dialog.Title>
-          <Dialog.Description>
-            Do you want to add to finance?
-          </Dialog.Description>
-          <Dialog.Button label="Cancel" onPress={this.handleCancelAdd.bind(this)}/>
-          <Dialog.Button label="Add" onPress={this.handleAdd.bind(this)}/>
-        </Dialog.Container>
+          <Dialog.Container visible={this.state.AddDialogVisible}>
+            <Dialog.Title style={styles.textDialogTitle}>Add To Finance</Dialog.Title>
+            <Dialog.Description>
+              Do you want to add to finance?
+            </Dialog.Description>
+            <View style={styles.textInputDialogView}>
+              <TextInput placeholder='Name' style={styles.textInput}></TextInput>
+              <TextInput placeholder='Cost' style={styles.textInput}></TextInput>
+            </View>
+            <View style={styles.btnDialogView}>
+              <Dialog.Button style={styles.btnDialogCancel} label="Cancel" onPress={this.handleCancelAdd.bind(this)}/>
+              <Dialog.Button style={styles.btnDialogConfirm} label="Add" onPress={this.handleAdd.bind(this)}/>
+            </View>
+          </Dialog.Container>
 
 
           <TouchableOpacity style={styles.btnEdit} onPress={this.editFromFinance.bind(this)}>
@@ -100,9 +107,7 @@ export default class Finance extends React.Component{
           </TouchableOpacity>
      
         </View>
-     <TouchableOpacity style={styles.btnRemove} onPress={() =>this.props.navigation.navigate('Try')}>
-            <Text style={styles.textBtnRemove}>Try2</Text>
-          </TouchableOpacity>
+
 
       </View>
     );
@@ -210,10 +215,38 @@ const styles = StyleSheet.create({
     fontSize: 30,
     color:'black',
   },
-   container: {
-    flex: 1,
-    paddingBottom: 20,
+  btnDialogView: {
+    flexDirection:'row',
+    justifyContent:'center',
+    alignItems: 'center',
   },
+  btnDialogCancel: {
+    fontSize: 20,
+    color:'black',
+  },
+  btnDialogConfirm: {
+    fontSize: 20,
+    color:'#3cff00',
+  },
+  textDialogTitle:{
+    fontWeight: 'bold',
+    textAlign: 'center',
+    fontSize: 30,
+    color:'black',
+  },
+  textInputDialogView: {
+    flexDirection:'column',
+    justifyContent:'center',
+    alignItems: 'center',
+  },
+  textInput: {
+    alignSelf: 'stretch',
+    padding: 16,
+  },
+
+ 
+
+ 
 });
 
 
