@@ -1,11 +1,14 @@
 import React from 'react';
 import { View, Text, TouchableOpacity,StyleSheet } from 'react-native';
+import Bar from './Bar'
 
 export default class Tasks extends React.Component {
 
 	render() {
 		return (
 			<View style={styles.container}>
+			<Bar navigation={this.props.navigation}/>
+
 			<TouchableOpacity
 			style={styles.btn}
 			onPress={this.login}

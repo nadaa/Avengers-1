@@ -48,12 +48,10 @@ const MyDrawer=createDrawerNavigator(
     Outside:{
      screen:Try,
     },
-    'Login For Try Only':{
-     screen:Login,
+    Logout:{
+     screen:Try,
     },
-    'SignUp For Try Only':{
-     screen:SignUp,
-    },
+  
   },
   {
     // navigationOptions:({navigation}) => ({
