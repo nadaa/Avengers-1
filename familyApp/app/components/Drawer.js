@@ -56,17 +56,25 @@ const MyDrawer=createDrawerNavigator(
     },
   },
   {
+    // navigationOptions:({navigation}) => ({
+    //   headerStyle: {backgroundColor: 'red'},
+    //   title: 'Welcome!',
+    //   headerTintColor: 'blue',
+    // }),
+    //contentComponent: CustomDrawerContentComponent,
+
+
     //                                  Try   Try2 Try3
     //initialRouteName:'Tasks',Finance  Study Exam Outside
     initialRouteName:'Finance',
     drawerPosition:'left',
-    //contentComponent: CustomDrawerContentComponent,
-    //drawarWidth:10,
+    drawerWidth:200,
     drawerOpenRoute: 'DrawerOpen',
     drawerCloseRoute: 'DrawerClose',
     drawerToggleRoute: 'DrawerToggle',
     contentOptions:{
       activeTintColor:'red',
+      // tintStyle:{backgroundColor: 'red'},
     },
   }
 );

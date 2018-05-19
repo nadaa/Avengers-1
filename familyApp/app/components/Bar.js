@@ -77,28 +77,28 @@ export default class Bar extends React.Component{
 
             centerComponent={
               <View style={styles.centerComponentView}>
-                <View style={styles.centerComponent}>
-                  <Icon0 name={this.state.userType} size={35} color="red"/>
-                  <Text style={styles.textUnderIcon}>
+                <View  style={styles.centerComponent}>
+                  <Icon0 onPress={() =>this.props.navigation.navigate('User Information')} name={this.state.userType} size={35} color="red"/>
+                  <Text onPress={() =>this.props.navigation.navigate('User Information')} style={styles.textUnderIcon}>
                     {UserTypeGenderText[this.state.userType]}
                   </Text>
                 </View>
 
                 <View style={styles.centerComponent}>
-                  <Text style={styles.textIconDone}>{this.state.userProgress}%</Text>
-                  <Text style={styles.textUnderIcon}>
+                  <Text onPress={() =>this.props.navigation.navigate('Tasks')} style={styles.textIconDone}>{this.state.userProgress}%</Text>
+                  <Text onPress={() =>this.props.navigation.navigate('Tasks')} style={styles.textUnderIcon}>
                     Progress
                   </Text>
                 </View>
                 <View style={styles.centerComponent}>
-                  <Text style={styles.textIconRank}>{this.state.userRanking}</Text>
-                  <Text style={styles.textUnderIcon}>
+                  <Text onPress={() =>this.props.navigation.navigate('Tasks')} style={styles.textIconRank}>{this.state.userRanking}</Text>
+                  <Text onPress={() =>this.props.navigation.navigate('Tasks')} style={styles.textUnderIcon}>
                     Rank
                   </Text>
                 </View>
                 <View style={styles.lastCenterComponent}>
-                  <Text style={styles.textIconMoney}>{this.state.restMoney}</Text>
-                  <Text style={styles.textUnderIcon}>
+                  <Text onPress={() =>this.props.navigation.navigate('Finance')} style={styles.textIconMoney}>{this.state.restMoney}</Text>
+                  <Text onPress={() =>this.props.navigation.navigate('Finance')} style={styles.textUnderIcon}>
                     Money
                   </Text>
                 </View>
