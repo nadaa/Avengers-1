@@ -6,22 +6,10 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 //import axios to make router works
 import axios from 'axios';
-import Bar from './Bar';
-
-// untill now I didint use it
 //import Dialog from react native dialog
 import Dialog from "react-native-dialog";
-// import HTML from react native render html to render html elemnt
-import HTML from 'react-native-render-html';
-// Dialog Component from react native dialog component to render pop elemnt
-import { DialogComponent, SlideAnimation } from 'react-native-dialog-component';
-
-const UserTypeGenderText={
-  //female (Mother) / male (Father) / child (Children)
-  female:'Mother',
-  male:'Father',
-  child:'Child',
-}
+//import Bar from Bar component
+import Bar from './Bar';
 
 //export Home from the react componant
 export default class Finance extends React.Component{
@@ -31,62 +19,48 @@ export default class Finance extends React.Component{
     super();
     //all the data save before to can show in the bar
     this.state={
-      //defult thing when change from data base change here 🙂 <3
-      //female (Mother) / male (Father)/ child (Children)
-      userType:'female',
-      //from 100%
-      userProgress:'100',
-      //for how many child in family
-      userRanking:'2',
-      //the money still
-      restMoney:'1500',
-      //
       tableHead:  ['Name', 'Cost'],
       tableName: ['Water', 'Electricity', 'Shortage', 'Family Event'],
-      tableCost:  [[12],     [20],            [40],         [50]    ],
-      tableTotal:['Total',0]
+      tableCost:  [[12],     [30],            [40],         [50]    ],
+      tableTotal:['Total',0],
+      //for show Dialog Add
+      AddDialogVisible: false,
     };
     //auto call function when render this scren
-    this.calculateTotal();
+    this.calculateTotalMoney();
   }
-  calculateTotal(){
+  calculateTotalMoney(){
     var total=0;
     for (var i = 0; i < this.state.tableCost.length; i++) {
       total+=this.state.tableCost[i][0];
     }
     //cant use set state so we use this .state
     this.state.tableTotal[1]=total;
-    //this.setState({tableTotal : ['Total',total]});
-    //alert('you cal total: '+this.state.tableTotal[1]);
+    // this.setState({tableTotal : ['Total',total]});
   }
-  fectch1(){
-    //return axios.get('http://192.168.1.82:3000')
-    return fetch('http://192.168.1.82:3000')
-      .then((response) => response.json())
-        .then((responseJson) => {
-          console.log("server done:",JSON.stringify(responseJson) )
-           alert(JSON.stringify(responseJson));
-        })
-      .catch(function (error) {
-       console.log(error);
-      });
-  }
+
   addToFinance(){
-    alert('Add To Finance');
+    //alert('Add To Finance');
+    this.setState({ AddDialogVisible: true });
   };
+  handleCancelAdd(){
+    this.setState({ dialogVisible: false });
+  };
+  handleAdd(){
+    this.setState({ dialogVisible: false });
+  };
+
+
+
+
+
   editFromFinance(){
     alert('Edit From Finance');
   };
   removeFromFinance(){
     alert('Remove From Finance');
   };
-  calculate(){
-    this.calculateTotal();
-    alert('calculate');
-  };
-  see(){
-    alert(this.state.tableTotal[1]);
-  };
+
   render() {
     //what return
     return (
@@ -107,6 +81,16 @@ export default class Finance extends React.Component{
             <Text style={styles.textBtnAdd}>Add</Text>
           </TouchableOpacity>
 
+        <Dialog.Container visible={this.state.AddDialogVisible}>
+          <Dialog.Title>Add To Finance</Dialog.Title>
+          <Dialog.Description>
+            Do you want to add to finance?
+          </Dialog.Description>
+          <Dialog.Button label="Cancel" onPress={this.handleCancelAdd.bind(this)}/>
+          <Dialog.Button label="Add" onPress={this.handleAdd.bind(this)}/>
+        </Dialog.Container>
+
+
           <TouchableOpacity style={styles.btnEdit} onPress={this.editFromFinance.bind(this)}>
             <Text style={styles.textBtnEdit}>Edit</Text>
           </TouchableOpacity>
@@ -114,8 +98,11 @@ export default class Finance extends React.Component{
           <TouchableOpacity style={styles.btnRemove} onPress={this.removeFromFinance.bind(this)}>
             <Text style={styles.textBtnRemove}>Remove</Text>
           </TouchableOpacity>
+     
         </View>
-
+     <TouchableOpacity style={styles.btnRemove} onPress={() =>this.props.navigation.navigate('Try')}>
+            <Text style={styles.textBtnRemove}>Try2</Text>
+          </TouchableOpacity>
 
       </View>
     );
@@ -231,40 +218,28 @@ const styles = StyleSheet.create({
 
 
 /*
-
-Alert.alert(
-      'Edit From Finance',
-      'Choose which one you want to edit',
-      [
-        {text: 'Ask me later', onPress: () => {}},
-        {text: 'Cancel', onPress: () => alert('Cancel Pressed'), style: 'cancel'},
-        {text: 'OK', onPress: () => alert('OK Pressed')},
-      ],
-      { cancelable: false }
-    )
-
- var txt;
-    var person = HTML.prompt("Please enter your name:", "Harry Potter");
-    if (person == null || person == "") {
-        txt = "User cancelled the prompt.";
-    } else {
-        txt = "Hello " + person + "! How are you today?";
-    }
+  fectch1(){
+    //return axios.get('http://192.168.1.82:3000')
+    return fetch('http://192.168.1.82:3000')
+      .then((response) => response.json())
+        .then((responseJson) => {
+          console.log("server done:",JSON.stringify(responseJson) )
+           alert(JSON.stringify(responseJson));
+        })
+      .catch(function (error) {
+       console.log(error);
+      });
+  }
 
 
 
-<View>
 
-   <View>
-        <Dialog.Container>
-          <Dialog.Title>Account delete</Dialog.Title>
-          <Dialog.Description>
-            Do you want to delete this account? You cannot undo this action.
-          </Dialog.Description>
-          <Dialog.Button label="Cancel" />
-          <Dialog.Button label="Delete" />
-        </Dialog.Container>
-      </View>
 
- </View>
+// untill now I didint use it
+// import HTML from react native render html to render html elemnt
+import HTML from 'react-native-render-html';
+// Dialog Component from react native dialog component to render pop elemnt
+import { DialogComponent, SlideAnimation } from 'react-native-dialog-component';
+
+
 */

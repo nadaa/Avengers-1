@@ -31,17 +31,14 @@ const MyDrawer=createDrawerNavigator(
     Shortage:{
      screen:Try,
     },
+    KidsTasks:{
+     screen:KidsTasks,
+    },
 
     Try:{
       screen:Try,
     },
-    Try2:{
-      screen:Try2,
-    },
-    
-    KidsTasks:{
-     screen:KidsTasks,
-    },
+    /*
     'Family Events':{
      screen:Try,
     },
@@ -52,10 +49,14 @@ const MyDrawer=createDrawerNavigator(
      screen:Try,
     },
     Outside:{
-     screen:Login,
+     screen:Try,
+    },
+    */
+    SignUp:{
+     screen:SignUp,
     },
     Logout:{
-     screen:SignUp,
+     screen:Login,
     },
   },
   {
@@ -108,5 +109,6 @@ const styles = StyleSheet.create({
   },
 });
 /*
-  static router = MyDrawer.router;
+
+
 */

@@ -24,13 +24,14 @@ export default class DialogTester extends React.Component {
     return (
       <View>
       <Bar navigation={this.props.navigation}/>
+
     <Text>asdasd</Text>
     <Text>asdasd</Text>
 
         <TouchableOpacity onPress={this.showDialog.bind(this)}>
           <Text>Show Dialog</Text>
         </TouchableOpacity>
-        <Dialog.Container visible={false}>
+        <Dialog.Container visible={this.state.dialogVisible}>
           <Dialog.Title>Account delete</Dialog.Title>
           <Dialog.Description>
             Do you want to delete this account? You cannot undo this action.
