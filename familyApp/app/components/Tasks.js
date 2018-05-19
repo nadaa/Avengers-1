@@ -8,21 +8,21 @@ export default class Tasks extends React.Component {
 			<View style={styles.container}>
 			<TouchableOpacity
 			style={styles.btn}
-			onPress={this.login}
+			
 			>
 			<Text style={styles.textStyle}>Assign Task</Text>
 			</TouchableOpacity>
 
 			<TouchableOpacity
 			style={styles.btn}
-			onPress={this.login}
+			
 			>
 			<Text style={styles.textStyle}>Monitor Task</Text>
 			</TouchableOpacity>
 
 			<TouchableOpacity
 			style={styles.btn}
-			onPress={this.login}
+			
 			>
 			<Text style={styles.textStyle}>Add Info</Text>
 			</TouchableOpacity>

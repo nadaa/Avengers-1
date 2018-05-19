@@ -3,7 +3,7 @@ import React from 'react';
 //import element from reacr-native
 import { StyleSheet, Text, View, TouchableOpacity,Button } from 'react-native';
 //import FormInput & Header from react native elements
-import { FormInput, Header ,Divider, CheckBox } from 'react-native-elements';
+import { FormInput, Header ,Divider} from 'react-native-elements';
 //import axios to make router works
 import axios from 'axios';
 import Drawer from './Drawer';

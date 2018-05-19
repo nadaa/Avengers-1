@@ -11,16 +11,19 @@ import axios from 'axios';
 import { createStackNavigator } from 'react-navigation';
 import SignUp from './SignUp';
 // import Profile from './Profile';
-import Tasks from './Tasks'
+import Tasks from './Tasks';
+import Drawer from './Drawer'
 export default class Login extends React.Component {
 	constructor(props){
 		super(props);
 		this.state={
 			username:'',
-			password:'',
+			password:'', 
 		}
 	}
   
+  //Waed
+  //123
 	componentDidMount(){
 		// this._loadInitialState().done();
 	}
@@ -41,7 +44,7 @@ export default class Login extends React.Component {
            if(response.data.msg==="success"){
                 // navigate('Profile')
                  alert(response.data.msg)
-                  navigate('SignUp')
+                  navigate('Drawer')
 
 
            }

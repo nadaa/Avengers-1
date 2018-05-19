@@ -11,10 +11,10 @@ import UserInfo from './UserInfo';
 import Bar from './Bar'
 
 import Try from './Try';
-import Try2 from './Try';
+//import Try2 from './Try';
 import Login from './Login';
 import SignUp from './SignUp';
-
+import Shortage from './Shortage'
 const MyDrawer=createDrawerNavigator(
   {
     Tasks:{
@@ -31,10 +31,10 @@ const MyDrawer=createDrawerNavigator(
       screen:Try,
     },
     Try2:{
-      screen:Try2,
+      screen:Try,
     },
     Shortage:{
-     screen:Tasks,
+     screen:Shortage,
     },
     'Family Events':{
      screen:Tasks,
@@ -48,12 +48,12 @@ const MyDrawer=createDrawerNavigator(
     Outside:{
      screen:Try,
     },
-    'Login For Try Only':{
-     screen:Login,
-    },
-    'SignUp For Try Only':{
-     screen:SignUp,
-    },
+    // 'Login For Try Only':{
+    //  screen:Login,
+    // },
+    // 'SignUp For Try Only':{
+    //  screen:SignUp,
+    // },
   },
   {
     //                                  Try   Try2 Try3
