@@ -1,40 +1,62 @@
+//import react from react
 import React from 'react';
-import { View, Text, TouchableOpacity,StyleSheet } from 'react-native';
-import Bar from './Bar'
+//import element from reacr-native
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+// import Bar from './Bar'
+//<Bar navigation={this.props.navigation}/>
+
+
 
 export default class Tasks extends React.Component {
+constructor(props){
+		super(props);
+
+		this.state={
+			kidName: '',
+			taskText : ''
+		}
+	}
 
 	render() {
 		return (
-			<View style={styles.container}>
-			<Bar navigation={this.props.navigation}/>
+			<View style={styles.allPage}>
+            <Text >please solve this isuue</Text>
+	<View style={styles.container}>
 
 			<TouchableOpacity
 			style={styles.btn}
-			onPress={this.login}
+			// onPress={this.login}
 			>
 			<Text style={styles.textStyle}>Assign Task</Text>
 			</TouchableOpacity>
 
 			<TouchableOpacity
 			style={styles.btn}
-			onPress={this.login}
+			// onPress={this.login}
 			>
 			<Text style={styles.textStyle}>Monitor Task</Text>
 			</TouchableOpacity>
 
 			<TouchableOpacity
 			style={styles.btn}
-			onPress={this.login}
+			// onPress={this.login}
 			>
 			<Text style={styles.textStyle}>Add Info</Text>
 			</TouchableOpacity>
 			</View>
+			</View>
+
 			);
 	}
 }
 
 const styles = StyleSheet.create({
+	allPage: {
+    flex: 1,
+    flexDirection: 'column',
+    backgroundColor: '#2896d3',
+    //marginBottom:35,
+  },
 	container: {
 		flex: 1,
 		alignItems: 'center',
@@ -52,7 +74,6 @@ const styles = StyleSheet.create({
 		fontWeight: 'bold',
 
 	},
-
 	btn: {
 		alignSelf: 'stretch',
 		backgroundColor: '#01c853',
@@ -84,3 +105,10 @@ const styles = StyleSheet.create({
 		position: 'relative'
 	},
 });
+/*
+
+
+		
+
+
+*/

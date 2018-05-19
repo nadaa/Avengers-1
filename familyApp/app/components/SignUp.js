@@ -140,9 +140,9 @@ onSelect(value, label) {
             textStyle = {{}}
             
           >
-          <Option value = 'father'>Father</Option>
-          <Option value = 'mother'>Mother</Option>
-          <Option value = 'kid'>kid</Option>
+          <Option value = 'Father'>Father</Option>
+          <Option value = 'Mother'>Mother</Option>
+          <Option value = 'Child'>Child</Option>
          
 
         </Select>

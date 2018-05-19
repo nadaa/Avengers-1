@@ -6,7 +6,7 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 //import axios to make router works
 import axios from 'axios';
-import Bar from './Bar'
+import Bar from './Bar';
 
 // untill now I didint use it
 //import Dialog from react native dialog

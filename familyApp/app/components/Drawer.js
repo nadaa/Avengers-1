@@ -5,15 +5,17 @@ import { View, StyleSheet,Text } from 'react-native';
 //import createDrawerNavigator as DrawerNavigator from react navigation
 import { createDrawerNavigator } from 'react-navigation'
 //import the file screen (page)
-import Tasks from './Tasks'
+import Tasks from './Tasks';
 import Finance from './Finance';
 import UserInfo from './UserInfo';
-import Bar from './Bar'
+import Bar from './Bar';
+import KidsTasks from './KidsTasks';
 
 import Try from './Try';
 import Try2 from './Try';
 import Login from './Login';
 import SignUp from './SignUp';
+
 
 const MyDrawer=createDrawerNavigator(
   {
@@ -26,6 +28,9 @@ const MyDrawer=createDrawerNavigator(
     'User Information':{
      screen:UserInfo,
     },
+    Shortage:{
+     screen:Try,
+    },
 
     Try:{
       screen:Try,
@@ -33,11 +38,12 @@ const MyDrawer=createDrawerNavigator(
     Try2:{
       screen:Try2,
     },
-    Shortage:{
-     screen:Tasks,
+    
+    KidsTasks:{
+     screen:KidsTasks,
     },
     'Family Events':{
-     screen:Tasks,
+     screen:Try,
     },
     Study:{
      screen:Try,
@@ -46,12 +52,11 @@ const MyDrawer=createDrawerNavigator(
      screen:Try,
     },
     Outside:{
-     screen:Try,
+     screen:Login,
     },
     Logout:{
-     screen:Try,
+     screen:SignUp,
     },
-  
   },
   {
     // navigationOptions:({navigation}) => ({
