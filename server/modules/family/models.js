@@ -21,10 +21,16 @@ const taskSchema=new mongoose.Schema({
 
 
 const familySchema=new mongoose.Schema({
-	familyId:String,
-	familyRules:String,
-	events:[{}],
-	finance:{}
+	// familyRules:String,
+	// events:[{}],
+	// finance:{},
+	jobtitle:String,
+   	workaddress:String,
+    worknumber:String,
+   	worktime:String,
+    salary:String,
+    familyId:String,
+    marriageDate:String,
 })
 
 

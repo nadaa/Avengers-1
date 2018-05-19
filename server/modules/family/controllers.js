@@ -120,3 +120,22 @@ exports.getTasks=function(req,res){
 
   })
 }
+
+exports.sendUserInfo=function(req,res){
+  var newInfo=new models.Family({
+    jobtitle:req.body.user.jobtitle,
+    workaddress:req.body.user.workaddress,
+    worknumber:req.body.user.worknumber,
+    worktime:req.body.user.worktime,
+    salary:req.body.user.salary,
+    familyId:req.body.user.familyId,
+    marriageDate:req.body.user.marriageDate,
+  })
+  newInfo.save(function(error,data){
+    if(error){
+      res.send({msg:"error"})
+    }else{
+      res.send({msg:"success"})
+    }
+  })
+}
