@@ -24,10 +24,12 @@ export default class Finance extends React.Component{
       tableCost:  [[12],     [30],            [40],         [150]    ,[999.99]],
       tableTotal:['Total',0],
       //for show Dialog Add
-      AddDialogVisible: false,
-      AddName:'',
-      AddCost:'',
-      EditDialogVisible: false,
+      addDialogVisible: false,
+      addName:'',
+      addCost:'',
+      editDialogVisible: false,
+      editCost:'',
+
     };
     //auto call function when render this scren
     this.calculateTotalMoney();
@@ -41,22 +43,44 @@ export default class Finance extends React.Component{
     this.state.tableTotal[1]=total;
     // this.setState({tableTotal : ['Total',total]});
   }
-
-  addToFinance(){
-    //alert('Add To Finance');
-    this.setState({ AddDialogVisible: true });
-  };
   handleCancelAdd(){
-    this.setState({ AddDialogVisible: false });
+    this.setState({ addDialogVisible: false });
   };
   handleAdd(){
-    alert(this.state.AddName)
-    this.setState({ AddDialogVisible: false });
+    alert(this.state.addName + this.state.addCost);
+    this.setState({ addDialogVisible: false });
+  };
+  addToFinance(){
+    //alert('Add To Finance');
+    this.setState({ addDialogVisible: true });
   };
   onAddName(name){
-    this.setState({AddName: name})
+    this.setState({addName: name})
   }
   onAddCost(value) {
+    let newNumber = '';
+    let numbers = '0123456789.';
+    for (var i = 0; i < value.length; i++) {
+        if ( numbers.indexOf(value[i]) > -1 ) {
+          if (newNumber.split('.').length<=1 || value[i]!=='.' ) {
+            if (newNumber.length>0 || value[i]!=='.') {
+               newNumber = newNumber + value[i];
+            }
+          }  
+        }
+    }
+    this.setState({addCost: newNumber})
+  }
+  handleCancelEdit(){
+    this.setState({ editDialogVisible: false });
+  };
+  handleEdit(){
+    this.setState({ editDialogVisible: false });
+  };
+  editFromFinance(){
+    alert('Edit From Finance');
+  };
+  onEditCost(value) {
     let newNumber = '';
     let numbers = '0123456789.';
     for (var i = 0; i < value.length; i++) {
@@ -64,15 +88,13 @@ export default class Finance extends React.Component{
             newNumber = newNumber + value[i];
         }
     }   
-    this.setState({AddCost: newNumber})
+    this.setState({editCost: newNumber})
   }
 
 
 
 
-  editFromFinance(){
-    alert('Edit From Finance');
-  };
+
   removeFromFinance(){
     alert('Remove From Finance');
   };
@@ -98,16 +120,16 @@ export default class Finance extends React.Component{
             <Text style={styles.textBtnAdd}>Add</Text>
           </TouchableOpacity>
 
-          <Dialog.Container visible={this.state.AddDialogVisible}>
+          <Dialog.Container visible={this.state.addDialogVisible}>
             <Dialog.Title style={styles.textDialogTitle}>Add To Finance</Dialog.Title>
             <Dialog.Description>
               Write the name and the cost please
             </Dialog.Description>
             <View style={styles.textInputDialogView}>
-              <TextInput placeholder='Name' value={this.state.AddName} style={styles.textInput} maxLength={17}
-              onChangeText={(name)=> this.onAddName(name)} value={this.state.AddName}></TextInput>
+              <TextInput placeholder='Name' value={this.state.addName} style={styles.textInput} maxLength={17}
+              onChangeText={(name)=> this.onAddName(name)} value={this.state.addName}></TextInput>
               <TextInput placeholder='Cost' style={styles.textInput} maxLength={6} keyboardType='numeric' 
-              onChangeText={(value)=> this.onAddCost(value)} value={this.state.AddCost} ></TextInput>
+              onChangeText={(value)=> this.onAddCost(value)} value={this.state.addCost} ></TextInput>
             </View>
             <View style={styles.btnDialogView}>
               <Dialog.Button style={styles.btnDialogCancel} label="Cancel" onPress={this.handleCancelAdd.bind(this)}/>
@@ -120,16 +142,16 @@ export default class Finance extends React.Component{
             <Text style={styles.textBtnEdit}>Edit</Text>
           </TouchableOpacity>
 
-           <Dialog.Container visible={this.state.AddDialogVisible}>
-            <Dialog.Title style={styles.textDialogTitle}>Add To Finance</Dialog.Title>
+           <Dialog.Container visible={this.state.editDialogVisible}>
+            <Dialog.Title style={styles.textDialogTitle}>Edit To Finance</Dialog.Title>
             <Dialog.Description>
-              Write the name and the cost please
+              Choice which one want to edit
             </Dialog.Description>
             <View style={styles.textInputDialogView}>
-              <TextInput placeholder='Name' value={this.state.AddName} style={styles.textInput} maxLength={17}
-              onChangeText={(name)=> this.onAddName(name)} value={this.state.AddName}></TextInput>
+              
+
               <TextInput placeholder='Cost' style={styles.textInput} maxLength={6} keyboardType='numeric' 
-              onChangeText={(value)=> this.onAddCost(value)} value={this.state.AddCost} ></TextInput>
+              onChangeText={(value)=> this.onEditCost(value)} value={this.state.editCost} ></TextInput>
             </View>
             <View style={styles.btnDialogView}>
               <Dialog.Button style={styles.btnDialogCancel} label="Cancel" onPress={this.handleCancelAdd.bind(this)}/>
