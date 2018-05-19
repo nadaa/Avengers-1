@@ -4,6 +4,9 @@ import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 // import Bar from './Bar'
 //<Bar navigation={this.props.navigation}/>
+import { createStackNavigator } from 'react-navigation';
+import TaskMonitor from './TaskMonitor';
+
 
 
 
@@ -15,9 +18,12 @@ constructor(props){
 			kidName: '',
 			taskText : ''
 		}
+
 	}
 
 	render() {
+	const { navigate } = this.props.navigation;
+
 		return (
 			<View style={styles.allPage}>
             <Text >please solve this isuue</Text>
@@ -32,7 +38,7 @@ constructor(props){
 
 			<TouchableOpacity
 			style={styles.btn}
-			// onPress={this.login}
+			onPress={() =>  navigate('TaskMonitor')}
 			>
 			<Text style={styles.textStyle}>Monitor Task</Text>
 			</TouchableOpacity>

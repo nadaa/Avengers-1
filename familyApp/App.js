@@ -14,6 +14,8 @@ const Application=  createStackNavigator({
   SignUp: { screen: SignUp },
   Login:{ screen: Login },
   Drawer: { screen: Drawer },
+  Tasks:{screen:Tasks},
+  TaskMonitor:{screen:TaskMonitor},
   //Login: { screen: Drawer },
 },{
   navigationOptions: {
@@ -24,9 +26,9 @@ const Application=  createStackNavigator({
 export default class App extends React.Component {
   render() {
     return (
-       // <Application/>
+        <Application/>
       // if (Jozaa){comment the above + uncomment the down} 
-      <Drawer/>
+     // <Tasks/>
     );
   }
 }
