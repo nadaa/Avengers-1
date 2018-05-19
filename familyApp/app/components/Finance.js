@@ -29,6 +29,7 @@ export default class Finance extends React.Component{
       addEditCost:'',
       editDialogVisible: false,
       editCost:'',
+      deleteDialogVisible:false,
 
     };
     //auto call function when render this scren
@@ -78,6 +79,7 @@ export default class Finance extends React.Component{
     }
     this.setState({addEditCost: newNumber})
   }
+
   handleCancelEdit(){
     this.setState({ editDialogVisible: false });
   };
@@ -88,12 +90,14 @@ export default class Finance extends React.Component{
     this.setState({ editDialogVisible: true });
   };
 
-
-
-
-
+  handleCancelDelete(){
+    this.setState({ deleteDialogVisible: false });
+  };
+  handleDelete(){
+    this.setState({ deleteDialogVisible: false });
+  };
   deleteFromFinance(){
-    alert('delete From Finance');
+    this.setState({ deleteDialogVisible: true });
   };
 
   render() {
@@ -116,11 +120,10 @@ export default class Finance extends React.Component{
           <TouchableOpacity style={styles.btnAdd} onPress={this.addToFinance.bind(this)}>
             <Text style={styles.textBtnAdd}>Add</Text>
           </TouchableOpacity>
-
           <Dialog.Container visible={this.state.addDialogVisible}>
-            <Dialog.Title style={styles.textDialogTitle}>Add To Finance</Dialog.Title>
-            <Dialog.Description>
-              Insert the name and cost please
+            <Dialog.Title style={styles.textDialogTitleAdd}>Add To Finance</Dialog.Title>
+            <Dialog.Description style={styles.textDialogDes}>
+              Insert the name and cost to add it
             </Dialog.Description>
             <View style={styles.textInputDialogView}>
               <TextInput placeholder='Name' value={this.state.addName} style={styles.textInput} maxLength={17}
@@ -137,15 +140,12 @@ export default class Finance extends React.Component{
           <TouchableOpacity style={styles.btnEdit} onPress={this.editFromFinance.bind(this)}>
             <Text style={styles.textBtnEdit}>Edit</Text>
           </TouchableOpacity>
-
            <Dialog.Container visible={this.state.editDialogVisible}>
-            <Dialog.Title style={styles.textDialogTitle}>Edit From Finance</Dialog.Title>
-            <Dialog.Description>
-              Choose the name then insert the cost  
+            <Dialog.Title style={styles.textDialogTitleEdit}>Edit From Finance</Dialog.Title>
+            <Dialog.Description style={styles.textDialogDes}>
+              Choose the name then insert the cost to edit it
             </Dialog.Description>
             <View style={styles.textInputDialogView}>
-          
-
               <TextInput placeholder='Cost' style={styles.textInput} maxLength={6} keyboardType='numeric' 
               onChangeText={(value)=> this.onAddEditCost(value)} value={this.state.editCost} ></TextInput>
             </View>
@@ -158,10 +158,20 @@ export default class Finance extends React.Component{
           <TouchableOpacity style={styles.btnDelete} onPress={this.deleteFromFinance.bind(this)}>
             <Text style={styles.textBtnDelete}>Delete</Text>
           </TouchableOpacity>
-     
+            <Dialog.Container visible={this.state.deleteDialogVisible}>
+              <Dialog.Title style={styles.textDialogTitleDelete}>Delete From Finance</Dialog.Title>
+              <Dialog.Description style={styles.textDialogDes}>
+                Choose the name to delete it
+              </Dialog.Description>
+              <View style={styles.textInputDialogView}>
+
+              </View>
+              <View style={styles.btnDialogView}>
+                <Dialog.Button style={styles.btnDialogCancel} label="Cancel" onPress={this.handleCancelDelete.bind(this)}/>
+                <Dialog.Button style={styles.btnDialogDelete} label="Delete" onPress={this.handleDelete.bind(this)}  />
+              </View>
+            </Dialog.Container>
         </View>
-
-
       </View>
     );
   }
@@ -294,11 +304,28 @@ const styles = StyleSheet.create({
     color:'red',//purple
     fontWeight: 'bold',
   },
-  
-  textDialogTitle:{
+  textDialogTitleAdd:{
     fontWeight: 'bold',
     textAlign: 'center',
     fontSize: 30,
+    color:'#3cff00',//green
+  },
+   textDialogTitleEdit:{
+    fontWeight: 'bold',
+    textAlign: 'center',
+    fontSize: 30,
+    color:'#6239BD',//purple
+  },
+   textDialogTitleDelete:{
+    fontWeight: 'bold',
+    textAlign: 'center',
+    fontSize: 30,
+    color:'red',
+  },
+  textDialogDes:{
+    fontWeight: 'bold',
+    textAlign: 'center',
+    fontSize: 15,
     color:'black',
   },
   textInputDialogView: {
