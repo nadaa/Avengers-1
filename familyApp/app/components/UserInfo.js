@@ -63,15 +63,16 @@ export default class UserInfo extends React.Component {
 // }
 
 
-sendSignUp(){
+sendInfo(){
 //const { navigate } = this.props.navigation;
-axios.post('http://192.168.1.86:3000/api/signup', {
+//this ip 192.168.1.86 for waed pc pleas comment it if you want to change it 
+axios.post('http://192.168.1.86:3000/api/userinfo', {
     user:this.state
    })
    .then(function (response) {
     
      if(response.data.msg==="success"){
-          alert('Login')
+          alert('success')
      }
      else if(response.data.msg==='error'){
            alert('error')
@@ -144,19 +145,15 @@ axios.post('http://192.168.1.86:3000/api/signup', {
 
     <TouchableOpacity
     	style={styles.btn}
-        //Here Please change (Jozaa comment)
-        /*
+      //this is fixed now by waed 
     	onPress={
     		this.sendInfo.bind(this)
         }
-        */
+        
     	>
-    	<Text>SignUp</Text>
+    	<Text>Fill in</Text>
     	</TouchableOpacity>
-         <Text style={{color: 'blue', paddingTop:10}}
-        onPress={() =>  navigate('Login')}>
-          I have already account -Login-
-             </Text>
+        
     </View>
     </KeyboardAvoidingView>
     );

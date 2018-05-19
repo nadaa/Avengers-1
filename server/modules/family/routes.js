@@ -44,6 +44,9 @@ appRouter.route('/api/gettasks').post((req,res)=>{
   appControllers.getTasks(req,res);
 
 })
+appRouter.route('/api/userinfo').post((req,res)=>{
+  appControllers.sendUserInfo(req,res);
+})
 
 
 module.exports=appRouter;
