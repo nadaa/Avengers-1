@@ -60,13 +60,13 @@ exports.signinUser = function(req, res) {
       if(data !== null){
         bcrypt.compare(req.body.user.password, data.password, function(err, resCrypt) {
           if(!resCrypt){
-            res.send({msg:"the password is not correct"})
+            res.status(500).send({msg:"the password is not correct"})
           }
             else if(resCrypt){
               req.session._id=data._id;
               req.session.username=data.username;
               req.session.password=data.password;
-              res.send({msg:"success"})
+              res.status(201).send({msg:"success login"})
             }
           });
       }
