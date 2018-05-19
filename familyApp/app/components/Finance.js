@@ -26,7 +26,7 @@ export default class Finance extends React.Component{
       //for show Dialog Add
       addDialogVisible: false,
       addName:'',
-      addCost:'',
+      addEditCost:'',
       editDialogVisible: false,
       editCost:'',
 
@@ -47,7 +47,7 @@ export default class Finance extends React.Component{
     this.setState({ addDialogVisible: false });
   };
   handleAdd(){
-    alert(this.state.addName + this.state.addCost);
+    alert('Done Add: '+this.state.addName +' with cost: ' + this.state.addEditCost);
     this.setState({ addDialogVisible: false });
   };
   addToFinance(){
@@ -55,9 +55,13 @@ export default class Finance extends React.Component{
     this.setState({ addDialogVisible: true });
   };
   onAddName(name){
+    if(name.length>0){
+      name=name[0].toUpperCase()+name.slice(1,name.length)
+    }
     this.setState({addName: name})
   }
-  onAddCost(value) {
+  onAddEditCost(value) {
+    //all this function to be sure the input is a valid number
     let newNumber = '';
     let numbers = '0123456789.';
     for (var i = 0; i < value.length; i++) {
@@ -69,7 +73,10 @@ export default class Finance extends React.Component{
           }  
         }
     }
-    this.setState({addCost: newNumber})
+    if (newNumber.length>(newNumber.indexOf('.')+3) && newNumber.indexOf('.')!==-1 ) {
+      newNumber=newNumber.slice(0,(newNumber.indexOf('.')+3))
+    }
+    this.setState({addEditCost: newNumber})
   }
   handleCancelEdit(){
     this.setState({ editDialogVisible: false });
@@ -78,25 +85,15 @@ export default class Finance extends React.Component{
     this.setState({ editDialogVisible: false });
   };
   editFromFinance(){
-    alert('Edit From Finance');
+    this.setState({ editDialogVisible: true });
   };
-  onEditCost(value) {
-    let newNumber = '';
-    let numbers = '0123456789.';
-    for (var i = 0; i < value.length; i++) {
-        if ( numbers.indexOf(value[i]) > -1 ) {
-            newNumber = newNumber + value[i];
-        }
-    }   
-    this.setState({editCost: newNumber})
-  }
 
 
 
 
 
-  removeFromFinance(){
-    alert('Remove From Finance');
+  deleteFromFinance(){
+    alert('delete From Finance');
   };
 
   render() {
@@ -123,44 +120,43 @@ export default class Finance extends React.Component{
           <Dialog.Container visible={this.state.addDialogVisible}>
             <Dialog.Title style={styles.textDialogTitle}>Add To Finance</Dialog.Title>
             <Dialog.Description>
-              Write the name and the cost please
+              Insert the name and cost please
             </Dialog.Description>
             <View style={styles.textInputDialogView}>
               <TextInput placeholder='Name' value={this.state.addName} style={styles.textInput} maxLength={17}
               onChangeText={(name)=> this.onAddName(name)} value={this.state.addName}></TextInput>
               <TextInput placeholder='Cost' style={styles.textInput} maxLength={6} keyboardType='numeric' 
-              onChangeText={(value)=> this.onAddCost(value)} value={this.state.addCost} ></TextInput>
+              onChangeText={(value)=> this.onAddEditCost(value)} value={this.state.addEditCost} ></TextInput>
             </View>
             <View style={styles.btnDialogView}>
               <Dialog.Button style={styles.btnDialogCancel} label="Cancel" onPress={this.handleCancelAdd.bind(this)}/>
-              <Dialog.Button style={styles.btnDialogConfirm} label="Add" onPress={this.handleAdd.bind(this)}  />
+              <Dialog.Button style={styles.btnDialogAdd} label="Add" onPress={this.handleAdd.bind(this)}  />
             </View>
           </Dialog.Container>
-
 
           <TouchableOpacity style={styles.btnEdit} onPress={this.editFromFinance.bind(this)}>
             <Text style={styles.textBtnEdit}>Edit</Text>
           </TouchableOpacity>
 
            <Dialog.Container visible={this.state.editDialogVisible}>
-            <Dialog.Title style={styles.textDialogTitle}>Edit To Finance</Dialog.Title>
+            <Dialog.Title style={styles.textDialogTitle}>Edit From Finance</Dialog.Title>
             <Dialog.Description>
-              Choice which one want to edit
+              Choose the name then insert the cost  
             </Dialog.Description>
             <View style={styles.textInputDialogView}>
-              
+          
 
               <TextInput placeholder='Cost' style={styles.textInput} maxLength={6} keyboardType='numeric' 
-              onChangeText={(value)=> this.onEditCost(value)} value={this.state.editCost} ></TextInput>
+              onChangeText={(value)=> this.onAddEditCost(value)} value={this.state.editCost} ></TextInput>
             </View>
             <View style={styles.btnDialogView}>
-              <Dialog.Button style={styles.btnDialogCancel} label="Cancel" onPress={this.handleCancelAdd.bind(this)}/>
-              <Dialog.Button style={styles.btnDialogConfirm} label="Add" onPress={this.handleAdd.bind(this)}  />
+              <Dialog.Button style={styles.btnDialogCancel} label="Cancel" onPress={this.handleCancelEdit.bind(this)}/>
+              <Dialog.Button style={styles.btnDialogEdit} label="Edit" onPress={this.handleEdit.bind(this)}  />
             </View>
           </Dialog.Container>
 
-          <TouchableOpacity style={styles.btnRemove} onPress={this.removeFromFinance.bind(this)}>
-            <Text style={styles.textBtnRemove}>Remove</Text>
+          <TouchableOpacity style={styles.btnDelete} onPress={this.deleteFromFinance.bind(this)}>
+            <Text style={styles.textBtnDelete}>Delete</Text>
           </TouchableOpacity>
      
         </View>
@@ -260,13 +256,13 @@ const styles = StyleSheet.create({
     fontSize: 30,
     color:'black',
   },
-  btnRemove:{
+  btnDelete:{
     backgroundColor: 'red',
     marginTop:10,
     padding:10,
     marginLeft:10,
   },
-  textBtnRemove:{
+  textBtnDelete:{
     fontWeight: 'bold',
     textAlign: 'center',
     fontSize: 30,
@@ -280,11 +276,25 @@ const styles = StyleSheet.create({
   btnDialogCancel: {
     fontSize: 20,
     color:'black',
+    fontWeight: 'bold',
+
   },
-  btnDialogConfirm: {
+  btnDialogAdd: {
     fontSize: 20,
-    color:'#3cff00',
+    color:'#3cff00',//green
+    fontWeight: 'bold',
   },
+  btnDialogEdit: {
+    fontSize: 20,
+    color:'#6239BD',//purple
+    fontWeight: 'bold',
+  },
+  btnDialogDelete: {
+    fontSize: 20,
+    color:'red',//purple
+    fontWeight: 'bold',
+  },
+  
   textDialogTitle:{
     fontWeight: 'bold',
     textAlign: 'center',
