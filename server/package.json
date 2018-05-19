@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --bail --timeout 15000 --reporter nyan test/ServerSpec.js"
   },
   "keywords": [],
   "author": "",
@@ -12,6 +12,7 @@
   "dependencies": {
     "bcrypt": "^2.0.1",
     "body-parser": "^1.18.2",
+    "chai-http": "^4.0.0",
     "express": "^4.16.3",
     "express-session": "^1.15.6",
     "mongoose": "^5.0.18",

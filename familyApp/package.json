@@ -26,8 +26,12 @@
     "react-native": "~0.55.2",
     "react-native-chooser": "^1.7.0",
     "react-native-datepicker": "^1.7.2",
+    "react-native-dialog": "^3.3.0",
+    "react-native-dialog-component": "^0.2.17",
     "react-native-drawer": "^2.5.0",
     "react-native-elements": "^0.19.1",
+    "react-native-render-html": "^3.10.0",
+    "react-native-table-component": "^1.1.8",
     "react-navigation": "^2.0.1"
   }
 }

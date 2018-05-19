@@ -5,7 +5,7 @@ const appControllers=require('./controllers');
 
 appRouter.route('/api/signup').post((req,res)=>{
 	// to retreive all family members
-	console.log("request received",req.body)
+	// console.log("request received",req.body)
 	appControllers.signupUser(req,res);
 
 })
@@ -24,5 +24,26 @@ appRouter.route('/api/login').post((req,res)=>{
     appControllers.signinUser(req,res);
 
 })
+
+
+appRouter.route('/api/getkids/:familyid').get((req,res)=>{
+  //console.log(req.params.familyid);
+  appControllers.getAllKids(req,res);
+
+})
+
+
+appRouter.route('/api/setkidtask').post((req,res)=>{
+  //console.log("received setkidtask");
+  appControllers.setKidTask(req,res);
+
+})
+
+appRouter.route('/api/gettasks').post((req,res)=>{
+  //console.log("received getkidtasks");
+  appControllers.getTasks(req,res);
+
+})
+
 
 module.exports=appRouter;

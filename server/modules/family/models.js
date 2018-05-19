@@ -1,25 +1,22 @@
 const mongoose=require('mongoose');
 
 const userSchema=new mongoose.Schema({
-
-	 // type: String, index: { unique: true }
-	email:String,
+	email:{
+	 type: String, index: { unique: true }
+	},
 	password: String,
 	username:String,
 	bdate: Date,
 	role: String,
-	rank: {type:Number,default:0},
-	familyId:Number
+	familyId:String
 	
 })
 
 const taskSchema=new mongoose.Schema({
-	taskName:Date,
-	taskCategory:String,
-	taskDate:Date,
-	taskTime:Date,
-	status:String,
-	userEmail:String 
+	taskName:String,
+	taskDate:{type:Date,default:new Date()},
+	completed:{type:Boolean,default:false},
+	userEmail:String,
 })
 
 
