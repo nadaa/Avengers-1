@@ -20,8 +20,8 @@ export default class Finance extends React.Component{
     //all the data save before to can show in the bar
     this.state={
       tableHead:  ['Name', 'Cost'],
-      tableName: ['Water', 'Electricity', 'Shortage', 'Family Event'],
-      tableCost:  [[12],     [30],            [40],         [50]    ],
+      tableName: [['Water'], ['Electricity'], ['Shortage'], ['Family Event'],['water of the month']],
+      tableCost:  [[12],     [30],            [40],         [150]    ,[999.99]],
       tableTotal:['Total',0],
       //for show Dialog Add
       AddDialogVisible: false,
@@ -68,12 +68,12 @@ export default class Finance extends React.Component{
       <Bar navigation={this.props.navigation}/>
         <View style={styles.tableView}>
           <Table style={styles.table}>
-            <Row data={this.state.tableHead} style={styles.head} textStyle={styles.textHead}/>
-            <TableWrapper style={styles.wrapper}>
-              <Col data={this.state.tableName} style={styles.name} textStyle={styles.textName}/>
-              <Rows data={this.state.tableCost} style={styles.cost} textStyle={styles.textCost} flexArr={[1]}/>
+            <Row data={this.state.tableHead} style={styles.head} textStyle={styles.textHead} flexArr={[2, 1.3]}/>
+            <TableWrapper style={styles.wrapper} >
+              <Rows data={this.state.tableName} style={styles.name} textStyle={styles.textName} flexArr={[2]}/>
+              <Rows data={this.state.tableCost} style={styles.cost} textStyle={styles.textCost} flexArr={[1.3]}/>
             </TableWrapper>
-            <Row data={this.state.tableTotal} style={styles.total} textStyle={styles.textTotal}/>
+            <Row data={this.state.tableTotal} style={styles.total} textStyle={styles.textTotal} flexArr={[2,1.3]}/>
           </Table>
         </View>
 
@@ -88,12 +88,12 @@ export default class Finance extends React.Component{
               Do you want to add to finance?
             </Dialog.Description>
             <View style={styles.textInputDialogView}>
-              <TextInput placeholder='Name' style={styles.textInput}></TextInput>
-              <TextInput placeholder='Cost' style={styles.textInput}></TextInput>
+              <TextInput placeholder='Name' style={styles.textInput} maxLength={17}></TextInput>
+              <TextInput placeholder='Cost' style={styles.textInput} maxLength={6} keyboardType='numeric'></TextInput>
             </View>
             <View style={styles.btnDialogView}>
               <Dialog.Button style={styles.btnDialogCancel} label="Cancel" onPress={this.handleCancelAdd.bind(this)}/>
-              <Dialog.Button style={styles.btnDialogConfirm} label="Add" onPress={this.handleAdd.bind(this)}/>
+              <Dialog.Button style={styles.btnDialogConfirm} label="Add" onPress={this.handleAdd.bind(this)}  />
             </View>
           </Dialog.Container>
 
