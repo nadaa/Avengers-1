@@ -14,7 +14,7 @@ import {
 import {createStackNavigator } from 'react-navigation';
 import Login from './Login';
 import axios from 'axios';    
-
+import Bar from './Bar';
 
 
 export default class UserInfo extends React.Component {
@@ -91,6 +91,8 @@ axios.post('http://192.168.1.86:3000/api/userinfo', {
   	const { navigate } = this.props.navigation;
     return (
     <KeyboardAvoidingView behaviour='padding' style ={styles.wrapper}>
+    <Bar navigation={this.props.navigation}/>
+
     <View style={styles.container}>
     <Text style={styles.header}>{/* jozaa change this  SIGNUP*/} User Information </Text>
 

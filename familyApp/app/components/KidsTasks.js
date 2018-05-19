@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Picker, StyleSheet, TextInput, TouchableOpacity, Text } from 'react-native';
+import Bar from './Bar'
 
 export default class KidsTasks extends React.Component {
 
@@ -14,8 +15,11 @@ export default class KidsTasks extends React.Component {
 
 	render() {
 		return (
+			<View style={styles.allPage}>
+						      <Bar navigation={this.props.navigation}/>
+
 			<View style={styles.container}>
-			
+
 			<Picker
 			selectedValue = {this.state.day}
 			onValueChange={day => this.setState({ day })}
@@ -43,12 +47,19 @@ export default class KidsTasks extends React.Component {
 			<Text style={styles.textStyle}>Submit</Text>
 			</TouchableOpacity>
 			</View>
+			</View>
 
 			);
 	}
 }
 
 const styles = StyleSheet.create({
+	allPage: {
+    flex: 1,
+    flexDirection: 'column',
+    backgroundColor: '#2896d3',
+    //marginBottom:35,
+  },
 	container: {
 		flex: 1,
 		alignItems: 'center',
