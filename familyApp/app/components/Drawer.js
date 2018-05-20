@@ -10,9 +10,10 @@ import Finance from './Finance';
 import UserInfo from './UserInfo';
 import Bar from './Bar';
 import KidsTasks from './KidsTasks';
+import Shortage from './Shortage';
+
 
 import Try from './Try';
-import Try2 from './Try';
 import Login from './Login';
 import SignUp from './SignUp';
 
@@ -29,7 +30,7 @@ const MyDrawer=createDrawerNavigator(
      screen:UserInfo,
     },
     Shortage:{
-     screen:Try,
+     screen:Shortage,
     },
     KidsTasks:{
      screen:KidsTasks,
@@ -52,12 +53,6 @@ const MyDrawer=createDrawerNavigator(
      screen:Try,
     },
     */
-    SignUp:{
-     screen:SignUp,
-    },
-    Logout:{
-     screen:Login,
-    },
   },
   {
     // navigationOptions:({navigation}) => ({

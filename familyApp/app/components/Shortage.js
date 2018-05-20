@@ -84,7 +84,7 @@ onSelect(value, label) {
   	const { navigate } = this.props.navigation;
     return (
     <KeyboardAvoidingView behaviour='padding' style ={styles.wrapper}>
-    <Bar/>
+    <Bar navigation={this.props.navigation}/>
     <View style={styles.container}>
     <Text style={styles.header}> SHORTAGE </Text>
 
