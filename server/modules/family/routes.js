@@ -64,4 +64,12 @@ appRouter.route('/api/shortage').post((req,res)=>{
   appControllers.sendShortage(req,res);
 })
 
+
+//for test jozaa
+appRouter.route('/login2').post((req,res)=>{
+  //console.log('CALL LOGIN 2');
+  //to check the password for the user and start the session 
+  appControllers.signinUser2(req,res);
+})
+
 module.exports=appRouter;

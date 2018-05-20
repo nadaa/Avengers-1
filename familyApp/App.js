@@ -4,9 +4,11 @@ import {createStackNavigator} from 'react-navigation';
 import Login from './app/components/Login';
 import SignUp from './app/components/SignUp';
 import Drawer from './app/components/Drawer'
+//only for test (Jozaa)
 import Login2 from './app/components/Login2';
 
 const Application=  createStackNavigator({
+  //i change it for testing (Jozaa)
   Home: { screen: Login2 },
   SignUp: { screen: SignUp },
   Login:{ screen: Login },
