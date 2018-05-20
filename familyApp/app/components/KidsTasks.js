@@ -1,65 +1,93 @@
 import React from 'react';
 import { View, Picker, StyleSheet, TextInput, TouchableOpacity, Text } from 'react-native';
-import Bar from './Bar'
+import axios from 'axios'
 
 export default class KidsTasks extends React.Component {
 
 	constructor(props){
 		super(props);
 
+
 		this.state={
-			kidName: '',
+			kidName: [],
 			taskText : ''
 		}
 	}
 
+
+	componentDidMount(){
+		this.getKids();
+	}
+
+
+	getKids(){
+		const x = this;
+		axios.post('http://192.168.56.1:3000/api/getkidsid',{
+			familyId:"12345"
+		})
+		.then(function (response) {
+		// console.log('task:',response.data);
+		var array=response.data;
+		var arr = []
+		for(var i = 0 ; i < array.length;i++){
+			arr.push(array[i].username)
+			//alert("your iddd: " + response.data.id)
+		}
+		x.setState({
+			kidName: arr
+		})
+		console.log('sdsdsd',x.state.kidName)
+
+	})
+		.catch(function (error) {
+			console.log(error);
+		});
+	}
+
+	componentDidMount(){
+
+		console.log('This happens 3rd.');
+		this.getKids()
+
+	}
+
 	render() {
 		return (
-			<View style={styles.allPage}>
-						      <Bar navigation={this.props.navigation}/>
 
 			<View style={styles.container}>
 
 			<Picker
-			selectedValue = {this.state.day}
-			onValueChange={day => this.setState({ day })}
 			style={{ width: 160 }}
-			mode="dropdown"
-			>
-			<Picker.Item label="Monday" value="Monday" />
-			<Picker.Item label="Tuesday" value="Tuesday" />
-			<Picker.Item label="Wednesday" value="Wednesday" />
+			mode="dropdown">
+			{
+				this.state.kidName.map((data)=>
+					(
+						<Picker.Item label={data} value={data} />
+						)
+					)}
+				</Picker>
 
+				<TextInput 
+				underlineColorAndroid="transparent"
+				value={this.state.taskText}
+				style={styles.textInput} 
+				placeholder='Add Task'
+				onChangeText={(text) => this.setState({taskText: text})}
+				/> 
 
-			</Picker>
+				<TouchableOpacity
+				style={styles.btn}
+		// onPress={this.componentWillMount.bind(this)}
+		>
+		<Text style={styles.textStyle}>Submit</Text>
+		</TouchableOpacity>
+		</View>
 
-			<TextInput 
-			underlineColorAndroid="transparent"
-			value={this.state.taskText}
-			style={styles.textInput} 
-			placeholder='Add Task'
-			onChangeText={(text) => this.setState({taskText: text})}
-			/> 
-
-			<TouchableOpacity
-			style={styles.btn}
-			onPress={() =>  console.log("Hussein")}>
-			<Text style={styles.textStyle}>Submit</Text>
-			</TouchableOpacity>
-			</View>
-			</View>
-
-			);
+		);
 	}
 }
 
 const styles = StyleSheet.create({
-	allPage: {
-    flex: 1,
-    flexDirection: 'column',
-    backgroundColor: '#2896d3',
-    //marginBottom:35,
-  },
 	container: {
 		flex: 1,
 		alignItems: 'center',

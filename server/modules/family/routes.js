@@ -23,7 +23,7 @@ appRouter.route('/api/login').post((req,res)=>{
     //to check the password for the user and start the session 
     appControllers.signinUser(req,res);
 
-})
+  })
 
 
 appRouter.route('/api/getkids/:familyid').get((req,res)=>{
@@ -47,6 +47,18 @@ appRouter.route('/api/gettasks').post((req,res)=>{
 appRouter.route('/api/userinfo').post((req,res)=>{
   appControllers.sendUserInfo(req,res);
 })
+
+appRouter.route('/getkids').post((req,res)=>{
+  var email=req.body.user
+  appControllers.getKidsNames(email,res);
+
+});
+
+appRouter.route('/api/getkidsid').post((req,res)=>{
+
+ appControllers.getKidsId(req,res);
+
+});
 
 
 module.exports=appRouter;
