@@ -18,8 +18,17 @@ sendLogin(){
     if(response.data.msg==="success login"){
       //alert(response.data.msg);
       navigate('Drawer');
+    }else if(response.data.msg==="the password is not correct"){
+      alert("the password is not correct please inser it correct");
+    }else if(response.data.msg==="no account"){
+      alert('You dont have an account please make one then login');
+      navigate('SignUp');
     }
   })
+  .catch(function (error) {
+    console.log(error);
+    alert(error);
+  });
 };
   render() {
     const { navigate } = this.props.navigation;
