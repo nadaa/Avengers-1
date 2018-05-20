@@ -139,7 +139,6 @@ exports.sendUserInfo=function(req,res){
     }
   })
 }
-<<<<<<< HEAD
 
 
 exports.getKidsId= function(req,res){
@@ -150,7 +149,7 @@ exports.getKidsId= function(req,res){
     res.send(kids)
   });
 };
-=======
+
 exports.sendShortage=function(req,res){
   var newShortage=new models.Shortage({
     room:req.body.needs.room,
@@ -177,4 +176,3 @@ exports.sendShortage=function(req,res){
 
 
 
->>>>>>> shortage full stack

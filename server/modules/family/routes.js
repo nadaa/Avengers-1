@@ -47,7 +47,6 @@ appRouter.route('/api/gettasks').post((req,res)=>{
 appRouter.route('/api/userinfo').post((req,res)=>{
   appControllers.sendUserInfo(req,res);
 })
-<<<<<<< HEAD
 
 appRouter.route('/getkids').post((req,res)=>{
   var email=req.body.user
@@ -61,10 +60,8 @@ appRouter.route('/api/getkidsid').post((req,res)=>{
 
 });
 
-=======
 appRouter.route('/api/shortage').post((req,res)=>{
   appControllers.sendShortage(req,res);
 })
->>>>>>> shortage full stack
 
 module.exports=appRouter;
