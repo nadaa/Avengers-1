@@ -21,15 +21,16 @@ export default class Finance extends React.Component{
     this.state={
       tableHead:  ['Name', 'Cost'],
       tableName: [['Water'], ['Electricity'], ['Shortage']],
-      tableCost:  [[12],     [30],            [40]],
+      tableCost:  [[12],     [30],            [40],       ],
       tableTotal:['Total',0],
       //for show Dialog Add
       addDialogVisible: false,
       addEditName:'',
-      editName:'',
       addEditCost:'',
       editDialogVisible: false,
+      editName:'',
       deleteDialogVisible:false,
+      deletetName:'',
     };
     //auto call function when render this scren
     this.calculateTotalMoney();
@@ -47,25 +48,29 @@ export default class Finance extends React.Component{
     this.setState({ addDialogVisible: false });
   };
   handleAdd(){
-    //need to work on it
-    if(this.state.addEditName.length===0){
-      alert('Please insert the name')
-    } else if(this.state.addEditCost.length===0){
-      alert('Please insert the cost')
-    } else {
-      //n:name ..... c:cost
-      //var n=this.state.tableName;
-      //n.push([this.state.addEditName]);
-      //this.setState({tableName:n});
-      //var c=this.state.tableName;
-      //c.push([JSON.parse(this.state.addEditCost)]);
-      //this.setState({tableCost:c});
-      this.state.tableName.push([this.state.addEditName]);
-      this.state.tableCost.push([JSON.parse(this.state.addEditCost)]);
-      this.calculateTotalMoney();
-      this.state.addEditName='';
-      this.state.addEditCost='';
-      this.setState({ addDialogVisible: false });
+    if (this.state.tableName.length>11) {
+      alert('There is so much exist ... please delete first to can add');
+    }else{
+      //need to work on it
+      if(this.state.addEditName.length===0){
+        alert('Please insert the name');
+      } else if(this.state.addEditCost.length===0){
+        alert('Please insert the cost');
+      } else {
+        //n:name ..... c:cost
+        //var n=this.state.tableName;
+        //n.push([this.state.addEditName]);
+        //this.setState({tableName:n});
+        //var c=this.state.tableName;
+        //c.push([JSON.parse(this.state.addEditCost)]);
+        //this.setState({tableCost:c});
+        this.state.tableName.push([this.state.addEditName]);
+        this.state.tableCost.push([JSON.parse(this.state.addEditCost)]);
+        this.calculateTotalMoney();
+        this.state.addEditName='';
+        this.state.addEditCost='';
+        this.setState({ addDialogVisible: false });
+      }
     }
   };
   addToFinance(){
@@ -74,9 +79,9 @@ export default class Finance extends React.Component{
   };
   onAddEditName(name){
     if(name.length>0){
-      name=name[0].toUpperCase()+name.slice(1,name.length)
+      name=name[0].toUpperCase()+name.slice(1,name.length);
     }
-    this.setState({addEditName: name})
+    this.setState({addEditName: name});
   }
   onAddEditCost(value) {
     //all this function to be sure the input is a valid number
@@ -92,9 +97,9 @@ export default class Finance extends React.Component{
         }
     }
     if (newNumber.length>(newNumber.indexOf('.')+3) && newNumber.indexOf('.')!==-1 ) {
-      newNumber=newNumber.slice(0,(newNumber.indexOf('.')+3))
+      newNumber=newNumber.slice(0,(newNumber.indexOf('.')+3));
     }
-    this.setState({addEditCost: newNumber})
+    this.setState({addEditCost: newNumber});
   }
 
   handleCancelEdit(){
@@ -103,22 +108,21 @@ export default class Finance extends React.Component{
   handleEdit(){
     var index=0;
     if(this.state.addEditName.length===0){
-      alert('Please insert the name')
+      alert('Please insert the name');
     } else if(this.state.addEditCost.length===0){
-      alert('Please insert the cost')
+      alert('Please insert the cost');
     } else {
-      
       for (var i = 0; i < this.state.tableName.length; i++) {
         if (this.state.tableName[i][0]===this.state.editName){
-          index=i
+          index=i;
         }
       }
-      this.state.tableName[index].splice(0,1,this.state.addEditName)
-      this.state.tableCost[index].splice(0,1,JSON.parse(this.state.addEditCost))
+      this.state.tableName[index].splice(0,1,this.state.addEditName);
+      this.state.tableCost[index].splice(0,1,JSON.parse(this.state.addEditCost));
       this.calculateTotalMoney();
       this.state.editName='';
       this.state.addEditCost='';
-      index=0
+      index=0;
       this.setState({ editDialogVisible: false });
     }
   };
@@ -130,7 +134,22 @@ export default class Finance extends React.Component{
     this.setState({ deleteDialogVisible: false });
   };
   handleDelete(){
-    this.setState({ deleteDialogVisible: false });
+    if (this.state.tableName.length===0) {
+      alert('There is nothing to delete');
+    }else{
+      var index=0;
+      for (var i = 0; i < this.state.tableName.length; i++) {
+        if (this.state.tableName[i][0]===this.state.deleteName){
+          index=i;
+        } 
+      }
+      this.state.tableName.splice(index,1);
+      this.state.tableCost.splice(index,1);
+      this.calculateTotalMoney();
+      this.state.deleteName='';
+      index=0;
+      this.setState({ deleteDialogVisible: false });
+    }
   };
   deleteFromFinance(){
     this.setState({ deleteDialogVisible: true });
@@ -179,7 +198,7 @@ export default class Finance extends React.Component{
            <Dialog.Container visible={this.state.editDialogVisible}>
             <Dialog.Title style={styles.textDialogTitleEdit}>Edit From Finance</Dialog.Title>
             <Dialog.Description style={styles.textDialogDes}>
-              Choose the name then insert the cost to edit it
+              Choose the name then insert the name and cost to edit it
             </Dialog.Description>
             <View style={styles.textInputDialogView}>
               <Picker
@@ -212,7 +231,16 @@ export default class Finance extends React.Component{
                 Choose the name to delete it
               </Dialog.Description>
               <View style={styles.textInputDialogView}>
-
+                <Picker
+                  selectedValue={this.state.deleteName}
+                  onValueChange={(value,index) => this.setState({ deleteName:value })}
+                  style={{ width: 160 }}
+                  mode="dropdown" //mode="dialog"
+                  >
+                  {this.state.tableName.map((name,index)=>{
+                    return (<Picker.Item label={name[0]} value={name[0]} key={index}/>) 
+                  })}
+                </Picker>
               </View>
               <View style={styles.btnDialogView}>
                 <Dialog.Button style={styles.btnDialogCancel} label="Cancel" onPress={this.handleCancelDelete.bind(this)}/>
