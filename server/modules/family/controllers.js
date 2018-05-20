@@ -139,6 +139,7 @@ exports.sendUserInfo=function(req,res){
     }
   })
 }
+<<<<<<< HEAD
 
 
 exports.getKidsId= function(req,res){
@@ -149,3 +150,31 @@ exports.getKidsId= function(req,res){
     res.send(kids)
   });
 };
+=======
+exports.sendShortage=function(req,res){
+  var newShortage=new models.Shortage({
+    room:req.body.needs.room,
+    need:req.body.needs.need,
+  })
+  console.log('newShortage',newShortage)
+  newShortage.save(function(error,data){
+    if(error){
+      res.send({msg:"error"})
+    }else{
+       console.log('success')
+      res.send({msg:"success"})
+    }
+  })
+}
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> shortage full stack
