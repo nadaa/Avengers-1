@@ -169,6 +169,35 @@ exports.sendShortage=function(req,res){
 
 
 
+//jozaa for test login 2
+exports.signinUser2=function(req, res){
+  console.log('CALL LOGIN 2 CONTROLLER');
+  // models.User.findOne({'username':req.body.user.username},function(err, data){
+  //   console.log('DATA:',data);
+  //   if(data===null){
+  //     res.send({msg:"no account"});
+  //   } else if(data !== null){
+  //   // console.log('data',data)
+  //     if(err){
+  //     res.status(404).send({msg:"no account"})}
+  //     if(data !== null){
+  //       bcrypt.compare(req.body.user.password, data.password, function(err, resCrypt) {
+  //         if(!resCrypt){
+  //           res.status(500).send({msg:"the password is not correct"});
+  //         }
+  //         else if(resCrypt){
+  //           req.session._id=data._id;
+  //           req.session.username=data.username;
+  //           req.session.password=data.password;
+  //           res.status(201).send({msg:"success login"});
+  //         }
+  //       });
+  //     }
+  //   };
+  // })
+}
+
+
 
 
 
