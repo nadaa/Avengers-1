@@ -1,27 +1,15 @@
 //import react from react
 import React from 'react';
 //import element from reacr-native
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native';
 //import table from react native table component
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 //import axios to make router works
 import axios from 'axios';
-import Bar from './Bar';
-
-// untill now I didint use it
 //import Dialog from react native dialog
 import Dialog from "react-native-dialog";
-// import HTML from react native render html to render html elemnt
-import HTML from 'react-native-render-html';
-// Dialog Component from react native dialog component to render pop elemnt
-import { DialogComponent, SlideAnimation } from 'react-native-dialog-component';
-
-const UserTypeGenderText={
-  //female (Mother) / male (Father) / child (Children)
-  female:'Mother',
-  male:'Father',
-  child:'Child',
-}
+//import Bar from Bar component
+import Bar from './Bar';
 
 //export Home from the react componant
 export default class Finance extends React.Component{
@@ -31,62 +19,87 @@ export default class Finance extends React.Component{
     super();
     //all the data save before to can show in the bar
     this.state={
-      //defult thing when change from data base change here 🙂 <3
-      //female (Mother) / male (Father)/ child (Children)
-      userType:'female',
-      //from 100%
-      userProgress:'100',
-      //for how many child in family
-      userRanking:'2',
-      //the money still
-      restMoney:'1500',
-      //
       tableHead:  ['Name', 'Cost'],
-      tableName: ['Water', 'Electricity', 'Shortage', 'Family Event'],
-      tableCost:  [[12],     [20],            [40],         [50]    ],
-      tableTotal:['Total',0]
+      tableName: [['Water'], ['Electricity'], ['Shortage'], ['Family Event'],['water of the month']],
+      tableCost:  [[12],     [30],            [40],         [150]    ,[999.99]],
+      tableTotal:['Total',0],
+      //for show Dialog Add
+      addDialogVisible: false,
+      addName:'',
+      addEditCost:'',
+      editDialogVisible: false,
+      editCost:'',
+      deleteDialogVisible:false,
+
     };
     //auto call function when render this scren
-    this.calculateTotal();
+    this.calculateTotalMoney();
   }
-  calculateTotal(){
+  calculateTotalMoney(){
     var total=0;
     for (var i = 0; i < this.state.tableCost.length; i++) {
       total+=this.state.tableCost[i][0];
     }
     //cant use set state so we use this .state
     this.state.tableTotal[1]=total;
-    //this.setState({tableTotal : ['Total',total]});
-    //alert('you cal total: '+this.state.tableTotal[1]);
+    // this.setState({tableTotal : ['Total',total]});
   }
-  fectch1(){
-    //return axios.get('http://192.168.1.82:3000')
-    return fetch('http://192.168.1.82:3000')
-      .then((response) => response.json())
-        .then((responseJson) => {
-          console.log("server done:",JSON.stringify(responseJson) )
-           alert(JSON.stringify(responseJson));
-        })
-      .catch(function (error) {
-       console.log(error);
-      });
-  }
+  handleCancelAdd(){
+    this.setState({ addDialogVisible: false });
+  };
+  handleAdd(){
+    alert('Done Add: '+this.state.addName +' with cost: ' + this.state.addEditCost);
+    this.setState({ addDialogVisible: false });
+  };
   addToFinance(){
-    alert('Add To Finance');
+    //alert('Add To Finance');
+    this.setState({ addDialogVisible: true });
+  };
+  onAddName(name){
+    if(name.length>0){
+      name=name[0].toUpperCase()+name.slice(1,name.length)
+    }
+    this.setState({addName: name})
+  }
+  onAddEditCost(value) {
+    //all this function to be sure the input is a valid number
+    let newNumber = '';
+    let numbers = '0123456789.';
+    for (var i = 0; i < value.length; i++) {
+        if ( numbers.indexOf(value[i]) > -1 ) {
+          if (newNumber.split('.').length<=1 || value[i]!=='.' ) {
+            if (newNumber.length>0 || value[i]!=='.') {
+               newNumber = newNumber + value[i];
+            }
+          }  
+        }
+    }
+    if (newNumber.length>(newNumber.indexOf('.')+3) && newNumber.indexOf('.')!==-1 ) {
+      newNumber=newNumber.slice(0,(newNumber.indexOf('.')+3))
+    }
+    this.setState({addEditCost: newNumber})
+  }
+
+  handleCancelEdit(){
+    this.setState({ editDialogVisible: false });
+  };
+  handleEdit(){
+    this.setState({ editDialogVisible: false });
   };
   editFromFinance(){
-    alert('Edit From Finance');
+    this.setState({ editDialogVisible: true });
   };
-  removeFromFinance(){
-    alert('Remove From Finance');
+
+  handleCancelDelete(){
+    this.setState({ deleteDialogVisible: false });
   };
-  calculate(){
-    this.calculateTotal();
-    alert('calculate');
+  handleDelete(){
+    this.setState({ deleteDialogVisible: false });
   };
-  see(){
-    alert(this.state.tableTotal[1]);
+  deleteFromFinance(){
+    this.setState({ deleteDialogVisible: true });
   };
+
   render() {
     //what return
     return (
@@ -94,29 +107,71 @@ export default class Finance extends React.Component{
       <Bar navigation={this.props.navigation}/>
         <View style={styles.tableView}>
           <Table style={styles.table}>
-            <Row data={this.state.tableHead} style={styles.head} textStyle={styles.textHead}/>
-            <TableWrapper style={styles.wrapper}>
-              <Col data={this.state.tableName} style={styles.name} textStyle={styles.textName}/>
-              <Rows data={this.state.tableCost} style={styles.cost} textStyle={styles.textCost} flexArr={[1]}/>
+            <Row data={this.state.tableHead} style={styles.head} textStyle={styles.textHead} flexArr={[2, 1.3]}/>
+            <TableWrapper style={styles.wrapper} >
+              <Rows data={this.state.tableName} style={styles.name} textStyle={styles.textName} flexArr={[2]}/>
+              <Rows data={this.state.tableCost} style={styles.cost} textStyle={styles.textCost} flexArr={[1.3]}/>
             </TableWrapper>
-            <Row data={this.state.tableTotal} style={styles.total} textStyle={styles.textTotal}/>
+            <Row data={this.state.tableTotal} style={styles.total} textStyle={styles.textTotal} flexArr={[2,1.3]}/>
           </Table>
         </View>
+
         <View style={styles.btnView}>
           <TouchableOpacity style={styles.btnAdd} onPress={this.addToFinance.bind(this)}>
             <Text style={styles.textBtnAdd}>Add</Text>
           </TouchableOpacity>
+          <Dialog.Container visible={this.state.addDialogVisible}>
+            <Dialog.Title style={styles.textDialogTitleAdd}>Add To Finance</Dialog.Title>
+            <Dialog.Description style={styles.textDialogDes}>
+              Insert the name and cost to add it
+            </Dialog.Description>
+            <View style={styles.textInputDialogView}>
+              <TextInput placeholder='Name' value={this.state.addName} style={styles.textInput} maxLength={17}
+              onChangeText={(name)=> this.onAddName(name)} value={this.state.addName}></TextInput>
+              <TextInput placeholder='Cost' style={styles.textInput} maxLength={6} keyboardType='numeric' 
+              onChangeText={(value)=> this.onAddEditCost(value)} value={this.state.addEditCost} ></TextInput>
+            </View>
+            <View style={styles.btnDialogView}>
+              <Dialog.Button style={styles.btnDialogCancel} label="Cancel" onPress={this.handleCancelAdd.bind(this)}/>
+              <Dialog.Button style={styles.btnDialogAdd} label="Add" onPress={this.handleAdd.bind(this)}  />
+            </View>
+          </Dialog.Container>
 
           <TouchableOpacity style={styles.btnEdit} onPress={this.editFromFinance.bind(this)}>
             <Text style={styles.textBtnEdit}>Edit</Text>
           </TouchableOpacity>
+           <Dialog.Container visible={this.state.editDialogVisible}>
+            <Dialog.Title style={styles.textDialogTitleEdit}>Edit From Finance</Dialog.Title>
+            <Dialog.Description style={styles.textDialogDes}>
+              Choose the name then insert the cost to edit it
+            </Dialog.Description>
+            <View style={styles.textInputDialogView}>
+              <TextInput placeholder='Cost' style={styles.textInput} maxLength={6} keyboardType='numeric' 
+              onChangeText={(value)=> this.onAddEditCost(value)} value={this.state.editCost} ></TextInput>
+            </View>
+            <View style={styles.btnDialogView}>
+              <Dialog.Button style={styles.btnDialogCancel} label="Cancel" onPress={this.handleCancelEdit.bind(this)}/>
+              <Dialog.Button style={styles.btnDialogEdit} label="Edit" onPress={this.handleEdit.bind(this)}  />
+            </View>
+          </Dialog.Container>
 
-          <TouchableOpacity style={styles.btnRemove} onPress={this.removeFromFinance.bind(this)}>
-            <Text style={styles.textBtnRemove}>Remove</Text>
+          <TouchableOpacity style={styles.btnDelete} onPress={this.deleteFromFinance.bind(this)}>
+            <Text style={styles.textBtnDelete}>Delete</Text>
           </TouchableOpacity>
+            <Dialog.Container visible={this.state.deleteDialogVisible}>
+              <Dialog.Title style={styles.textDialogTitleDelete}>Delete From Finance</Dialog.Title>
+              <Dialog.Description style={styles.textDialogDes}>
+                Choose the name to delete it
+              </Dialog.Description>
+              <View style={styles.textInputDialogView}>
+
+              </View>
+              <View style={styles.btnDialogView}>
+                <Dialog.Button style={styles.btnDialogCancel} label="Cancel" onPress={this.handleCancelDelete.bind(this)}/>
+                <Dialog.Button style={styles.btnDialogDelete} label="Delete" onPress={this.handleDelete.bind(this)}  />
+              </View>
+            </Dialog.Container>
         </View>
-
-
       </View>
     );
   }
@@ -211,60 +266,107 @@ const styles = StyleSheet.create({
     fontSize: 30,
     color:'black',
   },
-  btnRemove:{
+  btnDelete:{
     backgroundColor: 'red',
     marginTop:10,
     padding:10,
     marginLeft:10,
   },
-  textBtnRemove:{
+  textBtnDelete:{
     fontWeight: 'bold',
     textAlign: 'center',
     fontSize: 30,
     color:'black',
   },
-   container: {
-    flex: 1,
-    paddingBottom: 20,
+  btnDialogView: {
+    flexDirection:'row',
+    justifyContent:'center',
+    alignItems: 'center',
   },
+  btnDialogCancel: {
+    fontSize: 20,
+    color:'black',
+    fontWeight: 'bold',
+
+  },
+  btnDialogAdd: {
+    fontSize: 20,
+    color:'#3cff00',//green
+    fontWeight: 'bold',
+  },
+  btnDialogEdit: {
+    fontSize: 20,
+    color:'#6239BD',//purple
+    fontWeight: 'bold',
+  },
+  btnDialogDelete: {
+    fontSize: 20,
+    color:'red',//purple
+    fontWeight: 'bold',
+  },
+  textDialogTitleAdd:{
+    fontWeight: 'bold',
+    textAlign: 'center',
+    fontSize: 30,
+    color:'#3cff00',//green
+  },
+   textDialogTitleEdit:{
+    fontWeight: 'bold',
+    textAlign: 'center',
+    fontSize: 30,
+    color:'#6239BD',//purple
+  },
+   textDialogTitleDelete:{
+    fontWeight: 'bold',
+    textAlign: 'center',
+    fontSize: 30,
+    color:'red',
+  },
+  textDialogDes:{
+    fontWeight: 'bold',
+    textAlign: 'center',
+    fontSize: 15,
+    color:'black',
+  },
+  textInputDialogView: {
+    flexDirection:'column',
+    justifyContent:'center',
+    alignItems: 'center',
+  },
+  textInput: {
+    alignSelf: 'stretch',
+    padding: 16,
+  },
+
+ 
+
+ 
 });
 
 
 /*
-
-Alert.alert(
-      'Edit From Finance',
-      'Choose which one you want to edit',
-      [
-        {text: 'Ask me later', onPress: () => {}},
-        {text: 'Cancel', onPress: () => alert('Cancel Pressed'), style: 'cancel'},
-        {text: 'OK', onPress: () => alert('OK Pressed')},
-      ],
-      { cancelable: false }
-    )
-
- var txt;
-    var person = HTML.prompt("Please enter your name:", "Harry Potter");
-    if (person == null || person == "") {
-        txt = "User cancelled the prompt.";
-    } else {
-        txt = "Hello " + person + "! How are you today?";
-    }
+  fectch1(){
+    //return axios.get('http://192.168.1.82:3000')
+    return fetch('http://192.168.1.82:3000')
+      .then((response) => response.json())
+        .then((responseJson) => {
+          console.log("server done:",JSON.stringify(responseJson) )
+           alert(JSON.stringify(responseJson));
+        })
+      .catch(function (error) {
+       console.log(error);
+      });
+  }
 
 
 
-<View>
 
-   <View>
-        <Dialog.Container>
-          <Dialog.Title>Account delete</Dialog.Title>
-          <Dialog.Description>
-            Do you want to delete this account? You cannot undo this action.
-          </Dialog.Description>
-          <Dialog.Button label="Cancel" />
-          <Dialog.Button label="Delete" />
-        </Dialog.Container>
-      </View>
 
- </View>
+// untill now I didint use it
+// import HTML from react native render html to render html elemnt
+import HTML from 'react-native-render-html';
+// Dialog Component from react native dialog component to render pop elemnt
+import { DialogComponent, SlideAnimation } from 'react-native-dialog-component';
+
+
 */
