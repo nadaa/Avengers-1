@@ -6,10 +6,16 @@ import SignUp from './app/components/SignUp';
 import Tasks from './app/components/Tasks';
 import KidsTasks from './app/components/AssignKidsTasks';
 import TaskMonitor from './app/components/TaskMonitor';
+<<<<<<< HEAD
 import Drawer from './app/components/Drawer'
 
+=======
+import Drawer from './app/components/Drawer';
+import Shortage from './app/components/Shortage';
+//jozaa comment this
+>>>>>>> shortage full stack
 const Application=  createStackNavigator({
-  Home: { screen: SignUp },
+  Home: { screen: Shortage },
   SignUp: { screen: SignUp },
   Login:{ screen: Login },
   Drawer: { screen: Drawer },

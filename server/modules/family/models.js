@@ -33,16 +33,20 @@ const familySchema=new mongoose.Schema({
     marriageDate:String,
 })
 
-
+const shortageSchema=new mongoose.Schema({
+	room:String,
+	need:String,
+})
 
 var User=mongoose.model('User',userSchema);
 var Task=mongoose.model('Task',taskSchema);
 var Family=mongoose.model('Family',familySchema);
-
+var Shortage=mongoose.model('Shortage',shortageSchema);
 
 module.exports={
 User:User,
 Task:Task,
-Family:Family
+Family:Family,
+Shortage:Shortage,
 }
 
