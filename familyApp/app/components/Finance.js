@@ -26,11 +26,10 @@ export default class Finance extends React.Component{
       //for show Dialog Add
       addDialogVisible: false,
       addEditName:'',
+      editName:'',
       addEditCost:'',
       editDialogVisible: false,
-
       deleteDialogVisible:false,
-
     };
     //auto call function when render this scren
     this.calculateTotalMoney();
@@ -54,6 +53,13 @@ export default class Finance extends React.Component{
     } else if(this.state.addEditCost.length===0){
       alert('Please insert the cost')
     } else {
+      //n:name ..... c:cost
+      //var n=this.state.tableName;
+      //n.push([this.state.addEditName]);
+      //this.setState({tableName:n});
+      //var c=this.state.tableName;
+      //c.push([JSON.parse(this.state.addEditCost)]);
+      //this.setState({tableCost:c});
       this.state.tableName.push([this.state.addEditName]);
       this.state.tableCost.push([JSON.parse(this.state.addEditCost)]);
       this.calculateTotalMoney();
@@ -95,16 +101,24 @@ export default class Finance extends React.Component{
     this.setState({ editDialogVisible: false });
   };
   handleEdit(){
+    var index=0;
     if(this.state.addEditName.length===0){
       alert('Please insert the name')
     } else if(this.state.addEditCost.length===0){
       alert('Please insert the cost')
     } else {
-      //this.state.tableName.push([this.state.addEditName]);
-      //this.state.tableCost.push([JSON.parse(this.state.addEditCost)]);
+      
+      for (var i = 0; i < this.state.tableName.length; i++) {
+        if (this.state.tableName[i][0]===this.state.editName){
+          index=i
+        }
+      }
+      this.state.tableName[index].splice(0,1,this.state.addEditName)
+      this.state.tableCost[index].splice(0,1,JSON.parse(this.state.addEditCost))
       this.calculateTotalMoney();
-      this.state.addEditName='';
+      this.state.editName='';
       this.state.addEditCost='';
+      index=0
       this.setState({ editDialogVisible: false });
     }
   };
@@ -169,8 +183,8 @@ export default class Finance extends React.Component{
             </Dialog.Description>
             <View style={styles.textInputDialogView}>
               <Picker
-                //selectedValue = {this.state.tableName}
-                //onValueChange={(value,index) => this.setState({ tableName:value[0] })}
+                selectedValue={this.state.editName}
+                onValueChange={(value,index) => this.setState({ editName:value })}
                 style={{ width: 160 }}
                 mode="dropdown" //mode="dialog"
                 >
@@ -181,7 +195,7 @@ export default class Finance extends React.Component{
               <TextInput placeholder='Name' style={styles.textInput} maxLength={15}
               onChangeText={(name)=> this.onAddEditName(name)} value={this.state.addEditName}></TextInput>
               <TextInput placeholder='Cost' style={styles.textInput} maxLength={6} keyboardType='numeric' 
-              onChangeText={(value)=> this.onAddEditCost(value)} value={this.state.editCost} ></TextInput>
+              onChangeText={(value)=> this.onAddEditCost(value)} value={this.state.addEditCost} ></TextInput>
             </View>
             <View style={styles.btnDialogView}>
               <Dialog.Button style={styles.btnDialogCancel} label="Cancel" onPress={this.handleCancelEdit.bind(this)}/>
