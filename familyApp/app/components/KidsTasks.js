@@ -60,9 +60,9 @@ export default class KidsTasks extends React.Component {
 			style={{ width: 160 }}
 			mode="dropdown">
 			{
-				this.state.kidName.map((data)=>
+				this.state.kidName.map((data,i)=>
 					(
-						<Picker.Item label={data} value={data} />
+						<Picker.Item key={i} label={data} value={data} />
 						)
 					)}
 				</Picker>
