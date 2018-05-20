@@ -9,8 +9,8 @@ export default class Login2 extends React.Component {
   constructor(props){
     super(props);
     this.state={
-      username:'',
-      password:'',
+      username:'Alex Mercer',
+      password:'1234567',
     }
   }
   sendLogin(){
@@ -20,7 +20,7 @@ export default class Login2 extends React.Component {
   })
   .then(function (response) {
     if(response.data.msg==="success login"){
-      alert(response.data.msg);
+      //alert(response.data.msg);
       navigate('Drawer');
     }else if(response.data.msg==="the password is not correct"){
      alert("the password is not correct please inser it correct");
@@ -40,14 +40,14 @@ export default class Login2 extends React.Component {
       <KeyboardAvoidingView behaviour='padding' style ={styles.wrapper}>
         <View style={styles.container}>
           <Text style={styles.header}> LOGIN </Text>
-          <TextInput
-            style={styles.textInput} 
-            placeholder='Username'
+          <TextInput style={styles.textInput} placeholder='Username'
+            value={this.state.username}
             onChangeText={(username) => this.setState({username})} 
           /> 
             <TextInput
               style={styles.textInput} 
               placeholder='Password'
+              value={this.state.password}
               onChangeText={(password) => this.setState({password})}  
             /> 
           <TouchableOpacity
