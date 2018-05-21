@@ -1,7 +1,29 @@
 //dont delete this because it is the code for ata base jozaa
-//IP Adress Jozaa: 192.168.1.82
+//IP Adress Jozaa: 
+192.168.1.82
+192.168.0.89
 import Bar from './Bar'
 <Bar navigation={this.props.navigation}/>
+
+saveData(){
+  let userEmail1=this.state.email;
+  AsyncStorage.setItem('userEmail',userEmail1)
+}
+showData= async(){
+  try{
+    let userEmail3=await AsyncStorage.getItem('userEmail')
+    alert('the email is:' + userEmail3)
+  }
+  catch(error){
+    alert(error)
+  }
+
+}
+  
+
+
+
+
 
 Drawer     //When finish delet this
 Bar     //When finish delet this
@@ -35,25 +57,15 @@ Bar     //When finish delet this
 
 need to save the table in data base and the cost to can render it
 
-
-
 //proplem
 1- menue button
 2- tasks button
 3- router me and waed
 
 
-
-
-
-
 ///note
 
 neeed
-
-
-
-
 
 
 
@@ -86,24 +98,6 @@ fectch1(){
     });
 }
 */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 ------ the whole page
@@ -194,14 +188,6 @@ const styles = StyleSheet.create({
     alignItems:'center',
   }
 })
-
-
-
-
-
-
-
-
 
 
 

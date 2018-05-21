@@ -169,8 +169,7 @@ exports.sendShortage=function(req,res){
 //jozaa for test login 2
 exports.signinUser2=function(req, res){
   console.log('CALL LOGIN 2 CONTROLLER');
-  models.User.findOne({'username':req.body.user.username},function(err, data){
-    //console.log('DATA:',data);
+  models.User.findOne({'email':req.body.user.email},function(err, data){
     if(data===null){
       res.send({msg:"no account"});
     }else if(data!==null){
@@ -184,7 +183,7 @@ exports.signinUser2=function(req, res){
             req.session._id=data._id;
             req.session.username=data.username;
             req.session.password=data.password;
-            res.send({msg:"success login"});
+            res.send({msg:"success login",email:req.body.user.email});
           }
         });
       }
