@@ -63,10 +63,11 @@ export default class SignUp extends React.Component {
 
 
 sendSignUp(){
-// axios.post('http://192.168.1.86:3000/api/signup', {
-
       const { navigate } = this.props.navigation;
-	axios.post('http://10.0.2.2:3000/api/signup', {
+
+axios.post('http://192.168.1.86:3000/api/signup', {
+
+	//axios.post('http://10.0.2.2:3000/api/signup', {
     user:this.state
    })
    .then(function (response) {
@@ -142,7 +143,7 @@ onSelect(value, label) {
           >
           <Option value = 'Father'>Father</Option>
           <Option value = 'Mother'>Mother</Option>
-          <Option value = 'Child'>Child</Option>
+          <Option value = 'kid'>kid</Option>
          
 
         </Select>

@@ -60,7 +60,7 @@ export default class KidsTasks extends React.Component {
 			<View style={styles.container}>
 
 			<Picker
-			style={{ width: 160 }}
+			style={styles.textStyle}
 			mode="dropdown">
 			{
 				this.state.kidName.map((data,i)=>
