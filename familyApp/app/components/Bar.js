@@ -1,12 +1,11 @@
 //import react from react
 import React from 'react';
-//import element from reacr-native
-import { StyleSheet, Text, View, TouchableOpacity,Button } from 'react-native';
-//import FormInput & Header from react native elements
-import { FormInput, Header ,Divider, CheckBox } from 'react-native-elements';
+//import element from reacr native
+import { StyleSheet, Text, View,AsyncStorage } from 'react-native';
+//import Header from react native elements
+import { Header} from 'react-native-elements';
 //import axios to make router works
 import axios from 'axios';
-import Drawer from './Drawer';
 
 //import the icon from lirbary  one by one (each one library in react native icon)
 import Icon0 from 'react-native-vector-icons/FontAwesome';
@@ -35,15 +34,43 @@ export default class Bar extends React.Component{
     this.state={
       //defult thing when change from data base change here 🙂 <3
       //female (Mother) / male (Father)/ child (Children)
-      userType:'female',
+      role:'female',
       //from 100%
       userProgress:'100',
       //for how many child in family
       userRanking:'2',
       //the money still
       restMoney:'1500',
+
+      //usersave
+      userSave:'',
     };
+    //run the function to save the email in this.state,userSave
+    //this.callOrder(this.showData.bind(this),this.getUserRole.bind(this))
   }
+  showData=async()=>{
+    try{
+      let userEmail3=await AsyncStorage.getItem('userEmail')
+      this.setState({userSave:userEmail3})
+      //alert('the email save is: ' + userEmail3)
+      //this.getUserRole()
+    }
+    catch(error){
+      alert(error)
+    }
+  }
+  getUserRole(){
+    this.state.role='male'
+  }
+  callOrder(cb,cb2){
+    cb()
+    cb2()
+  }
+  getAlldata(){
+    alert('the type is: ')
+  }
+
+
   fectch1(){
     //return axios.get('http://192.168.1.82:3000')
     return fetch('http://192.168.1.82:3000')
@@ -78,10 +105,14 @@ export default class Bar extends React.Component{
             centerComponent={
               <View style={styles.centerComponentView}>
                 <View  style={styles.centerComponent}>
-                  <Icon0 onPress={() =>this.props.navigation.navigate('User Information')} name={this.state.userType} size={35} color="red"/>
+                  <Icon0 onPress={() =>this.props.navigation.navigate('User Information')} name={this.state.role} size={35} color="red"/>
                   <Text onPress={() =>this.props.navigation.navigate('User Information')} style={styles.textUnderIcon}>
-                    {UserTypeGenderText[this.state.userType]}
+                    {UserTypeGenderText[this.state.role]}
                   </Text>
+                </View>
+
+                <View style={styles.centerComponent}>
+                  <Icon0 onPress={this.getAlldata.bind(this)} style={{color:'white'}} name="bars" size={60}/>
                 </View>
 
                 <View style={styles.centerComponent}>

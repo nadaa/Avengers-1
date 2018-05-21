@@ -36,7 +36,7 @@ export default class Login2 extends React.Component {
   saveData(){
     let userEmail1=this.state.email;
     AsyncStorage.setItem('userEmail',userEmail1)
-    alert('userEmail1: ' + userEmail1)
+    //alert('you want to save: ' + userEmail1)
   }
   showData=async()=>{
     try{

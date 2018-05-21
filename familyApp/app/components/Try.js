@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, TouchableOpacity, View } from "react-native";
+import { Text, TouchableOpacity, View, AsyncStorage } from "react-native";
 import Dialog from "react-native-dialog";
 import Bar from './Bar'
 
@@ -20,6 +20,16 @@ export default class DialogTester extends React.Component {
   handleDelete(){
     this.setState({ dialogVisible: false });
   };
+  showData=async()=>{
+    try {
+      let userEmail3=await AsyncStorage.getItem('userEmail')
+      alert('the email save is: ' + userEmail3)
+    }
+    catch(error){
+      alert(error)
+    }
+  } 
+ 
   render() {
     return (
       <View>
@@ -39,6 +49,9 @@ export default class DialogTester extends React.Component {
           <Dialog.Button label="Cancel" onPress={this.handleCancel.bind(this)} />
           <Dialog.Button label="Delete" onPress={this.handleDelete.bind(this)} />
         </Dialog.Container>
+        <TouchableOpacity 
+        onPress={this.showData}>
+        <Text>SHOW FROM FINANCE</Text></TouchableOpacity>
       </View>
     );
   }

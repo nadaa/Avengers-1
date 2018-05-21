@@ -1,29 +1,33 @@
 //dont delete this because it is the code for ata base jozaa
-//IP Adress Jozaa: 
-192.168.1.82
-192.168.0.89
+
+// all screen work bar 
 import Bar from './Bar'
 <Bar navigation={this.props.navigation}/>
 
-saveData(){
-  let userEmail1=this.state.email;
-  AsyncStorage.setItem('userEmail',userEmail1)
-}
-showData= async(){
-  try{
-    let userEmail3=await AsyncStorage.getItem('userEmail')
-    alert('the email is:' + userEmail3)
+// all screen work async storage 
+import {  AsyncStorage} from 'react-native';
+showData=async()=>{
+    try{
+      let userEmail3=await AsyncStorage.getItem('userEmail')
+      alert('the email save is: ' + userEmail3)
+    }
+    catch(error){
+      alert(error)
+    }
   }
-  catch(error){
-    alert(error)
-  }
-
-}
   
 
+  // this.showData()
+  getUserRole(){
+    //alert('email: ' + this.state.userSave)
+    this.setState({role:'male'})
+    // this.state.role='male'
+  }
 
 
-
+//IP Adress Jozaa: 
+192.168.1.82
+192.168.0.89
 
 Drawer     //When finish delet this
 Bar     //When finish delet this
