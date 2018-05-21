@@ -22,8 +22,8 @@ const Application=  createStackNavigator({
 export default class App extends React.Component {
   render() {
     return (
-     // <Application/>
-     <Drawer/>
+     <Application/>
+     // <Drawer/>
     );
   }
 }

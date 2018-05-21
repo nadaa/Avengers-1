@@ -259,10 +259,6 @@ export default class Finance extends React.Component{
               </View>
             </Dialog.Container>
         </View>
-
-        <TouchableOpacity style={styles.btnAdd} 
-        onPress={this.showData}>
-        <Text>SHOW FROM FINANCE</Text></TouchableOpacity>
       </View>
     );
   }

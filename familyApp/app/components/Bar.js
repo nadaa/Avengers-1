@@ -17,11 +17,11 @@ import Icon5 from 'react-native-vector-icons/MaterialIcons';
 import Icon6 from 'react-native-vector-icons/Octicons';
 import Icon7 from 'react-native-vector-icons/Foundation';
 
-const UserTypeGenderText={
-  //female (Mother) / male (Father) / child (Children)
-  female:'Mother',
-  male:'Father',
-  child:'Child',
+const userRole={
+  // (Mother) female/  (Father)male /  (Child)child
+  'Mother':'female',
+  'Father':'male',
+  'Child':'child',
 }
 
 //export Bar from the react componant
@@ -34,74 +34,28 @@ export default class Bar extends React.Component{
     this.state={
       //defult thing when change from data base change here 🙂 <3
       //female (Mother) / male (Father)/ child (Children)
-      role:'female',
+      role:'Mother',
       //from 100%
       userProgress:'100',
       //for how many child in family
       userRanking:'2',
       //the money still
       restMoney:'1500',
-
-      //usersave
-      userEmailSave:'',
     };
     //run the function to save the email in this.state,userSave
-    this.callOrder(this.showData.bind(this))
-  }
-  showData=async()=>{
-    try{
-      let userEmail3=await AsyncStorage.getItem('userEmail')
-      //this.state.userEmailSave=userEmail3
-      this.setState({userEmailSave:userEmail3})
-      //alert('the email save is: ' + userEmail3)
-      this.getUserRole()
-    }
-    catch(error){
-      alert(error)
-    }
-  }
-  getUserRole(){
-    //this.state.role='male'
-    //this.setState({role:'male'})
-    //alert('the userEmailSave is: ' + this.state.userEmailSave)
+    this.callOrder(this.setUserRole.bind(this))
   }
   callOrder(cb){
     cb()
   }
-  getAlldata(){
-    //alert('you call the function with email: ' + this.state.userEmailSave )
-    axios.post('http://192.168.0.89:3000/data', {email:this.state.userEmailSave})
-      .then(function (response) {
-        if(response.data.msg==="success login"){
-          var email=response.data.email
-          //alert(response.data.msg + ' with email: ' + response.data.email);
-          navigate('Drawer',{ email });
-        }else if(response.data.msg==="the password is not correct"){
-          alert("the password is not correct please inser it correct");
-        }else if(response.data.msg==="no account"){
-          alert('You dont have an account please make one then login');
-          navigate('SignUp');
-        }
-      })
-      .catch(function (error) {
-        console.log(error);
-        alert(error);
-    });
-    //alert('the type is: ')    
-  }
-
-
-  fectch1(){
-    //return axios.get('http://192.168.1.82:3000')
-    return fetch('http://192.168.1.82:3000')
-      .then((response) => response.json())
-        .then((responseJson) => {
-          console.log("server done:",JSON.stringify(responseJson) )
-           alert(JSON.stringify(responseJson));
-        })
-      .catch(function (error) {
-       console.log(error);
-      });
+  setUserRole=async()=>{
+    try{
+      let role=await AsyncStorage.getItem('role')
+      this.setState({role:role})
+    }
+    catch(error){
+      alert(error)
+    }
   }
   //render
   render() {
@@ -125,14 +79,10 @@ export default class Bar extends React.Component{
             centerComponent={
               <View style={styles.centerComponentView}>
                 <View  style={styles.centerComponent}>
-                  <Icon0 onPress={() =>this.props.navigation.navigate('User Information')} name={this.state.role} size={35} color="red"/>
+                  <Icon0 onPress={() =>this.props.navigation.navigate('User Information')} name={userRole[this.state.role]} size={35} color="red"/>
                   <Text onPress={() =>this.props.navigation.navigate('User Information')} style={styles.textUnderIcon}>
-                    {UserTypeGenderText[this.state.role]}
+                    {this.state.role}
                   </Text>
-                </View>
-
-                <View style={styles.centerComponent}>
-                  <Icon0 onPress={this.getAlldata.bind(this)} style={{color:'white'}} name="bars" size={60}/>
                 </View>
 
                 <View style={styles.centerComponent}>
