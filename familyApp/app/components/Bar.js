@@ -43,31 +43,52 @@ export default class Bar extends React.Component{
       restMoney:'1500',
 
       //usersave
-      userSave:'',
+      userEmailSave:'',
     };
     //run the function to save the email in this.state,userSave
-    //this.callOrder(this.showData.bind(this),this.getUserRole.bind(this))
+    this.callOrder(this.showData.bind(this))
   }
   showData=async()=>{
     try{
       let userEmail3=await AsyncStorage.getItem('userEmail')
-      this.setState({userSave:userEmail3})
-      //alert('the email save is: ' + userEmail3)
-      //this.getUserRole()
+      //this.state.userEmailSave=userEmail3
+      this.setState({userEmailSave:userEmail3})
+      alert('the email save is: ' + userEmail3)
+      this.getUserRole()
     }
     catch(error){
       alert(error)
     }
   }
   getUserRole(){
-    this.state.role='male'
+    //this.state.role='male'
+    this.setState({role:'male'})
+    alert('the userEmailSave is: ' + this.state.userEmailSave)
   }
-  callOrder(cb,cb2){
+  callOrder(cb){
     cb()
-    cb2()
   }
   getAlldata(){
+    alert('you call the function')
+    axios.post('http://192.168.0.89:3000/data', {email:this.state.userEmailSave})
+      .then(function (response) {
+        if(response.data.msg==="success login"){
+          var email=response.data.email
+          //alert(response.data.msg + ' with email: ' + response.data.email);
+          navigate('Drawer',{ email });
+        }else if(response.data.msg==="the password is not correct"){
+          alert("the password is not correct please inser it correct");
+        }else if(response.data.msg==="no account"){
+          alert('You dont have an account please make one then login');
+          navigate('SignUp');
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+        alert(error);
+    });
     alert('the type is: ')
+
   }
 
 
