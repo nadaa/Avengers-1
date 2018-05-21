@@ -163,10 +163,7 @@ export default class Finance extends React.Component{
       alert(error)
     }
   } 
-
-
   render() {
-
     //what return
     return (
       <View style={styles.allPage}>
@@ -424,36 +421,4 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     padding: 16,
   },
-
- 
-
- 
 });
-
-
-/*
-  fectch1(){
-    //return axios.get('http://192.168.1.82:3000')
-    return fetch('http://192.168.1.82:3000')
-      .then((response) => response.json())
-        .then((responseJson) => {
-          console.log("server done:",JSON.stringify(responseJson) )
-           alert(JSON.stringify(responseJson));
-        })
-      .catch(function (error) {
-       console.log(error);
-      });
-  }
-
-
-
-
-
-// untill now I didint use it
-// import HTML from react native render html to render html elemnt
-import HTML from 'react-native-render-html';
-// Dialog Component from react native dialog component to render pop elemnt
-import { DialogComponent, SlideAnimation } from 'react-native-dialog-component';
-
-
-*/

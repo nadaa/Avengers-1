@@ -6,7 +6,6 @@ import { StyleSheet, Text, View,AsyncStorage } from 'react-native';
 import { Header} from 'react-native-elements';
 //import axios to make router works
 import axios from 'axios';
-
 //import the icon from lirbary  one by one (each one library in react native icon)
 import Icon0 from 'react-native-vector-icons/FontAwesome';
 import Icon1 from 'react-native-vector-icons/Entypo';
@@ -18,7 +17,7 @@ import Icon6 from 'react-native-vector-icons/Octicons';
 import Icon7 from 'react-native-vector-icons/Foundation';
 
 const userRole={
-  // (Mother) female/  (Father)male /  (Child)child
+  // (Mother) female /  (Father) male/ child (Children)
   'Mother':'female',
   'Father':'male',
   'Child':'child',
@@ -33,7 +32,7 @@ export default class Bar extends React.Component{
     //all the data save before to can show in the bar
     this.state={
       //defult thing when change from data base change here 🙂 <3
-      //female (Mother) / male (Father)/ child (Children)
+      // (Mother) female /  (Father) male/ child (Children)
       role:'Mother',
       //from 100%
       userProgress:'100',

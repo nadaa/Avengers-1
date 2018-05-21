@@ -12,7 +12,6 @@ import Bar from './Bar';
 import KidsTasks from './KidsTasks';
 import Shortage from './Shortage';
 
-
 import Try from './Try';
 import Login from './Login';
 import SignUp from './SignUp';
@@ -103,7 +102,3 @@ const styles = StyleSheet.create({
     marginBottom:25,
   },
 });
-/*
-
-
-*/
