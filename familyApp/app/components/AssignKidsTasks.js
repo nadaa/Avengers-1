@@ -1,7 +1,9 @@
 import React from 'react';
 import { View, Picker, StyleSheet, TextInput, TouchableOpacity, Text } from 'react-native';
 import axios from 'axios';
-export default class KidsTasks extends React.Component {
+import {Select, Option} from "react-native-chooser";
+
+export default class AssignKidsTasks extends React.Component {
 
 	constructor(props){
 		super(props);
@@ -10,7 +12,7 @@ export default class KidsTasks extends React.Component {
 			// to store all kids of the loggedin parent
 			kids:[],
 			taskText: '',
-			selectedKid:'',
+			selectedKid:'select your kid',
 			familyId:'',
 			kidIndex:0
 		}
@@ -23,9 +25,12 @@ getKids(){
 	//get familyId from the localstorage of the loggedin user, for testing
 	//I will use familyId=1
 	var familyId="1"
-	axios.get(`http://10.0.2.2:3000/api/getkids/${familyId}`)
+	axios.get(`http://192.168.1.86:3000/api/getkids/${familyId}`)
+	//axios.get(`http://10.0.2.2:3000/api/getkids/${familyId}`)
 	.then((response) =>{
     this.setState({kids:response.data});
+    //console.log(response.data)
+
   })
   .catch(function (error) {
     console.log(error);
@@ -34,14 +39,32 @@ getKids(){
 }
 
 
+//familyId should be taken from the AsyncStorage
 setKidTask(){
 	//console.log(this.state.kids[this.state.kidIndex]);
-	var kidEmail=this.state.kids[this.state.kidIndex].email;
-	axios.post('http://10.0.2.2:3000/api/setkidtask',{kidemail:kidEmail,
-		task:this.state.taskText
+	//var kidEmail=this.state.kids[this.state.kidIndex].email;
+	//console.log('gjgjgjgj',this.state.kids[this.state.kidIndex]);
+	var kidIndex;
+	for(var i=0;i<this.state.kids.length;i++){
+		if(this.state.kids[i].username===this.state.selectedKid)
+			kidIndex=i;
 
+	}
+	//console.log('nada',this.state.kids[kidIndex]);
+
+
+	axios.post('http://192.168.1.86:3000/api/setkidtask',{
+		kidName:this.state.selectedKid,
+		task:this.state.taskText,
+		familyId:this.state.kids[kidIndex].familyId	
 	})
+	// axios.post('http://10.0.2.2:3000/api/setkidtask',{kidemail:kidEmail,
+	// 	task:this.state.taskText
+
+	// })
 	.then((response) =>{
+		alert(response.data.msg);
+
 	    
   })
   .catch(function (error) {
@@ -59,32 +82,37 @@ componentDidMount(){
 		return (
 			<View style={styles.container}>
 			
-			
+			 <View style={styles.rolepicker}>
+		        <Select
+		            onSelect = {(kidName, KidName) => this.setState({selectedKid: kidName})}
+		            defaultText  = {this.state.selectedKid}
+		            textStyle = {{}}
+		          >
+		          {this.state.kids.map((kid,index)=>{
+		        	return (<Option value={kid.username}  key={index}>{kid.username}</Option>) 
+					})}
+		          
+		          
+		         
+
+		        </Select>
+		      </View>
+
 			<TextInput 
+			 multiline={true}
 			underlineColorAndroid="transparent"
 			value={this.state.taskText}
 			style={styles.textInput} 
-			placeholder='Add Task'
+			placeholder='Add One Task'
 			onChangeText={(text) => this.setState({taskText: text})}
 			/> 
 
-			<Picker
-			selectedValue = {this.state.selectedKid}
-  			onValueChange={(kidName, kidIndex) => this.setState({selectedKid: kidName,kidIndex:kidIndex})}
-			style={{ width: 160 }}
-			mode="dropdown">
 			
-			{this.state.kids.map((kid,index)=>{
-        	return (<Picker.Item label={kid.username} value={kid.username} key={index}/>) 
-			})}
-			</Picker>
-
-
 
 			<TouchableOpacity
 			style={styles.btn}
 			onPress={() => this.setKidTask() }>
-			<Text style={styles.textStyle}>Submit</Text>
+			<Text style={styles.textStyle}>Add Task</Text>
 			</TouchableOpacity>
 			</View>
 
@@ -97,7 +125,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		alignItems: 'center',
 		justifyContent: 'center',
-		backgroundColor: '#2896d3',
+		//backgroundColor: '#2896d3',
 		paddingLeft: 40,
 		paddingRight: 40,
 	},
@@ -134,6 +162,26 @@ const styles = StyleSheet.create({
 		padding: 16,
 		marginBottom: 20,
 		backgroundColor: '#fff',
+	  	height:200,
 
 	},
+	rolepicker: {
+    alignSelf: 'stretch',
+    padding: 16,
+    marginBottom: 20,
+    backgroundColor: '#fff',
+   
+},
 })
+
+// <Picker
+// 			selectedValue = {this.state.selectedKid}
+//   			onValueChange={(kidName, kidIndex) => this.setState({selectedKid: kidName,kidIndex:kidIndex})}
+// 			style={{ width: 160 }}
+// 			mode="dropdown">
+			
+// 			{this.state.kids.map((kid,index)=>{
+//         	return (<Picker.Item label={kid.username} value={kid.username} key={index}/>) 
+// 			})}
+// 			</Picker> 
+

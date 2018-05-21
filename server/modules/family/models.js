@@ -16,7 +16,8 @@ const taskSchema=new mongoose.Schema({
 	taskName:String,
 	taskDate:{type:Date,default:new Date()},
 	completed:{type:Boolean,default:false},
-	userEmail:String,
+	userName:String,
+	familyId:String
 })
 
 

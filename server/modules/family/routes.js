@@ -34,7 +34,7 @@ appRouter.route('/api/getkids/:familyid').get((req,res)=>{
 
 
 appRouter.route('/api/setkidtask').post((req,res)=>{
-  //console.log("received setkidtask");
+  console.log("received setkidtask",req.body);
   appControllers.setKidTask(req,res);
 
 })
