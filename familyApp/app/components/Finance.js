@@ -1,7 +1,7 @@
 //import react from react
 import React from 'react';
 //import element from reacr-native
-import { StyleSheet, Text, View, TouchableOpacity, TextInput, Picker } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, Picker, AsyncStorage } from 'react-native';
 //import table from react native table component
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 //import axios to make router works
@@ -154,8 +154,19 @@ export default class Finance extends React.Component{
   deleteFromFinance(){
     this.setState({ deleteDialogVisible: true });
   };
+  showData=async()=>{
+    try{
+      let userEmail3=await AsyncStorage.getItem('userEmail')
+      alert('the email save is: ' + userEmail3)
+    }
+    catch(error){
+      alert(error)
+    }
+  } 
+
 
   render() {
+
     //what return
     return (
       <View style={styles.allPage}>
@@ -248,6 +259,10 @@ export default class Finance extends React.Component{
               </View>
             </Dialog.Container>
         </View>
+
+        <TouchableOpacity style={styles.btnAdd} 
+        onPress={this.showData}>
+        <Text>SHOW FROM FINANCE</Text></TouchableOpacity>
       </View>
     );
   }
