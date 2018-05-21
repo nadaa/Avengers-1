@@ -11,14 +11,11 @@ import UserInfo from './UserInfo';
 import Bar from './Bar';
 import KidsTasks from './KidsTasks';
 import Shortage from './Shortage';
-
 import AssignKidsTasks from './AssignKidsTasks';
-
 
 import Try from './Try';
 import Login from './Login';
 import SignUp from './SignUp';
-
 
 const MyDrawer=createDrawerNavigator(
   {
@@ -37,14 +34,13 @@ const MyDrawer=createDrawerNavigator(
     KidsTasks:{
      screen:KidsTasks,
     },
-
+    AssignKidsTasks:{
+      screen:AssignKidsTasks,
+    },
     Try:{
       screen:Try
     },
     
-    AssignKidsTasks:{
-      screen:AssignKidsTasks,
-    },
     /*
     'Family Events':{
      screen:Try,
