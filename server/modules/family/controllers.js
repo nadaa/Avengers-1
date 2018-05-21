@@ -193,6 +193,17 @@ exports.signinUser2=function(req, res){
   })
 }
 
+exports.getData=function(req, res){
+  console.log('CALL  GET DATA 2 CONTROLLER',req.body.email);
+  models.User.findOne({'email':req.body.email},function(err, data){
+    if (err) {
+      res.send(err)
+    }
+    var allData=data
+      console.log('DATA: ',allData);
+      res.send(allData) 
+  })
+}
 
 
 

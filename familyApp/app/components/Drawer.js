@@ -11,7 +11,9 @@ import UserInfo from './UserInfo';
 import Bar from './Bar';
 import KidsTasks from './KidsTasks';
 import Shortage from './Shortage';
+
 import AssignKidsTasks from './AssignKidsTasks';
+
 
 import Try from './Try';
 import Login from './Login';
@@ -69,7 +71,7 @@ const MyDrawer=createDrawerNavigator(
 
     //                                  Try   Try2 Try3
     //initialRouteName:'Tasks',Finance  Study Exam Outside
-    initialRouteName:'AssignKidsTasks',
+    initialRouteName:'Finance',
     drawerPosition:'left',
     drawerWidth:200,
     drawerOpenRoute: 'DrawerOpen',
@@ -107,7 +109,3 @@ const styles = StyleSheet.create({
     marginBottom:25,
   },
 });
-/*
-
-
-*/

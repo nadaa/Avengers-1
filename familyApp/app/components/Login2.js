@@ -17,9 +17,7 @@ export default class Login2 extends React.Component {
     axios.post('http://192.168.0.89:3000/login2', {user:this.state})
     .then(function (response) {
       if(response.data.msg==="success login"){
-        var email=response.data.email
-        //alert(response.data.msg + ' with email: ' + response.data.email);
-        navigate('Drawer',{ email });
+        navigate('Drawer');
       }else if(response.data.msg==="the password is not correct"){
         alert("the password is not correct please inser it correct");
       }else if(response.data.msg==="no account"){
@@ -32,21 +30,38 @@ export default class Login2 extends React.Component {
       alert(error);
     });
   };
-
   saveData(){
-    let userEmail1=this.state.email;
-    AsyncStorage.setItem('userEmail',userEmail1)
-    alert('userEmail1: ' + userEmail1)
+    //let userEmail1=this.state.email;
+    var that=this
+    var allData
+    //alert('you call the function with email: ' + this.state.userEmailSave )
+    axios.post('http://192.168.0.89:3000/getData', {email:this.state.email})
+      .then(function (res) {
+        //console.log(res.data)
+        allData=res.data
+        AsyncStorage.setItem('username',allData.username)
+        AsyncStorage.setItem('email',allData.email)
+        AsyncStorage.setItem('bdate',allData.bdate)
+        AsyncStorage.setItem('role',allData.role)
+        AsyncStorage.setItem('familyId',allData.familyId)
+        //alert('you want to save: ' + JSON.stringify(allData))
+      })
+      .catch(function (err) {
+        //console.log(err);
+        alert(err);
+    });
+    //alert('the type is: ')    
   }
   showData=async()=>{
     try{
-      let userEmail3=await AsyncStorage.getItem('userEmail')
-      alert('the email save is: ' + userEmail3)
+      let role=await AsyncStorage.getItem('role')
+      alert('the role is: ' + JSON.stringify(role))
     }
     catch(error){
       alert(error)
     }
-  } 
+  }
+
   render() {
     const { navigate } = this.props.navigation;
     return (
@@ -66,14 +81,6 @@ export default class Login2 extends React.Component {
     <TouchableOpacity style={styles.btn} 
     onPress={this.sendLogin.bind(this)}>
     <Text>LOGIN</Text></TouchableOpacity>
-
-    <TouchableOpacity style={styles.btn} 
-    onPress={this.saveData.bind(this)}>
-    <Text>SAVE</Text></TouchableOpacity>
-
-    <TouchableOpacity style={styles.btn} 
-    onPress={this.showData}>
-    <Text>SHOW</Text></TouchableOpacity>
   </View>
       );
     }

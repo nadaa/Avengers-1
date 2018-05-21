@@ -72,4 +72,10 @@ appRouter.route('/login2').post((req,res)=>{
   appControllers.signinUser2(req,res);
 })
 
+//for test jozaa get the data
+appRouter.route('/getData').post((req,res)=>{
+  // console.log('CALL GET DATA 2 FROM SERVER');
+  appControllers.getData(req,res);
+})
+
 module.exports=appRouter;

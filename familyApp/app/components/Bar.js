@@ -1,13 +1,11 @@
 //import react from react
 import React from 'react';
-//import element from reacr-native
-import { StyleSheet, Text, View, TouchableOpacity,Button } from 'react-native';
-//import FormInput & Header from react native elements
-import { FormInput, Header ,Divider, CheckBox } from 'react-native-elements';
+//import element from reacr native
+import { StyleSheet, Text, View,AsyncStorage } from 'react-native';
+//import Header from react native elements
+import { Header} from 'react-native-elements';
 //import axios to make router works
 import axios from 'axios';
-import Drawer from './Drawer';
-
 //import the icon from lirbary  one by one (each one library in react native icon)
 import Icon0 from 'react-native-vector-icons/FontAwesome';
 import Icon1 from 'react-native-vector-icons/Entypo';
@@ -18,11 +16,11 @@ import Icon5 from 'react-native-vector-icons/MaterialIcons';
 import Icon6 from 'react-native-vector-icons/Octicons';
 import Icon7 from 'react-native-vector-icons/Foundation';
 
-const UserTypeGenderText={
-  //female (Mother) / male (Father) / child (Children)
-  female:'Mother',
-  male:'Father',
-  child:'Child',
+const userRole={
+  // (Mother) female /  (Father) male/ child (Children)
+  'Mother':'female',
+  'Father':'male',
+  'Child':'child',
 }
 
 //export Bar from the react componant
@@ -34,8 +32,8 @@ export default class Bar extends React.Component{
     //all the data save before to can show in the bar
     this.state={
       //defult thing when change from data base change here 🙂 <3
-      //female (Mother) / male (Father)/ child (Children)
-      userType:'female',
+      // (Mother) female /  (Father) male/ child (Children)
+      role:'Mother',
       //from 100%
       userProgress:'100',
       //for how many child in family
@@ -43,18 +41,20 @@ export default class Bar extends React.Component{
       //the money still
       restMoney:'1500',
     };
+    //run the function to save the email in this.state,userSave
+    this.callOrder(this.setUserRole.bind(this))
   }
-  fectch1(){
-    //return axios.get('http://192.168.1.82:3000')
-    return fetch('http://192.168.1.82:3000')
-      .then((response) => response.json())
-        .then((responseJson) => {
-          console.log("server done:",JSON.stringify(responseJson) )
-           alert(JSON.stringify(responseJson));
-        })
-      .catch(function (error) {
-       console.log(error);
-      });
+  callOrder(cb){
+    cb()
+  }
+  setUserRole=async()=>{
+    try{
+      let role=await AsyncStorage.getItem('role')
+      this.setState({role:role})
+    }
+    catch(error){
+      alert(error)
+    }
   }
   //render
   render() {
@@ -78,9 +78,9 @@ export default class Bar extends React.Component{
             centerComponent={
               <View style={styles.centerComponentView}>
                 <View  style={styles.centerComponent}>
-                  <Icon0 onPress={() =>this.props.navigation.navigate('User Information')} name={this.state.userType} size={35} color="red"/>
+                  <Icon0 onPress={() =>this.props.navigation.navigate('User Information')} name={userRole[this.state.role]} size={35} color="red"/>
                   <Text onPress={() =>this.props.navigation.navigate('User Information')} style={styles.textUnderIcon}>
-                    {UserTypeGenderText[this.state.userType]}
+                    {this.state.role}
                   </Text>
                 </View>
 
