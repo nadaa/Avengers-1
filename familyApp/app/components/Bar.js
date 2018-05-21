@@ -53,7 +53,7 @@ export default class Bar extends React.Component{
       let userEmail3=await AsyncStorage.getItem('userEmail')
       //this.state.userEmailSave=userEmail3
       this.setState({userEmailSave:userEmail3})
-      alert('the email save is: ' + userEmail3)
+      //alert('the email save is: ' + userEmail3)
       this.getUserRole()
     }
     catch(error){
@@ -62,14 +62,14 @@ export default class Bar extends React.Component{
   }
   getUserRole(){
     //this.state.role='male'
-    this.setState({role:'male'})
-    alert('the userEmailSave is: ' + this.state.userEmailSave)
+    //this.setState({role:'male'})
+    //alert('the userEmailSave is: ' + this.state.userEmailSave)
   }
   callOrder(cb){
     cb()
   }
   getAlldata(){
-    alert('you call the function')
+    //alert('you call the function with email: ' + this.state.userEmailSave )
     axios.post('http://192.168.0.89:3000/data', {email:this.state.userEmailSave})
       .then(function (response) {
         if(response.data.msg==="success login"){
@@ -87,8 +87,7 @@ export default class Bar extends React.Component{
         console.log(error);
         alert(error);
     });
-    alert('the type is: ')
-
+    //alert('the type is: ')    
   }
 
 
