@@ -92,7 +92,9 @@ exports.getAllKids=function(req,res){
 exports.setKidTask=function(req,res){
   var newTask={
     taskName:req.body.task,
-    userEmail:req.body.kidemail
+    userEmail:req.body.kidemail,
+    kidName:req.body.kidName,
+    familyId:req.body.familyId
   }
   new models.Task(newTask).save(function(err,task){
     if(err){
@@ -101,7 +103,7 @@ exports.setKidTask=function(req,res){
     }
     else{
       console.log('a new task is added',task);
-      res.status(200).send();
+      res.status(200).send({msg:"a task was added sucessfully"});
     }
   })
 
