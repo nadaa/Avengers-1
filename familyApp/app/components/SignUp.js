@@ -68,6 +68,26 @@ sendSignUp(){
   }else if(this.validateEmail(this.state.email))
      { 
       const { navigate } = this.props.navigation;
+
+//axios.post('http://192.168.1.86:3000/api/signup', {
+
+	axios.post('http://10.0.2.2:3000/api/signup', {
+    user:this.state
+   })
+   .then(function (response) {
+    
+     if(response.data.msg==="success signup"){
+          navigate('Login')
+     }
+     else if(response.data.msg==='choose another email'){
+           alert('choose another email')
+      }
+     }
+
+   )
+   .catch(function (error) {
+     console.log(error);
+   });
      
      axios.post('http://192.168.1.86:3000/api/signup', {
      
@@ -149,7 +169,7 @@ onSelect(value, label) {
           >
           <Option value = 'Father'>Father</Option>
           <Option value = 'Mother'>Mother</Option>
-          <Option value = 'kid'>kid</Option>
+          <Option value = 'Child'>Child</Option>
          
 
         </Select>

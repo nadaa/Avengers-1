@@ -1,9 +1,12 @@
 import React from 'react';
-import { View, Picker, FlatList ,StyleSheet,Platform, TextInput, TouchableOpacity, Text } from 'react-native';
+import { View, Picker, FlatList ,StyleSheet,Platform, TextInput, TouchableOpacity, Text,AsyncStorage } from 'react-native';
 import axios from 'axios';
 import { List, ListItem,CheckBox } from "react-native-elements";
 import CheckboxGroup from 'react-native-checkbox-group';
+import {Select, Option} from "react-native-chooser";
 
+
+var s=require('./Store.js');
 
 export default class TaskMonitor extends React.Component {
 
@@ -11,17 +14,21 @@ export default class TaskMonitor extends React.Component {
 		super(props);
 
 		this.state={
-			// it should object of arrays (kidname as key, value array of tasks)
 			kids:[],
 			kidTasks:[],
 			kidIndex:0,
 			checked:true,
-		}
+			}
 		this.getKids=this.getKids.bind(this);
 		this.showTasks=this.showTasks.bind(this);
-		this.deleteCompletedTask=this.deleteCompletedTask.bind(this);
-		//this.renderItem=this.renderItem.bind(this);
+		//this.deleteCompletedTask=this.deleteCompletedTask.bind(this);
 	}
+
+async getKids(){
+	
+	var familyId= await AsyncStorage.getItem('familyid')
+	
+	axios.get(`http://10.0.2.2:3000/api/getkids/${familyId}`)
 
 
 getKids(){
@@ -32,29 +39,30 @@ getKids(){
 	//axios.get(`http://10.0.2.2:3000/api/getkids/${familyId}`)
 	.then((response) =>{
 		this.setState({kids:response.data});
-
   })
   .catch(function (error) {
     console.log(error);
   });
-
 }
 
 deleteCompletedTask(selected){
 
-
 }
 
-
 showTasks(){
-	var kidEmail=this.state.kids[this.state.kidIndex].email;
-	axios.post('http://10.0.2.2:3000/api/gettasks',{kidemail:kidEmail
+	var kidIndex;
+	for(var i=0;i<this.state.kids.length;i++){
+		if(this.state.kids[i].username===this.state.selectedKid)
+			kidIndex=i;
 
+	}
+	var kidEmail=this.state.kids[kidIndex].email;
+
+	axios.post('http://10.0.2.2:3000/api/gettasks',{kidemail:kidEmail
 	})
 	.then((response) =>{
 		//console.log(response.data);
 		this.setState({kidTasks:response.data});
-    
   })
   .catch(function (error) {
     console.log(error);
@@ -65,34 +73,26 @@ componentDidMount(){
 	// send a ajax get request to get all kids
 	this.getKids();
 }
-
-	// renderItem(item){
-	// 	return (
-	// 	<View>
-	// 	<Text>{item.taskName}</Text>
-	// 	<Text>{item.completed}</Text>
-	// 	</View>
-
-	// 	)
-	// 	}
-
-
+	
 
 	render() {
 		return (
 			<View style={styles.container} >
-		
-			<View style={{borderWidth:2,marginTop:10,height:150,width:400}}>
-			<Picker style={styles.picker}
-			selectedValue = {this.state.selectedKid}
-  			onValueChange={(kidName, kidIndex) => this.setState({selectedKid: kidName,kidIndex:kidIndex})}
-			mode="dropdown">
-			
-			{this.state.kids.map((kid,index)=>{
-        	return (<Picker.Item   label={kid.username} value={kid.username} key={index}/>) 
-			})}
-			</Picker>
-			
+			<View style={{marginTop:10,height:150,width:400}}>
+
+
+		        <Select
+		            onSelect = {(kidName, KidName) => this.setState({selectedKid: kidName})}
+		            defaultText  = {this.state.selectedKid}
+		            textStyle = {{}}
+		          >
+		          {this.state.kids.map((kid,index)=>{
+		        	return (<Option value={kid.username}  key={index}>{kid.username}</Option>) 
+					})}
+		          
+		    	         
+
+		        </Select>
 
 			<TouchableOpacity
 			style={styles.btn}
@@ -101,11 +101,7 @@ componentDidMount(){
 			</TouchableOpacity>
 			</View>
 
-
-
-   	<View style={{borderWidth:2,marginTop:20,height:150,width:400}}>
-
-		
+   	<View style={{marginTop:20,height:150,width:400}}>
 		    <CheckboxGroup
               callback={(selected) => { this.deleteCompletedTask(selected) }}
               iconColor={"#fff"}
@@ -114,9 +110,8 @@ componentDidMount(){
               uncheckedIcon="ios-square-outline"
               checkboxes={this.state.kidTasks.map((task,index)=>{
               	return {label:task.taskName+'     '+task.completed,value:index}
-
               })
-                
+      
               }
               labelStyle={{
                 color: '#333'
@@ -127,13 +122,8 @@ componentDidMount(){
               rowDirection={"column"}
             />
 
-			
-			
 		</View>
-
     </View>
-
-
 			);
 	}
 }

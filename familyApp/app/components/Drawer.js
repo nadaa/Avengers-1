@@ -12,6 +12,7 @@ import Bar from './Bar';
 import KidsTasks from './KidsTasks';
 import Shortage from './Shortage';
 import AssignKidsTasks from './AssignKidsTasks';
+import TaskMonitor from './TaskMonitor';
 
 import Try from './Try';
 import Login from './Login';
@@ -36,6 +37,10 @@ const MyDrawer=createDrawerNavigator(
     },
     AssignKidsTasks:{
       screen:AssignKidsTasks,
+    },
+
+    TaskMonitor:{
+      screen:TaskMonitor
     },
     Try:{
       screen:Try
@@ -66,15 +71,15 @@ const MyDrawer=createDrawerNavigator(
 
 
     //                                  Try   Try2 Try3
-    //initialRouteName:'Tasks',Finance  Study Exam Outside
-    initialRouteName:'Finance',
+    initialRouteName:'Tasks',//Finance  Study Exam Outside
+    //initialRouteName:'Finance',
     drawerPosition:'left',
     drawerWidth:200,
     drawerOpenRoute: 'DrawerOpen',
     drawerCloseRoute: 'DrawerClose',
     drawerToggleRoute: 'DrawerToggle',
     contentOptions:{
-      activeTintColor:'red',
+    activeTintColor:'red',
       // tintStyle:{backgroundColor: 'red'},
     },
   }

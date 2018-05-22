@@ -1,7 +1,7 @@
 //import react from react
 import React from 'react';
 //import element from reacr-native
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity,AsyncStorage } from 'react-native';
 import Bar from './Bar'
 import { createStackNavigator } from 'react-navigation';
 import TaskMonitor from './TaskMonitor';
@@ -12,9 +12,9 @@ constructor(props){
 
     this.state={
       kidName: '',
-      taskText : ''
+      taskText : '',
+      loggeduser:{}
     }
-
   }
 
 render() {

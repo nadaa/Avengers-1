@@ -14,19 +14,14 @@ exports.signupUser = function(req, res) {
    familyId :parseInt(req.body.user.familyId),
  });
   models.User.findOne({ email: req.body.user.email },function(err,found){
-
    if (!found ){
-     
     bcrypt.hash(newUser.password, 10, function(err, hash) {
       newUser.password=hash;
       // console.log(' newUser.password', hash)
-
       newUser.save(function(err,obj) {
-       
        if(err){
         res.status(500).send({msg:"error"});
-        
-      }
+     }
       else{
         res.status(201).send({msg:"success signup"});
       }
@@ -34,39 +29,32 @@ exports.signupUser = function(req, res) {
       
     })
   }
-
   else{
     res.status(201).send({msg:'choose another email'})
   }
-  
 })
-
-
 // console.log(newUser);
 }
-
-
-
 exports.signinUser = function(req, res) {
- models.User.findOne({'username':req.body.user.username},function (err, data) {
-  console.log('data',data)
-  if(data===null){
-    res.send({msg:"no account"})
+ models.User.findOne({'email':req.body.user.email},function (err, user) {
+  //console.log('data',data)
+  if(user===null){
+    res.send({msg:"no account",user:null})
   }
-  else if(data !== null){
+  else if(user !== null){
   // console.log('data',data)
   if(err){
-    res.status(404).send({msg:"no account"})}
-    if(data !== null){
-      bcrypt.compare(req.body.user.password, data.password, function(err, resCrypt) {
+    res.status(404).send({msg:"no account",user:null})}
+    if(user !== null){
+      bcrypt.compare(req.body.user.password, user.password, function(err, resCrypt) {
         if(!resCrypt){
           res.status(500).send({msg:"the password is not correct"})
         }
         else if(resCrypt){
-          req.session._id=data._id;
-          req.session.username=data.username;
-          req.session.password=data.password;
-          res.status(201).send({msg:"success login"})
+          req.session._id=user._id;
+          req.session.username=user.username;
+          req.session.password=user.password;
+          res.status(201).send({msg:"success login",user:user})
         }
       });
     }
@@ -76,13 +64,12 @@ exports.signinUser = function(req, res) {
 
 exports.getAllKids=function(req,res){
   var familyId=req.params.familyid;
-  models.User.find({$and:[{familyId:familyId},{role:'kid'}]},function(err,kids){
+  models.User.find({$and:[{familyId:familyId},{role:'Child'}]},function(err,kids){
     if(err){
       console.log("error");
       res.status(500).send();
     }
     else{
-    //console.log(kids);
     res.status(200).send(kids);
   }
 })
@@ -116,7 +103,6 @@ exports.getTasks=function(req,res){
       res.status(500).send();
     }
     else{
-      //console.log(tasks);
       res.status(200).send(tasks)
     }
 
@@ -145,9 +131,7 @@ exports.sendUserInfo=function(req,res){
 
 exports.getKidsId= function(req,res){
   var familyId=req.body.familyId;
-
   models.User.find( {$and: [ {role:"kid"}, { familyId:familyId } ] },function (err, kids) {
-    
     res.send(kids)
   });
 };
@@ -169,29 +153,29 @@ exports.sendShortage=function(req,res){
 }
 
 //jozaa for test login 2
-exports.signinUser2=function(req, res){
-  console.log('CALL LOGIN 2 CONTROLLER');
-  models.User.findOne({'email':req.body.user.email},function(err, data){
-    if(data===null){
-      res.send({msg:"no account"});
-    }else if(data!==null){
-      if(err){
-        res.send(err);
-      }else{
-        bcrypt.compare(req.body.user.password, data.password, function(err, resCrypt) {
-          if(!resCrypt){
-            res.send({msg:"the password is not correct"});
-          }else if(resCrypt){
-            req.session._id=data._id;
-            req.session.username=data.username;
-            req.session.password=data.password;
-            res.send({msg:"success login",email:req.body.user.email});
-          }
-        });
-      }
-    };
-  })
-}
+// exports.signinUser2=function(req, res){
+//   console.log('CALL LOGIN 2 CONTROLLER');
+//   models.User.findOne({'email':req.body.user.email},function(err, data){
+//     if(data===null){
+//       res.send({msg:"no account"});
+//     }else if(user!==null){
+//       if(err){
+//         res.send(err);
+//       }else{
+//         bcrypt.compare(req.body.user.password, data.password, function(err, resCrypt) {
+//           if(!resCrypt){
+//             res.send({msg:"the password is not correct"});
+//           }else if(resCrypt){
+//             req.session._id=user._id;
+//             req.session.username=user.username;
+//             req.session.password=user.password;
+//             res.send({msg:'success login'});
+//           }
+//         });
+//       }
+//     };
+//   })
+// }
 
 exports.getData=function(req, res){
   console.log('CALL  GET DATA 2 CONTROLLER',req.body.email);

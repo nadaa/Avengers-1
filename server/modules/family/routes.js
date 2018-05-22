@@ -19,7 +19,7 @@ appRouter.route('/').get((req,res)=>{
 })
 
 appRouter.route('/api/login').post((req,res)=>{
-	console.log('inside')
+	console.log('inside',req.body)
     //to check the password for the user and start the session 
     appControllers.signinUser(req,res);
 
