@@ -5,7 +5,7 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import Bar from './Bar'
 import { createStackNavigator } from 'react-navigation';
 import TaskMonitor from './TaskMonitor';
-
+import AssignKidsTasks from './AssignKidsTasks';
 export default class Tasks extends React.Component {
 constructor(props){
     super(props);
@@ -26,7 +26,7 @@ const { navigate } = this.props.navigation;
 
           <TouchableOpacity
           style={styles.btn}
-          // onPress={this.login}
+         onPress={() =>  navigate('AssignKidsTasks')}
           >
           <Text style={styles.textStyle}>Assign Task</Text>
           </TouchableOpacity>

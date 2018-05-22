@@ -21,7 +21,7 @@ appRouter.route('/').get((req,res)=>{
 appRouter.route('/api/login').post((req,res)=>{
 	console.log('inside')
     //to check the password for the user and start the session 
-    appControllers.signinUser(req,res);
+    appControllers.signinUser2(req,res);
 
   })
 
@@ -65,12 +65,12 @@ appRouter.route('/api/shortage').post((req,res)=>{
 })
 
 
-//for test jozaa
-appRouter.route('/login2').post((req,res)=>{
-  console.log('CALL LOGIN 2 FROM SERVER');
-  //to check the password for the user and start the session 
-  appControllers.signinUser2(req,res);
-})
+// //for test jozaa
+// appRouter.route('/login2').post((req,res)=>{
+//   console.log('CALL LOGIN 2 FROM SERVER');
+//   //to check the password for the user and start the session 
+//   appControllers.signinUser2(req,res);
+// })
 
 //for test jozaa get the data
 appRouter.route('/getData').post((req,res)=>{
