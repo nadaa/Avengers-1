@@ -29,6 +29,14 @@ async getKids(){
 	var familyId= await AsyncStorage.getItem('familyid')
 	
 	axios.get(`http://10.0.2.2:3000/api/getkids/${familyId}`)
+
+
+getKids(){
+	//get familyId from the localstorage of the loggedin user, for testing
+	//I will use familyId=1
+	var familyId="1"
+	axios.get(`http://192.168.1.86:3000/api/getkids/${familyId}`)
+	//axios.get(`http://10.0.2.2:3000/api/getkids/${familyId}`)
 	.then((response) =>{
 		this.setState({kids:response.data});
   })
