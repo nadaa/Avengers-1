@@ -16,8 +16,8 @@ const taskSchema=new mongoose.Schema({
 	taskName:String,
 	taskDate:{type:Date,default:new Date()},
 	completed:{type:Boolean,default:false},
-	userName:String,
-	familyId:String
+	confirmed:{type:Boolean,default:false},
+	email:String
 })
 
 
@@ -25,12 +25,12 @@ const familySchema=new mongoose.Schema({
 	// familyRules:String,
 	// events:[{}],
 	// finance:{},
+	familyId:String,
 	jobtitle:String,
    	workaddress:String,
     worknumber:String,
    	worktime:String,
-    salary:String,
-    familyId:String,
+    salary:Number,
     marriageDate:String,
 })
 

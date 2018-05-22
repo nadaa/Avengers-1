@@ -30,7 +30,7 @@ export default class Finance extends React.Component{
       editDialogVisible: false,
       editName:'',
       deleteDialogVisible:false,
-      deletetName:'',
+      deletetName:''
     };
     //auto call function when render this scren
     this.calculateTotalMoney();
