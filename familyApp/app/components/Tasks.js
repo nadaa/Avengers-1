@@ -1,10 +1,11 @@
 //import react from react
 import React from 'react';
 //import element from reacr-native
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity,AsyncStorage } from 'react-native';
 import Bar from './Bar'
 import { createStackNavigator } from 'react-navigation';
 import TaskMonitor from './TaskMonitor';
+import AssignKidsTasks from './AssignKidsTasks';
 
 export default class Tasks extends React.Component {
 constructor(props){
@@ -12,9 +13,9 @@ constructor(props){
 
     this.state={
       kidName: '',
-      taskText : ''
+      taskText : '',
+      loggeduser:{}
     }
-
   }
 
 render() {
@@ -26,7 +27,7 @@ const { navigate } = this.props.navigation;
 
           <TouchableOpacity
           style={styles.btn}
-          // onPress={this.login}
+          onPress={()=> navigate('AssignKidsTasks')}
           >
           <Text style={styles.textStyle}>Assign Task</Text>
           </TouchableOpacity>
@@ -38,12 +39,7 @@ const { navigate } = this.props.navigation;
           <Text style={styles.textStyle}>Monitor Task</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity
-          style={styles.btn}
-          // onPress={this.login}
-          >
-          <Text style={styles.textStyle}>Add Info</Text>
-          </TouchableOpacity>
+        
         </View>
       </View>
     );

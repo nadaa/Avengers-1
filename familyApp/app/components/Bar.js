@@ -23,6 +23,7 @@ const userRole={
   'Child':'child',
 }
 
+
 //export Bar from the react componant
 export default class Bar extends React.Component{
   //the constructor
@@ -86,6 +87,7 @@ export default class Bar extends React.Component{
                 </View>
 
                 <View style={styles.centerComponent}>
+
                   <Text onPress={() =>this.props.navigation.navigate('Tasks')} style={styles.textIconDone}>{this.state.userProgress}%</Text>
                   <Text onPress={() =>this.props.navigation.navigate('Tasks')} style={styles.textUnderIcon}>
                     Progress
@@ -108,7 +110,9 @@ export default class Bar extends React.Component{
 
             rightComponent={
               <View style={styles.rightComponent}>
-                <Icon6 onPress={() =>this.props.navigation.navigate('Tasks')} style={{color:'#0bf5fb'}} name="checklist" size={35}/>
+                <Icon6 onPress={() => this.props.navigation.navigate('Tasks')} style={{color:'#0bf5fb'}} 
+                  name="checklist" size={35}/>
+                
                 <Text onPress={() =>this.props.navigation.navigate('Tasks')} style={styles.textUnderIcon}>Tasks</Text>
               </View>
             }

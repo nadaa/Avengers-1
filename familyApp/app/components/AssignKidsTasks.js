@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Picker, StyleSheet, TextInput, TouchableOpacity, Text } from 'react-native';
+import { View, Picker, StyleSheet, TextInput, TouchableOpacity, Text,AsyncStorage } from 'react-native';
 import axios from 'axios';
 import {Select, Option} from "react-native-chooser";
 
@@ -21,21 +21,17 @@ export default class AssignKidsTasks extends React.Component {
 	}
 
 
-getKids(){
-	//get familyId from the localstorage of the loggedin user, for testing
-	//I will use familyId=1
-	var familyId="1"
-	axios.get(`http://192.168.1.86:3000/api/getkids/${familyId}`)
-	//axios.get(`http://10.0.2.2:3000/api/getkids/${familyId}`)
+async getKids(){
+	
+	var familyId= await AsyncStorage.getItem('familyid')
+	
+	axios.get(`http://10.0.2.2:3000/api/getkids/${familyId}`)
 	.then((response) =>{
-    this.setState({kids:response.data});
-    //console.log(response.data)
-
+		this.setState({kids:response.data});
   })
   .catch(function (error) {
     console.log(error);
   });
-
 }
 
 
@@ -53,10 +49,11 @@ setKidTask(){
 	//console.log('nada',this.state.kids[kidIndex]);
 
 
-	axios.post('http://192.168.1.86:3000/api/setkidtask',{
-		kidName:this.state.selectedKid,
+	//axios.post('http://192.168.1.86:3000/api/setkidtask',{
+	axios.post('http://10.0.2.2:3000/api/setkidtask',{
+		kidemail:this.state.kids[kidIndex].email,
 		task:this.state.taskText,
-		familyId:this.state.kids[kidIndex].familyId	
+		//familyId:this.state.kids[kidIndex].familyId	
 	})
 	// axios.post('http://10.0.2.2:3000/api/setkidtask',{kidemail:kidEmail,
 	// 	task:this.state.taskText
