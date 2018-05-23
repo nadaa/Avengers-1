@@ -13,8 +13,7 @@ export default class TasksDisplay extends React.Component {
 		this.state={
 			// it should object of arrays (kidname as key, value array of tasks)
 			kidTasks:[],
-			selectedTasks:[], //should contain taskId of the selected tasks
-			//from the
+			selectedTasks:[] //should contain taskId of the selected tasks
  		}
 		this.getTasks=this.getTasks.bind(this);
 	}
@@ -23,8 +22,8 @@ changeTaskStatus(selected){
 	console.log(selected);
 	axios.post('http://10.0.2.2:3000/api/toggletask',{tasks:selected})
 	.then((response)=>{
-		alert("success, status was changed");
 
+		alert("success, status was changed");
 	})
 
 	.catch(function (error) {
@@ -33,12 +32,9 @@ changeTaskStatus(selected){
 
 }
 
-
 async getTasks(){
 	var kidEmail=await AsyncStorage.getItem('email');
-
 	axios.post('http://10.0.2.2:3000/api/gettasks',{kidemail:kidEmail
-
 	})
 	.then((response) =>{
 		console.log(response.data);
@@ -54,10 +50,6 @@ componentDidMount(){
 	// send a ajax get request to get all kids
 	this.getTasks();
 }	
-
-
-
-
 	render() {
 		return (
 
