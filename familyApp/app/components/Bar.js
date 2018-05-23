@@ -50,6 +50,7 @@ export default class Bar extends React.Component{
   setUserRole=async()=>{
     try{
       let role=await AsyncStorage.getItem('role')
+      //alert('the role is'+ role)
       this.setState({role:role})
     }
     catch(error){

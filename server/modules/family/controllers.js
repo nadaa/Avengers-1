@@ -173,19 +173,23 @@ exports.signinUser2=function(req, res){
   console.log('CALL LOGIN 2 CONTROLLER');
   models.User.findOne({'email':req.body.user.email},function(err, data){
     if(data===null){
+      console.log("null data");
       res.send({msg:"no account"});
     }else if(data!==null){
       if(err){
+        console.log("error");
         res.send(err);
       }else{
         bcrypt.compare(req.body.user.password, data.password, function(err, resCrypt) {
           if(!resCrypt){
+            console.log("wrong password");
             res.send({msg:"the password is not correct"});
           }else if(resCrypt){
             req.session._id=data._id;
             req.session.username=data.username;
             req.session.password=data.password;
-            res.send({msg:"success login",email:req.body.user.email});
+            console.log("success login");
+            res.send({msg:"success login"});
           }
         });
       }
@@ -194,13 +198,13 @@ exports.signinUser2=function(req, res){
 }
 
 exports.getData=function(req, res){
-  console.log('CALL  GET DATA 2 CONTROLLER',req.body.email);
+  //console.log('CALL  GET DATA 2 CONTROLLER',req.body.email);
   models.User.findOne({'email':req.body.email},function(err, data){
     if (err) {
       res.send(err)
     }
     var allData=data
-      console.log('DATA: ',allData);
+      //console.log('DATA: ',allData);
       res.send(allData) 
   })
 }
