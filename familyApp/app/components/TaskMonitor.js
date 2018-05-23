@@ -18,6 +18,7 @@ export default class TaskMonitor extends React.Component {
 			kidTasks:[],
 			kidIndex:0,
 			checked:true,
+			selectedIndex:0
 			}
 		this.getKids=this.getKids.bind(this);
 		this.showTasks=this.showTasks.bind(this);
@@ -61,7 +62,7 @@ showTasks(){
 	axios.post('http://10.0.2.2:3000/api/gettasks',{kidemail:kidEmail
 	})
 	.then((response) =>{
-		//console.log(response.data);
+		console.log(response.data);
 		this.setState({kidTasks:response.data});
   })
   .catch(function (error) {
@@ -72,6 +73,27 @@ showTasks(){
 componentDidMount(){
 	// send a ajax get request to get all kids
 	this.getKids();
+}
+
+confirm(selected){
+
+	this.setState({selectedIndex:selected});
+	var completed=[];
+	for(var i=0;i<selected.length;i++){
+		if(this.state.kidTasks[i].completed)
+			completed.push(this.state.kidTasks[i]._id);
+	}
+
+
+	//send a post request of all completed tasks
+	axios.post('http://10.0.2.2:3000/api/confirmtasks',{tasks:completed})
+		.then((response)=>{
+			this.render();
+
+		})
+		.catch(function(err){
+
+		})
 }
 	
 
@@ -103,7 +125,7 @@ componentDidMount(){
 
    	<View style={{marginTop:20,height:150,width:400}}>
 		    <CheckboxGroup
-              callback={(selected) => { this.deleteCompletedTask(selected) }}
+              callback={(selected) => this.confirm(selected)}
               iconColor={"#fff"}
               iconSize={30}
               checkedIcon="ios-checkbox-outline"
@@ -121,6 +143,9 @@ componentDidMount(){
               }}
               rowDirection={"column"}
             />
+
+
+
 
 		</View>
     </View>

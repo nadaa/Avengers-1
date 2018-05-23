@@ -5,6 +5,7 @@ import { StyleSheet, Text, View, TouchableOpacity,AsyncStorage } from 'react-nat
 import Bar from './Bar'
 import { createStackNavigator } from 'react-navigation';
 import TaskMonitor from './TaskMonitor';
+import AssignKidsTasks from './AssignKidsTasks';
 
 export default class Tasks extends React.Component {
 constructor(props){
@@ -26,7 +27,7 @@ const { navigate } = this.props.navigation;
 
           <TouchableOpacity
           style={styles.btn}
-          // onPress={this.login}
+          onPress={()=> navigate('AssignKidsTasks')}
           >
           <Text style={styles.textStyle}>Assign Task</Text>
           </TouchableOpacity>
@@ -38,12 +39,7 @@ const { navigate } = this.props.navigation;
           <Text style={styles.textStyle}>Monitor Task</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity
-          style={styles.btn}
-          // onPress={this.login}
-          >
-          <Text style={styles.textStyle}>Add Info</Text>
-          </TouchableOpacity>
+        
         </View>
       </View>
     );

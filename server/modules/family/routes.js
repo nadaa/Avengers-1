@@ -34,7 +34,7 @@ appRouter.route('/api/getkids/:familyid').get((req,res)=>{
 
 
 appRouter.route('/api/setkidtask').post((req,res)=>{
-  console.log("received setkidtask",req.body);
+  //console.log("received setkidtask",req.body);
   appControllers.setKidTask(req,res);
 
 })
@@ -44,9 +44,24 @@ appRouter.route('/api/gettasks').post((req,res)=>{
   appControllers.getTasks(req,res);
 
 })
+
+appRouter.route('/api/confirmtasks').post((req,res)=>{
+  console.log(req.body.tasks)
+  appControllers.confirmTasks(req,res);
+})
+
+
+appRouter.route('/api/toggletask').post((req,res)=>{
+  console.log("receieved tasks toggle");
+  appControllers.toggleTask(req,res);
+})
+
 appRouter.route('/api/userinfo').post((req,res)=>{
   appControllers.sendUserInfo(req,res);
 })
+
+
+
 
 appRouter.route('/getkids').post((req,res)=>{
   var email=req.body.user

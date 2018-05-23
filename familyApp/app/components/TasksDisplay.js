@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Picker, FlatList ,StyleSheet,Platform, TextInput, TouchableOpacity, Text } from 'react-native';
+import { View, Picker, FlatList ,StyleSheet,Platform, TextInput, TouchableOpacity, Text,AsyncStorage } from 'react-native';
 import axios from 'axios';
 import { List, ListItem,CheckBox } from "react-native-elements";
 import CheckboxGroup from 'react-native-checkbox-group';
@@ -14,7 +14,6 @@ export default class TasksDisplay extends React.Component {
 			// it should object of arrays (kidname as key, value array of tasks)
 			kidTasks:[],
 			selectedTasks:[] //should contain taskId of the selected tasks
-			//from the
  		}
 		this.getTasks=this.getTasks.bind(this);
 	}
@@ -23,7 +22,8 @@ changeTaskStatus(selected){
 	console.log(selected);
 	axios.post('http://10.0.2.2:3000/api/toggletask',{tasks:selected})
 	.then((response)=>{
-		alert("success");
+
+		alert("success, status was changed");
 	})
 
 	.catch(function (error) {
@@ -32,11 +32,9 @@ changeTaskStatus(selected){
 
 }
 
-
-getTasks(){
-	var kidEmail='kid1@gmail.com';
+async getTasks(){
+	var kidEmail=await AsyncStorage.getItem('email');
 	axios.post('http://10.0.2.2:3000/api/gettasks',{kidemail:kidEmail
-
 	})
 	.then((response) =>{
 		console.log(response.data);
@@ -52,7 +50,6 @@ componentDidMount(){
 	// send a ajax get request to get all kids
 	this.getTasks();
 }	
-
 	render() {
 		return (
 
@@ -71,6 +68,7 @@ componentDidMount(){
                 
               }
               labelStyle={{
+              	padding:10,
                 color: '#FFFF00',
                 fontSize:16
               }}

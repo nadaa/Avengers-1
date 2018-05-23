@@ -9,14 +9,12 @@ const userSchema=new mongoose.Schema({
 	bdate: Date,
 	role: String,
 	familyId:String
-	
-})
+	})
 
 const taskSchema=new mongoose.Schema({
 	taskName:String,
 	taskDate:{type:Date,default:new Date()},
 	completed:{type:Boolean,default:false},
-	confirmed:{type:Boolean,default:false},
 	email:String
 })
 
@@ -25,13 +23,13 @@ const familySchema=new mongoose.Schema({
 	// familyRules:String,
 	// events:[{}],
 	// finance:{},
-	familyId:String,
+	familyId:{type:String, index: { unique: true }},
 	jobtitle:String,
    	workaddress:String,
     worknumber:String,
    	worktime:String,
     salary:Number,
-    marriageDate:String,
+    marriageDate:String
 })
 
 const shortageSchema=new mongoose.Schema({
