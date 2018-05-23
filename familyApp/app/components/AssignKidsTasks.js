@@ -49,8 +49,9 @@ setKidTask(){
 	//console.log('nada',this.state.kids[kidIndex]);
 
 
-	axios.post('http://192.168.1.86:3000/api/setkidtask',{
-		kidEmail:this.state.kids[kidIndex].email,
+	//axios.post('http://192.168.1.86:3000/api/setkidtask',{
+	axios.post('http://10.0.2.2:3000/api/setkidtask',{
+		kidemail:this.state.kids[kidIndex].email,
 		task:this.state.taskText,
 		//familyId:this.state.kids[kidIndex].familyId	
 	})

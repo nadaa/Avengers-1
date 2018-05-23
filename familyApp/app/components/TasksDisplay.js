@@ -3,59 +3,47 @@ import { View, Picker, FlatList ,StyleSheet,Platform, TextInput, TouchableOpacit
 import axios from 'axios';
 import { List, ListItem,CheckBox } from "react-native-elements";
 import CheckboxGroup from 'react-native-checkbox-group';
-import {Select, Option} from "react-native-chooser";
 
 
-var s=require('./Store.js');
-
-export default class TaskMonitor extends React.Component {
+export default class TasksDisplay extends React.Component {
 
 	constructor(props){
 		super(props);
 
 		this.state={
-			kids:[],
+			// it should object of arrays (kidname as key, value array of tasks)
 			kidTasks:[],
-			kidIndex:0,
-			checked:true,
-			selectedIndex:0
-			}
-		this.getKids=this.getKids.bind(this);
-		this.showTasks=this.showTasks.bind(this);
-		//this.deleteCompletedTask=this.deleteCompletedTask.bind(this);
+			selectedTasks:[], //should contain taskId of the selected tasks
+			//from the
+ 		}
+		this.getTasks=this.getTasks.bind(this);
 	}
 
-async getKids(){
-	
-	var familyId= await AsyncStorage.getItem('familyid')
-	
-	axios.get(`http://10.0.2.2:3000/api/getkids/${familyId}`)
-	.then((response) =>{
-		this.setState({kids:response.data});
-  })
-  .catch(function (error) {
+changeTaskStatus(selected){
+	console.log(selected);
+	axios.post('http://10.0.2.2:3000/api/toggletask',{tasks:selected})
+	.then((response)=>{
+		alert("success, status was changed");
+
+	})
+
+	.catch(function (error) {
     console.log(error);
   });
-}
-
-deleteCompletedTask(selected){
 
 }
 
-showTasks(){
-	var kidIndex;
-	for(var i=0;i<this.state.kids.length;i++){
-		if(this.state.kids[i].username===this.state.selectedKid)
-			kidIndex=i;
 
-	}
-	var kidEmail=this.state.kids[kidIndex].email;
+async getTasks(){
+	var kidEmail=await AsyncStorage.getItem('email');
 
 	axios.post('http://10.0.2.2:3000/api/gettasks',{kidemail:kidEmail
+
 	})
 	.then((response) =>{
 		console.log(response.data);
 		this.setState({kidTasks:response.data});
+    
   })
   .catch(function (error) {
     console.log(error);
@@ -64,82 +52,40 @@ showTasks(){
 
 componentDidMount(){
 	// send a ajax get request to get all kids
-	this.getKids();
-}
-
-confirm(selected){
-
-	this.setState({selectedIndex:selected});
-	var completed=[];
-	for(var i=0;i<selected.length;i++){
-		if(this.state.kidTasks[i].completed)
-			completed.push(this.state.kidTasks[i]._id);
-	}
+	this.getTasks();
+}	
 
 
-	//send a post request of all completed tasks
-	axios.post('http://10.0.2.2:3000/api/confirmtasks',{tasks:completed})
-		.then((response)=>{
-			this.render();
 
-		})
-		.catch(function(err){
-
-		})
-}
-	
 
 	render() {
 		return (
-			<View style={styles.container} >
-			<View style={{marginTop:10,height:150,width:400}}>
 
-
-		        <Select
-		            onSelect = {(kidName, KidName) => this.setState({selectedKid: kidName})}
-		            defaultText  = {this.state.selectedKid}
-		            textStyle = {{}}
-		          >
-		          {this.state.kids.map((kid,index)=>{
-		        	return (<Option value={kid.username}  key={index}>{kid.username}</Option>) 
-					})}
-		          
-		    	         
-
-		        </Select>
-
-			<TouchableOpacity
-			style={styles.btn}
-			onPress={() =>this.showTasks()}>
-			<Text style={styles.textStyle}>Show Tasks</Text>
-			</TouchableOpacity>
-			</View>
-
-   	<View style={{marginTop:20,height:150,width:400}}>
-		    <CheckboxGroup
-              callback={(selected) => this.confirm(selected)}
+		
+	   	<View style={styles.container}>
+		    <CheckboxGroup 
+              callback={(selected) => { this.changeTaskStatus(selected)}}
               iconColor={"#fff"}
               iconSize={30}
               checkedIcon="ios-checkbox-outline"
               uncheckedIcon="ios-square-outline"
               checkboxes={this.state.kidTasks.map((task,index)=>{
-              	return {label:task.taskName+'     '+task.completed,value:index}
+    	       	return {label:task.taskName+'     '+task.completed,value:task._id}
+
               })
-      
+                
               }
               labelStyle={{
-                color: '#333'
+              	padding:10,
+                color: '#FFFF00',
+                fontSize:16
               }}
               rowStyle={{
                 flexDirection: 'row'
               }}
               rowDirection={"column"}
             />
-
-
-
-
-		</View>
+		
     </View>
 			);
 	}
@@ -153,6 +99,7 @@ const styles = StyleSheet.create({
 		backgroundColor: '#2896d3',
 		paddingLeft: 40,
 		paddingRight: 40,
+		borderWidth:1
 	
 		//paddingTop: Platform.OS === 'ios' ? 0 : Expo.Constants.statusBarHeight
 	},

@@ -13,6 +13,7 @@ import KidsTasks from './KidsTasks';
 import Shortage from './Shortage';
 import AssignKidsTasks from './AssignKidsTasks';
 import TaskMonitor from './TaskMonitor';
+import TasksDisplay from './TasksDisplay';
 
 import Try from './Try';
 import Login from './Login';
@@ -32,15 +33,10 @@ const MyDrawer=createDrawerNavigator(
     Shortage:{
      screen:Shortage,
     },
-    KidsTasks:{
-     screen:KidsTasks,
-    },
-    AssignKidsTasks:{
-      screen:AssignKidsTasks,
-    },
+    
+    TasksDisplay:{
+      screen:TasksDisplay,
 
-    TaskMonitor:{
-      screen:TaskMonitor
     },
     Try:{
       screen:Try

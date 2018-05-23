@@ -79,10 +79,10 @@ exports.getAllKids=function(req,res){
 exports.setKidTask=function(req,res){
   var newTask={
     taskName:req.body.task,
-    userEmail:req.body.kidemail,
-    kidName:req.body.kidName,
-    familyId:req.body.familyId
+    email:req.body.kidemail
   }
+
+  console.log(newTask);
   new models.Task(newTask).save(function(err,task){
     if(err){
       console.log("error adding a new Task");
@@ -98,15 +98,33 @@ exports.setKidTask=function(req,res){
 
 exports.getTasks=function(req,res){
   var kidEmail=req.body.kidemail;
-  models.Task.find({userEmail:kidEmail},function(err,tasks){
+  models.Task.find({email:kidEmail},function(err,tasks){
     if(err){
       res.status(500).send();
     }
     else{
+      console.log(tasks);
       res.status(200).send(tasks)
     }
 
   })
+}
+
+
+exports.confirmTasks=function(req,res){
+  var taskIds=req.body.tasks;
+  for(var i=0;i<taskIds.length;i++){
+    models.Task.deleteOne({_id:taskIds[i]},function(err,task){
+      if(err){
+        res.status(500).send(err)
+      }
+      else{
+        console.log("deleted ",taskIds[i])
+        res.status(200).send()
+      }
+  })
+
+}
 }
 
 exports.sendUserInfo=function(req,res){
@@ -135,6 +153,32 @@ exports.getKidsId= function(req,res){
     res.send(kids)
   });
 };
+
+
+exports.toggleTask=function(req,res){
+  var ids=req.body.tasks;
+  console.log(ids)
+  //find these tasks in the tasks colection and update the status, toggle them
+  ids.forEach(function(id){
+    models.Task.findOne({_id:id},function(err,task){
+      // console.log(task);
+      task.completed=!task.completed;
+    task.save(function(err,task){
+        if(err){
+          console.log("error in updating taskid"+id);
+          res.status(500),send({msg:task.taskName+'canot be changed'});
+        }
+        else{
+          console.log("success toggling the task"+id+' status');
+          res.status(200).send({msg:task.taskName+"changed"})
+        }
+      })//save
+   }) //find
+  })//foreach
+
+} 
+
+
 
 exports.sendShortage=function(req,res){
   var newShortage=new models.Shortage({
