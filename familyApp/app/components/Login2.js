@@ -14,9 +14,10 @@ export default class Login2 extends React.Component {
   sendLogin(){
     this.saveData()
     const {navigate}=this.props.navigation;
-    axios.post('http://192.168.0.89:3000/login2', {user:this.state})
+    axios.post('http://192.168.1.82:3000/login2', {user:this.state})
     .then(function (response) {
       if(response.data.msg==="success login"){
+        //console.log('go to drawer')
         navigate('Drawer');
       }else if(response.data.msg==="the password is not correct"){
         alert("the password is not correct please inser it correct");
@@ -35,7 +36,7 @@ export default class Login2 extends React.Component {
     var that=this
     var allData
     //alert('you call the function with email: ' + this.state.userEmailSave )
-    axios.post('http://192.168.0.89:3000/getData', {email:this.state.email})
+    axios.post('http://192.168.1.82:3000/getData', {email:this.state.email})
       .then(function (res) {
         //console.log(res.data)
         allData=res.data
@@ -55,7 +56,7 @@ export default class Login2 extends React.Component {
   showData=async()=>{
     try{
       let role=await AsyncStorage.getItem('role')
-      alert('the role is: ' + JSON.stringify(role))
+      //alert('the role is: ' + JSON.stringify(role))
     }
     catch(error){
       alert(error)

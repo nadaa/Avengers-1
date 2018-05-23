@@ -24,8 +24,8 @@ showData=async()=>{
   }
 
 //IP Adress Jozaa: 
-192.168.1.82
-192.168.0.89
+192.168.1.82:3000
+192.168.0.89:3000
 
 Drawer     //When finish delet this
 Bar     //When finish delet this

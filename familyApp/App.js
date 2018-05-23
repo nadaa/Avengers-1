@@ -9,9 +9,9 @@ import Login2 from './app/components/Login2';
 import AssignKidsTasks from './app/components/AssignKidsTasks';
 import TaskMonitor from './app/components/TaskMonitor';
 const Application=  createStackNavigator({
+  // Home: { screen: Login },
   //i change it for testing (Jozaa)
   // Home: { screen: Login2 },
-  
   Home: { screen: Login },
   TaskMonitor:{screen:TaskMonitor},
   SignUp: { screen: SignUp },
