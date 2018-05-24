@@ -71,8 +71,9 @@ async removeItemValue(key) {
 
   render() {
     //jozaa
-    const { navigate } = this.props.navigation;
+    // const { navigate } = this.props.navigation;
     return (
+      <form className = 'login'>
     <KeyboardAvoidingView behaviour='padding' style ={styles.wrapper}>
     <View style={styles.container}>
     <Text style={styles.header}> LOGIN </Text>
@@ -104,6 +105,7 @@ async removeItemValue(key) {
              </Text>
     </View>
     </KeyboardAvoidingView>
+    </form>
     );
   }
   
