@@ -3,7 +3,8 @@ import { StyleSheet, Text, View } from 'react-native';
 import {createStackNavigator} from 'react-navigation';
 import Login from './app/components/Login';
 import SignUp from './app/components/SignUp';
-import Drawer from './app/components/Drawer'
+import Drawer from './app/components/Drawer';
+import DrawerKids from './app/components/DrawerKids';
 //only for test (Jozaa)
 import Login2 from './app/components/Login2';
 import AssignKidsTasks from './app/components/AssignKidsTasks';
@@ -12,6 +13,10 @@ const Application=  createStackNavigator({
   // Home: { screen: Login },
   //i change it for testing (Jozaa)
   // Home: { screen: Login2 },
+<<<<<<< HEAD
+=======
+  DrawerKids: { screen: DrawerKids },
+>>>>>>> shortage
   Home: { screen: Login },
   TaskMonitor:{screen:TaskMonitor},
   SignUp: { screen: SignUp },
