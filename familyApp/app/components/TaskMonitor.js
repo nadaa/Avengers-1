@@ -28,22 +28,15 @@ export default class TaskMonitor extends React.Component {
 async getKids(){
 	
 	var familyId= await AsyncStorage.getItem('familyid')
-	
+		
 	axios.get(`http://10.0.2.2:3000/api/getkids/${familyId}`)
-
-
-getKids(){
-	//get familyId from the localstorage of the loggedin user, for testing
-	//I will use familyId=1
-	var familyId="1"
-	axios.get(`http://192.168.1.86:3000/api/getkids/${familyId}`)
-	//axios.get(`http://10.0.2.2:3000/api/getkids/${familyId}`)
-	.then((response) =>{
-		this.setState({kids:response.data});
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
+	//axios.get(`http://192.168.1.86:3000/api/getkids/${familyId}`)
+		.then((response) =>{
+			this.setState({kids:response.data});
+	  })
+	  .catch(function (error) {
+	    console.log(error);
+	  });
 }
 
 deleteCompletedTask(selected){
@@ -55,7 +48,6 @@ showTasks(){
 	for(var i=0;i<this.state.kids.length;i++){
 		if(this.state.kids[i].username===this.state.selectedKid)
 			kidIndex=i;
-
 	}
 	var kidEmail=this.state.kids[kidIndex].email;
 
@@ -76,7 +68,6 @@ componentDidMount(){
 }
 
 confirm(selected){
-
 	this.setState({selectedIndex:selected});
 	var completed=[];
 	for(var i=0;i<selected.length;i++){
@@ -84,25 +75,19 @@ confirm(selected){
 			completed.push(this.state.kidTasks[i]._id);
 	}
 
-
 	//send a post request of all completed tasks
 	axios.post('http://10.0.2.2:3000/api/confirmtasks',{tasks:completed})
 		.then((response)=>{
 			this.render();
-
 		})
 		.catch(function(err){
-
 		})
 }
 	
-
 	render() {
 		return (
 			<View style={styles.container} >
 			<View style={{marginTop:10,height:150,width:400}}>
-
-
 		        <Select
 		            onSelect = {(kidName, KidName) => this.setState({selectedKid: kidName})}
 		            defaultText  = {this.state.selectedKid}
@@ -111,8 +96,7 @@ confirm(selected){
 		          {this.state.kids.map((kid,index)=>{
 		        	return (<Option value={kid.username}  key={index}>{kid.username}</Option>) 
 					})}
-		          
-		    	         
+     
 
 		        </Select>
 
@@ -143,9 +127,6 @@ confirm(selected){
               }}
               rowDirection={"column"}
             />
-
-
-
 
 		</View>
     </View>

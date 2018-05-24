@@ -30,10 +30,12 @@ export default class Finance extends React.Component{
       editDialogVisible: false,
       editName:'',
       deleteDialogVisible:false,
-      deletetName:''
+      deletetName:'',
+      id:'',
     };
     //auto call function when render this scren
     this.calculateTotalMoney();
+    this.showId()
   }
   calculateTotalMoney(){
     var total=0;
@@ -154,10 +156,11 @@ export default class Finance extends React.Component{
   deleteFromFinance(){
     this.setState({ deleteDialogVisible: true });
   };
-  showData=async()=>{
+  showId=async()=>{
     try{
-      let userEmail3=await AsyncStorage.getItem('userEmail')
-      alert('the email save is: ' + userEmail3)
+      let id=await AsyncStorage.getItem('familyId')
+      this.setState({id:id})
+      //alert('the email save is: ' + userEmail3)
     }
     catch(error){
       alert(error)
@@ -256,6 +259,7 @@ export default class Finance extends React.Component{
               </View>
             </Dialog.Container>
         </View>
+        <Text style={styles.textBtnDelete}>{this.state.id}</Text>
       </View>
     );
   }

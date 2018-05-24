@@ -238,5 +238,3 @@ exports.getData=function(req, res){
 
 
 
-
-

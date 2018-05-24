@@ -9,9 +9,10 @@ import Tasks from './Tasks';
 import Finance from './Finance';
 import UserInfo from './UserInfo';
 import Bar from './Bar';
-import KidsTasks from './KidsTasks';
+
 import Shortage from './Shortage';
 import AssignKidsTasks from './AssignKidsTasks';
+
 import TaskMonitor from './TaskMonitor';
 import TasksDisplay from './TasksDisplay';
 
@@ -33,15 +34,19 @@ const MyDrawer=createDrawerNavigator(
     Shortage:{
      screen:Shortage,
     },
-    
     TasksDisplay:{
-      screen:TasksDisplay,
+      screen:TasksDisplay,},
+   
+    AssignKidsTasks:{
+      screen:AssignKidsTasks,
 
     },
     Try:{
-      screen:Try
+      screen:Try,
     },
-    
+    TasksDisplay:{
+      screen:TasksDisplay,
+    },
     /*
     'Family Events':{
      screen:Try,
