@@ -111,20 +111,20 @@ exports.getTasks=function(req,res){
 }
 
 
-exports.confirmTasks=function(req,res){
-  var taskIds=req.body.tasks;
-  for(var i=0;i<taskIds.length;i++){
-    models.Task.deleteOne({_id:taskIds[i]},function(err,task){
+exports.confirmTask=function(req,res){
+  var taskId=req.body.taskId;
+  //for(var i=0;i<taskIds.length;i++){
+    models.Task.deleteOne({$and:[{_id:taskId},{completed:true}]},function(err,task){
       if(err){
-        res.status(500).send(err)
+        res.status(500).send({deleted:false})
       }
       else{
-        console.log("deleted ",taskIds[i])
-        res.status(200).send()
+        console.log("deleted ",taskId)
+        res.status(200).send({deleted:true})
       }
   })
 
-}
+
 }
 
 exports.sendUserInfo=function(req,res){

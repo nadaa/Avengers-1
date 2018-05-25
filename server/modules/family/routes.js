@@ -45,9 +45,9 @@ appRouter.route('/api/gettasks').post((req,res)=>{
 
 })
 
-appRouter.route('/api/confirmtasks').post((req,res)=>{
+appRouter.route('/api/confirmtask').post((req,res)=>{
   console.log(req.body.tasks)
-  appControllers.confirmTasks(req,res);
+  appControllers.confirmTask(req,res);
 })
 
 
