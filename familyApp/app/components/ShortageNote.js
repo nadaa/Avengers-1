@@ -8,19 +8,19 @@ import {
  TouchableOpacity,    
 } from 'react-native';
 
-import {createStackNavigator } from 'react-navigation';
-import Login from './Login';
-import axios from 'axios';    
-import DatePicker from 'react-native-datepicker';
-import {Select, Option} from "react-native-chooser";
-import Bar from './Bar';
+// import {createStackNavigator } from 'react-navigation';
+// import Login from './Login';
+// import axios from 'axios';    
+// import DatePicker from 'react-native-datepicker';
+// import {Select, Option} from "react-native-chooser";
+// import Bar from './Bar';
 
 export default class ShortageNote extends React.Component {
 
   render() {
     return (
-          <View key={this.props.keyval} style={styles.note}>
 
+          <View key={this.props.keyval} style={styles.note}>
               <Text style={styles.noteText}>{this.props.val.date}</Text> 
               <Text style={styles.noteText}>{this.props.val.note}</Text> 
              
