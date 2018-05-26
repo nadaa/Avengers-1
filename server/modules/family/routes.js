@@ -92,5 +92,16 @@ appRouter.route('/getData').post((req,res)=>{
   // console.log('CALL GET DATA 2 FROM SERVER');
   appControllers.getData(req,res);
 })
-
+appRouter.route('/api/getfinance').post((req,res)=>{
+  appControllers.getFinance(req,res);
+})
+appRouter.route('/api/finance').post((req,res)=>{
+  appControllers.postFinance(req,res);
+})
+appRouter.route('/api/finance').put((req,res)=>{
+  appControllers.putFinance(req,res);
+})
+appRouter.route('/api/finance').delete((req,res)=>{
+  appControllers.deleteFinance(req,res);
+})
 module.exports=appRouter;

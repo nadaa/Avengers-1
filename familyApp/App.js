@@ -11,7 +11,7 @@ import AssignKidsTasks from './app/components/AssignKidsTasks';
 import TaskMonitor from './app/components/TaskMonitor';
 const Application=  createStackNavigator({
   //i change it for testing (Jozaa)
-  Home: { screen: Login2 },
+  Home: { screen: Drawer },
   // Home: { screen: Login },
   Drawer: { screen: Drawer },
   DrawerKids: { screen: DrawerKids },
