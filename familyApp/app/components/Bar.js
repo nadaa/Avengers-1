@@ -51,7 +51,6 @@ export default class Bar extends React.Component{
   setUserRole=async()=>{
     try{
       let role=await AsyncStorage.getItem('role')
-      //alert('the role is'+ role)
       this.setState({role:role})
     }
     catch(error){
@@ -63,7 +62,6 @@ export default class Bar extends React.Component{
     //what return
     return (
       <View style={styles.allPage}>
-
         <View style={styles.barView}>
           <Header
             backgroundColor='#123456'
@@ -112,7 +110,6 @@ export default class Bar extends React.Component{
               <View style={styles.rightComponent}>
                 <Icon6 onPress={() => this.props.navigation.navigate('Tasks')} style={{color:'#0bf5fb'}} 
                   name="checklist" size={35}/>
-                
                 <Text onPress={() =>this.props.navigation.navigate('Tasks')} style={styles.textUnderIcon}>Tasks</Text>
               </View>
             }

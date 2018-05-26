@@ -11,8 +11,8 @@ import TaskMonitor from './app/components/TaskMonitor';
 const Application=  createStackNavigator({
   // Home: { screen: Login },
   //i change it for testing (Jozaa)
-  // Home: { screen: Login2 },
-  Home: { screen: Login },
+  Home: { screen: Login2 },
+  // Home: { screen: Login },
   TaskMonitor:{screen:TaskMonitor},
   SignUp: { screen: SignUp },
   Login:{ screen: Login },

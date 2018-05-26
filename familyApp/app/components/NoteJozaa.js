@@ -1,6 +1,6 @@
 //dont delete this because it is the code for ata base jozaa
 must finish today
-
+Paid For
 waed and nada: when login remove the stack navigate + scrool view
 must end:22/5
 
