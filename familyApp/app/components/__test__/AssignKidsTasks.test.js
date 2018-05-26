@@ -23,6 +23,6 @@ describe('AssignKidsTasks Component', () => {
  
  // make our assertion and what we expect to happen 
  it('should render without throwing an error', () => {
-   expect(shallow(<AssignKidsTasks />).exists(<form className='login'></form>)).toBe(true)
+   expect(shallow(<AssignKidsTasks />).exists()).toBe(true)
  })
 })
