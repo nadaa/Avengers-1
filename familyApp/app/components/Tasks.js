@@ -23,20 +23,11 @@ const { navigate } = this.props.navigation;
       <View style={styles.allPage}>
         <Bar navigation={this.props.navigation}/>
         <View style={styles.container}>
-
-          <TouchableOpacity
-          style={styles.btn}
-
-         onPress={() =>  navigate('AssignKidsTasks')}
-          >
-          <Text style={styles.textStyle}>Assign Task</Text>
-          </TouchableOpacity>
-
           <TouchableOpacity
           style={styles.btn}
           onPress={() =>  navigate('TaskMonitor')}
           >
-          <Text style={styles.textStyle}>Monitor Task</Text>
+          <Text style={styles.textStyle}>Assign/Monitor Task</Text>
           </TouchableOpacity>
 
         
@@ -101,10 +92,12 @@ const styles = StyleSheet.create({
     position: 'relative'
   },
 });
-/*
 
 
-    
+ //  <TouchableOpacity
+         //  style={styles.btn}
 
-
-*/
+         // onPress={() =>  navigate('AssignKidsTasks')}
+         //  >
+         //  <Text style={styles.textStyle}>Assign Task</Text>
+         //  </TouchableOpacity>
