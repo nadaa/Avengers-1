@@ -37,7 +37,6 @@ export default class Shortage extends React.Component {
     return (
   <View style={styles.container}>
         <Bar navigation={this.props.navigation}/>
-
       <View style={styles.header}>
           <Text style={styles.headerText}>Shortage</Text>
       </View>
