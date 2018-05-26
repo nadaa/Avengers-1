@@ -33,7 +33,7 @@ export default class TaskMonitor extends React.Component {
 async getKids(){
 	
 	var familyId= await AsyncStorage.getItem('familyid')
-		
+		console.log(familyId)
 	axios.get(`http://10.0.2.2:3000/api/getkids/${familyId}`)
 	//axios.get(`http://192.168.1.86:3000/api/getkids/${familyId}`)
 		.then((response) =>{
@@ -59,8 +59,9 @@ updateCheck(index){
 	
 }
 
-showTasks(){
-	
+showTasks(kidName){
+	this.setState({kidTasks:[]})
+	this.setState({selectedKid: kidName})
 	if(this.state.selectedKid){
 		var kidIndex;
 		for(var i=0;i<this.state.kids.length;i++){
@@ -114,7 +115,7 @@ confirm(selected){
 			<Text style={styles.title}> Monitor Kids' Tasks</Text>
 				<View style={{flexDirection:'row',marginTop:30}}>
 		        <Select style={styles.select}
-		            onSelect = {(kidName, key) => this.setState({selectedKid: kidName,kidIndex:key})}
+		            onSelect = {(kidName, key) => this.showTasks(kidName)}
 		            defaultText  = {this.state.selectedKid}
 		            textStyle = {{}}
 		          >
