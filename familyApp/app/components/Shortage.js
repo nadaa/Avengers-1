@@ -17,7 +17,10 @@ import axios from 'axios';
 import DatePicker from 'react-native-datepicker';
 import {Select, Option} from "react-native-chooser";
 import Bar from './Bar';
-import ShortageNote from './ShortageNote'
+import ShortageNote from './ShortageNote';
+
+
+
 export default class Shortage extends React.Component {
 	constructor(props){
         super(props);
@@ -27,6 +30,7 @@ export default class Shortage extends React.Component {
         needArray:[],
         needText:'',
         }
+        this.getData.bind(this)
     }
 
 
@@ -36,15 +40,15 @@ export default class Shortage extends React.Component {
     })
     return (
   <View style={styles.container}>
-        <Bar navigation={this.props.navigation}/>
+       
       <View style={styles.header}>
           <Text style={styles.headerText}>Shortage</Text>
       </View>
 
 
-            <View style={styles.scrollContainer}>
+            <ScrollView style={styles.scrollContainer}>
                   {notes}
-            </View>
+            </ScrollView>
 
 
       <View style={styles.footer}>
@@ -62,15 +66,73 @@ export default class Shortage extends React.Component {
   </View>
     );
   }
-  addNeed(){
+  getData(){
+    axios.get('http://192.168.1.86:3000/api/shortage') 
+    
+    .then((response) =>{
+      //console.log(response);
+      
+        this.setState({needArray:response.data.needs})
+        console.log('needArray',this.state.needArray)
+        
+    })
+    .catch((error) =>{
+      console.log(error);
+      alert(error);
+    });
+  }
+  componentDidMount(){
+    this.getData()
+}
+
+  // axios.get(`http://10.0.2.2:3000/api/getkids/${familyId}`)
+  // //axios.get(`http://192.168.1.86:3000/api/getkids/${familyId}`)
+  //   .then((response) =>{
+  //     this.setState({kids:response.data});
+  //   })
+  //   .catch(function (error) {
+  //     console.log(error);
+  //   });
+
+
+
+   
+   async addNeed(){
+     
+    //this.getID()
+     var familyId = await AsyncStorage.getItem('familyid')
+      const {navigate}=this.props.navigation;
     if(this.state.needText){
       var d=new Date()
-      this.state.needArray.push({'date':d.getFullYear()+'/'+(d.getMonth()+1)+'/'+d.getDate(),'note':this.state.needText});
-      this.setState({needArray:this.state.needArray})
+     //this.state.needArray.push({'date':d.getFullYear()+'/'+(d.getMonth()+1)+'/'+d.getDate(),'note':this.state.needText});
+    // this.setState({needArray:this.state.needArray})
+
+     
+     axios.post('http://192.168.1.86:3000/api/shortage', 
+      {
+        need:this.state.needText,
+        familyId:familyId,
+      })
+    .then(function (response) {
+      if(response.data.msg==='success'){
+        alert('success')
+        this.getData();
+      
+      }
+      else if(response.data.msg==='error'){
+        alert("error");
+      }
+    })
+    .catch(function (error) {
+      console.log(error);
+      alert(error);
+    });
+
       this.setState({needText:''})
     }
   }
   deleteNote(key){
+
     this.state.needArray.splice(key,1)
     this.setState({needArray:this.state.needArray})
   }
@@ -85,7 +147,7 @@ container:{
      flex:1,
 },
 header:{
-      backgroundColor:'#E91E63',
+      backgroundColor:'#e9963b',
       alignItems:'center',
       justifyContent:'center',
       borderBottomWidth:  10,
@@ -97,7 +159,7 @@ headerText:{
       color:'white',
       fontSize:40,
       padding:10,
-       justifyContent:'center',
+      justifyContent:'center',
 
 },
 
@@ -122,21 +184,21 @@ addButton:{
       zIndex:10,
       elevation:8,
       marginBottom:-45,
-      backgroundColor:'#E91E63', 
+      backgroundColor:'#e9963b', 
 },
 addButtonText:{
-  color:'#fff',
-  fontSize:55,
-  justifyContent:'center',
+      color:'#fff',
+      fontSize:55,
+      justifyContent:'center',
 },
 textInput:{
-  alignSelf:'stretch',
-  color:'#fff',
-  padding:40,
-  paddingTop:40,
-  backgroundColor:'#252525',
-  borderTopWidth:2,
-  borderTopColor:'#ededed',
+      alignSelf:'stretch',
+      color:'#fff',
+      padding:40,
+      paddingTop:40,
+      backgroundColor:'#f1c089',
+      borderTopWidth:2,
+      borderTopColor:'#ededed',
 
 
 }

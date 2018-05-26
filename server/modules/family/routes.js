@@ -79,6 +79,9 @@ appRouter.route('/api/shortage').post((req,res)=>{
   appControllers.sendShortage(req,res);
 })
 
+appRouter.route('/api/shortage').get((req,res)=>{
+  appControllers.getShortage(req,res);
+})
 
 // //for test jozaa
 // appRouter.route('/login2').post((req,res)=>{

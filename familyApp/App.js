@@ -9,10 +9,14 @@ import DrawerKids from './app/components/DrawerKids';
 import Login2 from './app/components/Login2';
 import AssignKidsTasks from './app/components/AssignKidsTasks';
 import TaskMonitor from './app/components/TaskMonitor';
+import Bar from './app/components/Bar';
 const Application=  createStackNavigator({
   // Home: { screen: Login },
   //i change it for testing (Jozaa)
   // Home: { screen: Login2 },
+   Bar:{screen:Bar},
+   Login:{ screen: Login },
+
   Drawer: { screen: Drawer },
   DrawerKids: { screen: DrawerKids },
   Home: { screen: Login },
