@@ -13,7 +13,7 @@ import Shortage from './Shortage';
 import TasksDisplay from './TasksDisplay';
 import ShortageNote from './ShortageNote'
 
-const MyDrawer=createDrawerNavigator(
+const KidsDrawer=createDrawerNavigator(
   {
     Tasks:{
      screen:Tasks,
@@ -45,15 +45,15 @@ const MyDrawer=createDrawerNavigator(
   }
 );
 
-export default class Drawer extends React.Component{
+export default class DrawerKids extends React.Component{
 
-  static router = MyDrawer.router;
+  static router = KidsDrawer.router;
   
   render() {
     return (
       <View style={styles.allPage}>
       
-        <MyDrawer navigation={this.props.navigation}/>
+        <KidsDrawer navigation={this.props.navigation}/>
       </View>
     );
   }

@@ -198,19 +198,51 @@ exports.toggleTask=function(req,res){
 
 
 exports.sendShortage=function(req,res){
-  var newShortage=new models.Shortage({
-    room:req.body.needs.room,
-    need:req.body.needs.need,
-  })
-  console.log('newShortage',newShortage)
-  newShortage.save(function(error,data){
-    if(error){
-      res.send({msg:"error"})
+  var familyId=req.body.familyId;
+  var need=req.body.need;
+  console.log('familyId',familyId)
+  console.log('need',need)
+
+  models.Shortage.findOne({familyId:familyId},function(err,data){
+    if(data){
+      data.needs.push(need)
+      data.save(function(err){
+        if(err){
+          res.status(500).send({msg:'error'})
+        }
+        else{
+          res.status(200).send({msg:''})
+        }
+      })
     }else{
-       console.log('success')
-      res.send({msg:"success"})
+      var arrNeeds=[];
+      arrNeeds.push(need);
+      var newShortage=new models.Shortage({
+        familyId:familyId,
+        needs:arrNeeds,
+      })
+      console.log('newShortage',newShortage)
+      newShortage.save(function(err){
+        if(err){
+          res.status(500).send({msg:'error'})
+        }
+        else{
+          res.status(200).send({msg:'success'})
+        }
+      })
     }
   })
+}
+exports.getShortage=function(req,res){
+  models.Shortage.findOne({'familyid':req.body.familyid},function(err, data){
+    if (err) {
+      res.send(err)
+    }
+    var info=data
+      //console.log('DATA: ',allData);
+      res.send(info) 
+  })
+
 }
 
 //jozaa for test login 2

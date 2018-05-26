@@ -14,7 +14,7 @@ import axios from 'axios';
 import DatePicker from 'react-native-datepicker';
 import {Select, Option} from "react-native-chooser";
 import Bar from './Bar';
-
+``
 export default class ShortageNote extends React.Component {
 
   render() {
@@ -22,7 +22,7 @@ export default class ShortageNote extends React.Component {
           <View key={this.props.keyval} style={styles.note}>
 
               <Text style={styles.noteText}>{this.props.val.date}</Text> 
-              <Text style={styles.noteText}>{this.props.val.note}</Text> 
+              <Text style={styles.noteText}>{this.props.val}</Text> 
              
               <TouchableOpacity onPress={this.props.deleteMethod} style={styles.noteDelete}>
 
@@ -54,7 +54,7 @@ noteDelete:{
   position:'absolute',
   justifyContent:'center',
   alignItems:'center',
-  backgroundColor:'#2980b9',
+  backgroundColor:'#eba04e',
   padding:10,
   top:10,
   bottom:10,

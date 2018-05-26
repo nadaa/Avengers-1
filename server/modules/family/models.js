@@ -33,8 +33,8 @@ const familySchema=new mongoose.Schema({
 })
 
 const shortageSchema=new mongoose.Schema({
-	room:String,
-	need:String,
+	needs:[String],
+	familyId:{type:String, index: { unique: true }},
 })
 
 var User=mongoose.model('User',userSchema);

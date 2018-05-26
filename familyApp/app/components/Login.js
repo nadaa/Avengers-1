@@ -13,8 +13,8 @@ import {
 import axios from 'axios';  
 import { createStackNavigator } from 'react-navigation';
 import SignUp from './SignUp';
+import DrawerKids from './DrawerKids';
 import Drawer from './Drawer';
-
 export default class Login extends React.Component {
 
   constructor(props){
@@ -38,16 +38,25 @@ export default class Login extends React.Component {
       
 	
   sendLogin(){
-    // var that=this;
+     var that=this;
+     //console.log('hi',role)
           const { navigate } = this.props.navigation;
             axios.post('http://192.168.1.86:3000/api/login', {
              //axios.post('http://10.0.2.2:3000/api/login',{
              user:this.state
          })
-         .then(function (response) {
-           //that.saveData(response.data.user);
+         .then(async function (response) {
+           that.saveData(response.data.user);
+            var role= await AsyncStorage.getItem('role');
+
            if(response.data.msg==="success login"){
-                  navigate('Drawer')
+            if(role==='Mother'||role==='Father'){
+               navigate('Drawer')
+            }else if(role==='Child'){
+               navigate('DrawerKids')
+            }
+
+                 
            }
            else if(response.data.msg==="the password is not correct"){
                  alert("the password is not correct")
