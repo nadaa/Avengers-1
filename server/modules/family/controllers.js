@@ -111,20 +111,20 @@ exports.getTasks=function(req,res){
 }
 
 
-exports.confirmTasks=function(req,res){
-  var taskIds=req.body.tasks;
-  for(var i=0;i<taskIds.length;i++){
-    models.Task.deleteOne({_id:taskIds[i]},function(err,task){
+exports.confirmTask=function(req,res){
+  var taskId=req.body.taskId;
+  //for(var i=0;i<taskIds.length;i++){
+    models.Task.deleteOne({$and:[{_id:taskId},{completed:true}]},function(err,task){
       if(err){
-        res.status(500).send(err)
+        res.status(500).send({deleted:false})
       }
       else{
-        console.log("deleted ",taskIds[i])
-        res.status(200).send()
+        console.log("deleted ",taskId)
+        res.status(200).send({deleted:true})
       }
   })
 
-}
+
 }
 
 exports.sendUserInfo=function(req,res){
@@ -156,25 +156,42 @@ exports.getKidsId= function(req,res){
 
 
 exports.toggleTask=function(req,res){
-  var ids=req.body.tasks;
-  console.log(ids)
+  var id=req.body.taskId;
+  console.log(id)
   //find these tasks in the tasks colection and update the status, toggle them
-  ids.forEach(function(id){
-    models.Task.findOne({_id:id},function(err,task){
-      // console.log(task);
+  // ids.forEach(function(id){
+  //   models.Task.findOne({_id:id},function(err,task){
+  //     // console.log(task);
+  //     task.completed=!task.completed;
+  //   task.save(function(err,task){
+  //       if(err){
+  //         console.log("error in updating taskid"+id);
+  //         res.status(500),send({msg:task.taskName+'canot be changed'});
+  //       }
+  //       else{
+  //         console.log("success toggling the task"+id+' status');
+  //         res.status(200).send({msg:task.taskName+"changed"})
+  //       }
+  //     })//save
+  //  }) //find
+  // })//foreach
+  // 
+  models.Task.findOne({_id:id},function(err,task){
+    if(err){
+      res.status(500).send(err);
+    }
+    else{
       task.completed=!task.completed;
-    task.save(function(err,task){
+      task.save(function(err){
         if(err){
-          console.log("error in updating taskid"+id);
-          res.status(500),send({msg:task.taskName+'canot be changed'});
+          res.status(500).send({msg:task.taskName+'can not be changed'})
         }
         else{
-          console.log("success toggling the task"+id+' status');
-          res.status(200).send({msg:task.taskName+"changed"})
+          res.status(200).send({msg:task.taskName+' status changed'})
         }
-      })//save
-   }) //find
-  })//foreach
+      })
+    }
+  })
 
 } 
 
@@ -236,8 +253,6 @@ exports.getData=function(req, res){
       res.send(allData) 
   })
 }
-
-
 
 
 

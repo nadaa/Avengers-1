@@ -9,125 +9,70 @@ import {
  Button,
  AsyncStorage,
  Picker,
+ ScrollView
 } from 'react-native';
 
 import {createStackNavigator } from 'react-navigation';
-import Login from './Login';
 import axios from 'axios';    
 import DatePicker from 'react-native-datepicker';
 import {Select, Option} from "react-native-chooser";
 import Bar from './Bar';
-
-export default class SignUp extends React.Component {
-//in which room the need stuff
-//what need the need for that room 
+import ShortageNote from './ShortageNote'
+export default class Shortage extends React.Component {
 	constructor(props){
         super(props);
 
         this.state=
         {
-        room:'',
-        need:'',
+        needArray:[],
+        needText:'',
         }
     }
 
 
-
-	// componentDidMount(){
-	// 	this._loadInitialState().done();
-	// }
-
-
-
- //    //store user info in the device
-	// _loadInitialState = async () => {
-	// 	var value = await AsyncStorage.getItem('user');
-	// 	if(value !== null){
-	// 		this.props.navigation.navigate('Profile')
-	// 	}
-	// }
-
-
-
-
-
-
-sendShortage(){
-  // alert('BLA')
-   const { navigate } = this.props.navigation;
- axios.post('http://192.168.1.86:3000/api/shortage', { 
-	// axios.post('http://10.0.2.2:3000/api/signup', {
-    needs:this.state
-   })
-   .then(function (response) {
-     console.log('response.data.msg',response.data.msg)
-     if(response.data.msg==="success "){
-           alert('success')
-     }
-     else if(response.data.msg==='error'){
-           alert('error')
-      }
-     }
-
-   )
-   .catch(function (error) {
-     console.log(error);
-   });
-  }
-
-onSelect(value, label) {
-    this.setState({room : value});
-  }
-
-
   render() {
-  	const { navigate } = this.props.navigation;
+   let notes=this.state.needArray.map((val,key)=>{
+      return <ShortageNote key={key} keyval={key} val={val} deleteMethod ={()=>this.deleteNote(key)} />
+    })
     return (
-    <KeyboardAvoidingView behaviour='padding' style ={styles.wrapper}>
-    <Bar navigation={this.props.navigation}/>
-    <View style={styles.container}>
-    <Text style={styles.header}> SHORTAGE </Text>
-
-    <View style={styles.rolepicker}>
-        <Select
-            onSelect = {this.onSelect.bind(this)}
-            defaultText  = {this.state.room}
-            textStyle = {{}}
-            
-          >
-          <Option value = 'Kitchen'>Kitchen</Option>
-          <Option value = 'BedRoom'>BedRoom</Option>
-          <Option value = 'BathRoom'>BathRoom</Option>
-          <Option value = 'LivingRoom'>LivingRoom</Option>
-          <Option value = 'Backyard'>Backyard</Option>
-         
-
-        </Select>
+  <View style={styles.container}>
+        <Bar navigation={this.props.navigation}/>
+      <View style={styles.header}>
+          <Text style={styles.headerText}>Shortage</Text>
       </View>
 
 
-    <TextInput
-    multiline={true}
-    ref={input =>{this.textInput =input}}
-     value={this.state.need}
-    	style={styles.textInput}  
-    	placeholder='What do you need !'
-    	 onChangeText={(text) => this.setState({need: text})}
-    /> 
+            <View style={styles.scrollContainer}>
+                  {notes}
+            </View>
 
-    
-    <TouchableOpacity
-    	style={styles.btn}
-    	onPress={
-    		this.sendShortage.bind(this)
-        }
-    	>
-    	<Text>Ask for Approval</Text>
-    	</TouchableOpacity>
-       
-    </View>
-    </KeyboardAvoidingView>
+
+      <View style={styles.footer}>
+                      <TouchableOpacity style={styles.addButton} onPress={this.addNeed.bind(this)}>
+                        <Text style={styles.addButtonText}>+</Text>
+                      </TouchableOpacity>
+                          <TextInput 
+                          onChangeText={(needText) => this.setState({needText})} value={this.state.needText}
+                          style={styles.textInput} 
+                          placeholder='> need' 
+                          placeholderTextColor='white' >
+                           </TextInput>
+                  </View>
+
+  </View>
     );
+  }
+  addNeed(){
+    if(this.state.needText){
+      var d=new Date()
+      this.state.needArray.push({'date':d.getFullYear()+'/'+(d.getMonth()+1)+'/'+d.getDate(),'note':this.state.needText});
+      this.setState({needArray:this.state.needArray})
+      this.setState({needText:''})
+    }
+  }
+  deleteNote(key){
+    this.state.needArray.splice(key,1)
+    this.setState({needArray:this.state.needArray})
   }
 
 
@@ -135,54 +80,66 @@ onSelect(value, label) {
 }
 
 const styles = StyleSheet.create({
-wrapper: {
-	flex: 1,
+
+container:{
+     flex:1,
 },
-container: {
-	flex: 1,
-	alignItems: 'center',
-	justifyContent: 'center',
-	// backgroundColor: '#2896d3',
-	paddingLeft: 40,
-	paddingRight: 40,
-},
-header: {
-	fontSize: 24,
-	marginBottom: 60,
-	//color: '#fff',
-	fontWeight: 'bold',
-},
-textInput: {
-	alignSelf: 'stretch',
-	padding: 16,
-	marginBottom: 20,
-	backgroundColor: '#fff',
-  height:200,
+header:{
+      backgroundColor:'#E91E63',
+      alignItems:'center',
+      justifyContent:'center',
+      borderBottomWidth:  10,
+      borderBottomColor:'#ddd',
+
 },
 
-datepicker: {
-   
-    alignSelf: 'stretch',
-    padding: 16,
-    marginBottom: 20,
-    backgroundColor: '#fff',
+headerText:{
+      color:'white',
+      fontSize:40,
+      padding:10,
+       justifyContent:'center',
+
 },
 
-
-rolepicker: {
-    alignSelf: 'stretch',
-    padding: 16,
-    marginBottom: 20,
-    backgroundColor: '#fff',
-  
+scrollContainer:{
+      flex:1,
+      marginBottom:100,
 },
 
-btn: {
-	alignSelf:'stretch',
-	backgroundColor:'#01c853',
-	padding:20,
-	alignItems:'center',
+footer:{
+      position:'absolute',
+      alignItems:'center',
+      bottom:0,
+      left:0,
+      right:0,
+},
+addButton:{
+      width:90,
+      height:90,
+      borderRadius:70,
+      borderColor:'#ccc',
+      alignItems:'center',
+      zIndex:10,
+      elevation:8,
+      marginBottom:-45,
+      backgroundColor:'#E91E63', 
+},
+addButtonText:{
+  color:'#fff',
+  fontSize:55,
+  justifyContent:'center',
+},
+textInput:{
+  alignSelf:'stretch',
+  color:'#fff',
+  padding:40,
+  paddingTop:40,
+  backgroundColor:'#252525',
+  borderTopWidth:2,
+  borderTopColor:'#ededed',
+
+
 }
 
-})
+})  
 
