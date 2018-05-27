@@ -15,9 +15,7 @@ const Application=  createStackNavigator({
 
   // Home: { screen: Login2 },
 
-   Login:{ screen: Login },
-
-
+  Login:{ screen: Login },
   Drawer: { screen: Drawer },
   DrawerKids: { screen: DrawerKids },
   TaskMonitor:{screen:TaskMonitor},
@@ -27,7 +25,7 @@ const Application=  createStackNavigator({
   AssignKidsTasks:{screen:AssignKidsTasks},
 },{
   navigationOptions: {
-    header: false,
+    header: null,
   }
 });
 

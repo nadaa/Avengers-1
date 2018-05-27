@@ -20,8 +20,8 @@ export default class Finance extends React.Component{
     //all the data save before to can show in the bar
     this.state={
       tableHead:['Category','Cost'],
-      tableName:['Water','Electricity'],
-      tableCost:[12,30],
+      tableName:[['Water'],['Electricity']],
+      tableCost:[[12],[30]],
       tableTotal:['Total',0],
       //for show Dialog Add
       addDialogVisible:false,
@@ -38,39 +38,10 @@ export default class Finance extends React.Component{
     this.calculateTotalMoney();
     this.showId()
   }
-  getFinanceData(){
-    console.log('FRONT END')
-    alert('you call getFinanceData front end ')
 
-    axios.post('http://192.168.0.89:3000/api/getFinanceData', {id:this.state.id})
-    .then(function (res) {
-      console.log('RESP',res)
-   
-    })
-    .catch(function (err) {
-      console.log(err);
-      alert(err);
-    });
-  }
-  editFinanceData(){
-    console.log('FRONT END')
-    alert('you call editFinanceData front end ')
-    axios.post('http://192.168.0.89:3000/api/editFinanceData', {state:this.state})
-    .then(function (res) {
-      console.log('RESP',res)
-   
-    })
-    .catch(function (err) {
-      console.log(err);
-      alert(err);
-    });
-  }
-  deleteFinanceData(){
-
-  }
   showId=async()=>{
     try{
-      let id=await AsyncStorage.getItem('familyId')
+      let id=await AsyncStorage.getItem('familyid')
       this.setState({id:id})
       //alert('the email save is: ' + userEmail3)
     }
@@ -116,6 +87,20 @@ export default class Finance extends React.Component{
       }
     }
   };
+    editFinanceData(){
+    console.log('FRONT END')
+    alert('you call editFinanceData front end ')
+    axios.post('http://10.0.2.2:3000/api/editFinanceData', {state:this.state})
+    .then(function (res) {
+      console.log('RESP',res)
+   
+    })
+    .catch(function (err) {
+      console.log(err);
+      alert(err);
+    });
+  }
+
   addToFinance(){
     //alert('Add To Finance');
     this.setState({ addDialogVisible: true });

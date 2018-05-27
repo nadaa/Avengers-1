@@ -20,8 +20,8 @@ export default class Login extends React.Component {
   constructor(props){
     super(props);
     this.state={
-      email:'',
-      password:'',
+      email:'nada@gmail.com',
+      password:'123',
     }
   }
 
@@ -36,10 +36,8 @@ export default class Login extends React.Component {
      var that=this;
      //console.log('hi',role)
           const { navigate } = this.props.navigation;
-
-            axios.post('http://192.168.0.84:3000/api/login', {
-             //axios.post('http://10.0.2.2:3000/api/login',{
-
+            //axios.post('http://192.168.0.84:3000/api/login', {
+             axios.post('http://10.0.2.2:3000/api/login',{
              user:this.state
          })
          .then(async function (response) {
@@ -85,12 +83,14 @@ export default class Login extends React.Component {
    
     <TextInput
     	style={styles.textInput} 
+      value={this.state.email}
     	placeholder='Email'
     	onChangeText={(email) => this.setState({email})}
 
     /> 
      <TextInput
       style={styles.textInput} 
+      value={this.state.password}
       secureTextEntry={true}
       placeholder='Password'
       onChangeText={(password) => this.setState({password})}
