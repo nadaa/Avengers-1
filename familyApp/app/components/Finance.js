@@ -19,15 +19,15 @@ export default class Finance extends React.Component{
     super();
     //all the data save before to can show in the bar
     this.state={
-      tableHead:  ['Category', 'Cost'],
-      tableName: ['Water','Electricity'],
-      tableCost:  [12,30],
+      tableHead:['Category','Cost'],
+      tableName:['Water','Electricity'],
+      tableCost:[12,30],
       tableTotal:['Total',0],
       //for show Dialog Add
-      addDialogVisible: false,
+      addDialogVisible:false,
       addEditName:'',
       addEditCost:'',
-      editDialogVisible: false,
+      editDialogVisible:false,
       editName:'',
       deleteDialogVisible:false,
       deletetName:'',
@@ -37,6 +37,46 @@ export default class Finance extends React.Component{
     //auto call function when render this scren
     this.calculateTotalMoney();
     this.showId()
+  }
+  getFinanceData(){
+    console.log('FRONT END')
+    alert('you call getFinanceData front end ')
+
+    axios.post('http://192.168.0.89:3000/api/getFinanceData', {id:this.state.id})
+    .then(function (res) {
+      console.log('RESP',res)
+   
+    })
+    .catch(function (err) {
+      console.log(err);
+      alert(err);
+    });
+  }
+  editFinanceData(){
+    console.log('FRONT END')
+    alert('you call editFinanceData front end ')
+    axios.post('http://192.168.0.89:3000/api/editFinanceData', {state:this.state})
+    .then(function (res) {
+      console.log('RESP',res)
+   
+    })
+    .catch(function (err) {
+      console.log(err);
+      alert(err);
+    });
+  }
+  deleteFinanceData(){
+
+  }
+  showId=async()=>{
+    try{
+      let id=await AsyncStorage.getItem('familyId')
+      this.setState({id:id})
+      //alert('the email save is: ' + userEmail3)
+    }
+    catch(error){
+      alert(error)
+    }
   }
   calculateTotalMoney(){
     var total=0;
@@ -116,6 +156,7 @@ export default class Finance extends React.Component{
       this.state.addEditCost='';
       index=0;
       this.setState({ editDialogVisible: false });
+      this.editFinanceData()
     }
   };
   editFromFinance(){
@@ -146,16 +187,7 @@ export default class Finance extends React.Component{
   deleteFromFinance(){
     this.setState({ deleteDialogVisible: true });
   };
-  showId=async()=>{
-    try{
-      let id=await AsyncStorage.getItem('familyId')
-      this.setState({id:id})
-      //alert('the email save is: ' + userEmail3)
-    }
-    catch(error){
-      alert(error)
-    }
-  } 
+
   render() {
     //what return
     return (
@@ -194,8 +226,8 @@ export default class Finance extends React.Component{
               <Dialog.Button style={styles.btnDialogAdd} label="Add" onPress={this.handleAdd.bind(this)}  />
             </View>
           </Dialog.Container>
-
-          <TouchableOpacity style={styles.btnEdit} onPress={this.editFromFinance.bind(this)}>
+           {/*editFromFinance*/}
+          <TouchableOpacity style={styles.btnEdit} onPress={this.editFinanceData.bind(this)}>
             <Text style={styles.textBtnEdit}>Edit</Text>
           </TouchableOpacity>
            <Dialog.Container visible={this.state.editDialogVisible}>
