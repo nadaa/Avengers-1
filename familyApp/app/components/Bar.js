@@ -35,7 +35,7 @@ export default class Bar extends React.Component{
       //defult thing when change from data base change here 🙂 <3
       // (Mother) female /  (Father) male/ child (Children)
       kidTasks:[],
-      role:'Mother',
+      role:'Child',
       //from 100%
       userProgress:'100',
       //for how many child in family
