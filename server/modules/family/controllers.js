@@ -158,24 +158,7 @@ exports.getKidsId= function(req,res){
 exports.toggleTask=function(req,res){
   var id=req.body.taskId;
   console.log(id)
-  //find these tasks in the tasks colection and update the status, toggle them
-  // ids.forEach(function(id){
-  //   models.Task.findOne({_id:id},function(err,task){
-  //     // console.log(task);
-  //     task.completed=!task.completed;
-  //   task.save(function(err,task){
-  //       if(err){
-  //         console.log("error in updating taskid"+id);
-  //         res.status(500),send({msg:task.taskName+'canot be changed'});
-  //       }
-  //       else{
-  //         console.log("success toggling the task"+id+' status');
-  //         res.status(200).send({msg:task.taskName+"changed"})
-  //       }
-  //     })//save
-  //  }) //find
-  // })//foreach
-  // 
+  
   models.Task.findOne({_id:id},function(err,task){
     if(err){
       res.status(500).send(err);

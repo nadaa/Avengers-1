@@ -15,24 +15,25 @@ import ShortageNote from './ShortageNote'
 
 const KidsDrawer=createDrawerNavigator(
   {
-    Tasks:{
-     screen:Tasks,
-    },
-    'User Information':{
-     screen:UserInfo,
-    },
-    Shortage:{
-     screen:Shortage,
-    },
     TasksDisplay:{
       screen:TasksDisplay,
     },
-    ShortageNote:{
-      screen:ShortageNote,
-    }
+    // Tasks:{
+    //  screen:Tasks,
+    // },
+    // 'User Information':{
+    //  screen:UserInfo,
+    // },
+    Shortage:{
+     screen:Shortage,
+    },
+    
+    // ShortageNote:{
+    //   screen:ShortageNote,
+    // }
   },
   {
-    initialRouteName:'Shortage',
+    initialRouteName:'TasksDisplay',
     drawerPosition:'left',
     drawerWidth:200,
     drawerOpenRoute: 'DrawerOpen',

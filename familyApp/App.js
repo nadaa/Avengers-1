@@ -14,8 +14,10 @@ const Application=  createStackNavigator({
   // Home: { screen: Login },
   //i change it for testing (Jozaa)
   // Home: { screen: Login2 },
-    Login:{ screen: Login },
-   Bar:{screen:Bar},
+
+   Login:{ screen: Login },
+
+
   Drawer: { screen: Drawer },
   DrawerKids: { screen: DrawerKids },
   Home: { screen: Login },

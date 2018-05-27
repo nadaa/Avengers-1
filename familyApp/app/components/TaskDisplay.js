@@ -60,9 +60,8 @@ export default class TasksDisplay extends React.Component {
 
 	render() {
 		return (
-			<ScrollView >
-			 <Bar navigation={this.props.navigation}/>
-				<View style={styles.container}>
+			<ScrollView  contentContainerStyle={styles.container}>
+				<Bar navigation={this.props.navigation}/>
 				<Text style={styles.title}> My Tasks</Text>
 				<View style={styles.card} >
 			     {this.state.kidTasks.map((t,index)=>{
@@ -73,7 +72,6 @@ export default class TasksDisplay extends React.Component {
 				  onChange={(checked) =>this.updateCheck(index)}
 				/>)}
 				)}
-				</View>
 				</View>
 	    	</ScrollView>
 		);
@@ -97,7 +95,7 @@ const styles = StyleSheet.create({
 	    borderBottomLeftRadius: 10,
 	    borderBottomRightRadius: 10,
 	    marginTop:30,
-	    marginBottom:10,
+	    marginBottom:30,
 	    marginLeft:30,
 	    marginRight:30,
 
