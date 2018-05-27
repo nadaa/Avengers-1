@@ -269,6 +269,16 @@ exports.getData=function(req, res){
   })
 }
 
+exports.deleteShortage= function(req, res) {
+  models.Shortage.remove({_id:req.body.familyid},function(err,data){
+   if(err){
+     res.status(500).send('error');
+   }
+   else{
+    res.status(201).send('success');
+  }
+})
+}
 
 
 

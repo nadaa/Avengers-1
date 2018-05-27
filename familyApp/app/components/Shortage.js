@@ -67,7 +67,7 @@ export default class Shortage extends React.Component {
     );
   }
   getData(){
-    axios.get('http://192.168.1.86:3000/api/shortage') 
+    axios.get('http://192.168.0.84:3000/api/shortage') 
     
     .then((response) =>{
       //console.log(response);
@@ -99,16 +99,12 @@ export default class Shortage extends React.Component {
    
    async addNeed(){
      
-    //this.getID()
      var familyId = await AsyncStorage.getItem('familyid')
       const {navigate}=this.props.navigation;
     if(this.state.needText){
       var d=new Date()
-     //this.state.needArray.push({'date':d.getFullYear()+'/'+(d.getMonth()+1)+'/'+d.getDate(),'note':this.state.needText});
-    // this.setState({needArray:this.state.needArray})
-
      
-     axios.post('http://192.168.1.86:3000/api/shortage', 
+     axios.post('http://192.168.0.84:3000/api/shortage', 
       {
         need:this.state.needText,
         familyId:familyId,
@@ -131,8 +127,34 @@ export default class Shortage extends React.Component {
       this.setState({needText:''})
     }
   }
-  deleteNote(key){
+  async deleteNote(key){
+   var familyId = await AsyncStorage.getItem('familyid')
+      const {navigate}=this.props.navigation;
+    if(this.state.needText){
+      var d=new Date()
+     
+     axios.post('http://192.168.0.84:3000/api/shortage/delete', 
+      {
+        need:this.state.needText,
+        familyId:familyId,
+      })
+    .then(function (response) {
+      if(response.data.msg==='success'){
+        alert('success')
+        this.getData();
+      
+      }
+      else if(response.data.msg==='error'){
+        alert("error");
+      }
+    })
+    .catch(function (error) {
+      console.log(error);
+      alert(error);
+    });
 
+      this.setState({needText:''})
+    }
     this.state.needArray.splice(key,1)
     this.setState({needArray:this.state.needArray})
   }
