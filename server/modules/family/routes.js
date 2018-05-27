@@ -79,9 +79,13 @@ appRouter.route('/api/shortage').post((req,res)=>{
   appControllers.sendShortage(req,res);
 })
 
-appRouter.route('/api/shortage').get((req,res)=>{
+appRouter.route('/api/getshortage').post((req,res)=>{
+  console.log('received request for all shortage');
   appControllers.getShortage(req,res);
 })
+
+
+
 appRouter.route('/api/shortage/delete').post((req,res)=>{
   appControllers.deleteShortage(req,res);
 })

@@ -13,10 +13,12 @@ export default class TasksDisplay extends React.Component {
 		this.state={
 			kidTasks:[],
 			checked:[],
+			progress:0,
  		}
 		this.getTasks=this.getTasks.bind(this);
 		this.updateCheck=this.updateCheck.bind(this);
 		this.changeTaskStatus=this.changeTaskStatus.bind(this);
+		//this.getProgress=this.getProgress.bind(this);
 	}
 
 	changeTaskStatus(selected){
@@ -43,6 +45,16 @@ export default class TasksDisplay extends React.Component {
 		.then((response) =>{
 			console.log(response.data);
 			this.setState({kidTasks:response.data});
+			
+			var completed=0;
+			for(var i=0;i<this.state.kidTasks.length;i++){
+				if(this.state.kidTasks[i].completed){
+					completed++;
+		}
+	}
+	this.setState({progress:Math.round(completed/this.state.kidTasks.length.toFixed(2)*100)})
+
+
 	      })
 	  .catch(function (error) {
 	    console.log(error);
@@ -62,10 +74,24 @@ export default class TasksDisplay extends React.Component {
 			}
 	}
 
+//  getProgress(){
+// 	var completed=0;
+// 	for(var i=0;i<this.state.kidTasks.length;i++){
+// 		if(this.state.kidTasks[i].completed){
+// 			completed++;
+// 		}
+// 	}
+
+// 	this.setState({progress:50})
+
+// 	alert(this.state.progress);
+
+// }
+
 	render() {
 		return (
 			<ScrollView contentContainerStyle={{backgroundColor	:'#2896d3',flex:1}} >
-			 <Bar navigation={this.props.navigation}/>
+			 <Bar p={this.state.progress} navigation={this.props.navigation}/>
 				<Text style={styles.title}> My Tasks</Text>
 				<View style={styles.card} >
 			     {this.state.kidTasks.map((t,index)=>{
