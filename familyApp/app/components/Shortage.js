@@ -169,7 +169,7 @@ container:{
      flex:1,
 },
 header:{
-      backgroundColor:'#e9963b',
+      backgroundColor:'#65737e',
       alignItems:'center',
       justifyContent:'center',
       borderBottomWidth:  10,
@@ -206,7 +206,7 @@ addButton:{
       zIndex:10,
       elevation:8,
       marginBottom:-45,
-      backgroundColor:'#e9963b', 
+      backgroundColor:'#65737e', 
 },
 addButtonText:{
       color:'#fff',
@@ -218,9 +218,9 @@ textInput:{
       color:'#fff',
       padding:40,
       paddingTop:40,
-      backgroundColor:'#f1c089',
+      backgroundColor:'#c0c5ce',
       borderTopWidth:2,
-      borderTopColor:'#ededed',
+      borderTopColor:'#c0c5ce',
 
 
 }
