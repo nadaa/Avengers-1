@@ -158,24 +158,7 @@ exports.getKidsId= function(req,res){
 exports.toggleTask=function(req,res){
   var id=req.body.taskId;
   console.log(id)
-  //find these tasks in the tasks colection and update the status, toggle them
-  // ids.forEach(function(id){
-  //   models.Task.findOne({_id:id},function(err,task){
-  //     // console.log(task);
-  //     task.completed=!task.completed;
-  //   task.save(function(err,task){
-  //       if(err){
-  //         console.log("error in updating taskid"+id);
-  //         res.status(500),send({msg:task.taskName+'canot be changed'});
-  //       }
-  //       else{
-  //         console.log("success toggling the task"+id+' status');
-  //         res.status(200).send({msg:task.taskName+"changed"})
-  //       }
-  //     })//save
-  //  }) //find
-  // })//foreach
-  // 
+  
   models.Task.findOne({_id:id},function(err,task){
     if(err){
       res.status(500).send(err);
@@ -195,19 +178,51 @@ exports.toggleTask=function(req,res){
 } 
 
 exports.sendShortage=function(req,res){
-  var newShortage=new models.Shortage({
-    room:req.body.needs.room,
-    need:req.body.needs.need,
-  })
-  console.log('newShortage',newShortage)
-  newShortage.save(function(error,data){
-    if(error){
-      res.send({msg:"error"})
+  var familyId=req.body.familyId;
+  var need=req.body.need;
+  console.log('familyId',familyId)
+  console.log('need',need)
+
+  models.Shortage.findOne({familyId:familyId},function(err,data){
+    if(data){
+      data.needs.push(need)
+      data.save(function(err){
+        if(err){
+          res.status(500).send({msg:'error'})
+        }
+        else{
+          res.status(200).send({msg:''})
+        }
+      })
     }else{
-       console.log('success')
-      res.send({msg:"success"})
+      var arrNeeds=[];
+      arrNeeds.push(need);
+      var newShortage=new models.Shortage({
+        familyId:familyId,
+        needs:arrNeeds,
+      })
+      console.log('newShortage',newShortage)
+      newShortage.save(function(err){
+        if(err){
+          res.status(500).send({msg:'error'})
+        }
+        else{
+          res.status(200).send({msg:'success'})
+        }
+      })
     }
   })
+}
+exports.getShortage=function(req,res){
+  models.Shortage.findOne({'familyid':req.body.familyid},function(err, data){
+    if (err) {
+      res.send(err)
+    }
+    var info=data
+      //console.log('DATA: ',allData);
+      res.send(info) 
+  })
+
 }
 
 //jozaa for test login 2
@@ -251,9 +266,16 @@ exports.getData=function(req, res){
   })
 }
 
-exports.getFinanceData=function(req, res){
-  console.log('DATA BASE')
-  console.log(req.body,req.body.id)
+exports.deleteShortage= function(req, res) {
+  models.Shortage.remove({_id:req.body.familyid},function(err,data){
+   if(err){
+     res.status(500).send('error');
+   }
+   else{
+    res.status(201).send('success');
+  }
+})
+}
 
   models.Finance.findOne({'familyId':req.body.id},function(err, data){
     if (err) {
@@ -293,6 +315,9 @@ exports.editFinanceData=function(req, res){
     res.status(201).send({msg:'choose another email'})
   }
 })
+  exports.getFinanceData=function(req, res){
+  console.log('DATA BASE')
+  console.log(req.body,req.body.id)
   models.Finance.findOne({'familyId':req.body.id},function(err, data){
     
     if (err) {

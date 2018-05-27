@@ -13,8 +13,8 @@ import {
 import axios from 'axios';  
 import { createStackNavigator } from 'react-navigation';
 import SignUp from './SignUp';
+import DrawerKids from './DrawerKids';
 import Drawer from './Drawer';
-
 export default class Login extends React.Component {
 
   constructor(props){
@@ -31,23 +31,29 @@ export default class Login extends React.Component {
     AsyncStorage.setItem('email',(userInfo.email));
     AsyncStorage.setItem('role',(userInfo.role));
     AsyncStorage.setItem('familyid',(userInfo.familyId));
-    
-
   }
-
-      
-	
-  sendLogin(){
-    // var that=this;
+ sendLogin(){
+     var that=this;
+     //console.log('hi',role)
           const { navigate } = this.props.navigation;
-            axios.post('http://192.168.1.86:3000/api/login', {
+
+            axios.post('http://192.168.0.84:3000/api/login', {
              //axios.post('http://10.0.2.2:3000/api/login',{
+
              user:this.state
          })
-         .then(function (response) {
-           //that.saveData(response.data.user);
+         .then(async function (response) {
+           that.saveData(response.data.user);
+            var role= await AsyncStorage.getItem('role');
+
            if(response.data.msg==="success login"){
-                  navigate('Drawer')
+            if(role==='Mother'||role==='Father'){
+               navigate('Drawer')
+            }else if(role==='Child'){
+               navigate('DrawerKids')
+            }
+
+                
            }
            else if(response.data.msg==="the password is not correct"){
                  alert("the password is not correct")
@@ -67,7 +73,7 @@ export default class Login extends React.Component {
 
   render() {
     //jozaa
-    // const { navigate } = this.props.navigation;
+    const { navigate } = this.props.navigation;
     return (
 
       <ImageBackground
@@ -127,8 +133,6 @@ wrapper: {
 },
 container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
     backgroundColor: '#2896d3',
     paddingLeft: 40,
     paddingRight: 40,

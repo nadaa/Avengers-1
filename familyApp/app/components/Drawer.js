@@ -34,19 +34,11 @@ const MyDrawer=createDrawerNavigator(
     Shortage:{
      screen:Shortage,
     },
-    TasksDisplay:{
-      screen:TasksDisplay,},
-   
-    AssignKidsTasks:{
-      screen:AssignKidsTasks,
-
-    },
+      
     Try:{
       screen:Try,
     },
-    TasksDisplay:{
-      screen:TasksDisplay,
-    },
+   
     /*
     'Family Events':{
      screen:Try,

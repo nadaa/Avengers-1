@@ -1,4 +1,4 @@
-//import react from react
+www//import react from react
 import React from 'react';
 //import element from reacr native
 import { StyleSheet, Text, View,AsyncStorage } from 'react-native';
@@ -25,7 +25,7 @@ const userRole={
 
 
 //export Bar from the react componant
-export default class Bar extends React.Component{
+export default class BarParents extends React.Component{
   //the constructor
   constructor(){
     //super for ES6
@@ -34,7 +34,6 @@ export default class Bar extends React.Component{
     this.state={
       //defult thing when change from data base change here 🙂 <3
       // (Mother) female /  (Father) male/ child (Children)
-      kidTasks:[],
       role:'Mother',
       //from 100%
       userProgress:'100',
@@ -44,8 +43,7 @@ export default class Bar extends React.Component{
       restMoney:'1500',
     };
     //run the function to save the email in this.state,userSave
-    //this.callOrder(this.setUserRole.bind(this)
-    this.getProgress=this.getProgress.bind(this)
+    this.callOrder(this.setUserRole.bind(this))
   }
   callOrder(cb){
     cb()
@@ -59,32 +57,6 @@ export default class Bar extends React.Component{
       alert(error)
     }
   }
-
-componentDidMount(){
-	this.getProgress();
-}
-async getProgress(){
-	var kidEmail=await AsyncStorage.getItem('email');
-	axios.post('http://10.0.2.2:3000/api/gettasks',{kidemail:kidEmail
-	})
-	.then((response) =>{
-		console.log(response.data);
-		this.setState({kidTasks:response.data});
-		var countCompleted=0;
-		for(var i=0;i<this.state.kidTasks.length;i++){
-			if(this.state.kidTasks[i].completed){
-				countCompleted++;
-			}
-		}
-		this.setState({userProgress:Math.round(countCompleted/this.state.kidTasks.length.toFixed(2)*100)})
-    
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
-}
-
-
   //render
   render() {
     //what return
@@ -112,19 +84,8 @@ async getProgress(){
                   </Text>
                 </View>
 
-                <View style={styles.centerComponent}>
-
-                  <Text style={styles.textIconDone}>{this.state.userProgress}%</Text>
-                  <Text onPress={() =>this.props.navigation.navigate('Tasks')} style={styles.textUnderIcon}>
-                    Progress
-                  </Text>
-                </View>
-                <View style={styles.centerComponent}>
-                  <Text onPress={() =>this.props.navigation.navigate('Tasks')} style={styles.textIconRank}>{this.state.userRanking}</Text>
-                  <Text onPress={() =>this.props.navigation.navigate('Tasks')} style={styles.textUnderIcon}>
-                    Rank
-                  </Text>
-                </View>
+               
+              
                 <View style={styles.lastCenterComponent}>
                   <Text onPress={() =>this.props.navigation.navigate('Finance')} style={styles.textIconMoney}>{this.state.restMoney}</Text>
                   <Text onPress={() =>this.props.navigation.navigate('Finance')} style={styles.textUnderIcon}>
