@@ -41,7 +41,7 @@ export default class Login extends React.Component {
      var that=this;
      //console.log('hi',role)
           const { navigate } = this.props.navigation;
-            axios.post('http://192.168.1.86:3000/api/login', {
+            axios.post('http://192.168.0.84:3000/api/login', {
              //axios.post('http://10.0.2.2:3000/api/login',{
              user:this.state
          })
@@ -56,7 +56,7 @@ export default class Login extends React.Component {
                navigate('DrawerKids')
             }
 
-                 
+                
            }
            else if(response.data.msg==="the password is not correct"){
                  alert("the password is not correct")
@@ -76,7 +76,7 @@ export default class Login extends React.Component {
 
   render() {
     //jozaa
-    // const { navigate } = this.props.navigation;
+    const { navigate } = this.props.navigation;
     return (
 
       <ImageBackground

@@ -82,7 +82,9 @@ appRouter.route('/api/shortage').post((req,res)=>{
 appRouter.route('/api/shortage').get((req,res)=>{
   appControllers.getShortage(req,res);
 })
-
+appRouter.route('/api/shortage/delete').post((req,res)=>{
+  appControllers.deleteShortage(req,res);
+})
 // //for test jozaa
 // appRouter.route('/login2').post((req,res)=>{
 //   console.log('CALL LOGIN 2 FROM SERVER');
