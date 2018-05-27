@@ -38,8 +38,8 @@ const shortageSchema=new mongoose.Schema({
 })
 const finance=new mongoose.Schema({
 	familyId:{type:String, index: { unique: true }},
-	category:[String],
-	cost:[Number],
+	category:[[String]],
+	cost:[[Number]],
 })
 
 var User=mongoose.model('User',userSchema);

@@ -266,65 +266,40 @@ exports.getData=function(req, res){
   })
 }
 
-exports.deleteShortage= function(req, res) {
-  models.Shortage.remove({_id:req.body.familyid},function(err,data){
-   if(err){
-     res.status(500).send('error');
-   }
-   else{
-    res.status(201).send('success');
-  }
-})
-}
-
-  models.Finance.findOne({'familyId':req.body.id},function(err, data){
-    if (err) {
-      res.send(err)
-    }
-    var allData=data
-      console.log('DATA: ',allData);
-      res.send(allData) 
-  })
-}
-
 exports.editFinanceData=function(req, res){
   console.log('DATA BASE')
   var state=req.body.state
   console.log(state)
-  var newUser =new models.User({
-   category:state.tableName,
-   cost:state.tableCost,
- });
-  models.User.findOne({ email: req.body.user.email },function(err,found){
-   if (!found ){
-    bcrypt.hash(newUser.password, 10, function(err, hash) {
-      newUser.password=hash;
-      // console.log(' newUser.password', hash)
-      newUser.save(function(err,obj) {
-       if(err){
-        res.status(500).send({msg:"error"});
-     }
-      else{
-        res.status(201).send({msg:"success signup"});
-      }
-    });
-      
-    })
-  }
-  else{
-    res.status(201).send({msg:'choose another email'})
-  }
-})
-  exports.getFinanceData=function(req, res){
-  console.log('DATA BASE')
-  console.log(req.body,req.body.id)
-  models.Finance.findOne({'familyId':req.body.id},function(err, data){
-    
-    if (err) {
-      res.send(err)
+  models.Finance.findOne({'familyId':state.id},function(err, data){
+    if(data){
+      data.category=state.tableName;
+      data.cost=state.tableCost;
+      data.save(function(err){
+        if(err){
+          console.log("error in updating");
+        }
+        else{
+          console.log("success updating");
+        }
+      }) 
+    }else{
+      var newFinance=new models.Finance({
+          category:state.tableName,
+          cost:state.tableCost,
+          familyId:state.id
+      });
+      newFinance.save(function(err){
+        if(err){
+          console.log("error in adding new")
+        }else{
+          console.log("success in adding new");
+        }
+      })
     }
-    var allData=data
-      console.log('DATA: ',allData);
-      res.send(allData) 
-  })
+ })
+}
+
+
+  exports.getFinanceData=function(req, res){
+ 
 }
