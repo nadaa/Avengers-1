@@ -86,16 +86,23 @@ appRouter.route('/api/shortage/delete').post((req,res)=>{
   appControllers.deleteShortage(req,res);
 })
 // //for test jozaa
-// appRouter.route('/login2').post((req,res)=>{
-//   console.log('CALL LOGIN 2 FROM SERVER');
-//   //to check the password for the user and start the session 
-//   appControllers.signinUser2(req,res);
-// })
+appRouter.route('/login2').post((req,res)=>{
+  console.log('CALL LOGIN 2 FROM SERVER');
+  //to check the password for the user and start the session 
+  appControllers.signinUser2(req,res);
+})
 
 //for test jozaa get the data
 appRouter.route('/getData').post((req,res)=>{
   // console.log('CALL GET DATA 2 FROM SERVER');
   appControllers.getData(req,res);
+})
+appRouter.route('/api/getFinanceData').post((req,res)=>{
+  appControllers.getFinanceData(req,res);
+})
+appRouter.route('/api/editFinanceData').post((req,res)=>{
+  console.log('ROUTER')
+  appControllers.editFinanceData(req,res);
 })
 
 module.exports=appRouter;

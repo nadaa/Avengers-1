@@ -11,6 +11,7 @@ export default class Login2 extends React.Component {
       password:'1234567',
     }
   }
+  //1.82         0.89
   sendLogin(){
     this.saveData()
     const {navigate}=this.props.navigation;

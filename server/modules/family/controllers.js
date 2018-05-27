@@ -175,10 +175,7 @@ exports.toggleTask=function(req,res){
       })
     }
   })
-
 } 
-
-
 
 exports.sendShortage=function(req,res){
   var familyId=req.body.familyId;
@@ -280,7 +277,54 @@ exports.deleteShortage= function(req, res) {
 })
 }
 
+  models.Finance.findOne({'familyId':req.body.id},function(err, data){
+    if (err) {
+      res.send(err)
+    }
+    var allData=data
+      console.log('DATA: ',allData);
+      res.send(allData) 
+  })
+}
 
-
-
-
+exports.editFinanceData=function(req, res){
+  console.log('DATA BASE')
+  var state=req.body.state
+  console.log(state)
+  var newUser =new models.User({
+   category:state.tableName,
+   cost:state.tableCost,
+ });
+  models.User.findOne({ email: req.body.user.email },function(err,found){
+   if (!found ){
+    bcrypt.hash(newUser.password, 10, function(err, hash) {
+      newUser.password=hash;
+      // console.log(' newUser.password', hash)
+      newUser.save(function(err,obj) {
+       if(err){
+        res.status(500).send({msg:"error"});
+     }
+      else{
+        res.status(201).send({msg:"success signup"});
+      }
+    });
+      
+    })
+  }
+  else{
+    res.status(201).send({msg:'choose another email'})
+  }
+})
+  exports.getFinanceData=function(req, res){
+  console.log('DATA BASE')
+  console.log(req.body,req.body.id)
+  models.Finance.findOne({'familyId':req.body.id},function(err, data){
+    
+    if (err) {
+      res.send(err)
+    }
+    var allData=data
+      console.log('DATA: ',allData);
+      res.send(allData) 
+  })
+}
