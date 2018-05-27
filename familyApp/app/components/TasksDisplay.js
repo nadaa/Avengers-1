@@ -20,12 +20,16 @@ export default class TasksDisplay extends React.Component {
 	}
 
 	changeTaskStatus(selected){
-		console.log(selected);
+		//console.log(selected);
 		var taskId=this.state.kidTasks[selected]._id;
 		axios.post('http://10.0.2.2:3000/api/toggletask',{taskId:taskId})
 		.then((response)=>{
 			alert("success, status was changed");
 			this.getTasks();
+			if(this.state.checked[selected]){
+				this.state.checked[selected]=!this.state.checked[selected];
+				this.setState({checked:this.state.checked});
+			}
 		})
 		.catch(function (error) {
 	    console.log(error);                                      
@@ -60,9 +64,8 @@ export default class TasksDisplay extends React.Component {
 
 	render() {
 		return (
-			<ScrollView >
+			<ScrollView contentContainerStyle={{backgroundColor	:'#2896d3',flex:1}} >
 			 <Bar navigation={this.props.navigation}/>
-				<View style={styles.container}>
 				<Text style={styles.title}> My Tasks</Text>
 				<View style={styles.card} >
 			     {this.state.kidTasks.map((t,index)=>{
@@ -73,7 +76,6 @@ export default class TasksDisplay extends React.Component {
 				  onChange={(checked) =>this.updateCheck(index)}
 				/>)}
 				)}
-				</View>
 				</View>
 	    	</ScrollView>
 		);
@@ -97,31 +99,20 @@ const styles = StyleSheet.create({
 	    borderBottomLeftRadius: 10,
 	    borderBottomRightRadius: 10,
 	    marginTop:30,
-	    marginBottom:10,
-	    marginLeft:30,
-	    marginRight:30,
+	    // marginLeft:30,
+	    // marginRight:50,
+	    paddingLeft:10,
+	    paddingTop:30,
 
-	    ...Platform.select({
-	      	ios: {	
-		        shadowColor: 'rgb(50,50,50)',
-		        shadowOpacity: 0.5,
-		        shadowRadius: 5,
-		        shadowOffset: {
-		          height: -1,
-		          width: 0
-		        }
-      		},
-		      android: {
-		        elevation: 5
-		      }
-    	})
   },
 	  strikeText: {
 	    color: '#bbb',
-	    textDecorationLine: 'line-through'
+	    textDecorationLine: 'line-through',
+	    fontSize:14,
 	  },
 	  unstrikeText: {
-	    color: "#29323c"
+	    color: "#29323c",
+	    fontSize:14,
 	  },
 	  title: {
 	    color: '#fff',

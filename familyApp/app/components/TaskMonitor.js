@@ -216,10 +216,11 @@ card: {
     borderTopRightRadius: 10,
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
-    marginTop:30,
-    marginBottom:30,
-    marginLeft:10,
-    marginRight:10,
+    // marginTop:30,
+    // marginBottom:30,
+    // marginLeft:10,
+    // marginRight:10,
+
 
     ...Platform.select({
       ios: {

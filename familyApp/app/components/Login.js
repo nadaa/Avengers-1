@@ -31,13 +31,8 @@ export default class Login extends React.Component {
     AsyncStorage.setItem('email',(userInfo.email));
     AsyncStorage.setItem('role',(userInfo.role));
     AsyncStorage.setItem('familyid',(userInfo.familyId));
-    
-
   }
-
-      
-	
-  sendLogin(){
+ sendLogin(){
      var that=this;
      //console.log('hi',role)
           const { navigate } = this.props.navigation;
@@ -138,8 +133,6 @@ wrapper: {
 },
 container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
     backgroundColor: '#2896d3',
     paddingLeft: 40,
     paddingRight: 40,
