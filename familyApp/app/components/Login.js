@@ -41,8 +41,8 @@ export default class Login extends React.Component {
      var that=this;
      //console.log('hi',role)
           const { navigate } = this.props.navigation;
-            axios.post('http://192.168.1.86:3000/api/login', {
-             //axios.post('http://10.0.2.2:3000/api/login',{
+           // axios.post('http://192.168.1.86:3000/api/login', {
+             axios.post('http://10.0.2.2:3000/api/login',{
              user:this.state
          })
          .then(async function (response) {

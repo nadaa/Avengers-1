@@ -1,5 +1,14 @@
 {
   "expo": {
-    "sdkVersion": "27.0.0"
-  }
+    "sdkVersion": "27.0.0",
+    "name": "FamilyApp",
+    "description": "your app desc",
+    "version":"1",
+   "ios": {
+      "bundleIdentifier": "com.famapp.myapp"
+    },
+    "android": {
+      "package": "com.famapp.myapp"
+    }
+}
 }
