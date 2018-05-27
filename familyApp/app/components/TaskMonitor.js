@@ -4,7 +4,7 @@ import axios from 'axios';
 import { List, ListItem,CheckBox,Dimensions } from "react-native-elements";
 import CheckboxGroup from 'react-native-checkbox-group';
 import {Select, Option} from "react-native-chooser";
-import Bar from './Bar';
+import BarParents from './BarParents';
 
 
 export default class TaskMonitor extends React.Component {
@@ -115,8 +115,8 @@ confirm(selected){
 	render() {
 		return (
 	<View style={{flex:1}}>
+	<BarParents navigation={this.props.navigation}/>
 	<ScrollView contentContainerStyle={styles.container}>
-		<Bar navigation={this.props.navigation}/>
 		<Text style={styles.title}> Monitor Kids' Tasks</Text>
 		<View style={styles.subcontainer}>
 		    <Select style={styles.select}

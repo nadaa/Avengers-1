@@ -25,7 +25,7 @@ const userRole={
 
 
 //export Bar from the react componant
-export default class Bar extends React.Component{
+export default class BarParents extends React.Component{
   //the constructor
   constructor(){
     //super for ES6
