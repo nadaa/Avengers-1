@@ -28,7 +28,7 @@ const familySchema=new mongoose.Schema({
    	workaddress:String,
     worknumber:String,
    	worktime:String,
-    salary:Number,
+    salary:{type:Number,default:0},
     marriageDate:String
 })
 
