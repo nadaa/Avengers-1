@@ -77,11 +77,11 @@ export default class Finance extends React.Component{
     console.log('FRONT END EDIT')
     axios.post('http://192.168.1.82:3000/api/editFinanceData', {state:this.state})
     .then(function (res) {
-      alert(res.request._response)
+      //alert(res.request._response)
     })
     .catch(function (err) {
       console.log(err);
-      alert(res.request._response)
+      alert("Failed to add or edit or delete")
     });
   }
   calculateTotalMoney(){
@@ -92,6 +92,8 @@ export default class Finance extends React.Component{
     this.setState({tableTotal : ['Total',total]});
   }
   handleCancelAdd(){
+    this.state.addEditName='';
+    this.state.addEditCost='';
     this.setState({ addDialogVisible: false });
   };
   handleAdd(){
@@ -116,6 +118,7 @@ export default class Finance extends React.Component{
         this.calculateTotalMoney();
         this.state.addEditName='';
         this.state.addEditCost='';
+        this.editFinanceData()
         this.setState({ addDialogVisible: false });
       }
     }
@@ -141,8 +144,9 @@ export default class Finance extends React.Component{
     }
     this.setState({addEditCost: newNumber});
   }
-
   handleCancelEdit(){
+    this.state.addEditName='';
+    this.state.addEditCost='';
     this.setState({ editDialogVisible: false });
   };
   handleEdit(){
@@ -162,7 +166,9 @@ export default class Finance extends React.Component{
       this.calculateTotalMoney();
       this.state.editName='';
       this.state.addEditCost='';
+      this.state.addEditName='';
       index=0;
+      this.editFinanceData()
       this.setState({ editDialogVisible: false });
     }
   };
@@ -188,6 +194,7 @@ export default class Finance extends React.Component{
       this.calculateTotalMoney();
       this.state.deleteName='';
       index=0;
+      this.editFinanceData()
       this.setState({ deleteDialogVisible: false });
     }
   };
