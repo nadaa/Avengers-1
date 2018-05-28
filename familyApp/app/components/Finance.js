@@ -97,7 +97,7 @@ export default class Finance extends React.Component{
     this.setState({ addDialogVisible: false });
   };
   handleAdd(){
-    if (this.state.tableName.length>11) {
+    if (this.state.tableName.length>7) {
       alert('There is so much exist ... please delete first to can add');
     }else{
       //need to work on it
@@ -228,7 +228,7 @@ export default class Finance extends React.Component{
               Insert the name and cost to add it
             </Dialog.Description>
             <View style={styles.textInputDialogView}>
-              <TextInput placeholder='Name' style={styles.textInput} maxLength={15}
+              <TextInput placeholder='Category' style={styles.textInput} maxLength={15}
               onChangeText={(name)=> this.onAddEditName(name)} value={this.state.addEditName}></TextInput>
               <TextInput placeholder='Cost' style={styles.textInput} maxLength={6} keyboardType='numeric' 
               onChangeText={(value)=> this.onAddEditCost(value)} value={this.state.addEditCost} ></TextInput>
@@ -258,7 +258,7 @@ export default class Finance extends React.Component{
                   return (<Picker.Item label={name[0]} value={name[0]} key={index}/>) 
                 })}
               </Picker>
-              <TextInput placeholder='Name' style={styles.textInput} maxLength={15}
+              <TextInput placeholder='Category' style={styles.textInput} maxLength={15}
               onChangeText={(name)=> this.onAddEditName(name)} value={this.state.addEditName}></TextInput>
               <TextInput placeholder='Cost' style={styles.textInput} maxLength={6} keyboardType='numeric' 
               onChangeText={(value)=> this.onAddEditCost(value)} value={this.state.addEditCost} ></TextInput>
@@ -295,13 +295,6 @@ export default class Finance extends React.Component{
               </View>
             </Dialog.Container>
         </View>
-        <Text style={styles.textBtnDelete}>{this.state.id}</Text>
-        <TouchableOpacity style={styles.btnAdd} onPress={this.editFinanceData.bind(this)}>
-          <Text style={styles.textBtnAdd}>edit data base</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.btnEdit} onPress={this.getFinanceData.bind(this)}>
-          <Text style={styles.textBtnEdit}>get data base</Text>
-        </TouchableOpacity>
       </View>
     );
   }
