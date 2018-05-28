@@ -115,7 +115,9 @@ componentDidMount(){
                 <View style={styles.centerComponent}>
 
                   <Text style={styles.textIconDone}>{this.props.p}%</Text>
+
                   <Text style={styles.textUnderIcon}>
+
                     Progress
                   </Text>
                 </View>

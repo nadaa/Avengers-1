@@ -13,8 +13,8 @@ import {
 import axios from 'axios';  
 import { createStackNavigator } from 'react-navigation';
 import SignUp from './SignUp';
-import DrawerKids from './DrawerKids';
-import Drawer from './Drawer';
+//import DrawerKids from './DrawerKids';
+// import Drawer from './Drawer';
 export default class Login extends React.Component {
 
   constructor(props){
@@ -35,9 +35,11 @@ export default class Login extends React.Component {
  sendLogin(){
      var that=this;
           const { navigate } = this.props.navigation;
+
             //axios.post('http://192.168.0.84:3000/api/login', {
              //axios.post('http://192.168.1.86:3000/api/login',{
             axios.post(global.ip+'/login',{
+
              user:this.state
          })
          .then(async function (response) {
@@ -71,7 +73,7 @@ export default class Login extends React.Component {
 
   render() {
     //jozaa
-    const { navigate } = this.props.navigation;
+    
     return (
 
       <ImageBackground
@@ -107,7 +109,9 @@ export default class Login extends React.Component {
     	<Text>LOGIN</Text>
     	</TouchableOpacity>
     	 <Text style={{color: 'black', paddingTop:20,fontSize: 15}}
-        onPress={() =>  navigate('SignUp')}>
+
+        onPress={() =>  this.props.navigation('SignUp')}>
+
           Create Account 
              </Text>
     </ScrollView>

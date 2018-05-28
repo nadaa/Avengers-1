@@ -13,10 +13,7 @@ import BarParents from './app/components/BarParents';
 import Shortage from './app/components/Shortage'
 const Application=  createStackNavigator({
   //i change it for testing (Jozaa)
-  // Home: { screen: Login2 },
-  
- // BarParents:{screen:BarParents},
-  Login:{ screen: Login },
+
   Drawer: { screen: Drawer },
   DrawerKids: { screen: DrawerKids },
   TaskMonitor:{screen:TaskMonitor},

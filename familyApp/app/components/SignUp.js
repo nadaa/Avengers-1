@@ -120,7 +120,6 @@ onSelect(value, label) {
 
 
   render() {
-  	const { navigate } = this.props.navigation;
     return (
       <ImageBackground
       source={{uri: 'https://images.pexels.com/photos/1018137/pexels-photo-1018137.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'}}
@@ -199,7 +198,9 @@ onSelect(value, label) {
     	<Text>SignUp</Text>
     	</TouchableOpacity>
          <Text style={{color: 'black', paddingTop:20,fontSize: 15}}
-        onPress={() =>  navigate('Login')}>
+
+        onPress={() =>  this.props.navigation('Login')}>
+
           I have already account 
              </Text>
     </ScrollView>

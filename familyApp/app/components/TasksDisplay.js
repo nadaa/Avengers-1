@@ -25,7 +25,9 @@ export default class TasksDisplay extends React.Component {
 	changeTaskStatus(selected){
 		//console.log(selected);
 		var taskId=this.state.kidTasks[selected]._id;
+
 		axios.post(global.ip+'/toggletask',{taskId:taskId})
+
 		.then((response)=>{
 			alert("success, status was changed");
 			this.getTasks();
@@ -41,7 +43,9 @@ export default class TasksDisplay extends React.Component {
 
 	async getTasks(){
 		var kidEmail=await AsyncStorage.getItem('email');
+
 		axios.post(global.ip+'/gettasks',{kidemail:kidEmail
+
 		})
 		.then((response) =>{
 			console.log(response.data);
@@ -93,7 +97,9 @@ export default class TasksDisplay extends React.Component {
 		return (
 			<ScrollView contentContainerStyle={{backgroundColor	:'#2896d3',flex:1}} >
 			 <Bar p={this.state.progress} navigation={this.props.navigation}/>
+
 				<Card title="My Tasks" titleStyle={{fontSize:26}}>
+
 			     {this.state.kidTasks.map((t,index)=>{
 				  return(<View key={index} style={{borderWidth:1, borderColor:'#E0E0E0'}}>
 				  	<CheckBox key={index}
@@ -105,7 +111,9 @@ export default class TasksDisplay extends React.Component {
 				</View>)}
 				)}
 
+
 			     </Card>
+
 
 
 	    	</ScrollView>
@@ -139,11 +147,13 @@ const styles = StyleSheet.create({
 	  strikeText: {
 	    color: '#bbb',
 	    textDecorationLine: 'line-through',
+
 	    fontSize:18,
 	  },
 	  unstrikeText: {
 	    color: "#29323c",
 	    fontSize:18,
+
 	  },
 
 	  title: {

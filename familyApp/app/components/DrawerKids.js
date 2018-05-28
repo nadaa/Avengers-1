@@ -7,11 +7,12 @@ import { createDrawerNavigator } from 'react-navigation'
 
 import Tasks from './Tasks';
 import UserInfo from './UserInfo';
-import Bar from './Bar';
+//import Bar from './Bar';
 
 import Shortage from './Shortage';
 import TasksDisplay from './TasksDisplay';
 import ShortageNote from './ShortageNote'
+import Login from './Login';
 
 const KidsDrawer=createDrawerNavigator(
   {
@@ -26,6 +27,9 @@ const KidsDrawer=createDrawerNavigator(
     // },
     Shortage:{
      screen:Shortage,
+    },
+     Logout:{
+      screen:Login,
     },
     
     // ShortageNote:{
