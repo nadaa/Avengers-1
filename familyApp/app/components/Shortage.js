@@ -36,7 +36,7 @@ export default class Shortage extends React.Component {
 
   render() {
    let notes=this.state.needArray.map((val,key)=>{
-      return <ShortageNote key={key} keyval={key} val={val} deleteMethod ={()=>this.deleteNote(key)} />
+      return <ShortageNote key={key} keyval={key} val={val} deleteMethod ={()=>this.deleteMethod(key)} />
     })
     return (
   <View style={styles.container}>
@@ -70,7 +70,7 @@ export default class Shortage extends React.Component {
     //axios.get('http://192.168.0.84:3000/api/shortage')
     var familyId=await AsyncStorage.getItem('familyid');
     console.log(familyId);
-    axios.post('http://10.0.2.2:3000/api/getshortage',{familyId:familyId}) 
+    axios.post('http://192.168.1.86:3000/api/getshortage',{familyId:familyId}) 
     .then((response) =>{
       console.log(response);
       
@@ -100,19 +100,20 @@ export default class Shortage extends React.Component {
 
    
    async addNeed(){
-     
+      const {navigate}=this.props.navigation;
      var that=this;
      var familyId = await AsyncStorage.getItem('familyid')
-      const {navigate}=this.props.navigation;
-    if(this.state.needText){
-      var d=new Date()
      
-     //axios.post('http://192.168.0.84:3000/api/shortage', 
-     axios.post('http://10.0.2.2:3000/api/shortage',
+    if(this.state.needText){
+      //var d=new Date()
+     
+     axios.post('http://192.168.1.86:3000/api/shortage', 
+    // axios.post('http://10.0.2.2:3000/api/shortage',
       {
         need:this.state.needText,
         familyId:familyId,
       })
+     //console.log('need')
     .then(function (response) {
       if(response.data.msg==='success'){
         alert('success')
@@ -131,20 +132,20 @@ export default class Shortage extends React.Component {
       this.setState({needText:''})
     }
   }
-  async deleteNote(key){
-   var familyId = await AsyncStorage.getItem('familyid')
-      const {navigate}=this.props.navigation;
-    if(this.state.needText){
-      var d=new Date()
+  async deleteMethod(key){
+    this.state.needArray.splice(key,1)
+    this.setState({needArray:this.state.needArray})
+   var familyId = await AsyncStorage.getItem('familyid');
      
-     axios.post('http://192.168.0.84:3000/api/shortage/delete', 
+    axios.post('http://192.168.1.86:3000/api/deleteshortage', 
       {
         need:this.state.needText,
         familyId:familyId,
+        key:key
       })
+  
     .then(function (response) {
       if(response.data.msg==='success'){
-        alert('success')
         this.getData();
       
       }
@@ -158,13 +159,7 @@ export default class Shortage extends React.Component {
     });
 
       this.setState({needText:''})
-    }
-    this.state.needArray.splice(key,1)
-    this.setState({needArray:this.state.needArray})
   }
-
-
- 
 }
 
 const styles = StyleSheet.create({

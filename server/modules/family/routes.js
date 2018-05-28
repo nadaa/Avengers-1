@@ -76,6 +76,7 @@ appRouter.route('/api/getkidsid').post((req,res)=>{
 });
 
 appRouter.route('/api/shortage').post((req,res)=>{
+  console.log('ghghjghjg')
   appControllers.sendShortage(req,res);
 })
 
@@ -86,7 +87,8 @@ appRouter.route('/api/getshortage').post((req,res)=>{
 
 
 
-appRouter.route('/api/shortage/delete').post((req,res)=>{
+appRouter.route('/api/deleteshortage').post((req,res)=>{
+  console.log("dlete",req.body)
   appControllers.deleteShortage(req,res);
 })
 // //for test jozaa
