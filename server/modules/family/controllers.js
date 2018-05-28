@@ -266,10 +266,35 @@ exports.getData=function(req, res){
   })
 }
 
+exports.getFinanceData=function(req, res){
+  //console.log('DATA BASE GET');
+  var state=req.body.state;
+  models.Finance.findOne({'familyId':state.id},function(err, data){
+    if(data){
+      //console.log("DATA: ",data)
+      res.send(data);
+    }else{
+      var newFinance=new models.Finance({
+          category:[],
+          cost:[],
+          familyId:state.id
+      });
+      newFinance.save(function(err){
+        if(err){
+          console.log("error in adding new");
+          res.send("error in adding new");
+        }else{
+          console.log("success in adding new");
+          res.send(newFinance);
+        }
+      })
+    }
+ })
+}
 exports.editFinanceData=function(req, res){
-  console.log('DATA BASE')
-  var state=req.body.state
-  console.log(state)
+  //console.log('DATA BASE');
+  var state=req.body.state;
+  //console.log(state);
   models.Finance.findOne({'familyId':state.id},function(err, data){
     if(data){
       data.category=state.tableName;
@@ -277,9 +302,10 @@ exports.editFinanceData=function(req, res){
       data.save(function(err){
         if(err){
           console.log("error in updating");
-        }
-        else{
+          res.send("error in updating");
+        }else{
           console.log("success updating");
+          res.send("success updating");
         }
       }) 
     }else{
@@ -290,9 +316,11 @@ exports.editFinanceData=function(req, res){
       });
       newFinance.save(function(err){
         if(err){
-          console.log("error in adding new")
+          console.log("error in adding new");
+          res.send("error in adding new");
         }else{
           console.log("success in adding new");
+          res.send("success in adding new");
         }
       })
     }
@@ -300,6 +328,3 @@ exports.editFinanceData=function(req, res){
 }
 
 
-  exports.getFinanceData=function(req, res){
- 
-}

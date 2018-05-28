@@ -98,10 +98,11 @@ appRouter.route('/getData').post((req,res)=>{
   appControllers.getData(req,res);
 })
 appRouter.route('/api/getFinanceData').post((req,res)=>{
+  //console.log('ROUTER GET FINANCE');
   appControllers.getFinanceData(req,res);
 })
 appRouter.route('/api/editFinanceData').post((req,res)=>{
-  console.log('ROUTER')
+  //console.log('ROUTER EDIT FINANCE');
   appControllers.editFinanceData(req,res);
 })
 

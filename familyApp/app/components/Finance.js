@@ -18,10 +18,12 @@ export default class Finance extends React.Component{
     //super for ES6
     super();
     //all the data save before to can show in the bar
+    //['Water'], ['Electricity'], ['Shortage']
+    //[12],     [30],            [40]
     this.state={
       tableHead:  ['Category', 'Cost'],
-      tableName: [['Water'], ['Electricity'], ['Shortage']],
-      tableCost:  [[12],     [30],            [40],       ],
+      tableName: [],
+      tableCost:  [],
       tableTotal:['Total',0],
       //for show Dialog Add
       addDialogVisible:false,
@@ -34,31 +36,52 @@ export default class Finance extends React.Component{
       id:'',
     };
     //auto call function when render this scren
-    this.calculateTotalMoney();
-    this.showId()
+    //this.calculateTotalMoney();
+    //this.showId()
+    // this.showId=this.showId.bind(this)
+    // this.getFinanceData=this.getFinanceData.bind(this)
   }
+  //auto call function when render this scren
+  componentWillMount(){
+    this.showId() 
+  }
+  showId=async()=>{
+    try{
+      let id=await AsyncStorage.getItem('familyId')
+      this.setState({id:id})
+      //alert('the email save is: ' + userEmail3)
+      this.getFinanceData()
+    }
+    catch(error){
+      alert(error)
+    }
+  } 
   getFinanceData(){
-    console.log('FRONT END')
-    alert('you call getFinanceData front end ')
-    axios.post('http://192.168.0.89:3000/api/getFinanceData', {id:this.state.id})
+    var that=this
+    //alert('FRONT END GET');
+    console.log('FRONT END GET')
+    axios.post('http://192.168.1.82:3000/api/getFinanceData', {state:this.state})
     .then(function (res) {
-      console.log('RESP',res)
+      that.setState({tableName:res.data.category})
+      that.setState({tableCost:res.data.cost})
+      that.calculateTotalMoney();
+      //console.log('sucess get the data from data base')
+      //alert(JSON.stringify(that.state.tableName))
     })
     .catch(function (err) {
       console.log(err);
-      alert(err);
+      alert(err)
     });
   }
   editFinanceData(){
-    console.log('FRONT END')
-    alert('you call editFinanceData front end ')
+    console.log('FRONT END EDIT')
     axios.post('http://192.168.1.82:3000/api/editFinanceData', {state:this.state})
     .then(function (res) {
-      console.log('RESP',res)
+      alert(res.request._response)
     })
     .catch(function (err) {
       console.log(err);
-      alert(err);
+      alert(res.request._response)
     });
   }
   calculateTotalMoney(){
@@ -66,9 +89,7 @@ export default class Finance extends React.Component{
     for (var i = 0; i < this.state.tableCost.length; i++) {
       total+=this.state.tableCost[i][0];
     }
-    //cant use set state so we use this .state
-    this.state.tableTotal[1]=total;
-    // this.setState({tableTotal : ['Total',total]});
+    this.setState({tableTotal : ['Total',total]});
   }
   handleCancelAdd(){
     this.setState({ addDialogVisible: false });
@@ -173,16 +194,7 @@ export default class Finance extends React.Component{
   deleteFromFinance(){
     this.setState({ deleteDialogVisible: true });
   };
-  showId=async()=>{
-    try{
-      let id=await AsyncStorage.getItem('familyId')
-      this.setState({id:id})
-      //alert('the email save is: ' + userEmail3)
-    }
-    catch(error){
-      alert(error)
-    }
-  } 
+
   render() {
     //what return
     return (
@@ -278,8 +290,11 @@ export default class Finance extends React.Component{
         </View>
         <Text style={styles.textBtnDelete}>{this.state.id}</Text>
         <TouchableOpacity style={styles.btnAdd} onPress={this.editFinanceData.bind(this)}>
-            <Text style={styles.textBtnAdd}>data base</Text>
-          </TouchableOpacity>
+          <Text style={styles.textBtnAdd}>edit data base</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.btnEdit} onPress={this.getFinanceData.bind(this)}>
+          <Text style={styles.textBtnEdit}>get data base</Text>
+        </TouchableOpacity>
       </View>
     );
   }
