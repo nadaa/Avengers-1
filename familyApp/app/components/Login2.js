@@ -7,15 +7,15 @@ export default class Login2 extends React.Component {
   constructor(props){
     super(props);
     this.state={
-      email:'abdo@gmail.com',
-      password:'123',
+      email:'alex@yahoo.com',
+      password:'1234567',
     }
   }
   //1.82         0.89
   sendLogin(){
     this.saveData()
     const {navigate}=this.props.navigation;
-    axios.post('http://10.0.2.2:3000/login2', {user:this.state})
+    axios.post('http://192.168.1.82:3000/login2', {user:this.state})
     .then(function (response) {
       if(response.data.msg==="success login"){
         //console.log('go to drawer')
