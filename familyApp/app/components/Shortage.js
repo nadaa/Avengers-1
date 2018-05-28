@@ -70,7 +70,7 @@ export default class Shortage extends React.Component {
     //axios.get('http://192.168.0.84:3000/api/shortage')
     var familyId=await AsyncStorage.getItem('familyid');
     console.log(familyId);
-    axios.post('http://192.168.1.86:3000/api/getshortage',{familyId:familyId}) 
+    axios.post(global.ip+'/getshortage',{familyId:familyId}) 
     .then((response) =>{
       console.log(response);
       

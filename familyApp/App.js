@@ -13,7 +13,7 @@ import Shortage from './app/components/Shortage';
 import Login2 from './app/components/Login2';
 const Application=  createStackNavigator({
   //i change it for testing (Jozaa)
-  Home: { screen: Login2 },
+  // Home: { screen: Login2 },
   Drawer: { screen: Drawer },
   DrawerKids: { screen: DrawerKids },
   TaskMonitor:{screen:TaskMonitor},
@@ -30,7 +30,8 @@ const Application=  createStackNavigator({
 export default class App extends React.Component {
   constructor(props){
     super(props);
-    global.ip='http://192.168.8.105:3000/api'; //nada
+    global.ip='http://10.0.2.2:3000/api'; //nada
+    // global.ip='http://192.168.8.105:3000/api'; //jozaa
   }
   render() {
     return (
