@@ -2,7 +2,9 @@ const mongoose = require('mongoose');
 	//to avoide deprecating warrings of mongodb promise
 mongoose.Promise=global.Promise;
 
-mongoose.connect('mongodb://localhost/homeDb');
+// mongoose.connect('mongodb://localhost/homeDb');
+mongoose.connect('mongodb://avengers:123456@ds137740.mlab.com:37740/avengers');
+
  
 const db = mongoose.connection;
 
