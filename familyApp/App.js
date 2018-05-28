@@ -9,11 +9,12 @@ import DrawerKids from './app/components/DrawerKids';
 import Login2 from './app/components/Login2';
 import AssignKidsTasks from './app/components/AssignKidsTasks';
 import TaskMonitor from './app/components/TaskMonitor';
-import Bar from './app/components/Bar';
+import BarParents from './app/components/BarParents';
+import Shortage from './app/components/Shortage'
 const Application=  createStackNavigator({
   //i change it for testing (Jozaa)
-  Home: { screen: Login },
-  // Login:{ screen: Login },
+  // Home: { screen: Login2 },
+  Login:{ screen: Login },
   Drawer: { screen: Drawer },
   DrawerKids: { screen: DrawerKids },
   TaskMonitor:{screen:TaskMonitor},
@@ -23,7 +24,7 @@ const Application=  createStackNavigator({
   AssignKidsTasks:{screen:AssignKidsTasks},
 },{
   navigationOptions: {
-    header: false,
+    header: null,
   }
 });
 

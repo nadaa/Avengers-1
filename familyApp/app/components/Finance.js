@@ -21,6 +21,7 @@ export default class Finance extends React.Component{
     //['Water'], ['Electricity'], ['Shortage']
     //[12],     [30],            [40]
     this.state={
+
       tableHead:  ['Category', 'Cost'],
       tableName: [],
       tableCost:  [],
@@ -123,6 +124,20 @@ export default class Finance extends React.Component{
       }
     }
   };
+    editFinanceData(){
+    console.log('FRONT END')
+    alert('you call editFinanceData front end ')
+    axios.post('http://10.0.2.2:3000/api/editFinanceData', {state:this.state})
+    .then(function (res) {
+      console.log('RESP',res)
+   
+    })
+    .catch(function (err) {
+      console.log(err);
+      alert(err);
+    });
+  }
+
   addToFinance(){
     //alert('Add To Finance');
     this.setState({ addDialogVisible: true });
