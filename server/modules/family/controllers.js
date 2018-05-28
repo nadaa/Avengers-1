@@ -271,6 +271,33 @@ exports.getData=function(req, res){
   })
 }
 
+
+exports.getFinanceData=function(req, res){
+  //console.log('DATA BASE GET');
+  var state=req.body.state;
+  models.Finance.findOne({'familyId':state.id},function(err, data){
+    if(data){
+      //console.log("DATA: ",data)
+      res.send(data);
+    }else{
+      var newFinance=new models.Finance({
+          category:[],
+          cost:[],
+          familyId:state.id
+      });
+      newFinance.save(function(err){
+        if(err){
+          console.log("error in adding new");
+          res.send("error in adding new");
+        }else{
+          console.log("success in adding new");
+          res.send(newFinance);
+        }
+      })
+    }
+ })
+}
+
 exports.deleteShortage= function(req, res) {
 
   var familyId=req.body.familyId;
@@ -292,10 +319,11 @@ exports.deleteShortage= function(req, res) {
 
 }
 
+
 exports.editFinanceData=function(req, res){
-  console.log('DATA BASE')
- var state=req.body.state
- console.log(state)
+  //console.log('DATA BASE');
+  var state=req.body.state;
+  //console.log(state);
   models.Finance.findOne({'familyId':state.id},function(err, data){
     if(data){
       data.category=state.tableName;
@@ -303,46 +331,42 @@ exports.editFinanceData=function(req, res){
       data.save(function(err){
         if(err){
           console.log("error in updating");
-        }
-        else{
+          res.send("error in updating");
+        }else{
           console.log("success updating");
+          res.send("success updating");
         }
-      }) //save
+      }) 
+    }else{
+      var newFinance=new models.Finance({
+          category:state.tableName,
+          cost:state.tableCost,
+          familyId:state.id
+      });
+      newFinance.save(function(err){
+        if(err){
+          console.log("error in adding new");
+          res.send("error in adding new");
+        }else{
+          console.log("success in adding new");
+          res.send("success in adding new");
+        }
+      })
     }
-    else{
-      //new
-          var newFinance=new models.Finance({
-              category:state.tableName,
-             cost:state.tableCost,
-             familyId:state.id
-           });
-          newFinance.save(function(err){
-            if(err){
-              console.log("error in adding new")
-            }
-            else{
-              console.log("success in adding new");
-            }
-          })
-    }
-  })
+ })
+}
+
+exports.deleteShortage= function(req, res) {
+  models.Shortage.remove({_id:req.body.familyid},function(err,data){
+   if(err){
+     res.status(500).send('error');
+   }
+   else{
+    res.status(201).send('success');
+  }
+})
 }
 
    
-  
 
 
-
-  exports.getFinanceData=function(req, res){
-  console.log('DATA BASE')
-  console.log(req.body,req.body.id)
-  models.Finance.findOne({'familyId':req.body.id},function(err, data){
-    
-    if (err) {
-      res.send(err)
-    }
-    var allData=data
-      console.log('DATA: ',allData);
-      res.send(allData) 
-  })
-}
