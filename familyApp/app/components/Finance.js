@@ -10,37 +10,26 @@ import axios from 'axios';
 import Dialog from "react-native-dialog";
 //import Bar from Bar component
 import Bar from './Bar';
-
 //export Home from the react componant
 export default class Finance extends React.Component{
   //the constructor
   constructor(){
     //super for ES6
     super();
-    //all the data save before to can show in the bar
-    //['Water'], ['Electricity'], ['Shortage']
-    //[12],     [30],            [40]
     this.state={
-
       tableHead:  ['Category', 'Cost'],
       tableName: [],
       tableCost:  [],
       tableTotal:['Total',0],
-      //for show Dialog Add
       addDialogVisible:false,
+      editDialogVisible:false,
+      deleteDialogVisible:false,
       addEditName:'',
       addEditCost:'',
-      editDialogVisible:false,
       editName:'',
-      deleteDialogVisible:false,
       deletetName:'',
       id:'',
     };
-    //auto call function when render this scren
-    //this.calculateTotalMoney();
-    //this.showId()
-    // this.showId=this.showId.bind(this)
-    // this.getFinanceData=this.getFinanceData.bind(this)
   }
   //auto call function when render this scren
   componentWillMount(){
@@ -61,7 +50,7 @@ export default class Finance extends React.Component{
     var that=this
     //alert('FRONT END GET');
     console.log('FRONT END GET')
-    axios.post('http://192.168.1.82:3000/api/getFinanceData', {state:this.state})
+    axios.post(global.ip+'/getFinanceData', {state:this.state})
     .then(function (res) {
       that.setState({tableName:res.data.category})
       that.setState({tableCost:res.data.cost})
@@ -76,7 +65,7 @@ export default class Finance extends React.Component{
   }
   editFinanceData(){
     console.log('FRONT END EDIT')
-    axios.post('http://192.168.1.82:3000/api/editFinanceData', {state:this.state})
+    axios.post(global.ip+'/editFinanceData', {state:this.state})
     .then(function (res) {
       //alert(res.request._response)
     })
@@ -107,13 +96,6 @@ export default class Finance extends React.Component{
       } else if(this.state.addEditCost.length===0){
         alert('Please insert the cost');
       } else {
-        //n:name ..... c:cost
-        //var n=this.state.tableName;
-        //n.push([this.state.addEditName]);
-        //this.setState({tableName:n});
-        //var c=this.state.tableName;
-        //c.push([JSON.parse(this.state.addEditCost)]);
-        //this.setState({tableCost:c});
         this.state.tableName.push([this.state.addEditName]);
         this.state.tableCost.push([JSON.parse(this.state.addEditCost)]);
         this.calculateTotalMoney();
@@ -124,20 +106,6 @@ export default class Finance extends React.Component{
       }
     }
   };
-    editFinanceData(){
-    console.log('FRONT END')
-    //alert('you call editFinanceData front end ')
-    axios.post('http://192.168.1.82:3000/api/editFinanceData', {state:this.state})
-    .then(function (res) {
-      console.log('RESP',res)
-   
-    })
-    .catch(function (err) {
-      console.log(err);
-      alert(err);
-    });
-  }
-
   addToFinance(){
     //alert('Add To Finance');
     this.setState({ addDialogVisible: true });
@@ -190,7 +158,6 @@ export default class Finance extends React.Component{
   editFromFinance(){
     this.setState({ editDialogVisible: true });
   };
-
   handleCancelDelete(){
     this.setState({ deleteDialogVisible: false });
   };
@@ -216,7 +183,6 @@ export default class Finance extends React.Component{
   deleteFromFinance(){
     this.setState({ deleteDialogVisible: true });
   };
-
   render() {
     //what return
     return (
@@ -314,7 +280,6 @@ export default class Finance extends React.Component{
     );
   }
 }
-
 const styles = StyleSheet.create({
   allPage: {
     flex: 1,
