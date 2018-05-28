@@ -38,7 +38,7 @@ export default class Login extends React.Component {
           const { navigate } = this.props.navigation;
 
             //axios.post('http://192.168.0.84:3000/api/login', {
-             axios.post('http://10.0.2.2:3000/api/login',{
+             axios.post('http://192.168.1.86:3000/api/login',{
 
              user:this.state
          })

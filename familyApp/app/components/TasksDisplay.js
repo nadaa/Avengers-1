@@ -24,7 +24,7 @@ export default class TasksDisplay extends React.Component {
 	changeTaskStatus(selected){
 		//console.log(selected);
 		var taskId=this.state.kidTasks[selected]._id;
-		axios.post('http://10.0.2.2:3000/api/toggletask',{taskId:taskId})
+		axios.post('http://192.168.1.86:3000/api/toggletask',{taskId:taskId})
 		.then((response)=>{
 			alert("success, status was changed");
 			this.getTasks();
@@ -40,7 +40,7 @@ export default class TasksDisplay extends React.Component {
 
 	async getTasks(){
 		var kidEmail=await AsyncStorage.getItem('email');
-		axios.post('http://10.0.2.2:3000/api/gettasks',{kidemail:kidEmail
+		axios.post('http://192.168.1.86:3000/api/gettasks',{kidemail:kidEmail
 		})
 		.then((response) =>{
 			console.log(response.data);

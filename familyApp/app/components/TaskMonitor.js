@@ -25,7 +25,7 @@ export default class TaskMonitor extends React.Component {
 async getKids(){
 	var familyId= await AsyncStorage.getItem('familyid')
 //	console.log(familyId)
-	axios.get(`http://10.0.2.2:3000/api/getkids/${familyId}`)
+	axios.get(`http://192.168.1.86:3000/api/getkids/${familyId}`)
 	//axios.get(`http://192.168.1.86:3000/api/getkids/${familyId}`)
 		.then((response) =>{
 			this.setState({kids:response.data});
@@ -53,7 +53,7 @@ showTasks(kidName){
 				kidIndex=i;
 		}
 			var kidEmail=this.state.kids[kidIndex].email;
-			axios.post('http://10.0.2.2:3000/api/gettasks',{kidemail:kidEmail
+			axios.post('http://192.168.1.86:3000/api/gettasks',{kidemail:kidEmail
 			})
 			.then((response) =>{
 				console.log(response.data);
@@ -83,7 +83,7 @@ setKidTask(){
 			kidIndex=i;
 	}
 	//axios.post('http://192.168.1.86:3000/api/setkidtask',{
-	axios.post('http://10.0.2.2:3000/api/setkidtask',{
+	axios.post('http://192.168.1.86:3000/api/setkidtask',{
 		kidemail:this.state.kids[kidIndex].email,
 		task:this.state.taskText,
 		//familyId:this.state.kids[kidIndex].familyId	
@@ -102,7 +102,7 @@ setKidTask(){
 
 confirm(selected){
 	if(this.state.checked[selected]){
-		axios.post('http://10.0.2.2:3000/api/confirmtask',{taskId:this.state.kidTasks[selected]._id})
+		axios.post('http://192.168.1.86:3000/api/confirmtask',{taskId:this.state.kidTasks[selected]._id})
 			.then((response)=>{
 				if(response.data.deleted){
 					this.showTasks();

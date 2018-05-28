@@ -271,6 +271,7 @@ exports.getData=function(req, res){
   })
 }
 
+
 exports.getFinanceData=function(req, res){
   //console.log('DATA BASE GET');
   var state=req.body.state;
@@ -296,6 +297,29 @@ exports.getFinanceData=function(req, res){
     }
  })
 }
+
+exports.deleteShortage= function(req, res) {
+
+  var familyId=req.body.familyId;
+  var key=req.body.key;
+  models.Shortage.findOne({familyId:familyId},function(err,data){
+    if(err){
+      res.status(500).send(err);
+    }
+    else{
+      data.needs.splice(key,1);
+      data.save(function(err){
+        if(err){
+          res.status(500).send(err)
+        }
+      })
+      res.status(200).send('success');
+    }
+  })
+
+}
+
+
 exports.editFinanceData=function(req, res){
   //console.log('DATA BASE');
   var state=req.body.state;
