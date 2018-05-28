@@ -18,39 +18,87 @@ export default class Finance extends React.Component{
     //super for ES6
     super();
     //all the data save before to can show in the bar
+    //['Water'], ['Electricity'], ['Shortage']
+    //[12],     [30],            [40]
     this.state={
-      tableHead:  ['Name', 'Cost'],
-      tableName: [['Water'], ['Electricity'], ['Shortage']],
-      tableCost:  [[12],     [30],            [40],       ],
+
+      tableHead:  ['Category', 'Cost'],
+      tableName: [],
+      tableCost:  [],
       tableTotal:['Total',0],
       //for show Dialog Add
-      addDialogVisible: false,
+      addDialogVisible:false,
       addEditName:'',
       addEditCost:'',
-      editDialogVisible: false,
+      editDialogVisible:false,
       editName:'',
       deleteDialogVisible:false,
       deletetName:'',
       id:'',
     };
     //auto call function when render this scren
-    this.calculateTotalMoney();
-    this.showId()
+    //this.calculateTotalMoney();
+    //this.showId()
+    // this.showId=this.showId.bind(this)
+    // this.getFinanceData=this.getFinanceData.bind(this)
+  }
+  //auto call function when render this scren
+  componentWillMount(){
+    this.showId() 
+  }
+  showId=async()=>{
+    try{
+      let id=await AsyncStorage.getItem('familyId')
+      this.setState({id:id})
+      //alert('the email save is: ' + userEmail3)
+      this.getFinanceData()
+    }
+    catch(error){
+      alert(error)
+    }
+  } 
+  getFinanceData(){
+    var that=this
+    //alert('FRONT END GET');
+    console.log('FRONT END GET')
+    axios.post('http://192.168.1.82:3000/api/getFinanceData', {state:this.state})
+    .then(function (res) {
+      that.setState({tableName:res.data.category})
+      that.setState({tableCost:res.data.cost})
+      that.calculateTotalMoney();
+      //console.log('sucess get the data from data base')
+      //alert(JSON.stringify(that.state.tableName))
+    })
+    .catch(function (err) {
+      console.log(err);
+      alert(err)
+    });
+  }
+  editFinanceData(){
+    console.log('FRONT END EDIT')
+    axios.post('http://192.168.1.82:3000/api/editFinanceData', {state:this.state})
+    .then(function (res) {
+      //alert(res.request._response)
+    })
+    .catch(function (err) {
+      console.log(err);
+      alert("Failed to add or edit or delete")
+    });
   }
   calculateTotalMoney(){
     var total=0;
     for (var i = 0; i < this.state.tableCost.length; i++) {
       total+=this.state.tableCost[i][0];
     }
-    //cant use set state so we use this .state
-    this.state.tableTotal[1]=total;
-    // this.setState({tableTotal : ['Total',total]});
+    this.setState({tableTotal : ['Total',total]});
   }
   handleCancelAdd(){
+    this.state.addEditName='';
+    this.state.addEditCost='';
     this.setState({ addDialogVisible: false });
   };
   handleAdd(){
-    if (this.state.tableName.length>11) {
+    if (this.state.tableName.length>7) {
       alert('There is so much exist ... please delete first to can add');
     }else{
       //need to work on it
@@ -71,10 +119,25 @@ export default class Finance extends React.Component{
         this.calculateTotalMoney();
         this.state.addEditName='';
         this.state.addEditCost='';
+        this.editFinanceData()
         this.setState({ addDialogVisible: false });
       }
     }
   };
+    editFinanceData(){
+    console.log('FRONT END')
+    alert('you call editFinanceData front end ')
+    axios.post('http://10.0.2.2:3000/api/editFinanceData', {state:this.state})
+    .then(function (res) {
+      console.log('RESP',res)
+   
+    })
+    .catch(function (err) {
+      console.log(err);
+      alert(err);
+    });
+  }
+
   addToFinance(){
     //alert('Add To Finance');
     this.setState({ addDialogVisible: true });
@@ -86,25 +149,19 @@ export default class Finance extends React.Component{
     this.setState({addEditName: name});
   }
   onAddEditCost(value) {
-    //all this function to be sure the input is a valid number
+     //all this function to be sure the input is a valid number
     let newNumber = '';
-    let numbers = '0123456789.';
+    let numbers = '0123456789';
     for (var i = 0; i < value.length; i++) {
-        if ( numbers.indexOf(value[i]) > -1 ) {
-          if (newNumber.split('.').length<=1 || value[i]!=='.' ) {
-            if (newNumber.length>0 || value[i]!=='.') {
-               newNumber = newNumber + value[i];
-            }
-          }  
-        }
-    }
-    if (newNumber.length>(newNumber.indexOf('.')+3) && newNumber.indexOf('.')!==-1 ) {
-      newNumber=newNumber.slice(0,(newNumber.indexOf('.')+3));
+      if (numbers.indexOf(value[i]) > -1) {
+        newNumber = newNumber + value[i]; 
+      }
     }
     this.setState({addEditCost: newNumber});
   }
-
   handleCancelEdit(){
+    this.state.addEditName='';
+    this.state.addEditCost='';
     this.setState({ editDialogVisible: false });
   };
   handleEdit(){
@@ -124,7 +181,9 @@ export default class Finance extends React.Component{
       this.calculateTotalMoney();
       this.state.editName='';
       this.state.addEditCost='';
+      this.state.addEditName='';
       index=0;
+      this.editFinanceData()
       this.setState({ editDialogVisible: false });
     }
   };
@@ -150,22 +209,14 @@ export default class Finance extends React.Component{
       this.calculateTotalMoney();
       this.state.deleteName='';
       index=0;
+      this.editFinanceData()
       this.setState({ deleteDialogVisible: false });
     }
   };
   deleteFromFinance(){
     this.setState({ deleteDialogVisible: true });
   };
-  showId=async()=>{
-    try{
-      let id=await AsyncStorage.getItem('familyId')
-      this.setState({id:id})
-      //alert('the email save is: ' + userEmail3)
-    }
-    catch(error){
-      alert(error)
-    }
-  } 
+
   render() {
     //what return
     return (
@@ -192,7 +243,7 @@ export default class Finance extends React.Component{
               Insert the name and cost to add it
             </Dialog.Description>
             <View style={styles.textInputDialogView}>
-              <TextInput placeholder='Name' style={styles.textInput} maxLength={15}
+              <TextInput placeholder='Category' style={styles.textInput} maxLength={15}
               onChangeText={(name)=> this.onAddEditName(name)} value={this.state.addEditName}></TextInput>
               <TextInput placeholder='Cost' style={styles.textInput} maxLength={6} keyboardType='numeric' 
               onChangeText={(value)=> this.onAddEditCost(value)} value={this.state.addEditCost} ></TextInput>
@@ -222,7 +273,7 @@ export default class Finance extends React.Component{
                   return (<Picker.Item label={name[0]} value={name[0]} key={index}/>) 
                 })}
               </Picker>
-              <TextInput placeholder='Name' style={styles.textInput} maxLength={15}
+              <TextInput placeholder='Category' style={styles.textInput} maxLength={15}
               onChangeText={(name)=> this.onAddEditName(name)} value={this.state.addEditName}></TextInput>
               <TextInput placeholder='Cost' style={styles.textInput} maxLength={6} keyboardType='numeric' 
               onChangeText={(value)=> this.onAddEditCost(value)} value={this.state.addEditCost} ></TextInput>
@@ -259,7 +310,6 @@ export default class Finance extends React.Component{
               </View>
             </Dialog.Container>
         </View>
-        <Text style={styles.textBtnDelete}>{this.state.id}</Text>
       </View>
     );
   }

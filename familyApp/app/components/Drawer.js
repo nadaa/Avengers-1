@@ -34,9 +34,8 @@ const MyDrawer=createDrawerNavigator(
     Shortage:{
      screen:Shortage,
     },
-      
-    Try:{
-      screen:Try,
+    Logout:{
+      screen:Login,
     },
    
     /*
@@ -64,8 +63,8 @@ const MyDrawer=createDrawerNavigator(
 
 
     //                                  Try   Try2 Try3
-    initialRouteName:'Tasks',//Finance  Study Exam Outside
-    //initialRouteName:'Finance',
+    //Finance  Study Exam Outside
+    initialRouteName:'Finance',
     drawerPosition:'left',
     drawerWidth:200,
     drawerOpenRoute: 'DrawerOpen',

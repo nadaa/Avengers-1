@@ -36,7 +36,7 @@ export default class Shortage extends React.Component {
 
   render() {
    let notes=this.state.needArray.map((val,key)=>{
-      return <ShortageNote key={key} keyval={key} val={val} deleteMethod ={()=>this.deleteNote(key)} />
+      return <ShortageNote key={key} keyval={key} val={val} deleteMethod ={()=>this.deleteMethod(key)} />
     })
     return (
   <View style={styles.container}>
@@ -66,11 +66,13 @@ export default class Shortage extends React.Component {
   </View>
     );
   }
-  getData(){
-    axios.get('http://192.168.0.84:3000/api/shortage') 
-    
+  async getData(){
+    //axios.get('http://192.168.0.84:3000/api/shortage')
+    var familyId=await AsyncStorage.getItem('familyid');
+    console.log(familyId);
+    axios.post('http://192.168.1.86:3000/api/getshortage',{familyId:familyId}) 
     .then((response) =>{
-      //console.log(response);
+      console.log(response);
       
         this.setState({needArray:response.data.needs})
         console.log('needArray',this.state.needArray)
@@ -98,21 +100,24 @@ export default class Shortage extends React.Component {
 
    
    async addNeed(){
-     
-     var familyId = await AsyncStorage.getItem('familyid')
       const {navigate}=this.props.navigation;
-    if(this.state.needText){
-      var d=new Date()
+     var that=this;
+     var familyId = await AsyncStorage.getItem('familyid')
      
-     axios.post('http://192.168.0.84:3000/api/shortage', 
+    if(this.state.needText){
+      //var d=new Date()
+     
+     axios.post('http://192.168.1.86:3000/api/shortage', 
+    // axios.post('http://10.0.2.2:3000/api/shortage',
       {
         need:this.state.needText,
         familyId:familyId,
       })
+     //console.log('need')
     .then(function (response) {
       if(response.data.msg==='success'){
         alert('success')
-        this.getData();
+        that.getData();
       
       }
       else if(response.data.msg==='error'){
@@ -127,40 +132,34 @@ export default class Shortage extends React.Component {
       this.setState({needText:''})
     }
   }
-  async deleteNote(key){
-   var familyId = await AsyncStorage.getItem('familyid')
-      const {navigate}=this.props.navigation;
-    if(this.state.needText){
-      var d=new Date()
-     
-     axios.post('http://192.168.0.84:3000/api/shortage/delete', 
-      {
-        need:this.state.needText,
-        familyId:familyId,
-      })
-    .then(function (response) {
-      if(response.data.msg==='success'){
-        alert('success')
-        this.getData();
-      
-      }
-      else if(response.data.msg==='error'){
-        alert("error");
-      }
-    })
-    .catch(function (error) {
-      console.log(error);
-      alert(error);
-    });
-
-      this.setState({needText:''})
-    }
+  async deleteMethod(key){
     this.state.needArray.splice(key,1)
     this.setState({needArray:this.state.needArray})
+   var familyId = await AsyncStorage.getItem('familyid');
+     
+    axios.post('http://192.168.1.86:3000/api/deleteshortage', 
+      {
+        need:this.state.needText,
+        familyId:familyId,
+        key:key
+      })
+  
+    .then(function (response) {
+      if(response.data.msg==='success'){
+        this.getData();
+      
+      }
+      else if(response.data.msg==='error'){
+        alert("error");
+      }
+    })
+    .catch(function (error) {
+      console.log(error);
+      alert(error);
+    });
+
+      this.setState({needText:''})
   }
-
-
- 
 }
 
 const styles = StyleSheet.create({
@@ -169,7 +168,7 @@ container:{
      flex:1,
 },
 header:{
-      backgroundColor:'#e9963b',
+      backgroundColor:'#65737e',
       alignItems:'center',
       justifyContent:'center',
       borderBottomWidth:  10,
@@ -206,7 +205,7 @@ addButton:{
       zIndex:10,
       elevation:8,
       marginBottom:-45,
-      backgroundColor:'#e9963b', 
+      backgroundColor:'#65737e', 
 },
 addButtonText:{
       color:'#fff',
@@ -218,9 +217,9 @@ textInput:{
       color:'#fff',
       padding:40,
       paddingTop:40,
-      backgroundColor:'#f1c089',
+      backgroundColor:'#c0c5ce',
       borderTopWidth:2,
-      borderTopColor:'#ededed',
+      borderTopColor:'#c0c5ce',
 
 
 }
