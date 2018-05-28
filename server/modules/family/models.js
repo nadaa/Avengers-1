@@ -33,19 +33,28 @@ const familySchema=new mongoose.Schema({
 })
 
 const shortageSchema=new mongoose.Schema({
-	needs:[String],
+	needs:{type:[String],default:[]},
 	familyId:{type:String, index: { unique: true }},
+})
+
+
+const finance=new mongoose.Schema({
+	familyId:{type:String, index: { unique: true }},
+	category:[[String]],
+	cost:[[Number]],
 })
 
 var User=mongoose.model('User',userSchema);
 var Task=mongoose.model('Task',taskSchema);
 var Family=mongoose.model('Family',familySchema);
 var Shortage=mongoose.model('Shortage',shortageSchema);
+var Finance=mongoose.model('Finance',finance);
 
 module.exports={
 User:User,
 Task:Task,
 Family:Family,
 Shortage:Shortage,
+Finance:Finance,
 }
 

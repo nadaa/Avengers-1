@@ -66,11 +66,13 @@ export default class Shortage extends React.Component {
   </View>
     );
   }
-  getData(){
-    axios.get('http://192.168.0.84:3000/api/shortage') 
-    
+  async getData(){
+    //axios.get('http://192.168.0.84:3000/api/shortage')
+    var familyId=await AsyncStorage.getItem('familyid');
+    console.log(familyId);
+    axios.post('http://10.0.2.2:3000/api/getshortage',{familyId:familyId}) 
     .then((response) =>{
-      //console.log(response);
+      console.log(response);
       
         this.setState({needArray:response.data.needs})
         console.log('needArray',this.state.needArray)
@@ -99,12 +101,14 @@ export default class Shortage extends React.Component {
    
    async addNeed(){
      
+     var that=this;
      var familyId = await AsyncStorage.getItem('familyid')
       const {navigate}=this.props.navigation;
     if(this.state.needText){
       var d=new Date()
      
-     axios.post('http://192.168.0.84:3000/api/shortage', 
+     //axios.post('http://192.168.0.84:3000/api/shortage', 
+     axios.post('http://10.0.2.2:3000/api/shortage',
       {
         need:this.state.needText,
         familyId:familyId,
@@ -112,7 +116,7 @@ export default class Shortage extends React.Component {
     .then(function (response) {
       if(response.data.msg==='success'){
         alert('success')
-        this.getData();
+        that.getData();
       
       }
       else if(response.data.msg==='error'){

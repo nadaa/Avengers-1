@@ -20,8 +20,8 @@ export default class Login extends React.Component {
   constructor(props){
     super(props);
     this.state={
-      email:'',
-      password:'',
+      email:'nada@gmail.com',
+      password:'123',
     }
   }
 
@@ -31,19 +31,14 @@ export default class Login extends React.Component {
     AsyncStorage.setItem('email',(userInfo.email));
     AsyncStorage.setItem('role',(userInfo.role));
     AsyncStorage.setItem('familyid',(userInfo.familyId));
-    
-
   }
-
-      
-	
-  sendLogin(){
+ sendLogin(){
      var that=this;
      //console.log('hi',role)
           const { navigate } = this.props.navigation;
-  axios.post('http://192.168.1.86:3000/api/login', {
-           // axios.post('http://192.168.0.84:3000/api/login', {
-             //axios.post('http://10.0.2.2:3000/api/login',{
+
+            //axios.post('http://192.168.0.84:3000/api/login', {
+             axios.post('http://10.0.2.2:3000/api/login',{
 
              user:this.state
          })
@@ -90,6 +85,7 @@ export default class Login extends React.Component {
    
     <TextInput
     	style={styles.textInput} 
+      value={this.state.email}
     	placeholder='Email'
     	onChangeText={(email) => this.setState({email})}
       
@@ -97,6 +93,7 @@ export default class Login extends React.Component {
     /> 
      <TextInput
       style={styles.textInput} 
+      value={this.state.password}
       secureTextEntry={true}
       placeholder='Password'
       onChangeText={(password) => this.setState({password})}
@@ -138,9 +135,9 @@ wrapper: {
   flex: 1,
 },
 container: {
-    // flex: 1,
-    // alignItems: 'center',
-    // justifyContent: 'center',
+
+    flex: 1,
+
     backgroundColor: '#2896d3',
     paddingLeft: 40,
     paddingRight: 40,
