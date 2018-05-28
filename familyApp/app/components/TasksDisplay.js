@@ -1,9 +1,10 @@
 import React from 'react';
 import { View, Picker, FlatList ,StyleSheet,Platform, TextInput,ScrollView,TouchableOpacity, Text,AsyncStorage,ImageBackground } from 'react-native';
 import axios from 'axios';
-import { List, ListItem} from "react-native-elements";
+import { Card} from "react-native-elements";
 import CheckBox from 'react-native-checkbox';
 import Bar from './Bar';
+
 // import { List, ListItem,CheckBox } from "react-native-elements";
 // import CheckboxGroup from 'react-native-checkbox-group';
 export default class TasksDisplay extends React.Component {
@@ -24,7 +25,9 @@ export default class TasksDisplay extends React.Component {
 	changeTaskStatus(selected){
 		//console.log(selected);
 		var taskId=this.state.kidTasks[selected]._id;
-		axios.post('http://192.168.1.86:3000/api/toggletask',{taskId:taskId})
+
+		axios.post(global.ip+'/toggletask',{taskId:taskId})
+
 		.then((response)=>{
 			alert("success, status was changed");
 			this.getTasks();
@@ -40,7 +43,9 @@ export default class TasksDisplay extends React.Component {
 
 	async getTasks(){
 		var kidEmail=await AsyncStorage.getItem('email');
-		axios.post('http://192.168.1.86:3000/api/gettasks',{kidemail:kidEmail
+
+		axios.post(global.ip+'/gettasks',{kidemail:kidEmail
+
 		})
 		.then((response) =>{
 			console.log(response.data);
@@ -92,17 +97,25 @@ export default class TasksDisplay extends React.Component {
 		return (
 			<ScrollView contentContainerStyle={{backgroundColor	:'#2896d3',flex:1}} >
 			 <Bar p={this.state.progress} navigation={this.props.navigation}/>
-				<Text style={styles.title}> My Tasks</Text>
-				<View style={styles.card} >
+
+				<Card title="My Tasks" titleStyle={{fontSize:26}}>
+
 			     {this.state.kidTasks.map((t,index)=>{
-				   	return(<CheckBox key={index}
+				  return(<View key={index} style={{borderWidth:1, borderColor:'#E0E0E0'}}>
+				  	<CheckBox key={index}
 				  label={t.taskName}
 				  labelStyle={this.state.kidTasks[index].completed?styles.strikeText:styles.unstrikeText}
 				  checked={this.state.checked[index]}
 				  onChange={(checked) =>this.updateCheck(index)}
-				/>)}
+				/>
+				</View>)}
 				)}
-				</View>
+
+
+			     </Card>
+
+
+
 	    	</ScrollView>
 		);
 	}
@@ -134,19 +147,38 @@ const styles = StyleSheet.create({
 	  strikeText: {
 	    color: '#bbb',
 	    textDecorationLine: 'line-through',
-	    fontSize:14,
+
+	    fontSize:18,
 	  },
 	  unstrikeText: {
 	    color: "#29323c",
-	    fontSize:14,
+	    fontSize:18,
+
 	  },
+
 	  title: {
-	    color: '#fff',
 	    fontSize: 30,
 	    marginTop: 40,
 	    marginBottom: 20,
-	    fontWeight: '300'
+	    fontWeight: '300',
+	    textAlign:'center',
 	  },
 
 })
 
+
+
+// <View style={styles.card} >
+// 			     {this.state.kidTasks.map((t,index)=>{
+// 				  return(<View style={{borderWidth:1, borderColor:'#E0E0E0'}}>
+// 				  	<CheckBox key={index}
+// 				  label={t.taskName}
+// 				  labelStyle={this.state.kidTasks[index].completed?styles.strikeText:styles.unstrikeText}
+// 				  checked={this.state.checked[index]}
+// 				  onChange={(checked) =>this.updateCheck(index)}
+// 				/>
+// 								  </View>
+
+// 				)}
+// 				)}
+// 				</View>

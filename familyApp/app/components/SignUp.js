@@ -198,7 +198,9 @@ onSelect(value, label) {
     	<Text>SignUp</Text>
     	</TouchableOpacity>
          <Text style={{color: 'black', paddingTop:20,fontSize: 15}}
+
         onPress={() =>  this.props.navigation('Login')}>
+
           I have already account 
              </Text>
     </ScrollView>

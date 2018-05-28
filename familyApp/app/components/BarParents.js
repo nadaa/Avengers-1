@@ -33,29 +33,29 @@ export default class BarParents extends React.Component{
     this.state={
       //defult thing when change from data base change here 🙂 <3
       // (Mother) female /  (Father) male/ child (Children)
-      role:'Mother',
+      role:'Father',
       //from 100%
-      userProgress:'100',
+      //userProgress:'100',
       //for how many child in family
-      userRanking:'2',
+      //userRanking:'2',
       //the money still
       restMoney:'1500',
     };
     //run the function to save the email in this.state,userSave
-    this.callOrder(this.setUserRole.bind(this))
+   // this.callOrder(this.setUserRole.bind(this))
   }
-  callOrder(cb){
-    cb()
-  }
-  setUserRole=async()=>{
-    try{
-      let role=await AsyncStorage.getItem('role')
-      this.setState({role:role})
-    }
-    catch(error){
-      alert(error)
-    }
-  }
+  // callOrder(cb){
+  //   cb()
+  // }
+  // setUserRole=async()=>{
+  //   try{
+  //     let role=await AsyncStorage.getItem('role')
+  //     this.setState({role:role})
+  //   }
+  //   catch(error){
+  //     alert(error)
+  //   }
+  // }
   //render
   render() {
     //what return
@@ -79,7 +79,7 @@ export default class BarParents extends React.Component{
                 <View  style={styles.centerComponent}>
                   <Icon0 onPress={() =>this.props.navigation.navigate('User Information')} name={userRole[this.state.role]} size={35} color="red"/>
                   <Text onPress={() =>this.props.navigation.navigate('User Information')} style={styles.textUnderIcon}>
-                    {this.state.role}
+                    {this.props.p}
                   </Text>
                 </View>
 

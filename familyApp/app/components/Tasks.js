@@ -13,15 +13,27 @@ constructor(props){
     this.state={
       kidName: '',
       taskText : '',
-      loggeduser:{}
+      role:''
     }
+    this.getRole=this.getRole.bind(this);
   }
 
+
+async getRole(){
+      var role= await AsyncStorage.getItem('role');
+      this.setState({role:role});
+
+}
+
+
+componentDidMount(){
+  this.getRole();
+  }
 render() {
 const { navigate } = this.props.navigation;
     return (
       <View style={styles.allPage}>
-        <BarParents navigation={this.props.navigation}/>
+        <BarParents p={this.state.role} navigation={this.props.navigation}/>
         <View style={styles.container}>
           <TouchableOpacity
           style={styles.btn}

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Picker, FlatList ,StyleSheet,Platform,ScrollView, TextInput, TouchableOpacity, Text,AsyncStorage } from 'react-native';
 import axios from 'axios';
-import { List, ListItem,CheckBox,Dimensions } from "react-native-elements";
+import { Card,CheckBox,Dimensions } from "react-native-elements";
 import CheckboxGroup from 'react-native-checkbox-group';
 import {Select, Option} from "react-native-chooser";
 import BarParents from './BarParents';
@@ -25,8 +25,9 @@ export default class TaskMonitor extends React.Component {
 async getKids(){
 	var familyId= await AsyncStorage.getItem('familyid')
 //	console.log(familyId)
-	axios.get(`http://192.168.1.86:3000/api/getkids/${familyId}`)
-	//axios.get(`http://192.168.1.86:3000/api/getkids/${familyId}`)
+
+	axios.get(global.ip+`/getkids/${familyId}`)
+
 		.then((response) =>{
 			this.setState({kids:response.data});
 	  })
@@ -53,7 +54,8 @@ showTasks(kidName){
 				kidIndex=i;
 		}
 			var kidEmail=this.state.kids[kidIndex].email;
-			axios.post('http://192.168.1.86:3000/api/gettasks',{kidemail:kidEmail
+
+			axios.post(global.ip+'/gettasks',{kidemail:kidEmail
 			})
 			.then((response) =>{
 				console.log(response.data);
@@ -83,7 +85,9 @@ setKidTask(){
 			kidIndex=i;
 	}
 	//axios.post('http://192.168.1.86:3000/api/setkidtask',{
-	axios.post('http://192.168.1.86:3000/api/setkidtask',{
+
+	axios.post(global.ip+'/setkidtask',{
+
 		kidemail:this.state.kids[kidIndex].email,
 		task:this.state.taskText,
 		//familyId:this.state.kids[kidIndex].familyId	
@@ -102,7 +106,9 @@ setKidTask(){
 
 confirm(selected){
 	if(this.state.checked[selected]){
-		axios.post('http://192.168.1.86:3000/api/confirmtask',{taskId:this.state.kidTasks[selected]._id})
+
+		axios.post(global.ip+'/confirmtask',{taskId:this.state.kidTasks[selected]._id})
+
 			.then((response)=>{
 				if(response.data.deleted){
 					this.showTasks();
@@ -149,8 +155,7 @@ confirm(selected){
 			</TouchableOpacity>
 		</View>
 
-
-  		<ScrollView contentContainerStyle={styles.card} horizental={true} >
+  		<Card >
   			{this.state.kidTasks.map((t,index)=>{
   				return (
   					<CheckBox key={index}
@@ -162,10 +167,10 @@ confirm(selected){
 				)
  			})}
   
-  		</ScrollView>
+  		</Card>
     </ScrollView>
     </View>
-	);
+	)
 	}
 }
 const styles = StyleSheet.create({

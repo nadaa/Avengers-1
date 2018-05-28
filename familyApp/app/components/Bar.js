@@ -115,7 +115,9 @@ componentDidMount(){
                 <View style={styles.centerComponent}>
 
                   <Text style={styles.textIconDone}>{this.props.p}%</Text>
-                  <Text onPress={() =>this.props.navigation.navigate('Tasks')} style={styles.textUnderIcon}>
+
+                  <Text style={styles.textUnderIcon}>
+
                     Progress
                   </Text>
                 </View>
@@ -136,9 +138,9 @@ componentDidMount(){
 
             rightComponent={
               <View style={styles.rightComponent}>
-                <Icon6 onPress={() => this.props.navigation.navigate('Tasks')} style={{color:'#0bf5fb'}} 
+                <Icon6 onPress={() => this.props.navigation.navigate('TasksDisplay')} style={{color:'#0bf5fb'}} 
                   name="checklist" size={35}/>
-                <Text onPress={() =>this.props.navigation.navigate('Tasks')} style={styles.textUnderIcon}>Tasks</Text>
+                <Text onPress={() =>this.props.navigation.navigate('TasksDisplay')} style={styles.textUnderIcon}>Tasks</Text>
               </View>
             }
           >

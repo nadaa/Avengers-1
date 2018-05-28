@@ -14,17 +14,6 @@ import Shortage from './app/components/Shortage'
 const Application=  createStackNavigator({
   //i change it for testing (Jozaa)
 
-  // Home: { screen: Login2 },
-  Shortage:{screen:Shortage},
-   Login:{ screen: Login },
-  
-BarParents:{screen:BarParents},
-   
-
-
-  // Home: { screen: Login2 },
-
- 
   Drawer: { screen: Drawer },
   DrawerKids: { screen: DrawerKids },
   TaskMonitor:{screen:TaskMonitor},
@@ -39,6 +28,13 @@ BarParents:{screen:BarParents},
 });
 
 export default class App extends React.Component {
+  constructor(props){
+    super(props);
+    global.ip='http://10.0.2.2:3000/api'; //nada
+
+
+
+  }
   render() {
     return (
      <Application/>
