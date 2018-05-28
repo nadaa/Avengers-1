@@ -126,8 +126,8 @@ export default class Finance extends React.Component{
   };
     editFinanceData(){
     console.log('FRONT END')
-    alert('you call editFinanceData front end ')
-    axios.post('http://10.0.2.2:3000/api/editFinanceData', {state:this.state})
+    //alert('you call editFinanceData front end ')
+    axios.post('http://192.168.1.82:3000/api/editFinanceData', {state:this.state})
     .then(function (res) {
       console.log('RESP',res)
    
