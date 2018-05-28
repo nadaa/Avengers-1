@@ -1,4 +1,3 @@
-
 import React from 'react';
 //import element from reacr native
 import { StyleSheet, Text, View,AsyncStorage } from 'react-native';
