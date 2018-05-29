@@ -15,32 +15,32 @@ import Shortage from './app/components/Shortage';
 import UserInfo from './app/components/UserInfo';
 const Application=  createStackNavigator({
   //i change it for testing (Jozaa)
-
-  //BarParents:{screen:BarParents},
-
+import AssignKidsTasks from './app/components/AssignKidsTasks';
+import TaskMonitor from './app/components/TaskMonitor';
+import BarParents from './app/components/BarParents';
+import Shortage from './app/components/Shortage';
+//only for test (Jozaa)
+import Login2 from './app/components/Login2';
+const Application=  createStackNavigator({
+  //i change it for testing (Jozaa)
+  // Home: { screen: Login2 },
   Login:{ screen: Login },
-   SignUp: { screen: SignUp },
   Drawer: { screen: Drawer },
   DrawerKids: { screen: DrawerKids },
   TaskMonitor:{screen:TaskMonitor},
   Tasks:{screen:Tasks},
   TasksDisplay:{screen:TasksDisplay},
   UserInfo:{screen:UserInfo},
-  // Drawer: { screen: Drawer },
-  //AssignKidsTasks:{screen:AssignKidsTasks},
-},{
+  },{
   navigationOptions: {
     header: null,
   }
 });
-
 export default class App extends React.Component {
   constructor(props){
     super(props);
     global.ip='http://10.0.2.2:3000/api'; //nada
-
-
-
+    // global.ip='http://192.168.8.105:3000/api'; //jozaa
   }
   render() {
     return (
