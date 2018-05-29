@@ -19,22 +19,11 @@ const KidsDrawer=createDrawerNavigator(
     TasksDisplay:{
       screen:TasksDisplay,
     },
-    // Tasks:{
-    //  screen:Tasks,
-    // },
-    // 'User Information':{
-    //  screen:UserInfo,
-    // },
+   
     Shortage:{
      screen:Shortage,
     },
-     Logout:{
-      screen:Login,
-    },
-    
-    // ShortageNote:{
-    //   screen:ShortageNote,
-    // }
+   
   },
   {
     initialRouteName:'TasksDisplay',

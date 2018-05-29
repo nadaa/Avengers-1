@@ -17,10 +17,6 @@ import Icon6 from 'react-native-vector-icons/Octicons';
 import Icon7 from 'react-native-vector-icons/Foundation';
 import Icon8 from 'react-native-vector-icons/SimpleLineIcons' ; 
 
-
-
-
-
 const userRole={
   // (Mother) female /  (Father) male/ child (Children)
   'Mother':'female',

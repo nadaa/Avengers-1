@@ -13,18 +13,14 @@ import TasksDisplay from './app/components/TasksDisplay';
 import Bar from './app/components/Bar';
 import Shortage from './app/components/Shortage';
 import UserInfo from './app/components/UserInfo';
-const Application=  createStackNavigator({
-  //i change it for testing (Jozaa)
-import AssignKidsTasks from './app/components/AssignKidsTasks';
-import TaskMonitor from './app/components/TaskMonitor';
-import BarParents from './app/components/BarParents';
-import Shortage from './app/components/Shortage';
+
+
 //only for test (Jozaa)
-import Login2 from './app/components/Login2';
 const Application=  createStackNavigator({
   //i change it for testing (Jozaa)
   // Home: { screen: Login2 },
   Login:{ screen: Login },
+  SignUp:{screen:SignUp},
   Drawer: { screen: Drawer },
   DrawerKids: { screen: DrawerKids },
   TaskMonitor:{screen:TaskMonitor},
