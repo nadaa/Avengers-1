@@ -3,20 +3,20 @@ import Login from '../Login';
 import renderer from 'react-test-renderer';
 import { shallow, mount, render } from 'enzyme';
 
-jest.mock('Animated', () => {
-  const ActualAnimated = require.requireActual('Animated')
-  return {
-    ...ActualAnimated,
-    timing: (value, config) => ({
-      start: callback => {
-        value.setValue(config.toValue)
-        if (callback) {
-          callback()
-        }
-      },
-    }),
-  }
-})
+// jest.mock('Animated', () => {
+//   const ActualAnimated = require.requireActual('Animated')
+//   return {
+//     ...ActualAnimated,
+//     timing: (value, config) => ({
+//       start: callback => {
+//         value.setValue(config.toValue)
+//         if (callback) {
+//           callback()
+//         }
+//       },
+//     }),
+//   }
+// })
 
 // describe what we are testing
 describe('Login Component', () => {

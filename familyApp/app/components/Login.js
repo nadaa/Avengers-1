@@ -34,7 +34,7 @@ export default class Login extends React.Component {
   //    }
 
   saveData(userInfo){
-   console.log('userinfo',userInfo)
+   //console.log('userinfo',userInfo)
     AsyncStorage.setItem('username',(userInfo.username));
     AsyncStorage.setItem('email',(userInfo.email));
     AsyncStorage.setItem('role',(userInfo.role));
@@ -42,8 +42,6 @@ export default class Login extends React.Component {
   }
  sendLogin(){
      var that=this;
-          const { navigate } = this.props.navigation;
-
             //axios.post('http://192.168.0.84:3000/api/login', {
              //axios.post('http://192.168.1.86:3000/api/login',{
             axios.post(global.ip+'/login',{
@@ -56,9 +54,9 @@ export default class Login extends React.Component {
 
            if(response.data.msg==="success login"){
             if(role==='Mother'||role==='Father'){
-               navigate('Drawer')
+               this.props.navigation('Drawer')
             }else if(role==='Child'){
-               navigate('DrawerKids')
+               this.props.navigation('DrawerKids')
             }
 
                 
@@ -68,20 +66,18 @@ export default class Login extends React.Component {
             }
             else if(response.data.msg==="no account"){
               alert('You Have No Account')
-                 navigate('SignUp')
+                 this.props.navigation('SignUp')
                
             }
            })
          .catch(function (error) {
-           console.log(error);
+          console.log(error);
          });
 };
     
 
 
   render() {
-    //jozaa
-    
     return (
 
       <ImageBackground
@@ -111,7 +107,7 @@ export default class Login extends React.Component {
       style={styles.btn}
       onPress={
          this.sendLogin.bind(this)
-        //  navigate('Profile')
+        //  this.props.navigation('Profile')
         }
     	>
     	<Text>LOGIN</Text>

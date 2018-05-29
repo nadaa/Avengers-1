@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "babel-plugin-jest-hoist": "^23.0.1",
     "expo": "^27.0.1",
     "native-base": "^2.4.4",
     "react": "^16.3.2",
