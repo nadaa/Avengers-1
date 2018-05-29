@@ -33,9 +33,6 @@ const MyDrawer=createDrawerNavigator(
     Shortage:{
      screen:Shortage,
     },
-    Logout:{
-      screen:Login,
-    },
    
     /*
     'Family Events':{

@@ -36,7 +36,7 @@ exports.signupUser = function(req, res) {
 // console.log(newUser);
 }
 exports.signinUser = function(req, res) {
- models.User.findOne({'email':req.body.user.email},function (err, user) {
+ models.User.findOne({email:req.body.user.email},function (err, user) {
   //console.log('data',data)
   if(user===null){
     res.send({msg:"no account",user:null})
