@@ -11,7 +11,6 @@ import UserInfo from './UserInfo';
 import Bar from './Bar';
 
 import Shortage from './Shortage';
-import AssignKidsTasks from './AssignKidsTasks';
 
 import TaskMonitor from './TaskMonitor';
 import TasksDisplay from './TasksDisplay';

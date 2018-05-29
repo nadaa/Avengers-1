@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Card,CheckBox,Dimensions } from "react-native-elements";
 import CheckboxGroup from 'react-native-checkbox-group';
 import {Select, Option} from "react-native-chooser";
-import BarParents from './BarParents';
+import Bar from './Bar';
 
 
 export default class TaskMonitor extends React.Component {
@@ -25,9 +25,7 @@ export default class TaskMonitor extends React.Component {
 async getKids(){
 	var familyId= await AsyncStorage.getItem('familyid')
 //	console.log(familyId)
-
 	axios.get(global.ip+`/getkids/${familyId}`)
-
 		.then((response) =>{
 			this.setState({kids:response.data});
 	  })
@@ -54,7 +52,6 @@ showTasks(kidName){
 				kidIndex=i;
 		}
 			var kidEmail=this.state.kids[kidIndex].email;
-
 			axios.post(global.ip+'/gettasks',{kidemail:kidEmail
 			})
 			.then((response) =>{
@@ -85,9 +82,7 @@ setKidTask(){
 			kidIndex=i;
 	}
 	//axios.post('http://192.168.1.86:3000/api/setkidtask',{
-
 	axios.post(global.ip+'/setkidtask',{
-
 		kidemail:this.state.kids[kidIndex].email,
 		task:this.state.taskText,
 		//familyId:this.state.kids[kidIndex].familyId	
@@ -106,9 +101,7 @@ setKidTask(){
 
 confirm(selected){
 	if(this.state.checked[selected]){
-
 		axios.post(global.ip+'/confirmtask',{taskId:this.state.kidTasks[selected]._id})
-
 			.then((response)=>{
 				if(response.data.deleted){
 					this.showTasks();
@@ -121,7 +114,7 @@ confirm(selected){
 	render() {
 		return (
 	<View style={{flex:1}}>
-	<BarParents navigation={this.props.navigation}/>
+	<Bar navigation={this.props.navigation}/>
 	<ScrollView contentContainerStyle={styles.container}>
 		<Text style={styles.title}> Monitor Kids' Tasks</Text>
 		<View style={styles.subcontainer}>

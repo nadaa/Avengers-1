@@ -17,6 +17,10 @@ import SignUp from './SignUp';
 // import Drawer from './Drawer';
 export default class Login extends React.Component {
 
+  static navigationOptions = {
+         drawerLabel: () => null
+    }
+
   constructor(props){
     super(props);
     this.state={
@@ -24,6 +28,10 @@ export default class Login extends React.Component {
       password:'123',
     }
   }
+
+  // componentDu(){
+  //   this.props.navigation.navigate('DrawerClose') 
+  //    }
 
   saveData(userInfo){
    console.log('userinfo',userInfo)

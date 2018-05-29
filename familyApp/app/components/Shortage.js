@@ -107,7 +107,7 @@ export default class Shortage extends React.Component {
     if(this.state.needText){
       //var d=new Date()
      
-     axios.post('http://192.168.1.86:3000/api/shortage', 
+     axios.post(global.ip+'/shortage', 
     // axios.post('http://10.0.2.2:3000/api/shortage',
       {
         need:this.state.needText,
@@ -137,7 +137,7 @@ export default class Shortage extends React.Component {
     this.setState({needArray:this.state.needArray})
    var familyId = await AsyncStorage.getItem('familyid');
      
-    axios.post('http://192.168.1.86:3000/api/deleteshortage', 
+    axios.post(global.ip+'/deleteshortage', 
       {
         need:this.state.needText,
         familyId:familyId,
