@@ -23,8 +23,8 @@ describe('Login Component', () => {
  
  // make our assertion and what we expect to happen 
  it('should render without throwing an error', () => {
-   expect(shallow(<Login />).exists(<form className='login'></form>)).toBe(true)
- })
+ const component=shallow(<Login/>);
+    expect(component).toHaveLength(1); })
 })
 
 // it('should display a text input to fill question', () => {

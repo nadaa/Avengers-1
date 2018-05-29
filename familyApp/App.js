@@ -20,6 +20,7 @@ const Application=  createStackNavigator({
   //i change it for testing (Jozaa)
   // Home: { screen: Login2 },
   Login:{ screen: Login },
+  UserInfo:{screen:UserInfo},
   SignUp:{screen:SignUp},
   Drawer: { screen: Drawer },
   DrawerKids: { screen: DrawerKids },

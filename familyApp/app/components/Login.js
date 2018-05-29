@@ -24,7 +24,6 @@ export default class Login extends React.Component {
     }
   }
   saveData(userInfo){
-   //console.log('userinfo',userInfo)
     AsyncStorage.setItem('username',(userInfo.username));
     AsyncStorage.setItem('email',(userInfo.email));
     AsyncStorage.setItem('role',(userInfo.role));
@@ -39,8 +38,6 @@ export default class Login extends React.Component {
              user:this.state
          })
          .then(async function (response) {
-
-          alert(response.data.msg)
            that.saveData(response.data.user);
             var role= await AsyncStorage.getItem('role');
            if(response.data.msg==="success login"){
@@ -107,9 +104,7 @@ export default class Login extends React.Component {
 
     );
   }
-  
 }
-
 const styles = StyleSheet.create({
  contentContainer: {
     paddingVertical: 20,

@@ -157,7 +157,7 @@ onSelect(value, label) {
     	</TouchableOpacity>
          <Text style={{color: 'black', paddingTop:20,fontSize: 15}}
 
-        onPress={() =>  this.props.navigation('Login')}>
+        onPress={() =>  this.props.navigation.navigate('Login')}>
 
           I have already account 
              </Text>
@@ -166,8 +166,6 @@ onSelect(value, label) {
       </ImageBackground>
     );
   }
-
-
  
 }
 
