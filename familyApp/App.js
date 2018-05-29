@@ -7,20 +7,27 @@ import Drawer from './app/components/Drawer';
 import DrawerKids from './app/components/DrawerKids';
 //only for test (Jozaa)
 import Login2 from './app/components/Login2';
-import AssignKidsTasks from './app/components/AssignKidsTasks';
 import TaskMonitor from './app/components/TaskMonitor';
-import BarParents from './app/components/BarParents';
-import Shortage from './app/components/Shortage'
+import Tasks from './app/components/Tasks';
+import TasksDisplay from './app/components/TasksDisplay';
+import Bar from './app/components/Bar';
+import Shortage from './app/components/Shortage';
+import UserInfo from './app/components/UserInfo';
 const Application=  createStackNavigator({
   //i change it for testing (Jozaa)
 
+  //BarParents:{screen:BarParents},
+
+  Login:{ screen: Login },
+   SignUp: { screen: SignUp },
   Drawer: { screen: Drawer },
   DrawerKids: { screen: DrawerKids },
   TaskMonitor:{screen:TaskMonitor},
-  SignUp: { screen: SignUp },
-  Login:{ screen: Login },
+  Tasks:{screen:Tasks},
+  TasksDisplay:{screen:TasksDisplay},
+  UserInfo:{screen:UserInfo},
   // Drawer: { screen: Drawer },
-  AssignKidsTasks:{screen:AssignKidsTasks},
+  //AssignKidsTasks:{screen:AssignKidsTasks},
 },{
   navigationOptions: {
     header: null,
