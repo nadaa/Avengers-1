@@ -32,7 +32,9 @@ export default class Login extends React.Component {
   }
  sendLogin(){
      var that=this;
+
           const { navigate } = this.props.navigation;
+
             axios.post(global.ip+'/login',{
              user:this.state
          })
@@ -43,9 +45,9 @@ export default class Login extends React.Component {
             var role= await AsyncStorage.getItem('role');
            if(response.data.msg==="success login"){
             if(role==='Mother'||role==='Father'){
-               navigate('Drawer')
+               this.props.navigation('Drawer')
             }else if(role==='Child'){
-               navigate('DrawerKids')
+               this.props.navigation('DrawerKids')
             }
               
            }
@@ -54,17 +56,18 @@ export default class Login extends React.Component {
             }
             else if(response.data.msg==="no account"){
               alert('You Have No Account')
+
                  navigate('SignUp')
+
             }
            })
          .catch(function (error) {
-           console.log(error);
+          console.log(error);
          });
 };
    render() {
     //jozaa 
-    
-      return (
+ 
       <ImageBackground
       source={{uri: 'https://images.pexels.com/photos/1018137/pexels-photo-1018137.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'}}
       style={styles.container}>
@@ -87,6 +90,8 @@ export default class Login extends React.Component {
       style={styles.btn}
       onPress={
          this.sendLogin.bind(this)
+
+
         }
     	>
     	<Text>LOGIN</Text>
