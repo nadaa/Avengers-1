@@ -5,8 +5,6 @@ import Login from './app/components/Login';
 import SignUp from './app/components/SignUp';
 import Drawer from './app/components/Drawer';
 import DrawerKids from './app/components/DrawerKids';
-//only for test (Jozaa)
-import Login2 from './app/components/Login2';
 import TaskMonitor from './app/components/TaskMonitor';
 import Tasks from './app/components/Tasks';
 import TasksDisplay from './app/components/TasksDisplay';
@@ -38,18 +36,19 @@ const Application=  createStackNavigator({
 export default class App extends React.Component {
   constructor(props){
     super(props);
-
    //global.ip='http://10.0.2.2:3000/api'; //nada
-    // global.ip='http://192.168.8.105:3000/api'; //jozaa
-    //global.ip='http://192.168.0.84:3000/api' //Waed
-     global.ip='http://192.168.202.2:3000/api'; //Hussein
-
+   // global.ip='http://192.168.8.105:3000/api'; //jozaa
+   global.ip='http://192.168.1.82:3000/api'; //jozaa2
+   // global.ip='http://192.168.202.2:3000/api'; //Hussein
+   //global.ip='http://192.168.0.84:3000/api' //Waed
+   //global.ip='http://192.168.202.2:3000/api'; //Hussein
   }
   render() {
     return (
      <Application/>
      // <Drawer/>
      // <Finance/>
+     // <Login2/>
     );
   }
 }
