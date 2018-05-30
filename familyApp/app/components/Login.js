@@ -67,7 +67,7 @@ export default class Login extends React.Component {
 };
    render() {
     //jozaa 
- 
+ return (
       <ImageBackground
       source={{uri: 'https://images.pexels.com/photos/1018137/pexels-photo-1018137.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'}}
       style={styles.container}>

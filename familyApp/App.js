@@ -19,6 +19,7 @@ import UserInfo from './app/components/UserInfo';
 const Application=  createStackNavigator({
   //i change it for testing (Jozaa)
   // Home: { screen: Login2 },
+   // UserInfo:{screen:UserInfo},
   Login:{ screen: Login },
   SignUp:{screen:SignUp},
   Drawer: { screen: Drawer },
@@ -35,8 +36,9 @@ const Application=  createStackNavigator({
 export default class App extends React.Component {
   constructor(props){
     super(props);
-    global.ip='http://10.0.2.2:3000/api'; //nada
+   //global.ip='http://10.0.2.2:3000/api'; //nada
     // global.ip='http://192.168.8.105:3000/api'; //jozaa
+    global.ip='http://192.168.0.84:3000/api' //Waed
   }
   render() {
     return (
