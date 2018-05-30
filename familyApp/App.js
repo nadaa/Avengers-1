@@ -11,6 +11,8 @@ import BarParents from './app/components/BarParents';
 import Shortage from './app/components/Shortage';
 //only for test (Jozaa)
 import Login2 from './app/components/Login2';
+import Finance from './app/components/Finance';
+
 const Application=  createStackNavigator({
   //i change it for testing (Jozaa)
   // Home: { screen: Login2 },
@@ -37,6 +39,7 @@ export default class App extends React.Component {
     return (
      <Application/>
      // <Drawer/>
+     // <Finance/>
     );
   }
 }
