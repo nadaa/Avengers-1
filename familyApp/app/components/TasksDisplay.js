@@ -48,7 +48,7 @@ export default class TasksDisplay extends React.Component {
 
 		})
 		.then((response) =>{
-			console.log(response.data);
+			//console.log(response.data);
 			this.setState({kidTasks:response.data});
 			
 			var completed=0;
@@ -57,7 +57,9 @@ export default class TasksDisplay extends React.Component {
 					completed++;
 		}
 	}
-	this.setState({progress:Math.round(completed/this.state.kidTasks.length.toFixed(2)*100)})
+	if(this.state.kidTasks.length>0){
+		this.setState({progress:Math.round(completed/this.state.kidTasks.length.toFixed(2)*100)})
+	}
 
 
 	      })

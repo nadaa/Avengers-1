@@ -35,24 +35,6 @@ export default class SignUp extends React.Component {
         }
     }
 
-
-
-	// componentDidMount(){
-	// 	this._loadInitialState().done();
-	// }
-
-
-
- //    //store user info in the device
-	// _loadInitialState = async () => {
-	// 	var value = await AsyncStorage.getItem('user');
-	// 	if(value !== null){
-	// 		this.props.navigation.navigate('Profile')
-	// 	}
-	// }
-
-
-
 validateEmail (text) {
     var reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ;
     if(reg.test(text) === false)
@@ -71,9 +53,7 @@ sendSignUp(){
      { 
       const { navigate } = this.props.navigation;
 
-//axios.post('http://192.168.1.86:3000/api/signup', {
-
-	axios.post('http://10.0.2.2:3000/api/signup', {
+   	axios.post(global.ip+'/signup', {
     user:this.state
    })
    .then(function (response) {
@@ -89,30 +69,10 @@ sendSignUp(){
    )
    .catch(function (error) {
      console.log(error);
-   });
+   })
      
-     axios.post('http://192.168.1.86:3000/api/signup', {
-     
-       //axios.post('http://10.0.2.2:3000/api/signup', {
-         user:this.state
-        })
-        .then(function (response) {
-         
-          if(response.data.msg==="success signup"){
-               navigate('Login')
-          }
-          else if(response.data.msg==='choose another email'){
-                alert('choose another email')
-           }
-          }
-     
-        )
-        .catch(function (error) {
-          console.log(error);
-        });}else{
-          alert('invalid email')
-        }
-  }
+ } 
+ }  
 
 onSelect(value, label) {
     this.setState({role : value});
@@ -163,8 +123,6 @@ onSelect(value, label) {
         onDateChange={(date) => {this.setState({bdate: new Date(date)})}}
       />
 
-
-
     <View style={styles.rolepicker}>
         <Select
             onSelect = {this.onSelect.bind(this)}
@@ -199,7 +157,7 @@ onSelect(value, label) {
     	</TouchableOpacity>
          <Text style={{color: 'black', paddingTop:20,fontSize: 15}}
 
-        onPress={() =>  this.props.navigation('Login')}>
+        onPress={() =>  this.props.navigation.navigate('Login')}>
 
           I have already account 
              </Text>
@@ -208,8 +166,6 @@ onSelect(value, label) {
       </ImageBackground>
     );
   }
-
-
  
 }
 

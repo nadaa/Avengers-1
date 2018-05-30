@@ -2,11 +2,16 @@
 import React from 'react';
 //import element from reacr-native
 import { StyleSheet, Text, View, TouchableOpacity,AsyncStorage } from 'react-native';
-import BarParents from './BarParents'
+import Bar from './Bar'
 import { createStackNavigator } from 'react-navigation';
 import TaskMonitor from './TaskMonitor';
-import AssignKidsTasks from './AssignKidsTasks';
 export default class Tasks extends React.Component {
+   static navigationOptions = {
+    drawer: () => ({
+      label: 'Home',
+      icon: () => <DrawerIcon iconName="md-home" iconSize={25} iconColor="#FFF" />
+    })
+  };
 constructor(props){
     super(props);
 
@@ -15,6 +20,8 @@ constructor(props){
       taskText : '',
       role:''
     }
+
+
     this.getRole=this.getRole.bind(this);
   }
 
@@ -33,7 +40,7 @@ render() {
 const { navigate } = this.props.navigation;
     return (
       <View style={styles.allPage}>
-        <BarParents p={this.state.role} navigation={this.props.navigation}/>
+        <Bar p={0} navigation={this.props.navigation}/>
         <View style={styles.container}>
           <TouchableOpacity
           style={styles.btn}

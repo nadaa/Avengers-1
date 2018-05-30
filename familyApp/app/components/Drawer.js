@@ -9,17 +9,12 @@ import Tasks from './Tasks';
 import Finance from './Finance';
 import UserInfo from './UserInfo';
 import Bar from './Bar';
-
 import Shortage from './Shortage';
-import AssignKidsTasks from './AssignKidsTasks';
-
 import TaskMonitor from './TaskMonitor';
 import TasksDisplay from './TasksDisplay';
-
 import Try from './Try';
 import Login from './Login';
 import SignUp from './SignUp';
-
 const MyDrawer=createDrawerNavigator(
   {
     Tasks:{
@@ -34,8 +29,8 @@ const MyDrawer=createDrawerNavigator(
     Shortage:{
      screen:Shortage,
     },
-    Logout:{
-      screen:Login,
+    TaskMonitor:{
+      screen:TaskMonitor,
     },
    
     /*
@@ -73,7 +68,7 @@ const MyDrawer=createDrawerNavigator(
     drawerCloseRoute: 'DrawerClose',
     drawerToggleRoute: 'DrawerToggle',
     contentOptions:{
-    activeTintColor:'red',
+    activeTintColor:'green',
       // tintStyle:{backgroundColor: 'red'},
     },
   }

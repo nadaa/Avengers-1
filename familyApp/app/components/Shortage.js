@@ -18,13 +18,9 @@ import DatePicker from 'react-native-datepicker';
 import {Select, Option} from "react-native-chooser";
 import Bar from './Bar';
 import ShortageNote from './ShortageNote';
-
-
-
 export default class Shortage extends React.Component {
 	constructor(props){
         super(props);
-
         this.state=
         {
         needArray:[],
@@ -33,24 +29,21 @@ export default class Shortage extends React.Component {
         this.getData.bind(this)
     }
 
-
   render() {
+
+
    let notes=this.state.needArray.map((val,key)=>{
       return <ShortageNote key={key} keyval={key} val={val} deleteMethod ={()=>this.deleteMethod(key)} />
     })
     return (
   <View style={styles.container}>
-       
+       <Bar navigation={this.props.navigation}/>
       <View style={styles.header}>
           <Text style={styles.headerText}>Shortage</Text>
       </View>
-
-
             <ScrollView style={styles.scrollContainer}>
                   {notes}
             </ScrollView>
-
-
       <View style={styles.footer}>
                       <TouchableOpacity style={styles.addButton} onPress={this.addNeed.bind(this)}>
                         <Text style={styles.addButtonText}>+</Text>
@@ -62,7 +55,6 @@ export default class Shortage extends React.Component {
                           placeholderTextColor='white' >
                            </TextInput>
                   </View>
-
   </View>
     );
   }
@@ -72,9 +64,7 @@ export default class Shortage extends React.Component {
     console.log(familyId);
     axios.post(global.ip+'/getshortage',{familyId:familyId}) 
     .then((response) =>{
-      console.log(response);
-      
-        this.setState({needArray:response.data.needs})
+       this.setState({needArray:response.data.needs})
         console.log('needArray',this.state.needArray)
         
     })
@@ -86,18 +76,6 @@ export default class Shortage extends React.Component {
   componentDidMount(){
     this.getData()
 }
-
-  // axios.get(`http://10.0.2.2:3000/api/getkids/${familyId}`)
-  // //axios.get(`http://192.168.1.86:3000/api/getkids/${familyId}`)
-  //   .then((response) =>{
-  //     this.setState({kids:response.data});
-  //   })
-  //   .catch(function (error) {
-  //     console.log(error);
-  //   });
-
-
-
    
    async addNeed(){
       const {navigate}=this.props.navigation;
@@ -105,15 +83,12 @@ export default class Shortage extends React.Component {
      var familyId = await AsyncStorage.getItem('familyid')
      
     if(this.state.needText){
-      //var d=new Date()
-     
-     axios.post('http://192.168.1.86:3000/api/shortage', 
-    // axios.post('http://10.0.2.2:3000/api/shortage',
+   
+     axios.post(global.ip+'/shortage', 
       {
         need:this.state.needText,
         familyId:familyId,
       })
-     //console.log('need')
     .then(function (response) {
       if(response.data.msg==='success'){
         alert('success')
@@ -137,9 +112,8 @@ export default class Shortage extends React.Component {
     this.setState({needArray:this.state.needArray})
    var familyId = await AsyncStorage.getItem('familyid');
      
-    axios.post('http://192.168.1.86:3000/api/deleteshortage', 
-      {
-        need:this.state.needText,
+    axios.post(global.ip+'/deleteshortage', 
+      { need:this.state.needText,
         familyId:familyId,
         key:key
       })
@@ -147,7 +121,6 @@ export default class Shortage extends React.Component {
     .then(function (response) {
       if(response.data.msg==='success'){
         this.getData();
-      
       }
       else if(response.data.msg==='error'){
         alert("error");
@@ -157,11 +130,9 @@ export default class Shortage extends React.Component {
       console.log(error);
       alert(error);
     });
-
       this.setState({needText:''})
   }
 }
-
 const styles = StyleSheet.create({
 
 container:{
@@ -172,10 +143,8 @@ header:{
       alignItems:'center',
       justifyContent:'center',
       borderBottomWidth:  10,
-      borderBottomColor:'#ddd',
-
+     borderBottomColor:'#ddd',
 },
-
 headerText:{
       color:'white',
       fontSize:40,
@@ -220,8 +189,6 @@ textInput:{
       backgroundColor:'#c0c5ce',
       borderTopWidth:2,
       borderTopColor:'#c0c5ce',
-
-
 }
 
 })  
