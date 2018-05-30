@@ -1,29 +1,22 @@
 ##ProjectO
-
-heroku-website-link
+heroku-website-link:
 
 
 ##Heading
-
 Family Managment and Communication App.
 
 ##Sub-Heading
-
 Mobile application to help all family members staying connected with their family bonds in a modern organized way
 
 ##Summary
-
 Familj is an ios App that will provide an interface for all family members which will guarntee their contibution within their house and strengthen their family bonds.
 each family has it's own id and all family members should sign up with that id, there are two UI one for the sibilings and the other for the parents, parents have some extra authorites to monitor their kids life and teach them responsibility by envolving them with all family tasks,activites and responsibilites.  
 
 ##Problem
-
 In this era, families in all communites are suffering from being away from each other caused by many reasons one of them is overusing the social media networks.
 that will guide to a weak family bonds which will destroy the community    
 
-
 ##Solution
-
 Beneficial Effects of Spending Time Together:
 Family members learn how to listen and work together. Children learn how to behave in society by watching their parents interact with each other and with the world. Family bonding times are a great way to model expected behaviors inside the family circle and with others in the community.  Modeling expected behaviors is also a great way for the parents in the family to learn how to communicate to each other as well.
 
@@ -33,17 +26,26 @@ Family members learn how to listen and work together. Children learn how to beha
 As important as it is to impart wisdom, it is just as important to be an active listener as well. While everyone is together, sometimes it’s just as important to redirect attention towards your family and ask “What’s going on with you?”
 Children improve relationships and bond to their family members. Making a habit of displaying interest in the well being of your spouse and children will make them more likely to consult family members when there are personal problems occurring.
 
-
-
-##Quote from You
-
+##Quote 
 Having a good plan is your way to the success.
 
 ##How to Get Started
 
-## parents start Signup --> login --> Assign tasks --> Add tasks(left side menue)  --> Track your children progress--> check shortage 
+## parents start Signup --> login --> Assign tasks --> Add tasks(left side menue)  --> Track your children progress--> check shortage
+
 ## kids start Signup --> login --> Display Tasks(left side menue) --> check shortage 
 
-##Customer Quote
+##Our Customer Quote
 
 Familj is a powerful tool which has helped our family team .
+
+
+
+what need to do:
+1- wad: read me
+2- jozaa + waed: deloy
+3- waed: rprezi
+4- nada: test
+5- hsuun: style
+6- nada: validation
+

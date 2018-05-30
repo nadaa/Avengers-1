@@ -1,17 +1,11 @@
-//import react from react
 import React from 'react';
-//import element from reacr-native
 import { StyleSheet, Text, View, TouchableOpacity, TextInput, Picker, AsyncStorage, Dimensions} from 'react-native';
-//import table from react native table component
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
-//import axios to make router works
 import axios from 'axios';
-//import Dialog from react native dialog
 import Dialog from "react-native-dialog";
-//import Bar from Bar component
 import Bar from './Bar';
-const window = Dimensions.get('window');
 
+const window = Dimensions.get('window');
 const ShowOrHide={
   true:'btnView',
   false:'hiddenContainer'
@@ -21,16 +15,13 @@ const roleUser={
   'Mother':true,
   'Child':false
 }
-//export Home from the react componant
 export default class Finance extends React.Component{
-  //the constructor
   constructor(){
-    //super for ES6
     super();
     this.state={
-      tableHead:  ['Category', 'Cost'],
-      tableName: [],
-      tableCost:  [],
+      tableHead:['Category', 'Cost'],
+      tableName:[],
+      tableCost:[],
       tableTotal:['Total',0],
       addDialogVisible:false,
       editDialogVisible:false,
@@ -44,7 +35,6 @@ export default class Finance extends React.Component{
       show:true,
     };
   }
-  //auto call function when render this scren
   componentWillMount(){
     this.showId() 
   }
@@ -52,6 +42,8 @@ export default class Finance extends React.Component{
     try{
       let id=await AsyncStorage.getItem('familyId')
       this.setState({id:id})
+      let role=await AsyncStorage.getItem('role')
+      this.setState({role:role})
       //alert('the email save is: ' + userEmail3)
       this.getFinanceData()
     }
@@ -63,7 +55,7 @@ export default class Finance extends React.Component{
     var that=this
     //alert('FRONT END GET');
     console.log('FRONT END GET')
-    axios.post(global.ip+'/getFinanceData', {state:this.state})
+    axios.post(global.ip+'/getfinancedata', {state:this.state})
     .then(function (res) {
       that.setState({tableName:res.data.category})
       that.setState({tableCost:res.data.cost})
@@ -78,7 +70,7 @@ export default class Finance extends React.Component{
   }
   editFinanceData(){
     console.log('FRONT END EDIT')
-    axios.post(global.ip+'/editFinanceData', {state:this.state})
+    axios.post(global.ip+'/editfinancedata', {state:this.state})
     .then(function (res) {
       //alert(res.request._response)
     })
@@ -100,15 +92,15 @@ export default class Finance extends React.Component{
     this.setState({ addDialogVisible: false });
   };
   handleAdd(){
-    if (this.state.tableName.length>7) {
+    if (this.state.tableName.length>7){
       alert('There is so much exist ... please delete first to can add');
     }else{
       //need to work on it
       if(this.state.addEditName.length===0){
         alert('Please insert the name');
-      } else if(this.state.addEditCost.length===0){
+      }else if(this.state.addEditCost.length===0){
         alert('Please insert the cost');
-      } else {
+      }else {
         this.state.tableName.push([this.state.addEditName]);
         this.state.tableCost.push([JSON.parse(this.state.addEditCost)]);
         this.calculateTotalMoney();
@@ -130,7 +122,7 @@ export default class Finance extends React.Component{
     this.setState({addEditName: name});
   }
   onAddEditCost(value) {
-     //all this function to be sure the input is a valid number
+    //all this function to be sure the input is a valid number
     let newNumber = '';
     let numbers = '0123456789';
     for (var i = 0; i < value.length; i++) {
@@ -197,7 +189,6 @@ export default class Finance extends React.Component{
     this.setState({ deleteDialogVisible: true });
   };
   render() {
-    //what return
     return (
       <View style={styles.allPage}>
       <Bar navigation={this.props.navigation}/>
@@ -456,8 +447,5 @@ const styles = StyleSheet.create({
   hiddenContainer: {
     top: window.height,
     bottom: -window.height,
-    // right: window.width,
-    // left: window.width,
-    // marginTop:20,
   }
 });

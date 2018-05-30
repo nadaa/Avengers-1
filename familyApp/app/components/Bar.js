@@ -1,12 +1,11 @@
-//import react from react
 import React from 'react';
-//import element from reacr native
-import { StyleSheet, Text, View,AsyncStorage } from 'react-native';
-//import Header from react native elements
-import { Header} from 'react-native-elements';
-//import axios to make router works
+import {StyleSheet, Text, View, AsyncStorage } from 'react-native';
+import {Header} from 'react-native-elements';
 import axios from 'axios';
-//import the icon from lirbary  one by one (each one library in react native icon)
+import TaskMonitor from './TaskMonitor';
+import UserInfo from './UserInfo';
+
+
 import Icon0 from 'react-native-vector-icons/FontAwesome';
 import Icon1 from 'react-native-vector-icons/Entypo';
 import Icon2 from 'react-native-vector-icons/Feather';
@@ -18,32 +17,20 @@ import Icon7 from 'react-native-vector-icons/Foundation';
 import Icon8 from 'react-native-vector-icons/SimpleLineIcons' ; 
 
 const userRole={
-  // (Mother) female /  (Father) male/ child (Children)
   'Mother':'female',
   'Father':'male',
   'Child':'child',
 }
 
-
-//export Bar from the react componant
 export default class Bar extends React.Component{
-  //the constructor
   constructor(){
-    //super for ES6
     super();
-    //all the data save before to can show in the bar
     this.state={
-      //defult thing when change from data base change here 🙂 <3
-      // (Mother) female /  (Father) male/ child (Children)
       role:'Mother',
-      //from 100%
-      userProgress:'100',
-      //for how many child in family
-      userRanking:'2',
-      //the money still
-      restMoney:'1500',
+      // userProgress:'100',
+      //userRanking:'2',
+      // restMoney:'1500',
     };
-    //run the function to save the email in this.state,userSave
     this.callOrder(this.setUserRole.bind(this))
   }
   callOrder(cb){
@@ -58,12 +45,9 @@ export default class Bar extends React.Component{
       alert(error)
     }
   }
-  //render
-  render() {
-    //what return
-    return (
+  render(){
+    return(
       <View style={styles.allPage}>
-
         <View style={styles.barView}>
           <Header
             backgroundColor='#123456'
@@ -72,21 +56,22 @@ export default class Bar extends React.Component{
 
             leftComponent={
               <View  style={styles.leftComponent}>
-                <Icon0 onPress={() =>this.props.navigation.openDrawer()} style={{color:'#0bf5fb'}} name="bars" size={35}/>
-                <Text onPress={() => this.props.navigation.openDrawer()} style={styles.textUnderIcon}>Menu</Text>
+                <Icon0 onPress={()=>this.props.navigation.openDrawer()} style={{color:'#0bf5fb'}} name="bars" size={35}/>
+                <Text onPress={()=>this.props.navigation.openDrawer()} style={styles.textUnderIcon}>Menu</Text>
               </View>
             }
 
             centerComponent={
               <View style={styles.centerComponentView}>
                 <View  style={styles.centerComponent}>
-                  <Icon0 onPress={() =>this.state.role==='Father'||this.state.role==='Mother'?this.props.navigation.navigate('UserInfo'):null} name={userRole[this.state.role]} size={35} color="red"/>
-                  <Text onPress={() =>this.state.role==='Father'||this.state.role==='Mother'?this.props.navigation.navigate('UserInfo'):null} style={styles.textUnderIcon}>
+                  <Icon0 onPress={() =>this.state.role==='Father'||this.state.role==='Mother'?this.props.navigation.navigate('User Information'):null} name={userRole[this.state.role]} size={35} color="red"/>
+                  <Text onPress={() =>this.state.role==='Father'||this.state.role==='Mother'?this.props.navigation.navigate('User Information'):null} style={styles.textUnderIcon}>
                     {this.state.role}
                   </Text>
                 </View>
 
-  {/*              <View style={styles.centerComponent}>
+               {/* 
+               <View style={styles.centerComponent}>
                   <Text style={styles.textIconDone}>{this.props.p}%</Text>
                   <Text style={styles.textUnderIcon}>
                     Progress
@@ -98,12 +83,11 @@ export default class Bar extends React.Component{
                     Money
                   </Text>
                 </View>
-             */ }
+                */}
                 <View style={styles.lastCenterComponent}>
-                  <Icon6 onPress={() => this.state.role==='Father'||this.state.role==='Mother'?this.props.navigation.navigate('Tasks'):this.props.navigation.navigate('TasksDisplay')}  style={{color:'#0bf5fb'}} 
+                  <Icon6 onPress={() => this.state.role==='Father'||this.state.role==='Mother'?this.props.navigation.navigate('Task Monitor'):this.props.navigation.navigate('TasksDisplay')}  style={{color:'#0bf5fb'}} 
                   name="checklist" size={35}/>
-                
-                <Text onPress={() =>this.state.role==='Father'||this.state.role==='Mother'?this.props.navigation.navigate('Tasks'):this.props.navigation.navigate('TasksDisplay')} style={styles.textUnderIcon}>Tasks</Text>
+                <Text onPress={() =>this.state.role==='Father'||this.state.role==='Mother'?this.props.navigation.navigate('Task Monitor'):this.props.navigation.navigate('TasksDisplay')} style={styles.textUnderIcon}>Tasks</Text>
                 </View>
               </View>
             }
@@ -128,6 +112,7 @@ const styles = StyleSheet.create({
     //flex: 1,
     flexDirection: 'column',
     backgroundColor: 'white',
+    marginTop:35,
   },
   barView: {
     flexDirection: 'column',

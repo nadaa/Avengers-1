@@ -1,55 +1,35 @@
-//import react from react
 import React from 'react';
-//import element from reacr-native
 import { StyleSheet, Text, View, TouchableOpacity,AsyncStorage } from 'react-native';
 import Bar from './Bar'
 import { createStackNavigator } from 'react-navigation';
 import TaskMonitor from './TaskMonitor';
 export default class Tasks extends React.Component {
-   static navigationOptions = {
-    drawer: () => ({
-      label: 'Home',
-      icon: () => <DrawerIcon iconName="md-home" iconSize={25} iconColor="#FFF" />
-    })
-  };
-constructor(props){
+  constructor(props){
     super(props);
-
     this.state={
       kidName: '',
       taskText : '',
       role:''
     }
-
-
     this.getRole=this.getRole.bind(this);
   }
 
-
-async getRole(){
-      var role= await AsyncStorage.getItem('role');
-      this.setState({role:role});
-
-}
-
-
-componentDidMount(){
-  this.getRole();
+  async getRole(){
+    var role= await AsyncStorage.getItem('role');
+    this.setState({role:role});
   }
-render() {
-const { navigate } = this.props.navigation;
+  componentDidMount(){
+    this.getRole();
+  }
+  render(){
+    const { navigate } = this.props.navigation;
     return (
       <View style={styles.allPage}>
         <Bar p={0} navigation={this.props.navigation}/>
         <View style={styles.container}>
-          <TouchableOpacity
-          style={styles.btn}
-          onPress={() =>  navigate('TaskMonitor')}
-          >
-          <Text style={styles.textStyle}>Assign/Monitor Task</Text>
+          <TouchableOpacity style={styles.btn} onPress={() =>  navigate('TaskMonitor')}>
+            <Text style={styles.textStyle}>Assign/Monitor Task</Text>
           </TouchableOpacity>
-
-        
         </View>
       </View>
     );
@@ -61,7 +41,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     backgroundColor: '#2896d3',
-    //marginBottom:35,
   },
   container: {
     flex: 1,
@@ -71,14 +50,11 @@ const styles = StyleSheet.create({
     paddingLeft: 40,
     paddingRight: 40,
   },
-
   textStyle: {
-
     alignSelf: 'center',
     color: 'white',
     fontSize: 16,
     fontWeight: 'bold',
-
   },
   btn: {
     alignSelf: 'stretch',
@@ -98,7 +74,6 @@ const styles = StyleSheet.create({
     elevation: 2,
     position: 'relative'
   },
-
   viewStyle: {
     justifyContent: 'center',
     alignItems: 'center',
@@ -111,12 +86,3 @@ const styles = StyleSheet.create({
     position: 'relative'
   },
 });
-
-
- //  <TouchableOpacity
-         //  style={styles.btn}
-
-         // onPress={() =>  navigate('AssignKidsTasks')}
-         //  >
-         //  <Text style={styles.textStyle}>Assign Task</Text>
-         //  </TouchableOpacity>
