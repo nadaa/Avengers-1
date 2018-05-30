@@ -14,11 +14,11 @@ Mobile application to help all family members staying connected with their famil
 ##Summary
 
 Familj is an ios App that will provide an interface for all family members which will guarntee their contibution within their house and strengthen their family bonds.
-each family has it's own id and all family member should sign up with that id, there are two UI one for the sibilings and the other for the parents, parents have some extra authorites to monitor their kids life and teach them responsibility by envolving them with all family tasks,activites and responsibilites.  
+each family has it's own id and all family members should sign up with that id, there are two UI one for the sibilings and the other for the parents, parents have some extra authorites to monitor their kids life and teach them responsibility by envolving them with all family tasks,activites and responsibilites.  
 
 ##Problem
 
-in this era families in all communites are suffering from being away from each other caused by many reasons one of them is overusing the social media networks.
+In this era, families in all communites are suffering from being away from each other caused by many reasons one of them is overusing the social media networks.
 that will guide to a weak family bonds which will destroy the community    
 
 
