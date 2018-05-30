@@ -86,7 +86,7 @@ export default class Bar extends React.Component{
                   </Text>
                 </View>
 
-                <View style={styles.centerComponent}>
+  {/*              <View style={styles.centerComponent}>
                   <Text style={styles.textIconDone}>{this.props.p}%</Text>
                   <Text style={styles.textUnderIcon}>
                     Progress
@@ -98,6 +98,7 @@ export default class Bar extends React.Component{
                     Money
                   </Text>
                 </View>
+             */ }
                 <View style={styles.lastCenterComponent}>
                   <Icon6 onPress={() => this.state.role==='Father'||this.state.role==='Mother'?this.props.navigation.navigate('Tasks'):this.props.navigation.navigate('TasksDisplay')}  style={{color:'#0bf5fb'}} 
                   name="checklist" size={35}/>

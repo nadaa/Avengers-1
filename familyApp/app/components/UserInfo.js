@@ -153,8 +153,8 @@ wrapper: {
     flex: 1,
 },
 container: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    // alignItems: 'center',
+    // justifyContent: 'center',
     position: 'absolute',
     top: 0,
     left: 0,

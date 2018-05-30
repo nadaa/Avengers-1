@@ -1,4 +1,3 @@
-
 import React from 'react';
 import {
  StyleSheet,
@@ -25,7 +24,6 @@ export default class Login extends React.Component {
     }
   }
   saveData(userInfo){
-   //console.log('userinfo',userInfo)
     AsyncStorage.setItem('username',(userInfo.username));
     AsyncStorage.setItem('email',(userInfo.email));
     AsyncStorage.setItem('role',(userInfo.role));
@@ -33,22 +31,20 @@ export default class Login extends React.Component {
   }
  sendLogin(){
      var that=this;
-
-          const { navigate } = this.props.navigation;
+    const { navigate } = this.props.navigation;
 
             axios.post(global.ip+'/login',{
              user:this.state
          })
          .then(async function (response) {
-
           alert(response.data.msg)
            that.saveData(response.data.user);
             var role= await AsyncStorage.getItem('role');
            if(response.data.msg==="success login"){
             if(role==='Mother'||role==='Father'){
-               this.props.navigation('Drawer')
+               navigate('Drawer')
             }else if(role==='Child'){
-               this.props.navigation('DrawerKids')
+               navigate('DrawerKids')
             }
               
            }
@@ -68,7 +64,9 @@ export default class Login extends React.Component {
 };
    render() {
     //jozaa 
- return (
+        const { navigate } = this.props.navigation;
+
+    return( 
       <ImageBackground
       source={{uri: 'https://images.pexels.com/photos/1018137/pexels-photo-1018137.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'}}
       style={styles.container}>
@@ -89,64 +87,62 @@ export default class Login extends React.Component {
       /> 
     <TouchableOpacity
       style={styles.btn}
-      onPress={
-         this.sendLogin.bind(this)
-
-
-        }
+      onPress={()=> this.sendLogin()}
     	>
     	<Text>LOGIN</Text>
     	</TouchableOpacity>
     	 <Text style={{color: 'black', paddingTop:20,fontSize: 15}}
         //const { navigate } =;
-        onPress={() =>  this.props.navigation.navigate('SignUp')}>
+        onPress={() =>  navigate('SignUp')}>
           Create Account 
              </Text>
     </ScrollView>
     </KeyboardAvoidingView>
         </ImageBackground>
 
-    );
+    )
   }
-  
-
-// import React, {Component} from 'react';
-// import {StyleSheet, View, Image, KeyboardAvoidingView} from 'react-native';
-// import LoginForm from './LoginForm';
-
-// export default class Login extends Component {
-
-// 	render(){
-// 		return (
-// 			<KeyboardAvoidingView behavior="padding" style={styles.container}>
-// 			<View style={styles.logoContainer}>
-// 			<Image
-// 			style={styles.logo}
-// 			source={require('../images/13.png')} />
-
-// 			</View>
-// 			<View style={styles.formContainer}>
-// 			<LoginForm />
-// 			</View>
-// 			</KeyboardAvoidingView>
-
-// 			);
-// 	}
-
 }
-
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor : '#2980b9'
-	},
-	logoContainer:{
-		alignItems : 'center',
-		flexGrow: 1,
-		justifyContent : 'center'
-	},
-	logo: {
-		width: 200,
-		height: 200
-	}
+ contentContainer: {
+    paddingVertical: 20,
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+wrapper: {
+  flex: 1,
+},
+container: {
+    flex: 1,
+    backgroundColor: '#2896d3',
+    paddingLeft: 40,
+    paddingRight: 40,
+    position: 'absolute',
+     top: 0,
+     left: 0,
+      width: '100%',
+      height: '100%',
+      opacity: 23,
+},
+header: {
+  fontSize: 24,
+  marginBottom: 60,
+  color: '#fff',
+  fontWeight: 'bold',
+},
+textInput: {
+  alignSelf: 'stretch',
+  padding: 16,
+  marginBottom: 20,
+  backgroundColor: '#fff',
+  fontSize: 20,
+},
+btn: {
+  alignSelf:'stretch',
+  backgroundColor:'#ffcde6',
+  padding:20,
+  alignItems:'center',
+}
 })
+

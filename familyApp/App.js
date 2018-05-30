@@ -5,6 +5,8 @@ import Login from './app/components/Login';
 import SignUp from './app/components/SignUp';
 import Drawer from './app/components/Drawer';
 import DrawerKids from './app/components/DrawerKids';
+//only for test (Jozaa)
+import Login2 from './app/components/Login2';
 import TaskMonitor from './app/components/TaskMonitor';
 import Tasks from './app/components/Tasks';
 import TasksDisplay from './app/components/TasksDisplay';
@@ -12,8 +14,9 @@ import Bar from './app/components/Bar';
 import Shortage from './app/components/Shortage';
 import UserInfo from './app/components/UserInfo';
 //only for test (Jozaa)
-import Login2 from './app/components/Login2';
 import Finance from './app/components/Finance';
+import SignUpForm from './app/components/SignUpForm';
+
 
 const Application=  createStackNavigator({
   //i change it for testing (Jozaa)
@@ -22,6 +25,7 @@ const Application=  createStackNavigator({
   Login:{ screen: Login },
   UserInfo:{screen:UserInfo},
   SignUp:{screen:SignUp},
+  SignUpForm:{screen:SignUpForm},
   Drawer: { screen: Drawer },
   DrawerKids: { screen: DrawerKids },
   TaskMonitor:{screen:TaskMonitor},
@@ -36,19 +40,18 @@ const Application=  createStackNavigator({
 export default class App extends React.Component {
   constructor(props){
     super(props);
-   //global.ip='http://10.0.2.2:3000/api'; //nada
-   // global.ip='http://192.168.8.105:3000/api'; //jozaa
-   global.ip='http://192.168.1.82:3000/api'; //jozaa2
-   // global.ip='http://192.168.202.2:3000/api'; //Hussein
-   //global.ip='http://192.168.0.84:3000/api' //Waed
-   //global.ip='http://192.168.202.2:3000/api'; //Hussein
+
+   global.ip='http://10.0.2.2:3000/api'; //nada
+    // global.ip='http://192.168.8.105:3000/api'; //jozaa
+    //global.ip='http://192.168.0.84:3000/api' //Waed
+     //global.ip='http://192.168.202.2:3000/api'; //Hussein
+
   }
   render() {
     return (
      <Application/>
-     // <Drawer/>
+     // <Login/>
      // <Finance/>
-     // <Login2/>
     );
   }
 }

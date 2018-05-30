@@ -21,6 +21,8 @@ export default class SignUpForm extends Component {
 			role: 'Select your role',
 			familyId:''
 		}
+
+		this.sendSignUp=this.sendSignUp.bind(this);
 	}
 
 	validateEmail (text) {
@@ -35,17 +37,15 @@ export default class SignUpForm extends Component {
 
 
 		sendSignUp(){
+
 			if(this.state.email===''||this.state.password === ''||this.state.username ===''|| this.state.bdate === ''||this.state.role === 'Select your role'|| this.state.familyId ===''){
 				alert('fill all your data')
 			}else if(this.validateEmail(this.state.email))
-			{ 
-				const { navigate } = this.props.navigation;
-
-				axios.post(global.ip+'/signup', {
+			{ 	axios.post(global.ip+'/signup', {
 					user:this.state
 				})
 				.then(function (response) {
-					
+					console.log(response.data.msg)
 					if(response.data.msg==="success signup"){
 						navigate('Login')
 					}
@@ -67,11 +67,11 @@ export default class SignUpForm extends Component {
 		}
 
 		render(){
+		//const { navigate } = this.props.navigation;
+
 			return (
 				<View style={styles.regForm}>
-
-				<Text style={styles.header}> Registration </Text>
-
+     			<Text style={styles.header}> Registration </Text>
 				<TextInput style={styles.textInput} placeholder="Username"
 				underlineColorAndroid={"transparent"}
 				ref={input =>{this.textInput =input}}
@@ -127,11 +127,12 @@ export default class SignUpForm extends Component {
 
 				<TouchableOpacity style={styles.buttonContainer}>
 				<Text style={styles.buttonText}> Sign up </Text>
+				onPress={this.sendSignUp.bind(this) }
 				</TouchableOpacity>
 
 				<Text style={styles.textStyle}
 
-				onPress={() =>  this.props.navigation('Login')}>
+				onPress={() =>  navigate('Login')}>
 
 				I am already registered
 				</Text>
