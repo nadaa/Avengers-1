@@ -1,15 +1,13 @@
 const mongoose=require('mongoose');
 
 const userSchema=new mongoose.Schema({
-	email:{
-	 type: String, index: { unique: true }
-	},
+	email:{ type: String, index: { unique: true }},
 	password: String,
 	username:String,
 	bdate: Date,
 	role: String,
-	familyId:String
-	})
+	familyId:String 
+})
 
 const taskSchema=new mongoose.Schema({
 	taskName:String,
@@ -18,18 +16,14 @@ const taskSchema=new mongoose.Schema({
 	email:String
 })
 
-
 const familySchema=new mongoose.Schema({
-	// familyRules:String,
-	// events:[{}],
-	// finance:{},
 	familyId:{type:String, index: { unique: true }},
 	jobtitle:String,
-   	workaddress:String,
-    worknumber:String,
-   	worktime:String,
-    salary:{type:Number,default:0},
-    marriageDate:String
+ 	workaddress:String,
+  worknumber:String,
+ 	worktime:String,
+  salary:{type:Number,default:0},
+  marriageDate:String
 })
 
 const shortageSchema=new mongoose.Schema({
@@ -37,24 +31,23 @@ const shortageSchema=new mongoose.Schema({
 	familyId:{type:String, index: { unique: true }},
 })
 
-
 const finance=new mongoose.Schema({
 	familyId:{type:String, index: { unique: true }},
 	category:[[String]],
 	cost:[[Number]],
 })
 
-var User=mongoose.model('User',userSchema);
-var Task=mongoose.model('Task',taskSchema);
-var Family=mongoose.model('Family',familySchema);
+var User    =mongoose.model('User',userSchema);
+var Task    =mongoose.model('Task',taskSchema);
+var Family  =mongoose.model('Family',familySchema);
 var Shortage=mongoose.model('Shortage',shortageSchema);
-var Finance=mongoose.model('Finance',finance);
+var Finance =mongoose.model('Finance',finance);
 
 module.exports={
-User:User,
-Task:Task,
-Family:Family,
-Shortage:Shortage,
-Finance:Finance,
+  User:User,
+  Task:Task,
+  Family:Family,
+  Shortage:Shortage,
+  Finance:Finance,
 }
 
