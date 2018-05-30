@@ -15,6 +15,7 @@ import Icon4 from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icon5 from 'react-native-vector-icons/MaterialIcons';
 import Icon6 from 'react-native-vector-icons/Octicons';
 import Icon7 from 'react-native-vector-icons/Foundation';
+import Icon8 from 'react-native-vector-icons/SimpleLineIcons' ; 
 
 const userRole={
   // (Mother) female /  (Father) male/ child (Children)
@@ -34,7 +35,6 @@ export default class Bar extends React.Component{
     this.state={
       //defult thing when change from data base change here 🙂 <3
       // (Mother) female /  (Father) male/ child (Children)
-      kidTasks:[],
       role:'Mother',
       //from 100%
       userProgress:'100',
@@ -44,8 +44,7 @@ export default class Bar extends React.Component{
       restMoney:'1500',
     };
     //run the function to save the email in this.state,userSave
-    //this.callOrder(this.setUserRole.bind(this)
-    this.getProgress=this.getProgress.bind(this)
+    this.callOrder(this.setUserRole.bind(this))
   }
   callOrder(cb){
     cb()
@@ -59,37 +58,12 @@ export default class Bar extends React.Component{
       alert(error)
     }
   }
-
-componentDidMount(){
-	this.getProgress();
-}
-async getProgress(){
-	var kidEmail=await AsyncStorage.getItem('email');
-	axios.post('http://10.0.2.2:3000/api/gettasks',{kidemail:kidEmail
-	})
-	.then((response) =>{
-		console.log(response.data);
-		this.setState({kidTasks:response.data});
-		var countCompleted=0;
-		for(var i=0;i<this.state.kidTasks.length;i++){
-			if(this.state.kidTasks[i].completed){
-				countCompleted++;
-			}
-		}
-		this.setState({userProgress:Math.round(countCompleted/this.state.kidTasks.length.toFixed(2)*100)})
-    
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
-}
-
-
   //render
   render() {
     //what return
     return (
       <View style={styles.allPage}>
+
         <View style={styles.barView}>
           <Header
             backgroundColor='#123456'
@@ -106,39 +80,39 @@ async getProgress(){
             centerComponent={
               <View style={styles.centerComponentView}>
                 <View  style={styles.centerComponent}>
-                  <Icon0 onPress={() =>this.props.navigation.navigate('User Information')} name={userRole[this.state.role]} size={35} color="red"/>
-                  <Text onPress={() =>this.props.navigation.navigate('User Information')} style={styles.textUnderIcon}>
+                  <Icon0 onPress={() =>this.state.role==='Father'||this.state.role==='Mother'?this.props.navigation.navigate('UserInfo'):null} name={userRole[this.state.role]} size={35} color="red"/>
+                  <Text onPress={() =>this.state.role==='Father'||this.state.role==='Mother'?this.props.navigation.navigate('UserInfo'):null} style={styles.textUnderIcon}>
                     {this.state.role}
                   </Text>
                 </View>
 
-                <View style={styles.centerComponent}>
-
-                  <Text style={styles.textIconDone}>{this.state.userProgress}%</Text>
-                  <Text onPress={() =>this.props.navigation.navigate('Tasks')} style={styles.textUnderIcon}>
+  {/*              <View style={styles.centerComponent}>
+                  <Text style={styles.textIconDone}>{this.props.p}%</Text>
+                  <Text style={styles.textUnderIcon}>
                     Progress
                   </Text>
                 </View>
                 <View style={styles.centerComponent}>
-                  <Text onPress={() =>this.props.navigation.navigate('Tasks')} style={styles.textIconRank}>{this.state.userRanking}</Text>
-                  <Text onPress={() =>this.props.navigation.navigate('Tasks')} style={styles.textUnderIcon}>
-                    Rank
-                  </Text>
-                </View>
-                <View style={styles.lastCenterComponent}>
                   <Text onPress={() =>this.props.navigation.navigate('Finance')} style={styles.textIconMoney}>{this.state.restMoney}</Text>
                   <Text onPress={() =>this.props.navigation.navigate('Finance')} style={styles.textUnderIcon}>
                     Money
                   </Text>
+                </View>
+             */ }
+                <View style={styles.lastCenterComponent}>
+                  <Icon6 onPress={() => this.state.role==='Father'||this.state.role==='Mother'?this.props.navigation.navigate('Tasks'):this.props.navigation.navigate('TasksDisplay')}  style={{color:'#0bf5fb'}} 
+                  name="checklist" size={35}/>
+                
+                <Text onPress={() =>this.state.role==='Father'||this.state.role==='Mother'?this.props.navigation.navigate('Tasks'):this.props.navigation.navigate('TasksDisplay')} style={styles.textUnderIcon}>Tasks</Text>
                 </View>
               </View>
             }
 
             rightComponent={
               <View style={styles.rightComponent}>
-                <Icon6 onPress={() => this.props.navigation.navigate('Tasks')} style={{color:'#0bf5fb'}} 
-                  name="checklist" size={35}/>
-                <Text onPress={() =>this.props.navigation.navigate('Tasks')} style={styles.textUnderIcon}>Tasks</Text>
+                <Icon8 onPress={() => this.props.navigation.navigate('Login')} style={{color:'#0bf5fb'}} 
+                  name="logout" size={35}/>
+                <Text onPress={() =>this.props.navigation.navigate('Login')} style={styles.textUnderIcon}>logout</Text>
               </View>
             }
           >

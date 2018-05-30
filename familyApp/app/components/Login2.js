@@ -11,10 +11,11 @@ export default class Login2 extends React.Component {
       password:'1234567',
     }
   }
+  //1.82         0.89
   sendLogin(){
     this.saveData()
     const {navigate}=this.props.navigation;
-    axios.post('http://192.168.1.82:3000/login2', {user:this.state})
+    axios.post(global.ip+'/login2', {user:this.state})
     .then(function (response) {
       if(response.data.msg==="success login"){
         //console.log('go to drawer')
@@ -36,7 +37,7 @@ export default class Login2 extends React.Component {
     var that=this
     var allData
     //alert('you call the function with email: ' + this.state.userEmailSave )
-    axios.post('http://192.168.1.82:3000/getData', {email:this.state.email})
+    axios.post(global.ip+'/getData', {email:this.state.email})
       .then(function (res) {
         //console.log(res.data)
         allData=res.data

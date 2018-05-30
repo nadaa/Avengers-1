@@ -18,13 +18,9 @@ import DatePicker from 'react-native-datepicker';
 import {Select, Option} from "react-native-chooser";
 import Bar from './Bar';
 import ShortageNote from './ShortageNote';
-
-
-
 export default class Shortage extends React.Component {
 	constructor(props){
         super(props);
-
         this.state=
         {
         needArray:[],
@@ -33,24 +29,21 @@ export default class Shortage extends React.Component {
         this.getData.bind(this)
     }
 
-
   render() {
+
+
    let notes=this.state.needArray.map((val,key)=>{
-      return <ShortageNote key={key} keyval={key} val={val} deleteMethod ={()=>this.deleteNote(key)} />
+      return <ShortageNote key={key} keyval={key} val={val} deleteMethod ={()=>this.deleteMethod(key)} />
     })
     return (
   <View style={styles.container}>
-       
+       <Bar navigation={this.props.navigation}/>
       <View style={styles.header}>
           <Text style={styles.headerText}>Shortage</Text>
       </View>
-
-
             <ScrollView style={styles.scrollContainer}>
                   {notes}
             </ScrollView>
-
-
       <View style={styles.footer}>
                       <TouchableOpacity style={styles.addButton} onPress={this.addNeed.bind(this)}>
                         <Text style={styles.addButtonText}>+</Text>
@@ -62,17 +55,16 @@ export default class Shortage extends React.Component {
                           placeholderTextColor='white' >
                            </TextInput>
                   </View>
-
   </View>
     );
   }
-  getData(){
-    axios.get('http://192.168.0.84:3000/api/shortage') 
-    
+  async getData(){
+    //axios.get('http://192.168.0.84:3000/api/shortage')
+    var familyId=await AsyncStorage.getItem('familyid');
+    console.log(familyId);
+    axios.post(global.ip+'/getshortage',{familyId:familyId}) 
     .then((response) =>{
-      //console.log(response);
-      
-        this.setState({needArray:response.data.needs})
+       this.setState({needArray:response.data.needs})
         console.log('needArray',this.state.needArray)
         
     })
@@ -84,27 +76,15 @@ export default class Shortage extends React.Component {
   componentDidMount(){
     this.getData()
 }
-
-  // axios.get(`http://10.0.2.2:3000/api/getkids/${familyId}`)
-  // //axios.get(`http://192.168.1.86:3000/api/getkids/${familyId}`)
-  //   .then((response) =>{
-  //     this.setState({kids:response.data});
-  //   })
-  //   .catch(function (error) {
-  //     console.log(error);
-  //   });
-
-
-
    
    async addNeed(){
-     
-     var familyId = await AsyncStorage.getItem('familyid')
       const {navigate}=this.props.navigation;
-    if(this.state.needText){
-      var d=new Date()
+     var that=this;
+     var familyId = await AsyncStorage.getItem('familyid')
      
-     axios.post('http://192.168.0.84:3000/api/shortage', 
+    if(this.state.needText){
+   
+     axios.post(global.ip+'/shortage', 
       {
         need:this.state.needText,
         familyId:familyId,
@@ -112,7 +92,7 @@ export default class Shortage extends React.Component {
     .then(function (response) {
       if(response.data.msg==='success'){
         alert('success')
-        this.getData();
+        that.getData();
       
       }
       else if(response.data.msg==='error'){
@@ -127,56 +107,44 @@ export default class Shortage extends React.Component {
       this.setState({needText:''})
     }
   }
-  async deleteNote(key){
-   var familyId = await AsyncStorage.getItem('familyid')
-      const {navigate}=this.props.navigation;
-    if(this.state.needText){
-      var d=new Date()
-     
-     axios.post('http://192.168.0.84:3000/api/shortage/delete', 
-      {
-        need:this.state.needText,
-        familyId:familyId,
-      })
-    .then(function (response) {
-      if(response.data.msg==='success'){
-        alert('success')
-        this.getData();
-      
-      }
-      else if(response.data.msg==='error'){
-        alert("error");
-      }
-    })
-    .catch(function (error) {
-      console.log(error);
-      alert(error);
-    });
-
-      this.setState({needText:''})
-    }
+  async deleteMethod(key){
     this.state.needArray.splice(key,1)
     this.setState({needArray:this.state.needArray})
+   var familyId = await AsyncStorage.getItem('familyid');
+     
+    axios.post(global.ip+'/deleteshortage', 
+      { need:this.state.needText,
+        familyId:familyId,
+        key:key
+      })
+  
+    .then(function (response) {
+      if(response.data.msg==='success'){
+        this.getData();
+      }
+      else if(response.data.msg==='error'){
+        alert("error");
+      }
+    })
+    .catch(function (error) {
+      console.log(error);
+      alert(error);
+    });
+      this.setState({needText:''})
   }
-
-
- 
 }
-
 const styles = StyleSheet.create({
 
 container:{
      flex:1,
 },
 header:{
-      backgroundColor:'#e9963b',
+      backgroundColor:'#65737e',
       alignItems:'center',
       justifyContent:'center',
       borderBottomWidth:  10,
-      borderBottomColor:'#ddd',
-
+     borderBottomColor:'#ddd',
 },
-
 headerText:{
       color:'white',
       fontSize:40,
@@ -206,7 +174,7 @@ addButton:{
       zIndex:10,
       elevation:8,
       marginBottom:-45,
-      backgroundColor:'#e9963b', 
+      backgroundColor:'#65737e', 
 },
 addButtonText:{
       color:'#fff',
@@ -218,11 +186,9 @@ textInput:{
       color:'#fff',
       padding:40,
       paddingTop:40,
-      backgroundColor:'#f1c089',
+      backgroundColor:'#c0c5ce',
       borderTopWidth:2,
-      borderTopColor:'#ededed',
-
-
+      borderTopColor:'#c0c5ce',
 }
 
 })  

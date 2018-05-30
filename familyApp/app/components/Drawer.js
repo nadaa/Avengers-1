@@ -9,17 +9,12 @@ import Tasks from './Tasks';
 import Finance from './Finance';
 import UserInfo from './UserInfo';
 import Bar from './Bar';
-
 import Shortage from './Shortage';
-import AssignKidsTasks from './AssignKidsTasks';
-
 import TaskMonitor from './TaskMonitor';
 import TasksDisplay from './TasksDisplay';
-
 import Try from './Try';
 import Login from './Login';
 import SignUp from './SignUp';
-
 const MyDrawer=createDrawerNavigator(
   {
     Tasks:{
@@ -34,9 +29,8 @@ const MyDrawer=createDrawerNavigator(
     Shortage:{
      screen:Shortage,
     },
-      
-    Try:{
-      screen:Try,
+    TaskMonitor:{
+      screen:TaskMonitor,
     },
    
     /*
@@ -64,15 +58,17 @@ const MyDrawer=createDrawerNavigator(
 
 
     //                                  Try   Try2 Try3
-    initialRouteName:'Tasks',//Finance  Study Exam Outside
-    //initialRouteName:'Finance',
+    //Finance  Study Exam Outside
+
+    initialRouteName:'Tasks',
+
     drawerPosition:'left',
     drawerWidth:200,
     drawerOpenRoute: 'DrawerOpen',
     drawerCloseRoute: 'DrawerClose',
     drawerToggleRoute: 'DrawerToggle',
     contentOptions:{
-    activeTintColor:'red',
+    activeTintColor:'green',
       // tintStyle:{backgroundColor: 'red'},
     },
   }

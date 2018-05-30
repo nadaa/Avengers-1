@@ -7,30 +7,23 @@ import { createDrawerNavigator } from 'react-navigation'
 
 import Tasks from './Tasks';
 import UserInfo from './UserInfo';
-import Bar from './Bar';
+//import Bar from './Bar';
 
 import Shortage from './Shortage';
 import TasksDisplay from './TasksDisplay';
 import ShortageNote from './ShortageNote'
+import Login from './Login';
 
 const KidsDrawer=createDrawerNavigator(
   {
     TasksDisplay:{
       screen:TasksDisplay,
     },
-    // Tasks:{
-    //  screen:Tasks,
-    // },
-    // 'User Information':{
-    //  screen:UserInfo,
-    // },
+   
     Shortage:{
      screen:Shortage,
     },
-    
-    // ShortageNote:{
-    //   screen:ShortageNote,
-    // }
+   
   },
   {
     initialRouteName:'TasksDisplay',
