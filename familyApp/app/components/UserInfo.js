@@ -51,8 +51,7 @@ export default class UserInfo extends React.Component {
 
 
 sendInfo(){
-//const { navigate } = this.props.navigation;
-//this ip 192.168.1.86 for waed pc pleas comment it if you want to change it 
+
 axios.post(global.ip+'/userinfo', {
     user:this.state
    })
