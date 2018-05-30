@@ -1,7 +1,7 @@
 //import react from react
 import React from 'react';
 //import element from reacr-native
-import { StyleSheet, Text, View, TouchableOpacity, TextInput, Picker, AsyncStorage } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, Picker, AsyncStorage, Dimensions} from 'react-native';
 //import table from react native table component
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 //import axios to make router works
@@ -10,6 +10,17 @@ import axios from 'axios';
 import Dialog from "react-native-dialog";
 //import Bar from Bar component
 import Bar from './Bar';
+const window = Dimensions.get('window');
+
+const ShowOrHide={
+  true:'btnView',
+  false:'hiddenContainer'
+}
+const roleUser={
+  'Father':true,
+  'Mother':true,
+  'Child':false
+}
 //export Home from the react componant
 export default class Finance extends React.Component{
   //the constructor
@@ -29,6 +40,8 @@ export default class Finance extends React.Component{
       editName:'',
       deletetName:'',
       id:'',
+      role:'Child',
+      show:true,
     };
   }
   //auto call function when render this scren
@@ -199,7 +212,7 @@ export default class Finance extends React.Component{
           </Table>
         </View>
 
-        <View style={styles.btnView}>
+        <View style={styles[ShowOrHide[roleUser[this.state.role]]]}>
           <TouchableOpacity style={styles.btnAdd} onPress={this.addToFinance.bind(this)}>
             <Text style={styles.textBtnAdd}>Add</Text>
           </TouchableOpacity>
@@ -440,4 +453,11 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     padding: 16,
   },
+  hiddenContainer: {
+    top: window.height,
+    bottom: -window.height,
+    // right: window.width,
+    // left: window.width,
+    // marginTop:20,
+  }
 });
