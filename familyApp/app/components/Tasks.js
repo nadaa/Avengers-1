@@ -1,38 +1,42 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity,AsyncStorage } from 'react-native';
-import Bar from './Bar'
-import { createStackNavigator } from 'react-navigation';
-import TaskMonitor from './TaskMonitor';
+import { StyleSheet, Text, View, TouchableOpacity, AsyncStorage } from 'react-native';
+import Bar from './Bar';
+
 export default class Tasks extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state={
+    this.state = {
       kidName: '',
-      taskText : '',
-      role:''
-    }
-    this.getRole=this.getRole.bind(this);
+      taskText: '',
+      role: ''
+    };
+    this.getRole = this.getRole.bind(this);
   }
 
-  async getRole(){
-    var role= await AsyncStorage.getItem('role');
-    this.setState({role:role});
-  }
-  componentDidMount(){
+
+  componentDidMount() {
     this.getRole();
   }
-  render(){
+
+  async getRole() {
+    const role = await AsyncStorage.getItem('role');
+    this.setState({role: role });
+  }
+
+  render() {
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.allPage}>
-        <Bar p={0} navigation={this.props.navigation}/>
-        <View style={styles.container}>
-          <TouchableOpacity style={styles.btn} onPress={() =>  navigate('TaskMonitor')}>
-            <Text style={styles.textStyle}>Assign/Monitor Task</Text>
-          </TouchableOpacity>
-        </View>
+      <Bar 
+      p={0} navigation={this.props.navigation} 
+    />
+      <View style={styles.container}>
+      <TouchableOpacity style={styles.btn} onPress={() => navigate('TaskMonitor')}>
+      <Text style={styles.textStyle}>Assign/Monitor Task</Text>
+      </TouchableOpacity>
       </View>
-    );
+      </View>
+      );
   }
 }
 
