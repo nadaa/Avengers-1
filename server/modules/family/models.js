@@ -1,14 +1,17 @@
 const mongoose=require('mongoose');
 
+//user schema for user info
 const userSchema=new mongoose.Schema({
-	email:{ type: String, index: { unique: true }},
-	password: String,
-	username:String,
+	email:{ type: String,trim: true,index: { unique: true }},
+	password: {type:String, trim: true},
+	username:{type:String, trim: true },
 	bdate: Date,
-	role: String,
-	familyId:String 
+	role: {type:String, trim:true},
+	familyId:{type:String,trim:true} 
+
 })
 
+//taskSchema to store kids tasks
 const taskSchema=new mongoose.Schema({
 	taskName:String,
 	taskDate:{type:Date,default:new Date()},
@@ -16,16 +19,19 @@ const taskSchema=new mongoose.Schema({
 	email:String
 })
 
+
 const familySchema=new mongoose.Schema({
 	familyId:{type:String, index: { unique: true }},
 	jobtitle:String,
  	workaddress:String,
   worknumber:String,
- 	worktime:String,
+  worktime:String,
   salary:{type:Number,default:0},
   marriageDate:String
+
 })
 
+//shortageSchema to store shortages
 const shortageSchema=new mongoose.Schema({
 	needs:{type:[String],default:[]},
 	familyId:{type:String, index: { unique: true }},

@@ -5,6 +5,7 @@
   "devDependencies": {
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
+    "eslint-config-rallycoding": "^3.2.0",
     "jest-enzyme": "^6.0.0",
     "jest-expo": "~27.0.0",
     "react-native-scripts": "1.14.0",
@@ -31,6 +32,7 @@
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-native": "~0.55.2",
+    "react-native-animatable": "^1.3.0",
     "react-native-checkbox": "^2.0.0",
     "react-native-checkbox-group": "^1.0.3",
     "react-native-chooser": "^1.7.0",
@@ -43,6 +45,7 @@
     "react-native-picker-select": "^3.0.1",
     "react-native-render-html": "^3.10.0",
     "react-native-table-component": "^1.1.8",
+    "react-native-vector-icons": "^4.6.0",
     "react-navigation": "^2.0.1"
   }
 }

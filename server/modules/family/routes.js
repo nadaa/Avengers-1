@@ -3,8 +3,13 @@ const appControllers=require('./controllers');
 
 
 appRouter.route('/').get((req,res)=>{
-  var t={b:'YOU ARE CONECTED TO THE SERVER :)'}
-  res.send(t);
+
+  var t={msg:'YOU ARE CONECTED TO THE SERVER:)'}
+  res.status(200).send(t);
+})
+
+appRouter.route('/api/signup').post((req,res)=>{
+	appControllers.signupUser(req,res);
 })
 
 appRouter.route('/api/signup').post((req,res)=>{
@@ -48,7 +53,8 @@ appRouter.route('/api/getkidsid').post((req,res)=>{
   appControllers.getKidsId(req,res);
 });
 
-appRouter.route('/api/shortage').post((req,res)=>{
+
+appRouter.route('/api/addshortage').post((req,res)=>{
   appControllers.sendShortage(req,res);
 })
 
@@ -57,6 +63,7 @@ appRouter.route('/api/getshortage').post((req,res)=>{
 })
 
 appRouter.route('/api/deleteshortage').post((req,res)=>{
+  console.log(req.body)
    appControllers.deleteShortage(req,res);
 })
 
