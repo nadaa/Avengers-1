@@ -2,7 +2,6 @@ import React from 'react';
 import { StyleSheet, Text, View, AsyncStorage } from 'react-native';
 import { Header } from 'react-native-elements';
 
-
 import Icon0 from 'react-native-vector-icons/FontAwesome';
 import Icon6 from 'react-native-vector-icons/Octicons';
 import Icon8 from 'react-native-vector-icons/SimpleLineIcons'; 
@@ -17,7 +16,7 @@ export default class Bar extends React.Component {
   constructor() {
     super();
     this.state = {
-      role: 'Mother',
+      role: 'Child',
       // userProgress:'100',
       //userRanking:'2',
       // restMoney:'1500',
