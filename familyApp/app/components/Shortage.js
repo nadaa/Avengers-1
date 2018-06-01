@@ -1,11 +1,17 @@
 import React from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, 
-  AsyncStorage, ScrollView } from 'react-native';
-  import axios from 'axios';    
-  import Bar from './Bar';
-  import ShortageNote from './ShortageNote';
+AsyncStorage, ScrollView } from 'react-native';
+import axios from 'axios';    
+import Bar from './Bar';
+import ShortageNote from './ShortageNote';
+import Icon0 from 'react-native-vector-icons/FontAwesome';
 
-  export default class Shortage extends React.Component {
+export default class Shortage extends React.Component {
+ static navigationOptions = {
+    drawerIcon: () => (
+      <Icon0 style={{color:'green'}} name="cart-plus" size={20}/>
+    ),
+  }
    constructor(props) {
     super(props);
     this.state = {

@@ -5,6 +5,7 @@ import { StyleSheet, Text, View, TouchableOpacity,
   import axios from 'axios';
   import Dialog from 'react-native-dialog';
   import Bar from './Bar';
+  import Icon0 from 'react-native-vector-icons/FontAwesome';
 
   const window = Dimensions.get('window');
   const ShowOrHide = {
@@ -17,6 +18,11 @@ import { StyleSheet, Text, View, TouchableOpacity,
     Child: false
   };
   export default class Finance extends React.Component {
+    static navigationOptions = {
+      drawerIcon: () => (
+        <Icon0 style={styles.iconDrawer} name="money" size={20}/>
+      ),
+    };
     constructor() {
       super();
       this.state = {
@@ -508,5 +514,10 @@ const styles = StyleSheet.create({
   hiddenContainer: {
     top: window.height,
     bottom: -window.height,
+  },
+  iconDrawer:  {
+    color:'green',
+    // marginRight:0,
+    // paddingRight:-20,
   }
 });

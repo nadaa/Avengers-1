@@ -4,9 +4,17 @@ import { StyleSheet, Text, TextInput, TouchableOpacity,
   import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
   import axios from 'axios';    
   import Bar from './Bar';
-// import Drawer from './Drawer';
-// 
+
+import Icon1 from 'react-native-vector-icons/Entypo'; 
+
+
 export default class UserInfo extends React.Component {
+    static navigationOptions = {
+      drawerIcon: () => (
+        <Icon1 style={{color:'green'}} name="v-card" // archive
+        size={20}/>
+      ),
+    };
   constructor(props) {
     super(props);
     this.state = {

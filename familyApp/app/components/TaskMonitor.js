@@ -5,8 +5,15 @@ import { View, StyleSheet, Platform, ScrollView,
   import { Card, CheckBox } from 'react-native-elements';
   import { Select, Option } from 'react-native-chooser';
   import Bar from './Bar';
+import Icon6 from 'react-native-vector-icons/Octicons';
 
   export default class TaskMonitor extends React.Component {
+  static navigationOptions = {
+    drawerIcon: () => (
+      <Icon6 style={{color:'green'}} name="tasklist" size={20}/>
+    ),
+  };
+ 
    constructor(props) {
     super(props);
     this.state = {

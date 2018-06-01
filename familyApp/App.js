@@ -14,7 +14,6 @@ import Finance from './app/components/Finance';
 
 const Application = createStackNavigator({
   SignUp: { screen: SignUp },
-  
   Login: { screen: Login },
   'User Information': { screen: UserInfo },
   Drawer: { screen: Drawer },
@@ -37,7 +36,8 @@ export default class App extends React.Component {
   }
   render() {
     return (
-     <Application />
+     // <Application />
+     <Drawer/>
     );
   }
 }
