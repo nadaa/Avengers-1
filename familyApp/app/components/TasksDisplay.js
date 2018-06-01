@@ -27,6 +27,7 @@ export default class TasksDisplay extends React.Component {
 	componentDidMount(){
 		this.getTasks();
 	}
+	//get the tasks for loggenin kid
 	async getTasks() {
 		const kidEmail = await AsyncStorage.getItem('email');
 		axios.post(global.ip + '/gettasks', { kidemail: kidEmail
@@ -49,6 +50,7 @@ export default class TasksDisplay extends React.Component {
 		});
 	}
 
+// send a post request to change the status of the selected task
 	changeTaskStatus(selected) {
 		const taskId = this.state.kidTasks[selected].id;
 		axios.post(global.ip + '/toggletask', { taskId: taskId })
@@ -65,6 +67,7 @@ export default class TasksDisplay extends React.Component {
 		});
 	}
 
+// update the status of the selected task
 	updateCheck(index) {
 		this.state.checked[index] = !this.state.checked[index];
 		this.setState({ checked: this.state.checked });

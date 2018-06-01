@@ -10,6 +10,11 @@ import { StyleSheet, Text, View, TouchableOpacity,
   
     // Finance = Animatable.createAnimatableComponent(Finance);
 
+/*
+this screen holds the finincial matters for families, each family may use this screen
+to add, edit and delete their montly expenses such as bills, food, ..etc.
+ 
+ */
   const window = Dimensions.get('window');
   const ShowOrHide = {
     true: 'btnView',
@@ -60,7 +65,7 @@ import { StyleSheet, Text, View, TouchableOpacity,
     }
 
     onAddEditCost(value) {
-    //all this function to be sure the input is a valid number
+    // to validate numbers
     let newNumber = '';
     const numbers = '0123456789';
     for (let i = 0; i < value.length; i++) {
@@ -73,15 +78,12 @@ import { StyleSheet, Text, View, TouchableOpacity,
 
   getFinanceData() {
     const that = this;
-    //alert('FRONT END GET');
-    console.log('FRONT END GET');
     axios.post(`${global.ip}/getfinancedata`, { state: this.state })
     .then((res) => {
       that.setState({ tableName: res.data.category });
       that.setState({ tableCost: res.data.cost });
       that.calculateTotalMoney();
-      //console.log('sucess get the data from data base')
-      //alert(JSON.stringify(that.state.tableName))
+     
     })
     .catch((err) => {
       console.log(err);
@@ -95,7 +97,6 @@ import { StyleSheet, Text, View, TouchableOpacity,
       this.setState({ id });
       const role = await AsyncStorage.getItem('role');
       this.setState({ role });
-      //alert('the email save is: ' + userEmail3)
       this.getFinanceData();
     } catch (error) {
       alert(error);
@@ -106,7 +107,6 @@ import { StyleSheet, Text, View, TouchableOpacity,
     console.log('FRONT END EDIT');
     axios.post(`${global.ip}/editfinancedata`, { state: this.state })
     .then((res) => {
-      //alert(res.request._response)
     })
     .catch((err) => {
       console.log(err);
@@ -129,7 +129,6 @@ import { StyleSheet, Text, View, TouchableOpacity,
     if (this.state.tableName.length > 7) {
       alert('There is so much exist ... please delete first to can add');
     } else {
-      //need to work on it
       if (this.state.addEditName.length === 0) {
         alert('Please insert the name');
       } else if (this.state.addEditCost.length === 0) {
@@ -146,10 +145,8 @@ import { StyleSheet, Text, View, TouchableOpacity,
     }
   }
   addToFinance() {
-    //alert('Add To Finance');
     this.setState({ addDialogVisible: true });
   }
-
 
   handleCancelEdit() {
     this.state.addEditName = '';

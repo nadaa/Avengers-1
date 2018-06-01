@@ -22,6 +22,7 @@ const CustomDrawerContentComponent = (props) => (
   </Container>
 );
 
+// a left side drwarer to hold screens which appear for childs
 const KidsDrawer = createDrawerNavigator(
   {
     TasksDisplay: {

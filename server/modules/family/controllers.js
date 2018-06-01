@@ -1,6 +1,7 @@
 var models=require('./models');
 var bcrypt = require('bcrypt');
 
+//signup function to add new user
 exports.signupUser = function(req, res){
   var newUser =new models.User({
     username : req.body.user.username,  
@@ -8,7 +9,7 @@ exports.signupUser = function(req, res){
     password :req.body.user.password,   
     bdate :req.body.user.bdate,   
     role :req.body.user.role,   
-    familyId :parseInt(req.body.user.familyId),
+    familyId :req.body.user.familyId,
   });
   models.User.findOne({ email: req.body.user.email },function(err,found){
     if (!found ){
@@ -28,6 +29,7 @@ exports.signupUser = function(req, res){
   })
 }
 
+//to check if the user exists in the database
 exports.signinUser = function(req, res) {
   models.User.findOne({email:req.body.user.email},function (err, user) {
     if(user===null){
@@ -52,6 +54,7 @@ exports.signinUser = function(req, res) {
   })
 }
 
+// send all kids that have the same familyId
 exports.getAllKids=function(req,res){
   var familyId=req.params.familyid;
   models.User.find({$and:[{familyId:familyId},{role:'Child'}]},function(err,kids){
@@ -63,6 +66,7 @@ exports.getAllKids=function(req,res){
   })
 }
 
+//set task for a given kid
 exports.setKidTask=function(req,res){
   var newTask={
     taskName:req.body.task,
@@ -78,6 +82,7 @@ exports.setKidTask=function(req,res){
   })
 }
 
+// get all tasks for a given kid
 exports.getTasks=function(req,res){
   var kidEmail=req.body.kidemail;
   models.Task.find({email:kidEmail},function(err,tasks){
@@ -89,6 +94,7 @@ exports.getTasks=function(req,res){
   })
 }
 
+//check if the kid delete his task
 exports.confirmTask=function(req,res){
   var taskId=req.body.taskId;
   models.Task.deleteOne({$and:[{_id:taskId},{completed:true}]},function(err,task){
@@ -101,6 +107,7 @@ exports.confirmTask=function(req,res){
   })
 }
 
+// send back loggen user info
 exports.sendUserInfo=function(req,res){
   var newInfo=new models.Family({
     jobtitle:req.body.user.jobtitle,
@@ -127,6 +134,7 @@ exports.getKidsId= function(req,res){
   });
 };
 
+//toggle tasks checkbox
 exports.toggleTask=function(req,res){
   var id=req.body.taskId;
   models.Task.findOne({_id:id},function(err,task){
@@ -145,6 +153,7 @@ exports.toggleTask=function(req,res){
   })
 } 
 
+//to add family shortage list
 exports.sendShortage=function(req,res){
   var familyId=req.body.familyId;
   var need=req.body.need;
@@ -176,6 +185,7 @@ exports.sendShortage=function(req,res){
   })
 }
 
+//send back family shortage list abon request
 exports.getShortage=function(req,res){
   var familyId=req.body.familyId;
   models.Shortage.findOne({familyId:familyId},function(err, data){
@@ -188,6 +198,7 @@ exports.getShortage=function(req,res){
   })
 }
 
+//get user info by a given email
 exports.getData=function(req, res){
   models.User.findOne({'email':req.body.email},function(err, data){
     if (err) {
@@ -198,6 +209,7 @@ exports.getData=function(req, res){
   })
 }
 
+//send finiance data
 exports.getFinanceData=function(req, res){
   var state=req.body.state;
   models.Finance.findOne({'familyId':state.id},function(err, data){
@@ -220,6 +232,7 @@ exports.getFinanceData=function(req, res){
   })
 }
 
+//delete shortage item from the shortages model
 exports.deleteShortage= function(req, res) {
   var familyId=req.body.familyId;
   var key=req.body.key;
@@ -238,6 +251,7 @@ exports.deleteShortage= function(req, res) {
   })
 }
 
+//update fininace data
 exports.editFinanceData=function(req, res){
   var state=req.body.state;
   models.Finance.findOne({'familyId':state.id},function(err, data){
@@ -267,17 +281,3 @@ exports.editFinanceData=function(req, res){
     }
  })
 }
-
-exports.deleteShortage= function(req, res) {
-  models.Shortage.remove({_id:req.body.familyid},function(err,data){
-   if(err){
-     res.status(500).send('error');
-   }else{
-    res.status(201).send('success');
-   }
- })
-}
-
-   
-
-

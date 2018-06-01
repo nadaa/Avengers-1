@@ -1,7 +1,7 @@
 const express= require('express');
 
 //open DB connection
-require('./config/dbconfig');
+//require('./config/dbconfig');
 
 const session = require('express-session');
 
@@ -26,8 +26,8 @@ app.use('/',appRouter);
 
 
 
-const PORT = process.env.PORT || 3000;
+// const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, function() {
-  console.log(`listening on PORT ${PORT}`);
-});
+// app.listen(PORT, function() {
+//   console.log(`listening on PORT ${PORT}`);
+// });

@@ -6,6 +6,7 @@ import Icon0 from 'react-native-vector-icons/FontAwesome';
 import Icon6 from 'react-native-vector-icons/Octicons';
 import Icon8 from 'react-native-vector-icons/SimpleLineIcons'; 
 
+// this bar appears on the top of each screen and shows menue, user role, and logout
 const userRole = {
   Mother: 'female',
   Father: 'male',
