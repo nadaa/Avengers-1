@@ -27,6 +27,7 @@ import Icon6 from 'react-native-vector-icons/Octicons';
    this.showTasks = this.showTasks.bind(this);
    this.updateCheck = this.updateCheck.bind(this);
  }
+ // get all kids of a given family id
  async getKids() {
   const familyId = await AsyncStorage.getItem('familyid');
   axios.get(global.ip +`/getkids/${familyId}`)
@@ -38,6 +39,7 @@ import Icon6 from 'react-native-vector-icons/Octicons';
   });
 }
 
+// to show all tasks of a given child
 showTasks() {
  if (this.state.selectedKid) {
   let kidIndex;
@@ -49,9 +51,8 @@ showTasks() {
 const kidEmail = this.state.kids[kidIndex].email;
 axios.post(global.ip + '/gettasks', { kidemail: kidEmail })
 .then((response) => {
- console.log(response.data);
  this.setState({ kidTasks: response.data });
-  //initialize checked array by false
+  //initialize checked array 
   let temp;
   for (let i = 0; i < this.state.kidTasks.length; i++) {
     temp.push(false);
@@ -61,11 +62,11 @@ axios.post(global.ip + '/gettasks', { kidemail: kidEmail })
 .catch(function (error) {
   console.log(error);
 });
-}
-}
+}}
 componentDidMount() {
  this.getKids();
 }
+//set tasks for a given kid
 setKidTask() {
  if (this.state.selectedKid) {
    let kidIndex;
@@ -87,15 +88,16 @@ setKidTask() {
 }
 }
 
+// to updat the checkbox on selection
 updateCheck(index) {
  this.state.checked[index] = !this.state.checked[index];
  this.setState({ checked: this.state.checked });
  if (this.state.checked[index] && this.state.kidTasks[index].completed) {
   alert ('Do you want to delete this task?');
   this.confirm(index);
-}
-}
+}}
 
+// make sure kids complete their tasks before delation
 confirm(selected) {
  if (this.state.checked[selected]) {
   axios.post(global.ip + '/confirmtask', { taskId: this.state.kidTasks[selected].id })
@@ -106,8 +108,7 @@ confirm(selected) {
  })
   .catch(function(err) {
   });
-}
-}
+}}
 render() {
   return (
     <View style={{ flex: 1 }}>
@@ -157,8 +158,7 @@ render() {
       </ScrollView>
       </View>
       );
-}
-}
+}}
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,

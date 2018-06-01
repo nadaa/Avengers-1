@@ -10,10 +10,11 @@ import { StyleSheet, Text, View , TextInput, KeyboardAvoidingView, TouchableOpac
     constructor(props){
       super(props);
       this.state={
-        email:'Ammar@gmail.com',
-        password:'123',
+        email:'',
+        password:'',
       }
     }
+    //AsyncStorage to save user info
     saveData(userInfo){
       AsyncStorage.setItem('username',(userInfo.username));
       AsyncStorage.setItem('email',(userInfo.email));
@@ -25,9 +26,9 @@ import { StyleSheet, Text, View , TextInput, KeyboardAvoidingView, TouchableOpac
       const { navigate } = this.props.navigation;
       axios.post(global.ip+'/login',{user:this.state})
       .then(async function (response) {
-          //alert(response.data.msg)
           that.saveData(response.data.user);
           var role= await AsyncStorage.getItem('role');
+          //different drawer appears based on user role
           if(response.data.msg==="success login"){
             if(role==='Mother'||role==='Father'){
               navigate('Drawer')

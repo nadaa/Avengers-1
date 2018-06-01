@@ -1,13 +1,15 @@
 import React from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, 
   ScrollView, ImageBackground } from 'react-native';
-  import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-  import axios from 'axios';    
-  import Bar from './Bar';
-
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import axios from 'axios';    
+import Bar from './Bar';
 import Icon1 from 'react-native-vector-icons/Entypo'; 
 
 
+/*
+a screen to holds family information
+ */
 export default class UserInfo extends React.Component {
     static navigationOptions = {
       drawerIcon: () => (

@@ -11,32 +11,36 @@ chai.use(chaiHttp);
 const mongoose = require('mongoose')
 const Users = mongoose.model('User')
 
+describe("App Test",function(){
+	it('Server connection',function(done){
 
-describe('Users', () => {
-  before(function (done) {
-    Users.remove({username:"user1"}, (err) => {
-      console.error(err)
-      done()
-    })
-  })
+		 request(app).get('/')
+		 .end(function(er,res){
+			  expect(res).to.have.status(200);
+		      expect(res.body).to.have.property("msg");
+		      expect(res.body.msg).to.be.eql("YOU ARE CONECTED TO THE SERVER:)");
+		      done()
+		 	})
+		})
 })
 
+after(()=>{
+	User.remove({email:'user1@gmail.com'},function(err){
+		if(err) console.log(err);
+	})
 
-
-describe('App', function() {
-
-  describe('test Signup request', function() {
+})
+describe('test Signup request', function() {
     it('Should respond with status 201', function(done) {
-      chai.request(app)
+      request(app)
         .post('/api/signup')
         .send({
               user:{username:"user1",
               password:"123",
-              email:"userx@gmail.com",
+              email:"user1@gmail.com",
               bdate:"1980-12-17",
               role:"father",
-              familyId:1}
-              
+              familyId:1}       
             })
         .end(function(err, res) {
           expect(res).to.have.status(201);
@@ -46,16 +50,14 @@ describe('App', function() {
           done();
         });
     });
-
-
   });
 
 describe('Test Login', function() {
     it('Should respond with status 201', function(done) {
-      chai.request(app)
+      request(app)
         .post('/api/login')
         .send({
-              user:{username:"user1",
+              user:{email:"user1@gmail.com",
               password:"123"                 
             }
           })
@@ -67,32 +69,4 @@ describe('Test Login', function() {
           done();
         });
     });
-
-
   });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-});

@@ -23,6 +23,7 @@ const CustomDrawerContentComponent = (props) => (
   </Container>
 );
 
+// a left side drwarer to hold screens which appear for parent
 const MyDrawer = createDrawerNavigator(
   {
     'Task Monitor': {

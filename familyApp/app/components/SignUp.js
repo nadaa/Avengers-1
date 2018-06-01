@@ -17,6 +17,8 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity,
       role: 'Select your role',
       familyId: ''
     };
+    this.validateEmail=this.validateEmail.bind(this);
+    this.validatePassword=this.validatePassword.bind(this);
   }
 
   onSelect(value) {
@@ -24,12 +26,18 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity,
   }
 
   sendSignUp() {
+    const { navigate } = this.props.navigation;
     if (this.state.email === '' || this.state.password === '' || this.state.username === '' 
       || this.state.bdate === '' || this.state.role === 'Select your role' 
       || this.state.familyId === '') {
       alert('fill all your data');
-  } else if (this.validateEmail(this.state.email)) { 
-    const { navigate } = this.props.navigation;
+  } else if (!this.validateEmail(this.state.email)) { 
+        alert('Please Fill a Valid Email');
+    }
+    else if (!this.validatePassword(this.state.password)){
+      alert('Your password should be 6 charecters long and include[a-z,A-Z,0-9]');
+    }
+    else{
     axios.post(`${global.ip}/signup`, { user: this.state })
     .then((response) => {
       if (response.data.msg === 'success signup') {
@@ -41,18 +49,28 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity,
     .catch((error) => {
       console.log(error);
     });   
-  } else {
-    alert('Please Fill a Valid Email');
-  }
+  } 
+  
 }  
 
-validateEmail(text) {
-  const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-  if (reg.test(text) === false) {
-    return false;
+//validate user email
+validateEmail(text){
+    var reg = /^\s*(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))\s*$/;
+    if(reg.test(text) === false){
+      return false;
+    }else{
+      return true;
+    }
   }
-  return true;
-}
+  //validate user password
+  validatePassword(text){
+    var reg =/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{6,})/;
+    if(reg.test(text)===false){
+      return false;
+    }else{
+      return true;
+    }
+  }
 render() {
   return (
     <ImageBackground
@@ -66,18 +84,18 @@ render() {
     value={this.state.username}
     style={styles.textInput}  
     placeholder='Username'
-    onChangeText={(text) => this.setState({ username: text })}
+    onChangeText={(text) => this.setState({ username: text.toLowerCase() })}
     /> 
     <TextInput
     value={this.state.email}
     style={styles.textInput} 
     placeholder='Email'
-    onChangeText={(text) => this.setState({ email: text })}
+    onChangeText={(text) => this.setState({ email: text.toLowerCase().replace(/\s/g, "") })}
     /> 
     <TextInput
     style={styles.textInput} 
     placeholder='Password'
-    secureTextEntry	
+    secureTextEntry 
     value={this.state.password}
     onChangeText={(text) => this.setState({ password: text })}
     /> 
@@ -104,11 +122,11 @@ render() {
     </View>
     <TextInput
     style={styles.textInput} 
-    placeholder='FamilyId'	
+    placeholder='FamilyId'  
     value={this.state.familyId}
     onChangeText={(text) => this.setState({ familyId: text })}
     />  
-    <TouchableOpacity	style={styles.btn} onPress={this.sendSignUp.bind(this)}>
+    <TouchableOpacity style={styles.btn} onPress={this.sendSignUp.bind(this)}>
     <Text>SignUp</Text>
     </TouchableOpacity>
     <Text 
@@ -184,4 +202,3 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
 });
-
