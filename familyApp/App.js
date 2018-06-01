@@ -5,13 +5,11 @@ import SignUp from './app/components/SignUp';
 import Drawer from './app/components/Drawer';
 import DrawerKids from './app/components/DrawerKids';
 import TaskMonitor from './app/components/TaskMonitor';
-
 import TasksDisplay from './app/components/TasksDisplay';
 import Bar from './app/components/Bar';
 import Shortage from './app/components/Shortage';
 import UserInfo from './app/components/UserInfo';
 import Finance from './app/components/Finance';
-
 
 // App navigation screens
 const Application = createStackNavigator({
