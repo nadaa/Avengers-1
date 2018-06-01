@@ -1,17 +1,12 @@
-//import react from react
 import React from 'react';
-//import element from reacr-native
-import { StyleSheet, Text, View, TouchableOpacity, TextInput, Picker, AsyncStorage, Dimensions} from 'react-native';
-//import table from react native table component
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, Picker, AsyncStorage, Dimensions, Image} from 'react-native';
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
-//import axios to make router works
 import axios from 'axios';
-//import Dialog from react native dialog
 import Dialog from "react-native-dialog";
-//import Bar from Bar component
 import Bar from './Bar';
-const window = Dimensions.get('window');
+import Icon0 from 'react-native-vector-icons/FontAwesome';
 
+const window = Dimensions.get('window');
 const ShowOrHide={
   true:'btnView',
   false:'hiddenContainer'
@@ -21,16 +16,18 @@ const roleUser={
   'Mother':true,
   'Child':false
 }
-//export Home from the react componant
 export default class Finance extends React.Component{
-  //the constructor
+  static navigationOptions = {
+   drawerIcon: () => (
+     <Icon0 style={{color:'green'}} name="money" size={20}/>
+   ),
+ };
   constructor(){
-    //super for ES6
     super();
     this.state={
-      tableHead:  ['Category', 'Cost'],
-      tableName: [],
-      tableCost:  [],
+      tableHead:['Category', 'Cost'],
+      tableName:[],
+      tableCost:[],
       tableTotal:['Total',0],
       addDialogVisible:false,
       editDialogVisible:false,
@@ -44,7 +41,6 @@ export default class Finance extends React.Component{
       show:true,
     };
   }
-  //auto call function when render this scren
   componentWillMount(){
     this.showId() 
   }
@@ -52,6 +48,8 @@ export default class Finance extends React.Component{
     try{
       let id=await AsyncStorage.getItem('familyId')
       this.setState({id:id})
+      let role=await AsyncStorage.getItem('role')
+      this.setState({role:role})
       //alert('the email save is: ' + userEmail3)
       this.getFinanceData()
     }
@@ -63,7 +61,7 @@ export default class Finance extends React.Component{
     var that=this
     //alert('FRONT END GET');
     console.log('FRONT END GET')
-    axios.post(global.ip+'/getFinanceData', {state:this.state})
+    axios.post(global.ip+'/getfinancedata', {state:this.state})
     .then(function (res) {
       that.setState({tableName:res.data.category})
       that.setState({tableCost:res.data.cost})
@@ -78,7 +76,7 @@ export default class Finance extends React.Component{
   }
   editFinanceData(){
     console.log('FRONT END EDIT')
-    axios.post(global.ip+'/editFinanceData', {state:this.state})
+    axios.post(global.ip+'/editfinancedata', {state:this.state})
     .then(function (res) {
       //alert(res.request._response)
     })
@@ -100,15 +98,15 @@ export default class Finance extends React.Component{
     this.setState({ addDialogVisible: false });
   };
   handleAdd(){
-    if (this.state.tableName.length>7) {
+    if (this.state.tableName.length>7){
       alert('There is so much exist ... please delete first to can add');
     }else{
       //need to work on it
       if(this.state.addEditName.length===0){
         alert('Please insert the name');
-      } else if(this.state.addEditCost.length===0){
+      }else if(this.state.addEditCost.length===0){
         alert('Please insert the cost');
-      } else {
+      }else {
         this.state.tableName.push([this.state.addEditName]);
         this.state.tableCost.push([JSON.parse(this.state.addEditCost)]);
         this.calculateTotalMoney();
@@ -130,7 +128,7 @@ export default class Finance extends React.Component{
     this.setState({addEditName: name});
   }
   onAddEditCost(value) {
-     //all this function to be sure the input is a valid number
+    //all this function to be sure the input is a valid number
     let newNumber = '';
     let numbers = '0123456789';
     for (var i = 0; i < value.length; i++) {
@@ -197,7 +195,6 @@ export default class Finance extends React.Component{
     this.setState({ deleteDialogVisible: true });
   };
   render() {
-    //what return
     return (
       <View style={styles.allPage}>
       <Bar navigation={this.props.navigation}/>
@@ -289,6 +286,10 @@ export default class Finance extends React.Component{
               </View>
             </Dialog.Container>
         </View>
+         <Image 
+          source={{uri:'https://media.giphy.com/media/IQJdKZmrS6BLW/source.gif'}}
+          style={{width: 300, height: 320,justifyContent: 'center',marginTop:120, opacity:1}}/>
+       
       </View>
     );
   }
@@ -297,16 +298,14 @@ const styles = StyleSheet.create({
   allPage: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: '#2896d3',
-    //marginBottom:35,
+    backgroundColor: 'white',
   },
   tableView: {
     flexDirection: 'column',
-    backgroundColor: '#2896d3',
-    // backgroundColor: '#0bf5fb',
+    backgroundColor: 'white',
   },
   table: {
-    backgroundColor: '#6239BD',
+    backgroundColor: '#8cd078',
     marginRight:10,
     marginLeft:10,
     marginTop:10,
@@ -317,61 +316,56 @@ const styles = StyleSheet.create({
   },
   head: {
     height: 50,
-    backgroundColor: '#123456',
+    backgroundColor: '#8cd078',
   },
   textHead:{
     fontWeight: 'bold',
     textAlign: 'center',
-    fontSize: 40,
     color:'#3cff00',
   },
   name: {
-     // backgroundColor: '#6239BD'
   },
   textName:{
     fontWeight: 'bold',
     textAlign: 'center',
-    fontSize: 25,
     color:'white',
   },
   cost: {
-    // backgroundColor: '#6239BD',
   },
   textCost:{
     fontWeight: 'bold',
     textAlign: 'center',
-    fontSize: 25,
     color:'white',
   },
   total:{
     height: 40,
-    backgroundColor: '#123456',
+    backgroundColor: '#8cd078',
   },
   textTotal:{
     fontWeight: 'bold',
     textAlign: 'center',
-    fontSize: 30,
-    color:'red',
+    //fontSize: 30,
+    color:'white',
   },
   btnView: {
-    backgroundColor: '#2896d3',
+    backgroundColor: 'white',
     flexDirection:'row',
     justifyContent:'center',
     alignItems: 'center',
   },
   btnAdd:{
-    backgroundColor: '#3cff00',
+   backgroundColor: '#40b21e',
     marginTop:10,
     padding:10,
   },
   textBtnAdd:{
     fontWeight: 'bold',
     textAlign: 'center',
-    fontSize: 30,
-    color:'black',
+    //fontSize: 30,
+    color:'white',
   },
   btnEdit:{
-    backgroundColor: '#6239BD',
+    backgroundColor: '#40b21e',
     marginTop:10,
     padding:10,
     marginLeft:10,
@@ -379,11 +373,10 @@ const styles = StyleSheet.create({
   textBtnEdit:{
     fontWeight: 'bold',
     textAlign: 'center',
-    fontSize: 30,
-    color:'black',
+    color:'white',
   },
   btnDelete:{
-    backgroundColor: 'red',
+    backgroundColor: '#40b21e',
     marginTop:10,
     padding:10,
     marginLeft:10,
@@ -391,8 +384,8 @@ const styles = StyleSheet.create({
   textBtnDelete:{
     fontWeight: 'bold',
     textAlign: 'center',
-    fontSize: 30,
-    color:'black',
+    
+    color:'white',
   },
   btnDialogView: {
     flexDirection:'row',
@@ -400,49 +393,42 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   btnDialogCancel: {
-    fontSize: 20,
-    color:'black',
+    color:'white',
     fontWeight: 'bold',
 
   },
   btnDialogAdd: {
-    fontSize: 20,
     color:'#3cff00',//green
     fontWeight: 'bold',
   },
   btnDialogEdit: {
-    fontSize: 20,
+    //fontSize: 20,
     color:'#6239BD',//purple
     fontWeight: 'bold',
   },
   btnDialogDelete: {
-    fontSize: 20,
     color:'red',//purple
     fontWeight: 'bold',
   },
   textDialogTitleAdd:{
     fontWeight: 'bold',
     textAlign: 'center',
-    fontSize: 30,
     color:'#3cff00',//green
   },
    textDialogTitleEdit:{
     fontWeight: 'bold',
     textAlign: 'center',
-    fontSize: 30,
     color:'#6239BD',//purple
   },
    textDialogTitleDelete:{
     fontWeight: 'bold',
     textAlign: 'center',
-    fontSize: 30,
     color:'red',
   },
   textDialogDes:{
     fontWeight: 'bold',
     textAlign: 'center',
-    fontSize: 15,
-    color:'black',
+    color:'white',
   },
   textInputDialogView: {
     flexDirection:'column',
@@ -456,8 +442,5 @@ const styles = StyleSheet.create({
   hiddenContainer: {
     top: window.height,
     bottom: -window.height,
-    // right: window.width,
-    // left: window.width,
-    // marginTop:20,
   }
 });

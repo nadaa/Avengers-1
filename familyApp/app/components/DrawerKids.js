@@ -1,29 +1,24 @@
-
 import React from 'react';
-
 import { View, StyleSheet,Text,Image } from 'react-native';
-
 import { createDrawerNavigator } from 'react-navigation'
-
-import Tasks from './Tasks';
 import UserInfo from './UserInfo';
-//import Bar from './Bar';
-
 import Shortage from './Shortage';
 import TasksDisplay from './TasksDisplay';
 import ShortageNote from './ShortageNote'
 import Login from './Login';
+import Finance from './Finance';
 
 const KidsDrawer=createDrawerNavigator(
   {
     TasksDisplay:{
       screen:TasksDisplay,
     },
-   
-    Shortage:{
-     screen:Shortage,
+    Finance:{
+      screen:Finance,
     },
-   
+    Shortage:{
+      screen:Shortage,
+    },
   },
   {
     initialRouteName:'TasksDisplay',
@@ -33,20 +28,16 @@ const KidsDrawer=createDrawerNavigator(
     drawerCloseRoute: 'DrawerClose',
     drawerToggleRoute: 'DrawerToggle',
     contentOptions:{
-    activeTintColor:'green',
-     
+      activeTintColor:'green',
     },
   }
 );
 
 export default class DrawerKids extends React.Component{
-
-  static router = KidsDrawer.router;
-  
-  render() {
-    return (
+  static router=KidsDrawer.router;
+  render(){
+    return(
       <View style={styles.allPage}>
-      
         <KidsDrawer navigation={this.props.navigation}/>
       </View>
     );
