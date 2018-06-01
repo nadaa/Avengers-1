@@ -73,7 +73,5 @@ appRouter.route('/api/editfinancedata').post((req,res)=>{
   appControllers.editFinanceData(req,res);
 })
 
-// appRouter.route('/api/checkrole').post((req,res)=>{
-//   appControllers.checkRole(req,res);
-// })
+
 module.exports=appRouter;
