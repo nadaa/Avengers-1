@@ -5,7 +5,7 @@ import SignUp from './app/components/SignUp';
 import Drawer from './app/components/Drawer';
 import DrawerKids from './app/components/DrawerKids';
 import TaskMonitor from './app/components/TaskMonitor';
-import Tasks from './app/components/Tasks';
+// import Tasks from './app/components/Tasks';
 import TasksDisplay from './app/components/TasksDisplay';
 import Bar from './app/components/Bar';
 import Shortage from './app/components/Shortage';
@@ -19,7 +19,7 @@ const Application = createStackNavigator({
   Drawer: { screen: Drawer },
   DrawerKids: { screen: DrawerKids },
   'Task Monitor': { screen: TaskMonitor },
-  Tasks: { screen: Tasks },
+  // Tasks: { screen: Tasks },
   TasksDisplay: { screen: TasksDisplay },
   }, {
   navigationOptions: {
@@ -37,7 +37,7 @@ export default class App extends React.Component {
   render() {
     return (
      // <Application />
-     <Drawer/>
+     <DrawerKids/>
     );
   }
 }

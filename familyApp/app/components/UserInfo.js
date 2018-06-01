@@ -12,7 +12,7 @@ export default class UserInfo extends React.Component {
     static navigationOptions = {
       drawerIcon: () => (
         <Icon1 style={{color:'green'}} name="v-card" // archive
-        size={20}/>
+        size={25}/>
       ),
     };
   constructor(props) {

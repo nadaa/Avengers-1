@@ -10,7 +10,7 @@ import Icon6 from 'react-native-vector-icons/Octicons';
   export default class TaskMonitor extends React.Component {
   static navigationOptions = {
     drawerIcon: () => (
-      <Icon6 style={{color:'green'}} name="tasklist" size={20}/>
+      <Icon6 style={{color:'green'}} name="tasklist" size={25}/>
     ),
   };
  

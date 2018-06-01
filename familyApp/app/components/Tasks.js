@@ -1,3 +1,4 @@
+/*
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, AsyncStorage } from 'react-native';
 import Bar from './Bar';
@@ -90,3 +91,4 @@ const styles = StyleSheet.create({
     position: 'relative'
   },
 });
+*/

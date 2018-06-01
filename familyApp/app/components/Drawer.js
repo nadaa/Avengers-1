@@ -21,7 +21,6 @@ const CustomDrawerContentComponent = (props) => (
       <DrawerItems {...props} />
     </Content>
   </Container>
-
 );
 
 const MyDrawer = createDrawerNavigator(

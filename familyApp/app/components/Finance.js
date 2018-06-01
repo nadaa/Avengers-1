@@ -20,7 +20,8 @@ import { StyleSheet, Text, View, TouchableOpacity,
   export default class Finance extends React.Component {
     static navigationOptions = {
       drawerIcon: () => (
-        <Icon0 style={styles.iconDrawer} name="money" size={20}/>
+        <Icon0 style={styles.iconDrawer} name="money" 
+        size={20}  />
       ),
     };
     constructor() {
@@ -517,7 +518,5 @@ const styles = StyleSheet.create({
   },
   iconDrawer:  {
     color:'green',
-    // marginRight:0,
-    // paddingRight:-20,
-  }
+  },
 });
