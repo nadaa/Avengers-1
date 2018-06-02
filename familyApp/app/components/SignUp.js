@@ -18,6 +18,7 @@ export default class SignUp extends React.Component {
       role: 'Select your role 👶🏽 👨🏽 👩🏽',
       familyId:''
     }
+     
     this.validateEmail=this.validateEmail.bind(this);
     this.validatePassword=this.validatePassword.bind(this);
   }
@@ -69,7 +70,7 @@ validateEmail(text){
   onSelect(value, label) {
     this.setState({role : value});
   }
-  render(){
+   render(){
     return(
       <ImageBackground
         source={{uri: 'http://tekino.co/wp-content/uploads/2017/11/light-orange-color-abstract-background-smooth-in-light-orange-color-photo-by-light-orange-colored-poop.jpg'}}
@@ -84,20 +85,20 @@ validateEmail(text){
               <TextInput
                 ref={input =>{this.textInput =input}}
                 value={this.state.username}
-              	style={styles.textInput}  
-              	placeholder='🙎🏻‍♂️  Username'
-              	onChangeText={(text) => this.setState({username: text})}
+                style={styles.textInput}  
+                placeholder='🙎🏻‍♂️  Username'
+                onChangeText={(text) => this.setState({username: text})}
               /> 
               <TextInput
                 value={this.state.email}
-              	style={styles.textInput} 
-              	placeholder=' ✉️  Email'
-              	onChangeText={(text) => this.setState({email: text})}
+                style={styles.textInput} 
+                placeholder=' ✉️  Email'
+                onChangeText={(text) => this.setState({email: text})}
               /> 
                <TextInput
-              	style={styles.textInput} 
-              	placeholder=' 🔐  Password'
-              	secureTextEntry={true}	
+                style={styles.textInput} 
+                placeholder=' 🔐  Password'
+                secureTextEntry={true}  
                 value={this.state.password}
                 onChangeText={(text) => this.setState({password: text})}
               /> 
@@ -123,14 +124,14 @@ validateEmail(text){
               </Select>
             </View>
             <TextInput
-           	  style={styles.textInput} 
-           	  placeholder=' 👨‍👩‍👧‍👦  FamilyId'	
+              style={styles.textInput} 
+              placeholder=' 👨‍👩‍👧‍👦  FamilyId'  
               value={this.state.familyId}
               onChangeText={(text) => this.setState({familyId: text})}
             />  
-            <TouchableOpacity	style={styles.btn} onPress={this.sendSignUp.bind(this)}>
-    	        <Text>SignUp</Text>
-    	      </TouchableOpacity>
+            <TouchableOpacity style={styles.btn} onPress={this.sendSignUp.bind(this)}>
+              <Text>SignUp</Text>
+            </TouchableOpacity>
             <Text style={{color: 'black', paddingTop:20,fontSize: 15}} onPress={()=> this.props.navigation.navigate('Login')}>
               I Have Already Account 
             </Text>

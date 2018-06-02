@@ -5,10 +5,12 @@ import { createStackNavigator } from 'react-navigation';
 import Login from './Login';
 import axios from 'axios';    
 import Bar from './Bar';
-// import Drawer from './Drawer';
-// 
 import Icon0 from 'react-native-vector-icons/Ionicons'; 
 
+
+/*
+a screen to holds family information
+ */
 export default class UserInfo extends React.Component {
  static navigationOptions = {
    drawerIcon: () => (

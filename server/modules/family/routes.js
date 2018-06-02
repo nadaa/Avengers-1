@@ -3,7 +3,6 @@ const appControllers=require('./controllers');
 
 
 appRouter.route('/').get((req,res)=>{
-
   var t={msg:'YOU ARE CONECTED TO THE SERVER:)'}
   res.status(200).send(t);
 })
@@ -78,5 +77,6 @@ appRouter.route('/api/getfinancedata').post((req,res)=>{
 appRouter.route('/api/editfinancedata').post((req,res)=>{
   appControllers.editFinanceData(req,res);
 })
+
 
 module.exports=appRouter;
