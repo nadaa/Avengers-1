@@ -67,6 +67,18 @@ npm install
     ....README.md
     
 
+## Features
+- Different family roles registeration.
+- Parent Task assignment and monitoring for their kids.
+- Task display for kids.
+- Kids can mark their assigned tasks as complete.
+- Parents can confirm the compelation of kids tasks.
+- Tasks won't be deleted until it is marked as completed by kids.
+- Adding monthly payments for family, parents have a complete permission to add, edit, and delete, while kids only view the data.
+- Adding Shortage/need for a family.
+
+
+
 ## Screens
 
 ![](https://i.imgur.com/wfESssm.png)      ![](https://i.imgur.com/QjV8DdC.png) ![](https://i.imgur.com/3hBthax.png)
