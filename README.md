@@ -11,7 +11,7 @@ Familj helps family members to interact with each other.
 Each family has it's own id and all family members should sign up with that id, there are two User Interfaces one for the sibilings and the other for the parents, parents have some extra authorites to monitor their kids life and teach them responsibility by envolving them with all family tasks,activites and responsibilites.
 
 ## Technologies
-The app is built by using React Native framework, and it was tested on both IOS and Android. We used Nodejs/Express, and MongoDB in the backend. We used Mocha, Chai, Jest for unit testing. 
+The app is built by using React Native framework, and it was tested on both IOS and Android, and preferred to run on IOS. We used Nodejs/Express, and MongoDB in the backend. We used Mocha, Chai, Jest for unit testing. 
     
     
 ## Installation
