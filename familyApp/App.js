@@ -14,7 +14,6 @@ import Finance from './app/components/Finance';
 
 // App navigation screens
 const Application = createStackNavigator({
-  
   Login: { screen: Login },
   SignUp: { screen: SignUp },
  'User Information': { screen: UserInfo },
@@ -33,14 +32,15 @@ const Application = createStackNavigator({
 export default class App extends React.Component {
   constructor(props){
     super(props);
-     global.ip = 'http://10.0.2.2:3000/api'; //nada
-    // global.ip = 'http://192.168.8.105:3000/api'; //jozaa
+    // global.ip = 'http://10.0.2.2:3000/api'; //nada
+     global.ip = 'http://192.168.1.82:3000/api'; //jozaa
     // global.ip = 'http://192.168.1.111:3000/api' //Waed
     //global.ip = 'http://192.168.202.2:3000/api'; //Hussein
   }
   render(){
     return(
      <Application/>
+     //     <Drawer/>
     );
   }
 }

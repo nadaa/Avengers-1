@@ -33,19 +33,11 @@ const CustomDrawerContentComponent = (props) => (
 
 const MyDrawer=createDrawerNavigator(
  {
-   'Task Monitor':{
-     screen:TaskMonitor,
-     drawerLabel:"Home2",
-     title: "Home",
-     drawerIcon: ({ tintColor }) => (
-       <Image
-         source={{uri:'https://cdn3.vectorstock.com/i/1000x1000/89/37/happy-family-icon-multicolored-in-simple-figures-vector-19728937.jpg'}}
-         style={styles.icon}
-       />
-     ),
-   },
    Finance:{
      screen:Finance,
+   },
+   'Task Monitor':{
+     screen:TaskMonitor,
    },
    Shortage:{
      screen:Shortage,
@@ -55,7 +47,7 @@ const MyDrawer=createDrawerNavigator(
    },
  },
  {
-   initialRouteName:'Task Monitor',
+   initialRouteName:'Finance',
    drawerPosition:'left',
    drawerWidth:200,
    drawerOpenRoute:'DrawerOpen',

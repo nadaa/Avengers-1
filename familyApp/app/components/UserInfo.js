@@ -5,7 +5,7 @@ import { createStackNavigator } from 'react-navigation';
 import Login from './Login';
 import axios from 'axios';    
 import Bar from './Bar';
-import Icon0 from 'react-native-vector-icons/Ionicons'; 
+import Icon2 from 'react-native-vector-icons/Entypo'; 
 
 
 /*
@@ -14,7 +14,7 @@ a screen to holds family information
 export default class UserInfo extends React.Component {
  static navigationOptions = {
    drawerIcon: () => (
-     <Icon0 style={{color:'green'}} name="ios-information-circle-outline" size={20}/>
+     <Icon2 style={{color:'green'}} name="v-card" size={25}/>
    ),
  }
   constructor(props){
