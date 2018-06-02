@@ -1,30 +1,44 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, 
-  ScrollView, ImageBackground } from 'react-native';
-  import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-  import axios from 'axios';    
-  import DatePicker from 'react-native-datepicker';
-  import { Select, Option } from 'react-native-chooser';
+import { StyleSheet, Image, Text, View, TextInput, KeyboardAvoidingView, TouchableOpacity, Button, AsyncStorage, Picker, ScrollView, ImageBackground} from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import {createStackNavigator } from 'react-navigation';
+import Login from './Login';
+import axios from 'axios';    
+import DatePicker from 'react-native-datepicker';
+import {Select, Option} from "react-native-chooser";
 
-  export default class SignUp extends React.Component {
-   constructor(props) {
+export default class SignUp extends React.Component {
+	constructor(props){
     super(props);
-    this.state = {
-      email: '',
+    this.state={
+      email:'',
       password: '',
-      username: '',
+      username:'',
       bdate: '',
-      role: 'Select your role',
-      familyId: ''
-    };
+      role: 'Select your role 👶🏽 👨🏽 👩🏽',
+      familyId:''
+    }
     this.validateEmail=this.validateEmail.bind(this);
     this.validatePassword=this.validatePassword.bind(this);
   }
-
-  onSelect(value) {
-    this.setState({ role: value });
+ //validate user email
+validateEmail(text){
+    var reg = /^\s*(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))\s*$/;
+    if(reg.test(text) === false){
+      return false;
+    }else{
+      return true;
+    }
   }
-
+  //validate user password
+  validatePassword(text){
+    var reg =/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{6,})/;
+    if(reg.test(text)===false){
+      return false;
+    }else{
+      return true;
+    }
+  }
   sendSignUp() {
     const { navigate } = this.props.navigation;
     if (this.state.email === '' || this.state.password === '' || this.state.username === '' 
@@ -52,111 +66,96 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity,
   } 
   
 }  
-
-//validate user email
-validateEmail(text){
-    var reg = /^\s*(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))\s*$/;
-    if(reg.test(text) === false){
-      return false;
-    }else{
-      return true;
-    }
+  onSelect(value, label) {
+    this.setState({role : value});
   }
-  //validate user password
-  validatePassword(text){
-    var reg =/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{6,})/;
-    if(reg.test(text)===false){
-      return false;
-    }else{
-      return true;
-    }
-  }
-render() {
-  return (
-    <ImageBackground
-    source={{ uri: 'https://images.pexels.com/photos/1018137/pexels-photo-1018137.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940' }}
-    style={styles.container}
-    >
-    <KeyboardAwareScrollView behaviour='padding' style={styles.wrapper}>
-    <ScrollView contentContainerStyle={styles.contentContainer}>
-    <TextInput
-    ref={input => { this.textInput = input; }}
-    value={this.state.username}
-    style={styles.textInput}  
-    placeholder='Username'
-    onChangeText={(text) => this.setState({ username: text.toLowerCase() })}
-    /> 
-    <TextInput
-    value={this.state.email}
-    style={styles.textInput} 
-    placeholder='Email'
-    onChangeText={(text) => this.setState({ email: text.toLowerCase().replace(/\s/g, "") })}
-    /> 
-    <TextInput
-    style={styles.textInput} 
-    placeholder='Password'
-    secureTextEntry 
-    value={this.state.password}
-    onChangeText={(text) => this.setState({ password: text })}
-    /> 
-    <DatePicker 
-    style={styles.datepicker}
-    date={this.state.bdate}
-    mode="date"
-    placeholder="select your birthdate"
-    format="YYYY-MM-DD"
-    confirmBtnText="Confirm"
-    cancelBtnText="Cancel"
-    onDateChange={(date) => { this.setState({ bdate: new Date(date) }); }}
-    />
-    <View style={styles.rolepicker}>
-    <Select
-    onSelect={this.onSelect.bind(this)}
-    defaultText={this.state.role}
-    textStyle={{}}
-    >
-    <Option value='Father'>Father</Option>
-    <Option value='Mother'>Mother</Option>
-    <Option value='Child'>Child</Option>
-    </Select>
-    </View>
-    <TextInput
-    style={styles.textInput} 
-    placeholder='FamilyId'  
-    value={this.state.familyId}
-    onChangeText={(text) => this.setState({ familyId: text })}
-    />  
-    <TouchableOpacity style={styles.btn} onPress={this.sendSignUp.bind(this)}>
-    <Text>SignUp</Text>
-    </TouchableOpacity>
-    <Text 
-    style={{ color: 'black', paddingTop: 20, fontSize: 15 }} 
-    onPress={() => this.props.navigation.navigate('Login')}
-    >
-    I have already account 
-    </Text>
-    </ScrollView>
-    </KeyboardAwareScrollView>
-    </ImageBackground>
+  render(){
+    return(
+      <ImageBackground
+        source={{uri: 'http://tekino.co/wp-content/uploads/2017/11/light-orange-color-abstract-background-smooth-in-light-orange-color-photo-by-light-orange-colored-poop.jpg'}}
+        style={styles.container}>
+          <KeyboardAwareScrollView behaviour='padding' style ={styles.wrapper}>
+            <ScrollView contentContainerStyle={styles.contentContainer}>
+             <View>
+              <Image 
+                source={{uri:'https://asuartmuseum.asu.edu/sites/default/files/styles/panopoly_image_original/public/families-visit-icon.png?itok=KPQ80-2x'}}
+                style={{width: 150, height: 150,justifyContent: 'center', opacity:1}}/>
+             </View>
+              <TextInput
+                ref={input =>{this.textInput =input}}
+                value={this.state.username}
+              	style={styles.textInput}  
+              	placeholder='🙎🏻‍♂️  Username'
+              	onChangeText={(text) => this.setState({username: text})}
+              /> 
+              <TextInput
+                value={this.state.email}
+              	style={styles.textInput} 
+              	placeholder=' ✉️  Email'
+              	onChangeText={(text) => this.setState({email: text})}
+              /> 
+               <TextInput
+              	style={styles.textInput} 
+              	placeholder=' 🔐  Password'
+              	secureTextEntry={true}	
+                value={this.state.password}
+                onChangeText={(text) => this.setState({password: text})}
+              /> 
+              <DatePicker 
+                style={styles.datepicker}
+                date={this.state.bdate}
+                mode="date"
+                placeholder="🎂 select your birthdate"
+                format="YYYY-MM-DD"
+                confirmBtnText="Confirm"
+                cancelBtnText="Cancel"
+                onDateChange={(date) => {this.setState({bdate: new Date(date)})}}
+              />
+            <View style={styles.rolepicker}>
+              <Select
+                onSelect = {this.onSelect.bind(this)}
+                defaultText  = {this.state.role}
+                textStyle = {{}}
+              >
+                <Option value = 'Father'>Father</Option>
+                <Option value = 'Mother'>Mother</Option>
+                <Option value = 'Child'>Child</Option>
+              </Select>
+            </View>
+            <TextInput
+           	  style={styles.textInput} 
+           	  placeholder=' 👨‍👩‍👧‍👦  FamilyId'	
+              value={this.state.familyId}
+              onChangeText={(text) => this.setState({familyId: text})}
+            />  
+            <TouchableOpacity	style={styles.btn} onPress={this.sendSignUp.bind(this)}>
+    	        <Text>SignUp</Text>
+    	      </TouchableOpacity>
+            <Text style={{color: 'black', paddingTop:20,fontSize: 15}} onPress={()=> this.props.navigation.navigate('Login')}>
+              I Have Already Account 
+            </Text>
+          </ScrollView>
+        </KeyboardAwareScrollView>
+      </ImageBackground>
     );
-}
+  }
 }
 
 const styles = StyleSheet.create({
   contentContainer: {
+    paddingVertical: 20,
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 10,
     paddingLeft: 0,
     paddingRight: 0,
-    marginTop: 100,
+    marginTop:50,
   },
   wrapper: {
     // flex: 1,
   },
   container: {
-    // flex: 1,
     backgroundColor: '#2896d3',
     paddingLeft: 40,
     paddingRight: 40,
@@ -176,29 +175,37 @@ const styles = StyleSheet.create({
   textInput: {
     alignSelf: 'stretch',
     padding: 16,
-    // marginBottom: 10,
-    marginBottom: 20,
+    marginBottom: 10,
     backgroundColor: '#fff',
-    fontSize: 20,
+    fontSize: 15,
+    borderColor: 'green',
+    borderWidth: 1,
   },
   btn: {
-    alignSelf: 'stretch',
-    backgroundColor: '#ffcde6',
-    padding: 20,
-    alignItems: 'center',
+    alignSelf:'stretch',
+    padding:10,
+    alignItems:'center',
+    borderColor: 'green',
+    borderWidth: 1,
+    marginTop:20,
   },
-  datepicker: {
-    width: 295,
-    height: 60,
-    alignSelf: 'stretch',
-    padding: 16,
-    marginBottom: 20,
-    backgroundColor: '#fff',
-  },
-  rolepicker: {
+  datepicker:{
+    width:295,
+    height:60,
     alignSelf: 'stretch',
     padding: 16,
-    marginBottom: 20,
+    marginBottom: 10,
     backgroundColor: '#fff',
+    borderColor: 'green',
+    borderWidth: 1,
   },
-});
+  rolepicker:{
+    alignSelf: 'stretch',
+    padding: 10,
+    marginBottom: 5,
+    backgroundColor: '#fff',
+    borderColor: 'green',
+    borderWidth: 1,
+  },
+})
+

@@ -8,6 +8,7 @@ const userSchema=new mongoose.Schema({
 	bdate: Date,
 	role: {type:String, trim:true},
 	familyId:{type:String,trim:true} 
+
 })
 
 //taskSchema to store kids tasks
@@ -18,15 +19,16 @@ const taskSchema=new mongoose.Schema({
 	email:String
 })
 
-//familySchema to store family
+
 const familySchema=new mongoose.Schema({
 	familyId:{type:String, index: { unique: true }},
 	jobtitle:String,
  	workaddress:String,
-    worknumber:String,
-    worktime:String,
-    salary:{type:Number,default:0},
-    marriageDate:String
+  worknumber:String,
+  worktime:String,
+  salary:{type:Number,default:0},
+  marriageDate:String
+
 })
 
 //shortageSchema to store shortages
@@ -35,7 +37,6 @@ const shortageSchema=new mongoose.Schema({
 	familyId:{type:String, index: { unique: true }},
 })
 
-//finianceSchema to store finiance data
 const finance=new mongoose.Schema({
 	familyId:{type:String, index: { unique: true }},
 	category:[[String]],
