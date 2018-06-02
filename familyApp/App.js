@@ -11,7 +11,6 @@ import UserInfo from './app/components/UserInfo';
 
 // App navigation screens
 const Application = createStackNavigator({
-  
   Login: { screen: Login },
   SignUp: { screen: SignUp },
  'User Information': { screen: UserInfo },
@@ -37,6 +36,7 @@ export default class App extends React.Component {
   render() {
     return (
      <Application />
+      //<Drawer/>
     );
   }
 }

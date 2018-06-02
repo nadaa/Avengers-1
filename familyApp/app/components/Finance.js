@@ -25,7 +25,7 @@ export default class Finance extends React.Component{
   constructor(){
     super();
     this.state={
-      tableHead:['Category', 'Cost'],
+      tableHead:['💵 Category 💵 ', '💰 Cost 💰'],
       tableName:[],
       tableCost:[],
       tableTotal:['Total',0],
@@ -216,12 +216,12 @@ export default class Finance extends React.Component{
           <Dialog.Container visible={this.state.addDialogVisible}>
             <Dialog.Title style={styles.textDialogTitleAdd}>Add To Finance</Dialog.Title>
             <Dialog.Description style={styles.textDialogDes}>
-              Insert the name and cost to add it
+              Insert the category and cost to add it
             </Dialog.Description>
             <View style={styles.textInputDialogView}>
-              <TextInput placeholder='Category' style={styles.textInput} maxLength={15}
+              <TextInput placeholder='💵 Category' style={styles.textInput} maxLength={15}
               onChangeText={(name)=> this.onAddEditName(name)} value={this.state.addEditName}></TextInput>
-              <TextInput placeholder='Cost' style={styles.textInput} maxLength={6} keyboardType='numeric' 
+              <TextInput placeholder='💰 Cost' style={styles.textInput} maxLength={6} keyboardType='numeric' 
               onChangeText={(value)=> this.onAddEditCost(value)} value={this.state.addEditCost} ></TextInput>
             </View>
             <View style={styles.btnDialogView}>
@@ -236,7 +236,7 @@ export default class Finance extends React.Component{
            <Dialog.Container visible={this.state.editDialogVisible}>
             <Dialog.Title style={styles.textDialogTitleEdit}>Edit From Finance</Dialog.Title>
             <Dialog.Description style={styles.textDialogDes}>
-              Choose the name then insert the name and cost to edit it
+              Choose the category then insert the name and cost to edit it
             </Dialog.Description>
             <View style={styles.textInputDialogView}>
               <Picker
@@ -249,9 +249,9 @@ export default class Finance extends React.Component{
                   return (<Picker.Item label={name[0]} value={name[0]} key={index}/>) 
                 })}
               </Picker>
-              <TextInput placeholder='Category' style={styles.textInput} maxLength={15}
+              <TextInput placeholder='💵 Category' style={styles.textInput} maxLength={15}
               onChangeText={(name)=> this.onAddEditName(name)} value={this.state.addEditName}></TextInput>
-              <TextInput placeholder='Cost' style={styles.textInput} maxLength={6} keyboardType='numeric' 
+              <TextInput placeholder='💰 Cost' style={styles.textInput} maxLength={6} keyboardType='numeric' 
               onChangeText={(value)=> this.onAddEditCost(value)} value={this.state.addEditCost} ></TextInput>
             </View>
             <View style={styles.btnDialogView}>
@@ -266,7 +266,7 @@ export default class Finance extends React.Component{
             <Dialog.Container visible={this.state.deleteDialogVisible}>
               <Dialog.Title style={styles.textDialogTitleDelete}>Delete From Finance</Dialog.Title>
               <Dialog.Description style={styles.textDialogDes}>
-                Choose the name to delete it
+                Choose the category to delete it
               </Dialog.Description>
               <View style={styles.textInputDialogView}>
                 <Picker
@@ -321,7 +321,7 @@ const styles = StyleSheet.create({
   textHead:{
     fontWeight: 'bold',
     textAlign: 'center',
-    color:'#3cff00',
+    color:'white',//'#3cff00',
   },
   name: {
   },
@@ -384,7 +384,6 @@ const styles = StyleSheet.create({
   textBtnDelete:{
     fontWeight: 'bold',
     textAlign: 'center',
-    
     color:'white',
   },
   btnDialogView: {
@@ -393,42 +392,42 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   btnDialogCancel: {
-    color:'white',
+    color:'black',
     fontWeight: 'bold',
 
   },
   btnDialogAdd: {
-    color:'#3cff00',//green
+    color:'black',//'#3cff00',//green
     fontWeight: 'bold',
   },
   btnDialogEdit: {
     //fontSize: 20,
-    color:'#6239BD',//purple
+    color:'black',//'#6239BD',//purple
     fontWeight: 'bold',
   },
   btnDialogDelete: {
-    color:'red',//purple
+    color:'black',//'red',//purple
     fontWeight: 'bold',
   },
   textDialogTitleAdd:{
     fontWeight: 'bold',
     textAlign: 'center',
-    color:'#3cff00',//green
+    color:'black',//'#3cff00',//green
   },
    textDialogTitleEdit:{
     fontWeight: 'bold',
     textAlign: 'center',
-    color:'#6239BD',//purple
+    color:'black',//'#6239BD',//purple
   },
    textDialogTitleDelete:{
     fontWeight: 'bold',
     textAlign: 'center',
-    color:'red',
+    color:'black',//'red',
   },
   textDialogDes:{
     fontWeight: 'bold',
     textAlign: 'center',
-    color:'white',
+    color:'black',
   },
   textInputDialogView: {
     flexDirection:'column',
