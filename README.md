@@ -1,51 +1,80 @@
-##ProjectO
-heroku-website-link:
+# Familj
 
+Familj is an ios App that provides an interface for all family members which will guarntee their contibution within their house and strengthen their family bonds.
 
-##Heading
-Family Managment and Communication App.
-
-##Sub-Heading
-Mobile application to help all family members staying connected with their family bonds in a modern organized way
-
-##Summary
-Familj is an ios App that will provide an interface for all family members which will guarntee their contibution within their house and strengthen their family bonds.
-each family has it's own id and all family members should sign up with that id, there are two UI one for the sibilings and the other for the parents, parents have some extra authorites to monitor their kids life and teach them responsibility by envolving them with all family tasks,activites and responsibilites.  
-
-##Problem
+## Problem
 In this era, families in all communites are suffering from being away from each other caused by many reasons one of them is overusing the social media networks.
-that will guide to a weak family bonds which will destroy the community    
+that will guide to a weak family bonds which will destroy the community.
 
-##Solution
-Beneficial Effects of Spending Time Together:
-Family members learn how to listen and work together. Children learn how to behave in society by watching their parents interact with each other and with the world. Family bonding times are a great way to model expected behaviors inside the family circle and with others in the community.  Modeling expected behaviors is also a great way for the parents in the family to learn how to communicate to each other as well.
+## Solution
+Familj helps family members to interact with each other. 
+Each family has it's own id and all family members should sign up with that id, there are two User Interfaces one for the sibilings and the other for the parents, parents have some extra authorites to monitor their kids life and teach them responsibility by envolving them with all family tasks,activites and responsibilites.
 
-## - Promising your personal time at least one day out of the week will help members in your family gain a sense of self worth. Children that have guardians that take the time with them, begin to assign value to their family time. Children that do not have a sense of family values are more likely to be influenced by friends that do not necessarily have their best interests at heart.
+## Technologies
+The app is built by using React Native framework, and it was tested on both IOS and Android. We used Nodejs/Express, and MongoDB in the backend. We used Mocha, Chai, Jest for unit testing. 
+    
+    
+## Installation
 
-## - Communications between family members improve. Parents often admit frustration when it comes to communication. Their children are not open, untrustworthy, do not listen or lack understanding between talker and listener.  Bonding time can help eliminate some of the frustration.  Parents can use this time to relate their childhood to an adolescent just beginning his childhood interactions.  Parents know the same trials have weathered us all. The amount of temptation and the sources of these hindrances are the only things that really change.
-As important as it is to impart wisdom, it is just as important to be an active listener as well. While everyone is together, sometimes it’s just as important to redirect attention towards your family and ask “What’s going on with you?”
-Children improve relationships and bond to their family members. Making a habit of displaying interest in the well being of your spouse and children will make them more likely to consult family members when there are personal problems occurring.
+Install Back-end dependencies
+Move to the server folder, then run:
+npm install
 
-##Quote 
-Having a good plan is your way to the success.
+Install Front-end dependencies
+Move to the familyapp folder, then run:
+npm install
 
-##How to Get Started
+## File Hieghrarcy  
+    Avengers+
+    ..../server
+    ........server.js (server configuration)
+    ........index.js(express middleware and routes connection)
+    ......./config
+    ..........dbconfig.js(mongodb configuration)
+    ......./modules
+    ........../family
+    .............models.js
+    .............routes.js
+    .............controllers.js
+    ......./test
+    ..........serverSpec.js (integeration test signup-login)
+    ..........user_model_test.js (unit test-user model )
+    .......package.json (server dependencies)
+    
+    ..../familyApp
+    .......App.js (main front-end file)
+    ......./app
+    ........../components
+    .............SignUp.js
+    .............Login.js
+    .............TaskMonitor.js
+    .............TaskDisplay.js
+    .............Finance.js
+    .............Shortage.js
+    .............ShortageNote
+    .............Drawer.js
+    .............DrawerKids.js
+    .............UserInfo.js
+    .............Bar.js
+    ............./_test_
+    .................setupTests.js
+    ................SignUp.test.js
+    ................Login.test.js
+    ................Finance.test.js
+    ................Drawer.test.js
+    ................TaskMonitor.test.js
+    ................Bar.test.js
+    ....README.md
+    
 
-## parents start Signup --> login --> Assign tasks --> Add tasks(left side menue)  --> Track your children progress--> check shortage
+## Screens
 
-## kids start Signup --> login --> Display Tasks(left side menue) --> check shortage 
+![](https://i.imgur.com/wfESssm.png)      ![](https://i.imgur.com/QjV8DdC.png) ![](https://i.imgur.com/3hBthax.png)
 
-##Our Customer Quote
-
-Familj is a powerful tool which has helped our family team .
+![](https://i.imgur.com/3kvdNSO.png) ![](https://i.imgur.com/SSSLOUS.png) ![](https://i.imgur.com/daWRBhi.png)
 
 
+![](https://i.imgur.com/cmlALOm.png)
 
-what need to do:
-1- wad: read me
-2- jozaa + waed: deloy
-3- waed: rprezi
-4- nada: test
-5- hsuun: style
-6- nada: validation
+
 
