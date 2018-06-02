@@ -72,13 +72,12 @@ export default class Shortage extends React.Component {
     var that=this;
     var familyId = await AsyncStorage.getItem('familyid')
     if(this.state.needText){
-      axios.post(global.ip+'/shortage',{
+      axios.post(global.ip+'/addshortage',{
         need:this.state.needText,
         familyId:familyId,
       })
       .then(function (response){
         if(response.data.msg==='success'){
-          alert('success')
           that.getData();
         }else if(response.data.msg==='error'){
           alert("error");

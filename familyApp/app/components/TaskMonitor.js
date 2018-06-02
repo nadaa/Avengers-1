@@ -28,7 +28,7 @@ export default class TaskMonitor extends React.Component {
     this.updateCheck=this.updateCheck.bind(this);
   }
   async getKids(){
-    var familyId= await AsyncStorage.getItem('familyid')
+    var familyId= await AsyncStorage.getItem('familyId')
     axios.get(global.ip+`/getkids/${familyId}`)
     .then((response) =>{
       this.setState({kids:response.data});
@@ -86,7 +86,7 @@ export default class TaskMonitor extends React.Component {
         task:this.state.taskText,
       })
       .then((response) =>{
-        alert(response.data.msg);     
+        this.setState({taskText:''})
       })
       .catch(function (error) {
         console.log(error);

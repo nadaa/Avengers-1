@@ -23,6 +23,7 @@ const Application = createStackNavigator({
   'Task Monitor':{screen:TaskMonitor},
   TasksDisplay:{screen:TasksDisplay},
   Shortage:{screen:Shortage},
+
   },{
   navigationOptions: {
     header: null,
@@ -31,15 +32,15 @@ const Application = createStackNavigator({
 export default class App extends React.Component {
   constructor(props){
     super(props);
-     global.ip = 'http://10.0.2.2:3000/api'; //nada
-    // global.ip = 'http://192.168.8.105:3000/api'; //jozaa
+    // global.ip = 'http://10.0.2.2:3000/api'; //nada
+     global.ip = 'http://192.168.1.82:3000/api'; //jozaa
     // global.ip = 'http://192.168.1.111:3000/api' //Waed
     //global.ip = 'http://192.168.202.2:3000/api'; //Hussein
   }
   render(){
     return(
-     // <Application/>
-     <Drawer/>
+     <Application/>
+     //     <Drawer/>
     );
   }
 }
