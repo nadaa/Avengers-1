@@ -49,9 +49,10 @@ export default class Shortage extends React.Component {
       </View>
     );
   }
-  async getData(){
-    //axios.get('http://192.168.0.84:3000/api/shortage')
-    var familyId=await AsyncStorage.getItem('familyid');
+  
+  //this function is used to get shortage data for the family
+  async getData() {
+    const familyId = await AsyncStorage.getItem('familyid');
     console.log(familyId);
     axios.post(global.ip+'/getshortage',{familyId:familyId}) 
     .then((response) =>{
@@ -89,7 +90,8 @@ export default class Shortage extends React.Component {
       });
       this.setState({needText:''})
     }
-  }
+  }  
+  // to delete items from the shortage list
   async deleteMethod(key){
     this.state.needArray.splice(key,1)
     this.setState({needArray:this.state.needArray})
@@ -98,7 +100,7 @@ export default class Shortage extends React.Component {
       need:this.state.needText,
       familyId:familyId,
       key:key
-    })
+      })
     .then(function (response) {
       if(response.data.msg==='success'){
         this.getData();

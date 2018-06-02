@@ -8,6 +8,7 @@ import ShortageNote from './ShortageNote'
 import Login from './Login';
 import Finance from './Finance';
 
+// a left side drwarer to hold screens which appear for childs
 const KidsDrawer=createDrawerNavigator(
   {
     TasksDisplay:{

@@ -14,20 +14,22 @@ export default class Login extends React.Component {
       password:'',
     }
   }
-  saveData(userInfo){
-    AsyncStorage.setItem('username',(userInfo.username));
-    AsyncStorage.setItem('email',(userInfo.email));
-    AsyncStorage.setItem('role',(userInfo.role));
-    AsyncStorage.setItem('familyId',(userInfo.familyId));
-  }
-  sendLogin(){
-    var that=this;
-    const { navigate } = this.props.navigation;
-    axios.post(global.ip+'/login',{user:this.state})
-        .then(async function (response) {
-          //alert(response.data.msg)
+  
+     //AsyncStorage to save user info
+    saveData(userInfo){
+      AsyncStorage.setItem('username',(userInfo.username));
+      AsyncStorage.setItem('email',(userInfo.email));
+      AsyncStorage.setItem('role',(userInfo.role));
+      AsyncStorage.setItem('familyId',(userInfo.familyId));
+    }
+    sendLogin(){
+      var that=this;
+      const { navigate } = this.props.navigation;
+      axios.post(global.ip+'/login',{user:this.state})
+      .then(async function (response) {
           that.saveData(response.data.user);
           var role= await AsyncStorage.getItem('role');
+          //different drawer appears based on user role
           if(response.data.msg==="success login"){
             if(role==='Mother'||role==='Father'){
               navigate('Drawer')
