@@ -11,7 +11,7 @@ import Icon0 from 'react-native-vector-icons/Octicons';
 export default class TaskMonitor extends React.Component {
   static navigationOptions = {
    drawerIcon: () => (
-     <Icon0 style={{color:'green'}} name="tasklist" size={20}/>
+     <Icon0 style={{color:'green'}} name="tasklist" size={25}/>
    ),
  }
   constructor(props){
@@ -116,6 +116,7 @@ export default class TaskMonitor extends React.Component {
           <Select style={styles.select} onSelect={(kidName, key) => this.setState({selectedKid:kidName})}
             defaultText  = {this.state.selectedKid}
             textStyle = {{}}
+            mode="dropdown"
           >
             {this.state.kids.map((kid,index)=>{
               return (<Option value={kid.username}  key={index}>{kid.username}</Option>) 

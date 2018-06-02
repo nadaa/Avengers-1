@@ -14,7 +14,6 @@ import Finance from './app/components/Finance';
 
 // App navigation screens
 const Application = createStackNavigator({
-  
   Login: { screen: Login },
   SignUp: { screen: SignUp },
  'User Information': { screen: UserInfo },
@@ -24,7 +23,6 @@ const Application = createStackNavigator({
   'Task Monitor':{screen:TaskMonitor},
   TasksDisplay:{screen:TasksDisplay},
   Shortage:{screen:Shortage},
-
   },{
   navigationOptions: {
     header: null,
@@ -40,7 +38,8 @@ export default class App extends React.Component {
   }
   render(){
     return(
-     <Application/>
+     // <Application/>
+     <Drawer/>
     );
   }
 }

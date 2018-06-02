@@ -11,7 +11,7 @@ import Icon0 from 'react-native-vector-icons/FontAwesome';
 export default class Shortage extends React.Component {
   static navigationOptions = {
    drawerIcon: () => (
-     <Icon0 style={{color:'green'}} name="cart-plus" size={20}/>
+     <Icon0 style={{color:'green'}} name="cart-plus" size={25}/>
    ),
  }
 	constructor(props){

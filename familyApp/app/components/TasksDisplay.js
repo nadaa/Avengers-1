@@ -4,8 +4,14 @@ import axios from 'axios';
 import { Card} from "react-native-elements";
 import CheckBox from 'react-native-checkbox';
 import Bar from './Bar';
+import Icon6 from 'react-native-vector-icons/Octicons';
 
 export default class TasksDisplay extends React.Component {
+	static navigationOptions = {
+   drawerIcon: () => (
+     <Icon6 style={{color:'green'}} name="checklist" size={25}/>
+   ),
+ };
 	constructor(props){
 		super(props);
 		this.state={
